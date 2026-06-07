@@ -1,0 +1,8 @@
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Ignorar archivos de datos
+*.csv
+*.parquet
