@@ -79,7 +79,7 @@ def init_project(base_path):
         f.write("*.parquet\n")
         f.write("```\n")
         
-    # Crear el archivo .gitignore automáticamente en la raíz del proyecto
+    # Crear el archivo .gitignore automáticamente en la raíz del proyectoss
     gitignore_path = root / ".gitignore"
     with open(gitignore_path, "w", encoding="utf-8") as f:
         f.write(".venv/\n")
