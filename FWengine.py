@@ -102,7 +102,7 @@ def route_file(file_path, base_path, move=False):
     ext = src_file.suffix.lower()
     dest_subfolder = ROUTING_MAP.get(ext)
     
-    # Heurística avanzada por patrones si la extensión es genérica o ambigua
+    # Heurística avanzada por patrones si la extensión es genérica o ambiguas
     if not dest_subfolder:
         name_lower = src_file.name.lower()
         if "test" in name_lower or "spec" in name_lower:
