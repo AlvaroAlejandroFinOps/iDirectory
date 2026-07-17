@@ -6,6 +6,7 @@ from pathlib import Path
 
 # 1. Manifiesto Centralizado de Gobernanza (Estructura expandida)
 FOLDER_MANIFEST = {
+    "01_Status": "Carpeta para detallar los avances del proyecto y registrar el estado y reportes de desempeño.",
     "src/data_generation": "Módulos de generación y simulación de datos sintéticos. Rigor matemático en distribuciones y volumetría estadística para pruebas de carga.",
     "src/fabric_jobs": "Scripts productivos, definiciones de pipelines y orquestación nativa para Microsoft Fabric (PySpark/Spark SQL Jobs).",
     "docs/technical_specs": "Especificaciones técnicas detalladas, mapeos de linaje de datos, contratos de esquemas y requerimientos no funcionales.",
