@@ -1,0 +1,7 @@
+README.md
+pyproject.toml
+src/fwengine.egg-info/PKG-INFO
+src/fwengine.egg-info/SOURCES.txt
+src/fwengine.egg-info/dependency_links.txt
+src/fwengine.egg-info/entry_points.txt
+src/fwengine.egg-info/top_level.txt
