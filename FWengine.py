@@ -2,11 +2,74 @@
 import os
 import sys
 import argparse
+import shutil
 from pathlib import Path
+
+# Plantilla Maestra de Semilla Híbrida
+SEED_TEMPLATE = """# MASTER HYBRID SEED: [Nombre del Proyecto]
+
+> **Propósito:** Snapshot técnico, verificable y portable.
+> **Instrucción al Agente:** Actúa como Arquitecto de Software Senior. Inspecciona el repo y llena este documento respetando las etiquetas de evidencia y la política de seguridad.
+
+## 0. REGLAS DE GENERACIÓN (Epistemología y Seguridad)
+*   **Etiquetas de Evidencia:** Toda afirmación debe llevar:
+    *   `[CONFIRMADO]`: Observado directamente en código/config.
+    *   `[INFERIDO]`: Deducción lógica (no declarado).
+    *   `[FALTANTE]`: Esperado, pero no hallado.
+*   **Política de Seguridad:** **PROHIBIDO** reproducir secretos, passwords, tokens o connection strings. Sustituye siempre por `<REDACTED>`. Si existen secretos versionados, regístralo como hallazgo sin reproducir el valor.
+
+---
+
+## 1. CORE MANIFESTO
+   - 1.1 Objetivo Principal
+   - 1.2 Problema que Resuelve
+   - 1.3 Patrón Arquitectónico
+   - 1.4 Stack Principal (Versiones y fuente: manifest/lockfile)
+
+## 2. REPOSITORY TOPOLOGY
+   - Tree completo (omitir ruido: `.git`, `node_modules`, `__pycache__`, etc.)
+   - 2.x Diferenciaciones clave entre carpetas ambiguas.
+
+## 3. EXECUTION FLOW
+   - 3.1 Flujo E2E (Diagrama Mermaid o ASCII)
+   - 3.2 Entry Points (Qué comandos/triggers inician qué procesos)
+   - 3.3 Datos: Origen, transformación y persistencia.
+
+## 4. CURRENT STATE & RULES
+   - 4.1 Foco actual y estado de madurez.
+   - 4.2 Reglas de código y convenciones (Style, linting, tipado).
+   - 4.3 Convenciones de directorios.
+
+## 5. ECOSYSTEM CONTEXT
+   - Proyectos hermanos, dependencias externas, integraciones críticas.
+
+## 6. CONFIGURATION REFERENCE
+   - Tabla: Variable | Tipo | Default | Efecto | Sensible (Sí/No)
+
+## 7. SEGURIDAD, RIESGOS Y FAILURE MODES
+   - 7.1 Security Findings: Análisis de vulnerabilidades estáticas.
+   - 7.2 Failure Modes: ¿Qué pasa si falla la fuente? ¿Qué pasa ante re-ejecución? ¿Existe idempotencia?
+   - 7.3 Riesgos técnicos: Deuda técnica, bloqueos, dependencias críticas.
+
+## 8. SECCIONES OPCIONALES (Si aplica)
+   - Dependency Graph, Data Contracts, ADRs (Decisions Log), Testing Strategy.
+
+---
+
+## 9. CONTEXT HANDOFF (Instrucciones para el Modelo Receptor)
+Este documento es la fuente primaria. Antes de proponer cambios, el modelo debe:
+
+1.  **Entender:** Identificar el objetivo y componentes afectados.
+2.  **Validar:** Si la información falta, **preguntar** en lugar de alucinar.
+3.  **Justificar:** Citar rutas del repositorio al proponer cambios.
+4.  **Respetar:** Mantener arquitectura, contratos y restricciones de seguridad.
+5.  **Proponer:** Detallar archivos a modificar/crear y riesgos de rollback.
+6.  **Supuestos:** Si debe asumir, marcar explícitamente: "Supongo que X debido a Y".
+"""
 
 # 1. Manifiesto Centralizado de Gobernanza (Estructura expandida)
 FOLDER_MANIFEST = {
-    "001_Seed": "Seed (Semilla de proyecto.",
+    "001_Seed": "Seed (Semilla de proyecto).",
     "01_Status": "Carpeta para detallar los avances del proyecto y registrar el estado y reportes de desempeño.",
     "src/data_generation": "Módulos de generación y simulación de datos sintéticos. Rigor matemático en distribuciones y volumetría estadística para pruebas de carga.",
     "src/fabric_jobs": "Scripts productivos, definiciones de pipelines y orquestación nativa para Microsoft Fabric (PySpark/Spark SQL Jobs).",
@@ -51,6 +114,23 @@ ROUTING_MAP = {
     ".delta": "data/processed"
 }
 
+def save_seed_file(target_root):
+    """Asegura y guarda una copia de ThinkingSeed_MasterHybrid.md en la carpeta 001_Seed."""
+    root = Path(target_root)
+    seed_dir = root / "001_Seed"
+    seed_dir.mkdir(parents=True, exist_ok=True)
+    seed_file = seed_dir / "ThinkingSeed_MasterHybrid.md"
+    
+    script_dir = Path(__file__).resolve().parent
+    source_seed = script_dir / "001_Seed" / "ThinkingSeed_MasterHybrid.md"
+    
+    if source_seed.exists() and source_seed.resolve() != seed_file.resolve():
+        shutil.copy2(source_seed, seed_file)
+    elif not seed_file.exists():
+        with open(seed_file, "w", encoding="utf-8") as f:
+            f.write(SEED_TEMPLATE)
+    return seed_file
+
 def init_project(base_path):
     """Inicializa la estructura de carpetas y escribe un README.md explicativo en cada una."""
     root = Path(base_path)
@@ -61,6 +141,9 @@ def init_project(base_path):
         folder_path = root / folder
         folder_path.mkdir(parents=True, exist_ok=True)
             
+    # Guardar copia de ThinkingSeed_MasterHybrid.md en 001_Seed
+    save_seed_file(root)
+    
     # Crear el Master README en la carpeta Engine con el nombre EngineReadme.md
     engine_readme = root / "Engine" / "EngineReadme.md"
     with open(engine_readme, "w", encoding="utf-8") as f:
@@ -132,6 +215,10 @@ def route_file(file_path, base_path, move=False):
         print(f"  [Comando] python3 Engine/engine.py route \"{file_path}\" --move")
 
 def main():
+    # Siempre asegurar que la semilla en 001_Seed esté guardada y disponible al ejecutar el script
+    script_root = Path(__file__).resolve().parent
+    save_seed_file(script_root)
+
     parser = argparse.ArgumentParser(description="Engine v1.0: Automatización, Gobernanza y Ruteo de Datos")
     subparsers = parser.add_subparsers(dest="command", help="Comandos operativos")
     
@@ -155,4 +242,4 @@ def main():
         parser.print_help()
 
 if __name__ == "__main__":
-    main()
+    main()
