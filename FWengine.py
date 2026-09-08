@@ -2,93 +2,34 @@
 import os
 import sys
 import argparse
-import shutil
 from pathlib import Path
 
-# Plantilla Maestra de Semilla Híbrida
-SEED_TEMPLATE = """# MASTER HYBRID SEED: [Nombre del Proyecto]
-
-> **Propósito:** Snapshot técnico, verificable y portable.
-> **Instrucción al Agente:** Actúa como Arquitecto de Software Senior. Inspecciona el repo y llena este documento respetando las etiquetas de evidencia y la política de seguridad.
-
-## 0. REGLAS DE GENERACIÓN (Epistemología y Seguridad)
-*   **Etiquetas de Evidencia:** Toda afirmación debe llevar:
-    *   `[CONFIRMADO]`: Observado directamente en código/config.
-    *   `[INFERIDO]`: Deducción lógica (no declarado).
-    *   `[FALTANTE]`: Esperado, pero no hallado.
-*   **Política de Seguridad:** **PROHIBIDO** reproducir secretos, passwords, tokens o connection strings. Sustituye siempre por `<REDACTED>`. Si existen secretos versionados, regístralo como hallazgo sin reproducir el valor.
-
----
-
-## 1. CORE MANIFESTO
-   - 1.1 Objetivo Principal
-   - 1.2 Problema que Resuelve
-   - 1.3 Patrón Arquitectónico
-   - 1.4 Stack Principal (Versiones y fuente: manifest/lockfile)
-
-## 2. REPOSITORY TOPOLOGY
-   - Tree completo (omitir ruido: `.git`, `node_modules`, `__pycache__`, etc.)
-   - 2.x Diferenciaciones clave entre carpetas ambiguas.
-
-## 3. EXECUTION FLOW
-   - 3.1 Flujo E2E (Diagrama Mermaid o ASCII)
-   - 3.2 Entry Points (Qué comandos/triggers inician qué procesos)
-   - 3.3 Datos: Origen, transformación y persistencia.
-
-## 4. CURRENT STATE & RULES
-   - 4.1 Foco actual y estado de madurez.
-   - 4.2 Reglas de código y convenciones (Style, linting, tipado).
-   - 4.3 Convenciones de directorios.
-
-## 5. ECOSYSTEM CONTEXT
-   - Proyectos hermanos, dependencias externas, integraciones críticas.
-
-## 6. CONFIGURATION REFERENCE
-   - Tabla: Variable | Tipo | Default | Efecto | Sensible (Sí/No)
-
-## 7. SEGURIDAD, RIESGOS Y FAILURE MODES
-   - 7.1 Security Findings: Análisis de vulnerabilidades estáticas.
-   - 7.2 Failure Modes: ¿Qué pasa si falla la fuente? ¿Qué pasa ante re-ejecución? ¿Existe idempotencia?
-   - 7.3 Riesgos técnicos: Deuda técnica, bloqueos, dependencias críticas.
-
-## 8. SECCIONES OPCIONALES (Si aplica)
-   - Dependency Graph, Data Contracts, ADRs (Decisions Log), Testing Strategy.
-
----
-
-## 9. CONTEXT HANDOFF (Instrucciones para el Modelo Receptor)
-Este documento es la fuente primaria. Antes de proponer cambios, el modelo debe:
-
-1.  **Entender:** Identificar el objetivo y componentes afectados.
-2.  **Validar:** Si la información falta, **preguntar** en lugar de alucinar.
-3.  **Justificar:** Citar rutas del repositorio al proponer cambios.
-4.  **Respetar:** Mantener arquitectura, contratos y restricciones de seguridad.
-5.  **Proponer:** Detallar archivos a modificar/crear y riesgos de rollback.
-6.  **Supuestos:** Si debe asumir, marcar explícitamente: "Supongo que X debido a Y".
-"""
-
-# 1. Manifiesto Centralizado de Gobernanza (Estructura expandida)
+# 1. Manifiesto Centralizado de Gobernanza (Directorio Thinking Multi-Cloud, IA y Datos)
 FOLDER_MANIFEST = {
-    "001_Seed": "Seed (Semilla de proyecto).",
-    "01_Status": "Carpeta para detallar los avances del proyecto y registrar el estado y reportes de desempeño.",
+    "001_Seed": "Seed (Semilla de proyecto y contexto primario para agentes de IA y arquitectos).",
+    "02_Foundation/Engine": "Núcleo del framework de automatización del proyecto. Contiene la lógica de ruteo, indexación y EngineReadme.md de gobernanza.",
+    "03_Research_AI/Notebooks": "Notebooks de desarrollo interactivo y experimentación (Jupyter/Fabric/Databricks/Colab) para análisis exploratorio (EDA) y algoritmos.",
+    "03_Research_AI/llm_prompts": "Estructuras de prompts para LLMs, system prompts, árboles de contexto y plantillas de inferencia generativa.",
+    "03_Research_AI/experiments": "Espacio de pruebas de concepto (PoCs), prototipos de modelos, I+D y benchmarks algorítmicos.",
+    "src/cloud_jobs": "Scripts productivos, definiciones de pipelines y orquestación multi-cloud (Fabric PySpark, AWS Glue/EMR, GCP Dataproc/Dataflow, Azure Synapse).",
     "src/data_generation": "Módulos de generación y simulación de datos sintéticos. Rigor matemático en distribuciones y volumetría estadística para pruebas de carga.",
-    "src/fabric_jobs": "Scripts productivos, definiciones de pipelines y orquestación nativa para Microsoft Fabric (PySpark/Spark SQL Jobs).",
+    "src/core": "Lógica de negocio transversal, servicios modulares, utilitarios de backend y componentes de desarrollo de software.",
+    "src/dashboards": "Aplicaciones de visualización, tableros de BI, cuadros de mando interactivos (Streamlit, Dash, PowerBI, Looker).",
+    "Artefactos/Planes/Vigentes": "Planes de capacidad activos (F-SKUs), presupuestos de cómputo cloud vigentes, hitos del proyecto y documentación activa.",
+    "Artefactos/Planes/Historico_Obsoletos": "Histórico de planes evaluados, arquitecturas descartadas y documentación obsoleta preservada como respaldo y trazabilidad.",
     "docs/technical_specs": "Especificaciones técnicas detalladas, mapeos de linaje de datos, contratos de esquemas y requerimientos no funcionales.",
     "docs/engineers_notes": "Bitácoras de ingeniería, registro de deuda técnica, decisiones de diseño rápido y análisis de causa raíz (RCA).",
     "docs/architecture": "Diagramas de arquitectura multi-cloud, flujos de datos e información estratégica de las capas Medallion (Bronze, Silver, Gold).",
     "tests": "Suites de pruebas unitarias, de integración y de calidad de datos (Great Expectations / deequ) para garantizar consistencia lógica.",
-    "Notebooks": "Notebooks de desarrollo interactivo y experimentación (Jupyter/Fabric) para análisis exploratorio (EDA) y prototipos de algoritmos.",
-    "Artefactos/Planes": "Planes de capacidad (F-SKUs), presupuestos de cómputo cloud, hitos del proyecto y documentación de gobernanza.",
     "Tools": "Scripts utilitarios internos, herramientas de automatización local, linters, y configuraciones de debugging personalizado.",
     "config": "Parámetros de entorno (dev, staging, prod), llaves de configuración de esquemas y variables de conexión desacopladas del código.",
-    "infrastructure": "Scripts de Infraestructura como Código (IaC) utilizando AWS CDK, Terraform o plantillas ARM para aprovisionamiento multi-cloud.",
+    "infrastructure": "Scripts de Infraestructura como Código (IaC) utilizando AWS CDK, Terraform o plantillas ARM/Bicep para aprovisionamiento multi-cloud.",
     "data/raw": "Zona de aterrizaje local (Bronze) para almacenamiento de fuentes de datos puras e inmutables sin transformaciones.",
     "data/processed": "Datos refinados localmente (Silver/Gold) bajo esquemas validados, optimizados para consultas y entrenamiento de modelos.",
     "data/sandbox": "Entorno aislado para experimentación rápida de científicos de datos y arquitectos sin alterar zonas críticas.",
     "schemas": "Definiciones estrictas de esquemas (Avro, JSON Schema, DDL de SQL) para garantizar gobernanza y control de deriva de esquemas.",
-    "scripts": "Scripts operativos del sistema (bash, make) para tareas de mantenimiento, sincronización de buckets y automatización local.",
-    "logs": "Trazas locales de ejecución, auditorías de consultas y dumps de errores para análisis predictivo de fallas de pipelines.",
-    "Engine": "El núcleo del framework de automatización del proyecto (este motor). Contiene la lógica de ruteo, indexación y scaffolding."
+    "scripts": "Scripts operativos del sistema (bash, make, powershell) para tareas de mantenimiento, sincronización de buckets y automatización local.",
+    "logs": "Trazas locales de ejecución, auditorías de consultas y dumps de errores para análisis predictivo de fallas de pipelines."
 }
 
 # 2. Matriz de Ruteo Inteligente
@@ -98,10 +39,15 @@ ROUTING_MAP = {
     ".pdf": "docs/technical_specs",
     ".drawio": "docs/architecture",
     ".png": "docs/architecture",
-    # Código y Cómputo
-    ".ipynb": "Notebooks",
-    ".py": "src/fabric_jobs",
-    ".sql": "src/fabric_jobs",
+    # Código y Cómputo / IA
+    ".ipynb": "03_Research_AI/Notebooks",
+    ".py": "src/cloud_jobs",
+    ".sql": "src/cloud_jobs",
+    # Prompts / Inferencia IA
+    ".prompt": "03_Research_AI/llm_prompts",
+    # Visualización / Dashboards / BI
+    ".pbix": "src/dashboards",
+    ".pbip": "src/dashboards",
     # Gobernanza, Infraestructura y Configuración
     ".yaml": "config",
     ".yml": "config",
@@ -114,71 +60,64 @@ ROUTING_MAP = {
     ".delta": "data/processed"
 }
 
-def save_seed_file(target_root):
-    """Asegura y guarda una copia de ThinkingSeed_MasterHybrid.md en la carpeta 001_Seed."""
-    root = Path(target_root)
-    seed_dir = root / "001_Seed"
-    seed_dir.mkdir(parents=True, exist_ok=True)
-    seed_file = seed_dir / "ThinkingSeed_MasterHybrid.md"
-    
-    script_dir = Path(__file__).resolve().parent
-    source_seed = script_dir / "001_Seed" / "ThinkingSeed_MasterHybrid.md"
-    
-    if source_seed.exists() and source_seed.resolve() != seed_file.resolve():
-        shutil.copy2(source_seed, seed_file)
-    elif not seed_file.exists():
-        with open(seed_file, "w", encoding="utf-8") as f:
-            f.write(SEED_TEMPLATE)
-    return seed_file
-
 def init_project(base_path):
-    """Inicializa la estructura de carpetas y escribe un README.md explicativo en cada una."""
+    """Inicializa la estructura de carpetas y escribe el EngineReadme.md explicativo."""
     root = Path(base_path)
-    print(f"[*] Inicializando arquitectura de datos en: {root.resolve()}")
+    print(f"[*] Inicializando Directorio Thinking en: {root.resolve()}")
     
-    # Crear estructura de carpetas
-    for folder, desc in FOLDER_MANIFEST.items():
+    # 1. Crear estructura de carpetas definida en el manifiesto
+    for folder in FOLDER_MANIFEST.keys():
         folder_path = root / folder
         folder_path.mkdir(parents=True, exist_ok=True)
             
-    # Guardar copia de ThinkingSeed_MasterHybrid.md en 001_Seed
-    save_seed_file(root)
+    # 2. Crear el Master README en 02_Foundation/Engine/EngineReadme.md
+    engine_readme = root / "02_Foundation" / "Engine" / "EngineReadme.md"
+    engine_readme.parent.mkdir(parents=True, exist_ok=True)
     
-    # Crear el Master README en la carpeta Engine con el nombre EngineReadme.md
-    engine_readme = root / "Engine" / "EngineReadme.md"
+    project_title = root.resolve().name.upper() if root.resolve().name else "PROJECT"
     with open(engine_readme, "w", encoding="utf-8") as f:
-        f.write(f"# {root.name.upper()} - Data Architecture Infrastructure\n\n")
-        f.write("Estructura corporativa optimizada para alta escala, trazabilidad interna y entornos Multi-cloud.\n\n")
+        f.write(f"# {project_title} - Directorio Thinking Architecture\n\n")
+        f.write("Estructura modular híbrida optimizada para Multi-Cloud (GCP, AWS, Azure, Fabric), IA/LLMs, Ingeniería de Datos e I+D.\n\n")
+        f.write("> **Guía de Gobernanza para Agentes de IA y Desarrolladores:**\n")
+        f.write("> Este documento define el propósito canónico de cada directorio. Los agentes deben consultar este manifiesto para ubicar o generar artefactos en su ruta correspondiente.\n\n")
         f.write("## Manifiesto de Gobernanza de Directorios\n\n")
         for folder, desc in FOLDER_MANIFEST.items():
             f.write(f"* **`{folder}/`**: {desc}\n")
-        f.write("\n## Instrucciones de Git para cada nuevo proyecto\n\n")
-        f.write("Repites el paso 2 (git init + .gitignore propio).\n\n")
+        f.write("\n## Reglas de Ignorado Git (.gitignore)\n\n")
         f.write("```text\n")
         f.write(".venv/\n")
         f.write("__pycache__/\n")
         f.write("*.pyc\n")
         f.write(".ipynb_checkpoints/\n\n")
-        f.write("# Ignorar archivos de datos\n")
+        f.write("# Ignorar datos locales y logs\n")
         f.write("*.csv\n")
         f.write("*.parquet\n")
+        f.write("logs/\n")
+        f.write("data/raw/\n")
+        f.write("data/processed/\n")
+        f.write("data/sandbox/\n")
         f.write("```\n")
         
-    # Crear el archivo .gitignore automáticamente en la raíz del proyectoss
+    # 3. Crear el archivo .gitignore en la raíz del proyecto si no existe
     gitignore_path = root / ".gitignore"
-    with open(gitignore_path, "w", encoding="utf-8") as f:
-        f.write(".venv/\n")
-        f.write("__pycache__/\n")
-        f.write("*.pyc\n")
-        f.write(".ipynb_checkpoints/\n\n")
-        f.write("# Ignorar archivos de datos\n")
-        f.write("*.csv\n")
-        f.write("*.parquet\n")
+    if not gitignore_path.exists():
+        with open(gitignore_path, "w", encoding="utf-8") as f:
+            f.write(".venv/\n")
+            f.write("__pycache__/\n")
+            f.write("*.pyc\n")
+            f.write(".ipynb_checkpoints/\n\n")
+            f.write("# Ignorar datos locales y logs\n")
+            f.write("*.csv\n")
+            f.write("*.parquet\n")
+            f.write("logs/\n")
+            f.write("data/raw/\n")
+            f.write("data/processed/\n")
+            f.write("data/sandbox/\n")
             
-    print("[+] Estructura completa y manifiestos markdown (.md) desplegados exitosamente.")
+    print("[+] Estructura Thinking Directory y EngineReadme.md desplegados exitosamente.")
 
 def route_file(file_path, base_path, move=False):
-    """Analiza la naturaleza de un archivo, sugiere su ubicación o lo automatiza físicamente."""
+    """Analiza la naturaleza de un archivo, sugiere su ubicación óptima o lo reubica físicamente."""
     src_file = Path(file_path)
     if not src_file.exists():
         print(f"[-] Error crítico: El archivo '{file_path}' no existe en el origen.")
@@ -186,15 +125,26 @@ def route_file(file_path, base_path, move=False):
         
     ext = src_file.suffix.lower()
     dest_subfolder = ROUTING_MAP.get(ext)
-    
-    # Heurística avanzada por patrones si la extensión es genérica o ambiguas
-    if not dest_subfolder:
-        name_lower = src_file.name.lower()
-        if "test" in name_lower or "spec" in name_lower:
-            dest_subfolder = "tests"
+    name_lower = src_file.name.lower()
+
+    # Heurística contextual avanzada
+    if ext == ".ipynb":
+        dest_subfolder = "03_Research_AI/Notebooks"
+    elif ext in [".py", ".sql"] and ("test" in name_lower or "spec" in name_lower):
+        dest_subfolder = "tests"
+    elif ext in [".md", ".txt", ".pdf"]:
+        if "obsoleto" in name_lower or "historico" in name_lower or "old" in name_lower or "backup" in name_lower:
+            dest_subfolder = "Artefactos/Planes/Historico_Obsoletos"
         elif "plan" in name_lower or "budget" in name_lower or "hitos" in name_lower:
-            dest_subfolder = "Artefactos/Planes"
-        elif "gen" in name_lower or "mock" in name_lower:
+            dest_subfolder = "Artefactos/Planes/Vigentes"
+        elif "prompt" in name_lower or "system" in name_lower:
+            dest_subfolder = "03_Research_AI/llm_prompts"
+    elif not dest_subfolder:
+        if "experiment" in name_lower or "benchmark" in name_lower or "poc" in name_lower:
+            dest_subfolder = "03_Research_AI/experiments"
+        elif "dashboard" in name_lower or "report" in name_lower or "viz" in name_lower:
+            dest_subfolder = "src/dashboards"
+        elif "gen" in name_lower or "mock" in name_lower or "synthetic" in name_lower:
             dest_subfolder = "src/data_generation"
         else:
             dest_subfolder = "Tools" # Repositorio por defecto seguro
@@ -212,18 +162,14 @@ def route_file(file_path, base_path, move=False):
         print(f"  [+] ACCIÓN: Archivo movido automáticamente a -> {dest_path}")
     else:
         print(f"  [Sugerencia] Para ejecutar la migración automatizada, añade el flag '--move'")
-        print(f"  [Comando] python3 Engine/engine.py route \"{file_path}\" --move")
+        print(f"  [Comando] python FWengine.py route \"{file_path}\" --move")
 
 def main():
-    # Siempre asegurar que la semilla en 001_Seed esté guardada y disponible al ejecutar el script
-    script_root = Path(__file__).resolve().parent
-    save_seed_file(script_root)
-
-    parser = argparse.ArgumentParser(description="Engine v1.0: Automatización, Gobernanza y Ruteo de Datos")
+    parser = argparse.ArgumentParser(description="FWengine: Gobernanza, Automatización y Ruteo para Directorios Thinking")
     subparsers = parser.add_subparsers(dest="command", help="Comandos operativos")
     
     # Comando 'init'
-    init_parser = subparsers.add_parser("init", help="Inicializa el andamiaje del proyecto con su metadata .md")
+    init_parser = subparsers.add_parser("init", help="Inicializa el andamiaje del proyecto con su manifiesto de gobernanza")
     init_parser.add_argument("path", nargs="?", default=".", help="Ruta de inicialización")
     
     # Comando 'route'
@@ -242,4 +188,4 @@ def main():
         parser.print_help()
 
 if __name__ == "__main__":
-    main()
+    main()
