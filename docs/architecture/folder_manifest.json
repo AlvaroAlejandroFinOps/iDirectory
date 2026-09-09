@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "version": "1.0",
+  "project_type": "Thinking Multi-Cloud, AI & Data Architecture",
+  "last_updated": "2026-09-09",
+  "manifest": {
+    "001_Seed": {
+      "purpose": "Seed (Semilla de proyecto y contexto primario para agentes de IA y arquitectos).",
+      "category": "governance"
+    },
+    "02_Foundation/Engine": {
+      "purpose": "Núcleo del framework de automatización del proyecto. Contiene la lógica de ruteo, indexación y EngineReadme.md de gobernanza.",
+      "category": "core_framework"
+    },
+    "03_Research_AI/Notebooks": {
+      "purpose": "Notebooks de desarrollo interactivo y experimentación (Jupyter/Fabric/Databricks/Colab) para análisis exploratorio (EDA) y algoritmos.",
+      "category": "research"
+    },
+    "03_Research_AI/llm_prompts": {
+      "purpose": "Estructuras de prompts para LLMs, system prompts, árboles de contexto y plantillas de inferencia generativa.",
+      "category": "ai_engineering"
+    },
+    "03_Research_AI/experiments": {
+      "purpose": "Espacio de pruebas de concepto (PoCs), prototipos de modelos, I+D y benchmarks algorítmicos.",
+      "category": "research"
+    },
+    "src/cloud_jobs": {
+      "purpose": "Scripts productivos, definiciones de pipelines y orquestación multi-cloud (Fabric PySpark, AWS Glue/EMR, GCP Dataproc/Dataflow, Azure Synapse).",
+      "category": "data_engineering"
+    },
+    "src/data_generation": {
+      "purpose": "Módulos de generación y simulación de datos sintéticos. Rigor matemático en distribuciones y volumetría estadística para pruebas de carga.",
+      "category": "data_engineering"
+    },
+    "src/core": {
+      "purpose": "Lógica de negocio transversal, servicios modulares, utilitarios de backend y componentes de desarrollo de software.",
+      "category": "backend"
+    },
+    "src/dashboards": {
+      "purpose": "Aplicaciones de visualización, tableros de BI, cuadros de mando interactivos (Streamlit, Dash, PowerBI, Looker).",
+      "category": "analytics"
+    },
+    "Artefactos/Planes/Vigentes": {
+      "purpose": "Planes de capacidad activos (F-SKUs), presupuestos de cómputo cloud vigentes, hitos del proyecto y documentación activa.",
+      "category": "management"
+    },
+    "Artefactos/Planes/Historico_Obsoletos": {
+      "purpose": "Histórico de planes evaluados, arquitecturas descartadas y documentación obsoleta preservada como respaldo y trazabilidad.",
+      "category": "archive"
+    },
+    "docs/technical_specs": {
+      "purpose": "Especificaciones técnicas detalladas, mapeos de linaje de datos, contratos de esquemas y requerimientos no funcionales.",
+      "category": "documentation"
+    },
+    "docs/engineers_notes": {
+      "purpose": "Bitácoras de ingeniería, registro de deuda técnica, decisiones de diseño rápido y análisis de causa raíz (RCA).",
+      "category": "documentation"
+    },
+    "docs/architecture": {
+      "purpose": "Diagramas de arquitectura multi-cloud, flujos de datos e información estratégica de las capas Medallion (Bronze, Silver, Gold).",
+      "category": "documentation"
+    },
+    "tests": {
+      "purpose": "Suites de pruebas unitarias, de integración y de calidad de datos (Great Expectations / deequ) para garantizar consistencia lógica.",
+      "category": "quality_assurance"
+    },
+    "Tools": {
+      "purpose": "Scripts utilitarios internos, herramientas de automatización local, linters, y configuraciones de debugging personalizado.",
+      "category": "tooling"
+    },
+    "config": {
+      "purpose": "Parámetros de entorno (dev, staging, prod), llaves de configuración de esquemas y variables de conexión desacopladas del código.",
+      "category": "configuration"
+    },
+    "infrastructure": {
+      "purpose": "Scripts de Infraestructura como Código (IaC) utilizando AWS CDK, Terraform o plantillas ARM/Bicep para aprovisionamiento multi-cloud.",
+      "category": "devops_iac"
+    },
+    "data/raw": {
+      "purpose": "Zona de aterrizaje local (Bronze) para almacenamiento de fuentes de datos puras e inmutables sin transformaciones.",
+      "category": "data_storage"
+    },
+    "data/processed": {
+      "purpose": "Datos refinados localmente (Silver/Gold) bajo esquemas validados, optimizados para consultas y entrenamiento de modelos.",
+      "category": "data_storage"
+    },
+    "data/sandbox": {
+      "purpose": "Entorno aislado para experimentación rápida de científicos de datos y arquitectos sin alterar zonas críticas.",
+      "category": "data_storage"
+    },
+    "schemas": {
+      "purpose": "Definiciones strictly de esquemas (Avro, JSON Schema, DDL de SQL) para garantizar gobernanza y control de deriva de esquemas.",
+      "category": "data_governance"
+    },
+    "scripts": {
+      "purpose": "Scripts operativos del sistema (bash, make, powershell) para tareas de mantenimiento, sincronización de buckets y automatización local.",
+      "category": "operations"
+    },
+    "logs": {
+      "purpose": "Trazas locales de ejecución, auditorías de consultas y dumps de errores para análisis predictivo de fallas de pipelines.",
+      "category": "observability"
+    }
+  },
+  "routing_rules": {
+    ".md": "docs/engineers_notes",
+    ".pdf": "docs/technical_specs",
+    ".py": "src/core",
+    ".ipynb": "03_Research_AI/Notebooks",
+    ".tf": "infrastructure",
+    ".sql": "schemas",
+    ".json": "schemas"
+  }
+}
