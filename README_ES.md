@@ -105,47 +105,65 @@ Evaluación empírica sobre hardware de desarrollo empresarial estándar (x86_64
 
 ## 5. Estructura del Repositorio y Artefactos
 
-```text
 .
+├── .context/
+│   └── tree.json                    # Mapa topológico satelital compacto (~250 tokens)
 ├── .agents/
 │   └── skills/
 │       └── idir/                    # Manifiesto de skill Antigravity para gobernanza automatizada (/idir)
 │           └── SKILL.md
-├── 001_Seed/
+├── .claude/
+│   └── commands/
+│       └── idir.md                  # Wrapper de comandos de gobernanza para Claude Code
+├── 01_seed/
+│   ├── .context.yaml                # Beacon de directorio (Prioridad: P0, Relevancia: Crítica)
 │   └── seed-idirectory-master.md    # Memoria técnica primaria y snapshot del ADN del proyecto
-├── 02_Foundation/
-│   └── Engine/
-│       └── EngineReadme.md          # Manifiesto de gobernanza generado con funciones de directorios
-├── 03_Research_AI/
-│   ├── Notebooks/                   # Notebooks interactivos EDA (Jupyter, Databricks, Fabric)
-│   ├── llm_prompts/                 # Plantillas de ingeniería de prompts y system prompts LLM
+├── 02_foundation/
+│   ├── .context.yaml                # Beacon de capa foundation
+│   └── engine/
+│       ├── .context.yaml
+│       └── engine_readme.md         # Manifiesto de gobernanza generado con funciones de directorios
+├── 03_research/
+│   ├── .context.yaml                # Beacon de investigación
+│   ├── notebooks/                   # Notebooks interactivos EDA (Jupyter, Databricks, Fabric)
+│   ├── prompts/                     # Plantillas de ingeniería de prompts y system prompts LLM
 │   └── experiments/                 # Pruebas de concepto algorítmicas y benchmarks de I+D
 ├── src/
+│   ├── .context.yaml                # Beacon de código fuente
 │   ├── cloud_jobs/                  # Pipelines ETL multi-cloud (Spark, Dataproc, Glue, Synapse)
 │   ├── data_generation/             # Generadores de datos sintéticos y distribuciones de carga
 │   ├── core/                        # Lógica compartida de negocio y servicios modulares backend
 │   └── dashboards/                  # Aplicaciones interactivas de BI (Streamlit, Dash, PowerBI)
-├── Artefactos/
-│   └── Planes/
-│       ├── Vigentes/                # Planes de capacidad activos y presupuestos de cómputo
-│       └── Historico_Obsoletos/     # Propuestas arquitectónicas archivadas y planes descartados
+├── artifacts/
+│   ├── .context.yaml                # Beacon de artefactos
+│   └── plans/
+│       ├── active/                  # Planes de capacidad activos y presupuestos de cómputo
+│       └── archive/                 # Propuestas descartadas y ramas muertas (crawl: false)
 ├── docs/
+│   ├── .context.yaml                # Beacon de documentación
 │   ├── architecture/                # Diagramas de arquitectura multi-cloud y topología Medallion
-│   ├── technical_specs/             # Linaje de datos, contratos de esquemas y especificaciones
-│   └── engineers_notes/             # Bitácoras de deuda técnica, notas de ingeniería y RCAs
+│   ├── specs/                       # Linaje de datos, contratos de esquemas y especificaciones
+│   └── notes/                       # Bitácoras de deuda técnica, notas de ingeniería y RCAs
 ├── schemas/                         # Contratos formales de esquemas (Avro, JSON Schema, SQL DDL)
 ├── config/                          # Parámetros de entorno (dev, staging, prod)
 ├── infrastructure/                  # Infraestructura como Código (Terraform, Bicep, AWS CDK)
-├── data/                            # Almacenamiento local aislado de datos (Ignorado en Git)
+├── data/                            # Almacenamiento local aislado (Ignorado en Git y agentes de IA)
+│   ├── .context.yaml                # Beacon de poda (crawl: false, relevance: zero_for_llm)
 │   ├── raw/                         # Capa Bronze (aterrizaje puro inmutable)
 │   ├── processed/                   # Capa Silver/Gold (datos limpios y modelados)
 │   └── sandbox/                     # Zona no restringida de exploración en ciencia de datos
-├── Tools/                           # Herramientas internas de desarrollo, linters y helpers
+├── tools/                           # Herramientas internas de desarrollo, linters y helpers
 ├── scripts/                         # Scripts operativos de mantenimiento en bash y PowerShell
-├── logs/                            # Trazas locales de ejecución y volcados de auditoría
+├── logs/                            # Trazas locales de ejecución y volcados (crawl: false)
 ├── tests/                           # Suites de verificación y pruebas de invariantes
-├── GEMINI.md                        # Reglas operativas locales de gobernanza y control de agentes
-├── FWengine.py                      # Motor principal de CLI en Python para inicialización y ruteo
+├── AGENTS.md                        # Gobernanza Maestra Universal y Protocolo Bootloader de 4 Pasos
+├── GEMINI.md                        # Shim de gobernanza para Google Gemini y Antigravity
+├── CLAUDE.md                        # Shim de gobernanza para Anthropic Claude Code
+├── .cursorrules                     # Reglas de contexto para Cursor y Windsurf
+├── .agentignore                     # Máscara de exclusión para indexadores de IA
+├── .gitignore                       # Reglas estándar de exclusión de git
+├── FWengine.py                      # Motor principal de CLI en Python para gobernanza y ruteo
+├── LICENSE                          # Licencia Open Source MIT
 ├── README.md                        # Documentación maestra (Inglés)
 └── README_ES.md                     # Documentación maestra (Español)
 ```

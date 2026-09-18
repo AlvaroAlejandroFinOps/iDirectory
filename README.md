@@ -105,47 +105,65 @@ Operational benchmarks evaluated on standard enterprise developer hardware (x86_
 
 ## 5. Repository Structure & Artifacts
 
-```text
 .
+├── .context/
+│   └── tree.json                    # Compact topological satellite map (~250 tokens)
 ├── .agents/
 │   └── skills/
 │       └── idir/                    # Antigravity skill manifest for automated governance (/idir)
 │           └── SKILL.md
-├── 001_Seed/
+├── .claude/
+│   └── commands/
+│       └── idir.md                  # Claude Code governance command wrapper
+├── 01_seed/
+│   ├── .context.yaml                # Directory beacon (Priority: P0, Relevance: Critical)
 │   └── seed-idirectory-master.md    # Primary technical memory and project DNA snapshot
-├── 02_Foundation/
-│   └── Engine/
-│       └── EngineReadme.md          # Generated governance manifest for directory functions
-├── 03_Research_AI/
-│   ├── Notebooks/                   # Interactive EDA notebooks (Jupyter, Databricks, Fabric)
-│   ├── llm_prompts/                 # Prompt engineering templates and LLM system prompts
+├── 02_foundation/
+│   ├── .context.yaml                # Foundation beacon
+│   └── engine/
+│       ├── .context.yaml
+│       └── engine_readme.md         # Generated governance manifest for directory functions
+├── 03_research/
+│   ├── .context.yaml                # Research beacon
+│   ├── notebooks/                   # Interactive EDA notebooks (Jupyter, Databricks, Fabric)
+│   ├── prompts/                     # Prompt engineering templates and LLM system prompts
 │   └── experiments/                 # Algorithm PoCs and research benchmarks
 ├── src/
+│   ├── .context.yaml                # Source beacon
 │   ├── cloud_jobs/                  # Multi-cloud ETL pipelines (Spark, Dataproc, Glue, Synapse)
 │   ├── data_generation/             # Synthetic data generators and load testing distributions
 │   ├── core/                        # Shared business logic and modular backend services
 │   └── dashboards/                  # Interactive BI apps (Streamlit, Dash, PowerBI)
-├── Artefactos/
-│   └── Planes/
-│       ├── Vigentes/                # Active capacity plans and compute budgets
-│       └── Historico_Obsoletos/     # Archived architectural proposals and retired plans
+├── artifacts/
+│   ├── .context.yaml                # Artifacts beacon
+│   └── plans/
+│       ├── active/                  # Active capacity plans and compute budgets
+│       └── archive/                 # Archived proposals and dead branches (crawl: false)
 ├── docs/
+│   ├── .context.yaml                # Documentation beacon
 │   ├── architecture/                # Multi-cloud architecture and Medallion topology diagrams
-│   ├── technical_specs/             # Data lineage, schema contracts, and specifications
-│   └── engineers_notes/             # Technical debt logs, engineering journals, and RCAs
+│   ├── specs/                       # Data lineage, schema contracts, and technical specifications
+│   └── notes/                       # Technical debt logs, engineering journals, and RCAs
 ├── schemas/                         # Formal schema contracts (Avro, JSON Schema, SQL DDL)
 ├── config/                          # Environment parameters (dev, staging, prod)
 ├── infrastructure/                  # Infrastructure as Code (Terraform, Bicep, AWS CDK)
-├── data/                            # Isolated local data storage (Ignored by Git)
+├── data/                            # Isolated local data storage (Ignored by Git and AI agents)
+│   ├── .context.yaml                # Dead-branch beacon (crawl: false, relevance: zero_for_llm)
 │   ├── raw/                         # Bronze storage tier (pure immutable landing)
 │   ├── processed/                   # Silver/Gold storage tier (cleaned & modeled data)
 │   └── sandbox/                     # Unrestricted data science exploration zone
-├── Tools/                           # Internal developer tooling, linters, and helpers
+├── tools/                           # Internal developer tooling, linters, and helpers
 ├── scripts/                         # Operational bash and PowerShell maintenance scripts
-├── logs/                            # Local execution traces and query audit dumps
+├── logs/                            # Local execution traces and query audit dumps (crawl: false)
 ├── tests/                           # Verification suites and invariant tests
-├── GEMINI.md                        # Local governance and agent operational rules
-├── FWengine.py                      # Main Python CLI engine for initialization and routing
+├── AGENTS.md                        # Master Universal Governance & 4-Step Bootloader Protocol
+├── GEMINI.md                        # Governance shim for Google Gemini & Antigravity
+├── CLAUDE.md                        # Governance shim for Anthropic Claude Code
+├── .cursorrules                     # Context rules for Cursor & Windsurf
+├── .agentignore                     # AI agent indexer exclusion mask
+├── .gitignore                       # Standard git ignore rules
+├── FWengine.py                      # Main Python CLI engine for governance, beacons, and routing
+├── LICENSE                          # MIT Open Source License
 ├── README.md                        # Master documentation (English)
 └── README_ES.md                     # Master documentation (Spanish)
 ```

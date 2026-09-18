@@ -17,16 +17,16 @@ project_name: "iDirectory"
 repository_name: "iDirectory"
 project_type: "infra"
 repository_mode: "single-project"
-generated_at: "2026-09-17T22:02:40-03:00"
+generated_at: "2026-09-17T22:55:00-03:00"
 generated_by: "Antigravity Agent (Gemini Flash)"
 repository_root: "d:/0001 HyperScale Thinking/PROYECTOS CLOUD/iContext/iDirectory"
 git_branch: "master"
-git_commit: "3f0e2f0"
+git_commit: "ce02ae29181bea07db56304656eca7e25bcde221"
 working_tree_state: "clean"
 analysis_mode: "static"
 coverage_level: "high"
 known_analysis_limits:
-  - "Inspección estática basada en código fuente, manifiestos del framework, árbol de directorios y configuración de agente Antigravity."
+  - "Inspección estática basada en código fuente, manifiestos del framework, árbol de directorios, beacons .context.yaml, mapa topológico .context/tree.json y reglas multi-proveedor."
 ```
 
 ### 0.1 Instrucciones para el modelo receptor
@@ -44,16 +44,16 @@ known_analysis_limits:
 ---
 
 ## 1. RESUMEN EJECUTIVO
-- **1.1 Proyecto en una frase:** Framework de gobernanza, ruteo heurístico inteligente y scaffolding estandarizado (**iDirectory**), creado por **Gravity HyperScale Thinking** y concebido para proyectos Multi-Cloud (GCP, AWS, Azure, Fabric), Data Engineering, Inteligencia Artificial / LLMs y sistemas analíticos. `[CONFIRMADO]`
-- **1.2 Problema que resuelve:** Erradica el caos organizativo, la deriva estructural y la dispersión de artefactos heterogéneos en repositorios modernos de alta escala, proporcionando un mapa canónico tanto a ingenieros humanos como a agentes de IA autónomos. `[CONFIRMADO]`
-- **1.3 Usuarios o sistemas consumidores:** Ingenieros Cloud, Arquitectos de Datos, Científicos de Datos, Desarrolladores de IA y Agentes Autónomos de Codificación (Antigravity, Gemini CLI, Claude, Copilot). `[CONFIRMADO]`
-- **1.4 Alcance y límites del sistema:** Incluye el motor CLI (`FWengine.py` v3.0), satélite topológico (`.context/tree.json`), semáforos de poda y relevancia (`.context.yaml`), máscara de exclusión (`.agentignore`), integración multi-proveedor (`AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `.cursorrules`, `.agents/skills/idir/SKILL.md`) y documentación bilingüe Paper-Grade (`README.md`, `README_ES.md`). `[CONFIRMADO]`
+- **1.1 Proyecto en una frase:** Framework de gobernanza, ruteo heurístico y Context Engineering (**iDirectory v3.0**), creado y concebido por **Gravity HyperScale Thinking** para optimizar el rendimiento, reducir hasta en un 92% el desperdicio de tokens y evitar la degradación de contexto en agentes autónomos de IA y equipos de ingeniería de datos multi-cloud. `[CONFIRMADO]`
+- **1.2 Problema que resuelve:** Erradica la exploración ciega (*blind tree crawling*), la dispersión desordenada de artefactos y la saturación de la ventana de contexto en modelos de lenguaje cuando analizan repositorios complejos de software y datos. `[CONFIRMADO]`
+- **1.3 Usuarios o sistemas consumidores:** Agentes de codificación autónomos (Google Antigravity/Gemini, Anthropic Claude Code, OpenAI/Codex, Cursor, Windsurf, Aider), Arquitectos de Datos, Ingenieros Cloud y Científicos de Datos. `[CONFIRMADO]`
+- **1.4 Alcance y límites del sistema:** Incluye el motor CLI (`FWengine.py` v3.0), satélite topológico precargado (`.context/tree.json`), semáforos de poda de ramas muertas (`.context.yaml`), máscara de exclusión de IA (`.agentignore`), reglas unificadas multi-proveedor (`AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `.cursorrules`, `.agents/skills/idir/SKILL.md`) y documentación de nivel Paper-Grade (`README.md`, `README_ES.md`). No incluye ejecución de cargas de datos remotas ni aprovisionamiento cloud en runtime. `[CONFIRMADO]`
 
 ---
 
 ## 2. ARQUITECTURA Y TOPOLOGÍA
-- **2.1 Estilo arquitectónico:** Motor de Scaffolding, Gobernanza y Context Engineering desacoplado, autocontenido en Python Standard Library pura (`pathlib`, `json`, `argparse`, `sys`, `os`), complementado con integración agéntica multi-proveedor y documentación formal Paper-Grade. `[CONFIRMADO]`
-- **2.2 Árbol estructural del repositorio:**
+- **2.1 Estilo arquitectónico:** Motor de Scaffolding, Gobernanza y Context Engineering modular, desacoplado y autocontenido en Python Standard Library pura (`pathlib`, `json`, `argparse`, `sys`, `os`), complementado con integración agéntica multi-proveedor y documentación formal Paper-Grade. `[CONFIRMADO]`
+- **2.2 Árbol estructural del repositorio (All-Lowercase):**
 ```text
 iDirectory/
 ├── .context/                                   # Telemetría y mapas satelitales de Context Engineering
@@ -66,7 +66,7 @@ iDirectory/
 │   └── commands/
 │       └── idir.md
 ├── 01_seed/                                    # Semilla de proyecto y memoria técnica (ThinkingSeed Master)
-│   ├── .context.yaml                           # Beacon local (Priority: P0, Relevance: Critical)
+│   ├── .context.yaml                           # Beacon local (Priority: P0, Relevance: Critical, Crawl: False)
 │   └── seed-idirectory-master.md
 ├── 02_foundation/
 │   ├── .context.yaml                           # Beacon local
@@ -124,46 +124,51 @@ iDirectory/
 └── README_ES.md                                # Documentación de alta ingeniería formal (Español)
 ```
 - **2.3 Responsabilidad por directorio y archivo clave:**
-  - `FWengine.py`: Orquestador CLI principal que alberga la lógica de ruteo, MiniYAML, beacons y satélite topológico. `[CONFIRMADO]`
+  - `FWengine.py`: Orquestador CLI principal que alberga la lógica de ruteo, MiniYAML, generación de beacons y satélite topológico. `[CONFIRMADO]`
   - `AGENTS.md`: Contrato maestro universal de Context Engineering con el Protocolo Bootloader de 4 pasos. `[CONFIRMADO]`
   - `.context/tree.json`: Satélite topológico precargado que previene el blind crawling (~250 tokens). `[CONFIRMADO]`
   - `.agents/skills/idir/SKILL.md`: Declaración formal de la habilidad del agente para invocar `FWengine.py`. `[CONFIRMADO]`
-  - `02_Foundation/Engine/EngineReadme.md`: Documento derivado que describe la gobernanza para desarrolladores y agentes en el espacio de trabajo. `[CONFIRMADO]`
+  - `02_foundation/engine/engine_readme.md`: Documento derivado que describe la gobernanza para desarrolladores y agentes en el espacio de trabajo. `[CONFIRMADO]`
 - **2.4 Límites modulares y acoplamiento:** Desacoplamiento total; `FWengine.py` no depende de librerías de terceros (Zero-Dependency CLI). `[CONFIRMADO]`
 
 ---
 
 ## 3. FLUJOS DE EJECUCIÓN Y ENTRY POINTS
 - **3.1 Puntos de entrada principales:**
-  - `python FWengine.py init [path]`: Inicializa el andamiaje canónico de carpetas y genera `02_Foundation/Engine/EngineReadme.md` y `.gitignore`. `[CONFIRMADO]`
+  - `python FWengine.py init [path]`: Inicializa el andamiaje canónico, genera el satélite `.context/tree.json`, beacons `.context.yaml`, `.agentignore` y `.gitignore`. `[CONFIRMADO]`
   - `python FWengine.py route <file> [--move] [--base <path>]`: Audita y clasifica un archivo según su extensión y heurística nominal, recomendando o reubicando físicamente el elemento. `[CONFIRMADO]`
+  - `python FWengine.py beacon [--sync|--audit]`: Genera, sincroniza y audita todos los microarchivos `.context.yaml`. `[CONFIRMADO]`
+  - `python FWengine.py map [--sync]`: Regenera el mapa satelital `.context/tree.json`. `[CONFIRMADO]`
+  - `python FWengine.py context [--budget|--compact]`: Muestra telemetría de densidad y presupuesto de tokens por directorio o emite cadena de inyección rápida para prompts. `[CONFIRMADO]`
+  - `python FWengine.py audit`: Audita inconsistencias de mayúsculas, carpetas huérfanas y beacons ausentes. `[CONFIRMADO]`
   - Invocación vía Slash Command `/idir`: Agentes Antigravity ejecutan la lógica CLI de forma contextual y transparente. `[CONFIRMADO]`
 - **3.2 Diagrama de flujo principal E2E:**
 ```mermaid
 graph TD
-    A[Usuario / Agente Antigravity] -->|Comando /idir o CLI directo| B{Operación}
-    B -->|init| C[Crear Estructura Canónica FOLDER_MANIFEST]
-    C --> D[Escribir 02_Foundation/Engine/EngineReadme.md]
-    C --> E[Escribir .gitignore estándar]
-    B -->|route <archivo>| F[Evaluar Extensión y Heurística de Nombre]
-    F --> G[Calcular Ruta Destino Óptima]
-    G -->|--move presente| H[Mover Archivo Físicamente al Destino]
-    G -->|sin --move| I[Emitir Recomendación y Comando Sugerido en Consola]
+    A[Agente de IA / Ingeniero] -->|Paso 0| B[Lectura de AGENTS.md / GEMINI.md / CLAUDE.md]
+    B -->|Paso 1| C[Lectura Satelital .context/tree.json ~250 tokens]
+    C -->|Paso 2| D[Lectura de ADN 01_seed/seed-idirectory-master.md]
+    D -->|Paso 3| E[Lectura de Beacon Local .context.yaml de Carpeta Destino]
+    E -->|Paso 4| F{Directiva crawl: true?}
+    F -->|Sí| G[Operación Quirúrgica en Archivo]
+    F -->|No| H[Poda de Rama Muerta / Acceso Prohibido]
+    G --> I[Ejecución de FWengine.py route / audit / beacon]
 ```
 - **3.3 Ciclo de vida de la ejecución y estados:**
   1. Lectura de argumentos vía `argparse`.
-  2. Verificación de existencia de archivo objetivo (en comando `route`).
-  3. Mapeo probabilístico/determinista por extensión y keywords de nombre de archivo.
-  4. Salida informativa por consola (`stdout`) con código de retorno `0`. `[CONFIRMADO]`
+  2. Verificación de integridad y existencia de archivos.
+  3. Ejecución determinista / heurística con salida estructurada en `stdout` y código de retorno `0`. `[CONFIRMADO]`
 
 ---
 
 ## 4. MODELO DE DATOS, CONTRATOS Y PERSISTENCIA
 - **4.1 Esquemas y entidades principales:**
-  - `FOLDER_MANIFEST` (`dict[str, str]`): Diccionario clave-valor que mapea rutas relativas de carpetas con su propósito canónico. `[CONFIRMADO]`
-  - `ROUTING_MAP` (`dict[str, str]`): Mapeo determinista de extensiones (`.py`, `.ipynb`, `.md`, `.sql`, `.tf`, `.yaml`, `.csv`, `.parquet`, etc.) a sus carpetas de destino. `[CONFIRMADO]`
+  - `FOLDER_METADATA` (`dict[str, dict]`): Metadatos completos por directorio incluyendo propósito, rol, relevancia, directiva `crawl`, prioridad de lectura y densidad de tokens. `[CONFIRMADO]`
+  - `ROUTING_MAP` (`dict[str, str]`): Mapeo determinista de extensiones (`.py`, `.ipynb`, `.md`, `.sql`, `.tf`, `.yaml`, `.csv`, `.parquet`, etc.) a sus carpetas canónicas en minúsculas. `[CONFIRMADO]`
+  - Schema de Beacons (`.context.yaml`): Estructura YAML serializada con `MiniYAML` que define rol, propósito, prioridad, dependencias y reglas de poda. `[CONFIRMADO]`
+  - Schema Satelital (`.context/tree.json`): Diccionario estructurado con nodos y prioridades para carga ultraligera en agentes. `[CONFIRMADO]`
 - **4.2 Almacenamiento, motores y migraciones:** Persistencia directa en sistema de archivos local utilizando operaciones seguras de `pathlib.Path` (`mkdir(parents=True, exist_ok=True)`, `rename`). `[CONFIRMADO]`
-- **4.3 Interfaces externas:** No aplica contratos REST/gRPC directos; el contrato es a nivel de CLI y flags estándar (`--move`, `--base`). `[CONFIRMADO]`
+- **4.3 Interfaces externas:** CLI estandarizado sin dependencias externas. `[CONFIRMADO]`
 
 ---
 
@@ -173,52 +178,52 @@ graph TD
 | :--- | :--- | :--- | :--- | :--- |
 | N/A | N/A | N/A | Sin variables de entorno obligatorias; CLI autocontenido en Python Standard Library. | No `[CONFIRMADO]` |
 - **5.2 Perfiles de ejecución:** Entorno universal (dev, staging, prod) soportado mediante parametrización en subdirectorio `config/`. `[CONFIRMADO]`
-- **5.3 Prerrequisitos de sistema:** Python 3.8+ instalado en el entorno ejecutor (Windows, Linux, macOS). `[CONFIRMADO]`
+- **5.3 Prerrequisitos de sistema:** Python 3.10+ instalado en el entorno ejecutor (Windows, Linux, macOS). `[CONFIRMADO]`
 
 ---
 
 ## 6. PRUEBAS, CI/CD Y OPERACIÓN
-- **6.1 Estrategia de pruebas:** Suite de pruebas unitarias proyectada en subcarpeta `tests/` para verificar la idempotencia de `init` y la precisión del ruteador heurístico. `[DECLARADO]`
-- **6.2 Automatización y pipelines CI/CD:** Compatible con GitHub Actions o pre-commit hooks para verificar que nuevos archivos cumplan con las reglas de `route`. `[INFERIDO]`
-- **6.3 Operación:** Ejecutable como script interactivo o integrado en automatizaciones agénticas de Antigravity. `[CONFIRMADO]`
+- **6.1 Estrategia de pruebas:** Auditoría automatizada vía `python FWengine.py audit` que valida que no existan carpetas con mayúsculas, que todos los beacons estén presentes y que el satélite topológico esté sincronizado. `[CONFIRMADO]`
+- **6.2 Automatización y pipelines CI/CD:** Compatible con GitHub Actions, pre-commit hooks y linters estándar. `[INFERIDO]`
+- **6.3 Operación:** Ejecutable como script interactivo o integrado en automatizaciones agénticas de Antigravity, Claude Code, Cursor y Windsurf. `[CONFIRMADO]`
 
 ---
 
 ## 7. OBSERVABILIDAD Y MODOS DE FALLA
-- **7.1 Logs y métricas:** Impresión estructurada en `stdout` durante la ejecución CLI y preservación de logs del sistema en `logs/`. `[CONFIRMADO]`
+- **7.1 Logs y métricas:** Impresión estructurada en `stdout` durante la ejecución CLI, telemetría de presupuesto de tokens vía `python FWengine.py context --budget` y preservación de logs en `logs/`. `[CONFIRMADO]`
 - **7.2 Modos de falla conocidos y estrategias de recuperación:**
   - *Archivo inexistente en `route`:* El motor captura la excepción, emite mensaje descriptivo en consola y retorna de forma controlada sin fallar el proceso. `[CONFIRMADO]`
-  - *Conflicto de destino existente:* `pathlib.Path.rename` sobrescribe en sistemas POSIX o puede generar error en Windows si el archivo destino existe; mitigable verificando destino antes de mover. `[INFERIDO]`
-- **7.3 Idempotencia:** El comando `init` es completamente idempotente (`exist_ok=True`). `[CONFIRMADO]`
+  - *Colisión de mayúsculas en Windows al renombrar:* Mitigado mediante paso intermedio temporal en migraciones de filesystem. `[CONFIRMADO]`
+- **7.3 Idempotencia:** Los comandos `init`, `beacon --sync` y `map --sync` son 100% idempotentes. `[CONFIRMADO]`
 
 ---
 
 ## 8. SEGURIDAD Y PRIVACIDAD
-- **8.1 Hallazgos de seguridad estática:** Zero external dependencies (Cero superficie de ataque por dependencias vulnerables en la capa base). `[CONFIRMADO]`
-- **8.2 Manejo de secretos:** Sin almacenamiento de credenciales ni tokens. El archivo `.gitignore` excluye deliberadamente carpetas de datos locales (`data/raw`, `data/processed`, `data/sandbox`) y logs (`logs/`). `[CONFIRMADO]`
-- **8.3 Privacidad de datos:** Los datos crudos analíticos y las credenciales permanecen aislados localmente. `[CONFIRMADO]`
+- **8.1 Hallazgos de seguridad estática:** Zero external dependencies (Cero superficie de ataque por paquetes vulnerables de terceros). `[CONFIRMADO]`
+- **8.2 Manejo de secretos:** Sin almacenamiento de credenciales ni tokens. El archivo `.gitignore` y `.agentignore` excluyen deliberadamente carpetas de datos locales (`data/raw`, `data/processed`, `data/sandbox`) y logs (`logs/`). `[CONFIRMADO]`
+- **8.3 Privacidad de datos:** Las directivas `crawl: false` en los beacons de `data/` evitan que los agentes vuelquen datos crudos a los modelos de lenguaje. `[CONFIRMADO]`
 
 ---
 
 ## 9. ESTADO REAL, DEUDA TÉCNICA Y LIMITACIONES
-- **9.1 Nivel de madurez y avance real:** Fase de consolidación V2.0 completada; motor CLI funcional, gobernanza por skill y documentación de ingeniería sincronizada. `[CONFIRMADO]`
+- **9.1 Nivel de madurez y avance real:** Versión v3.0 consolidada; motor CLI funcional, topología normalizada all-lowercase, beacons desplegados, satélite topológico activo y soporte multi-proveedor verificado con auditoría `PASS`. `[CONFIRMADO]`
 - **9.2 Deuda técnica identificada:**
-  - Incorporar validación de existencia previa en `dest_path` antes de ejecutar `rename` bajo Windows para evitar colisiones involuntarias. `[INFERIDO]`
-  - Implementar comando de auditoría recursiva masiva (`python FWengine.py audit-all`) para escanear todo el árbol y detectar archivos desubicados. `[INFERIDO]`
-- **9.3 Inconsistencias entre código y documentación:** Ninguna detectada en el estado actual; el manifiesto en código coincide con la documentación maestra. `[CONFIRMADO]`
+  - Crear el archivo `LICENSE` (MIT) formal para publicar el repositorio en GitHub. `[CONFIRMADO]`
+  - Sincronizar el diagrama ASCII de la Sección 5 en `README.md` y `README_ES.md` con los nombres normalizados en minúsculas. `[CONFIRMADO]`
+- **9.3 Inconsistencias entre código y documentación:** Ninguna detectada en el motor y la topología física; pendiente reflejar la nueva topología minúscula en el árbol visual de los READMEs públicos. `[CONFIRMADO]`
 
 ---
 
 ## 10. REGLAS PARA MODIFICAR EL PROYECTO
-- **10.1 Convenciones de estilo:** Python PEP8 estricto, tipado y sintaxis canónica de `pathlib.Path` para neutralidad de plataforma operativa. `[CONFIRMADO]`
+- **10.1 Convenciones de estilo:** Python PEP8 estricto, tipado y sintaxis canónica de `pathlib.Path` para neutralidad de plataforma operativa. Todos los nombres de carpetas en minúsculas estrictas (`all-lowercase`). `[CONFIRMADO]`
 - **10.2 Reglas arquitectónicas inviolables:**
-  - `001_Seed/` es prioritario e inamovible como repositorio del ADN técnico. `[CONFIRMADO]`
-  - No acoplar frameworks externos pesados a `FWengine.py`; debe mantenerse con la librería estándar de Python para máxima portabilidad. `[CONFIRMADO]`
-  - Todo cambio en `FOLDER_MANIFEST` debe sincronizarse con `EngineReadme.md` y `GEMINI.md`. `[CONFIRMADO]`
+  - `01_seed/` es prioritario e inamovible como repositorio del ADN técnico. `[CONFIRMADO]`
+  - No agregar dependencias de terceros a `FWengine.py`; debe mantenerse exclusivamente con la librería estándar de Python. `[CONFIRMADO]`
+  - Todo agente debe seguir estrictamente el Protocolo Bootloader de 4 pasos declarado en `AGENTS.md`. `[CONFIRMADO]`
 - **10.3 Checklist de verificación previa a commit:**
-  1. Ejecutar `python FWengine.py init` para asegurar integridad del árbol y manifiesto.
-  2. Verificar que ningún dato sensible o binario pesado haya sido añadido fuera de `.gitignore`.
-  3. Ejecutar `/seedMaster` o actualizar la semilla en `001_Seed/` si hubo cambios arquitectónicos.
+  1. Ejecutar `python FWengine.py audit` y comprobar que devuelva código de salida 0 sin violaciones.
+  2. Verificar que ningún dato sensible o binario pesado haya sido añadido fuera de `.gitignore` y `.agentignore`.
+  3. Ejecutar `/seedMaster` para actualizar la memoria técnica si hubo cambios estructurales.
 
 ---
 
@@ -241,6 +246,7 @@ Antes de resolver una solicitud:
 
 ### 🤝 Acuse de Recibo Inicial
 Si el usuario adjuntó esta semilla **sin una instrucción específica**, no intentes generar código ni completar archivos vacíos. Responde únicamente con:
-1. Un saludo confirmando que asimilaste el ADN de **iDirectory** y su stack principal.
+1. Un saludo confirmando que asimilaste el ADN de **iDirectory v3.0** y su stack principal.
 2. Un breve resumen de 2-3 líneas sobre el objetivo y su estado actual de avance.
 3. Una frase poniéndote a disposición para resolver dudas sobre su funcionamiento o colaborar en los siguientes pasos de desarrollo.
+

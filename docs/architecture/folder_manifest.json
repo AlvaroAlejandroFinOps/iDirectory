@@ -1,113 +1,256 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "version": "1.0",
-  "project_type": "Thinking Multi-Cloud, AI & Data Architecture",
-  "last_updated": "2026-09-09",
+  "version": "3.0",
+  "project_type": "iDirectory: Multi-Cloud, AI & Data Context Engineering Architecture",
+  "created_by": "Gravity HyperScale Thinking",
   "manifest": {
-    "001_Seed": {
-      "purpose": "Seed (Semilla de proyecto y contexto primario para agentes de IA y arquitectos).",
-      "category": "governance"
+    "01_seed": {
+      "purpose": "Semilla de proyecto y memoria técnica (ThinkingSeed Master). ADN arquitectónico del sistema.",
+      "role": "dna",
+      "relevance": "critical",
+      "crawl": false,
+      "read_priority": "p0",
+      "token_density": "medium",
+      "key_files": [
+        "seed-idirectory-master.md"
+      ],
+      "instructions": "LECTURA OBLIGATORIA (Paso 3 del Bootloader) antes de generar o alterar código."
     },
-    "02_Foundation/Engine": {
-      "purpose": "Núcleo del framework de automatización del proyecto. Contiene la lógica de ruteo, indexación y EngineReadme.md de gobernanza.",
-      "category": "core_framework"
+    "02_foundation/engine": {
+      "purpose": "Núcleo del framework de automatización, lógica de ruteo, indexación y governance engine.",
+      "role": "core_engine",
+      "relevance": "critical",
+      "crawl": true,
+      "read_priority": "p1",
+      "token_density": "low",
+      "key_files": [
+        "engine_readme.md"
+      ],
+      "instructions": "Contiene los utilitarios de gobernanza y especificación formal de directorios."
     },
-    "03_Research_AI/Notebooks": {
-      "purpose": "Notebooks de desarrollo interactivo y experimentación (Jupyter/Fabric/Databricks/Colab) para análisis exploratorio (EDA) y algoritmos.",
-      "category": "research"
+    "03_research/notebooks": {
+      "purpose": "Notebooks de desarrollo interactivo (Jupyter/Colab/Fabric/Databricks) para análisis exploratorio (EDA).",
+      "role": "eda",
+      "relevance": "low",
+      "crawl": false,
+      "read_priority": "p2",
+      "token_density": "dense",
+      "instructions": "Notebooks exploratorios. No iterar de forma recursiva a menos que se solicite un análisis específico."
     },
-    "03_Research_AI/llm_prompts": {
-      "purpose": "Estructuras de prompts para LLMs, system prompts, árboles de contexto y plantillas de inferencia generativa.",
-      "category": "ai_engineering"
+    "03_research/prompts": {
+      "purpose": "Estructuras de prompts para LLMs, system prompts, árboles de contexto y plantillas de inferencia.",
+      "role": "prompt_engineering",
+      "relevance": "high",
+      "crawl": true,
+      "read_priority": "p1",
+      "token_density": "sparse",
+      "instructions": "Plantillas de inferencia y configuración de agentes."
     },
-    "03_Research_AI/experiments": {
-      "purpose": "Espacio de pruebas de concepto (PoCs), prototipos de modelos, I+D y benchmarks algorítmicos.",
-      "category": "research"
+    "03_research/experiments": {
+      "purpose": "Pruebas de concepto (PoCs), prototipos de modelos algorítmicos, benchmarks e I+D.",
+      "role": "pocs_benchmarks",
+      "relevance": "medium",
+      "crawl": false,
+      "read_priority": "p2",
+      "token_density": "medium",
+      "instructions": "Espacio de pruebas descartables y experimentos temporales."
     },
     "src/cloud_jobs": {
-      "purpose": "Scripts productivos, definiciones de pipelines y orquestación multi-cloud (Fabric PySpark, AWS Glue/EMR, GCP Dataproc/Dataflow, Azure Synapse).",
-      "category": "data_engineering"
+      "purpose": "Scripts productivos, pipelines y orquestación multi-cloud (Fabric PySpark, AWS Glue, GCP Dataproc, Azure Synapse).",
+      "role": "production_pipelines",
+      "relevance": "high",
+      "crawl": true,
+      "read_priority": "p1",
+      "token_density": "medium",
+      "dependencies": [
+        "schemas",
+        "config"
+      ],
+      "instructions": "Cargas productivas de datos. Conservar invariantes de arquitectura e idempotencia."
     },
     "src/data_generation": {
-      "purpose": "Módulos de generación y simulación de datos sintéticos. Rigor matemático en distribuciones y volumetría estadística para pruebas de carga.",
-      "category": "data_engineering"
+      "purpose": "Módulos de generación y simulación de datos sintéticos con rigor probabilístico y volumetría estadística.",
+      "role": "synthetic_data",
+      "relevance": "medium",
+      "crawl": true,
+      "read_priority": "p2",
+      "token_density": "medium",
+      "instructions": "Generadores de pruebas de carga y benchmarking sintético."
     },
     "src/core": {
-      "purpose": "Lógica de negocio transversal, servicios modulares, utilitarios de backend y componentes de desarrollo de software.",
-      "category": "backend"
+      "purpose": "Lógica de negocio transversal, utilitarios de backend, clientes de servicios y módulos comunes.",
+      "role": "shared_backend",
+      "relevance": "high",
+      "crawl": true,
+      "read_priority": "p1",
+      "token_density": "medium",
+      "instructions": "Servicios backend reutilizables por jobs y dashboards."
     },
     "src/dashboards": {
-      "purpose": "Aplicaciones de visualización, tableros de BI, cuadros de mando interactivos (Streamlit, Dash, PowerBI, Looker).",
-      "category": "analytics"
+      "purpose": "Tableros de Business Intelligence y apps de visualización interactiva (Streamlit, Dash, PowerBI, Looker).",
+      "role": "bi_viz",
+      "relevance": "medium",
+      "crawl": true,
+      "read_priority": "p2",
+      "token_density": "medium",
+      "instructions": "Aplicaciones de visualización frontend y consumo analítico."
     },
-    "Artefactos/Planes/Vigentes": {
-      "purpose": "Planes de capacidad activos (F-SKUs), presupuestos de cómputo cloud vigentes, hitos del proyecto y documentación activa.",
-      "category": "management"
+    "artifacts/plans/active": {
+      "purpose": "Planes de capacidad activos (F-SKUs), presupuestos cloud vigentes e hitos operativos en curso.",
+      "role": "active_plans",
+      "relevance": "high",
+      "crawl": true,
+      "read_priority": "p1",
+      "token_density": "sparse",
+      "instructions": "Planes y decisiones vigentes. Consultar antes de modificar infraestructura o presupuestos."
     },
-    "Artefactos/Planes/Historico_Obsoletos": {
-      "purpose": "Histórico de planes evaluados, arquitecturas descartadas y documentación obsoleta preservada como respaldo y trazabilidad.",
-      "category": "archive"
-    },
-    "docs/technical_specs": {
-      "purpose": "Especificaciones técnicas detalladas, mapeos de linaje de datos, contratos de esquemas y requerimientos no funcionales.",
-      "category": "documentation"
-    },
-    "docs/engineers_notes": {
-      "purpose": "Bitácoras de ingeniería, registro de deuda técnica, decisiones de diseño rápido y análisis de causa raíz (RCA).",
-      "category": "documentation"
+    "artifacts/plans/archive": {
+      "purpose": "Histórico de planes evaluados, arquitecturas descartadas y documentación obsoleta preservada por trazabilidad.",
+      "role": "archived_plans",
+      "relevance": "zero_for_llm",
+      "crawl": false,
+      "read_priority": "p3",
+      "token_density": "sparse",
+      "instructions": "RAMA MUERTA / ARCHIVADA. No explorar a menos que se pida explícitamente auditar el pasado."
     },
     "docs/architecture": {
-      "purpose": "Diagramas de arquitectura multi-cloud, flujos de datos e información estratégica de las capas Medallion (Bronze, Silver, Gold).",
-      "category": "documentation"
+      "purpose": "Diagramas de arquitectura multi-cloud, topologías C4 y flujos de datos de las capas Medallion.",
+      "role": "architecture_diagrams",
+      "relevance": "high",
+      "crawl": true,
+      "read_priority": "p1",
+      "token_density": "sparse",
+      "instructions": "Diagramas y especificaciones de alto nivel de sistemas."
     },
-    "tests": {
-      "purpose": "Suites de pruebas unitarias, de integración y de calidad de datos (Great Expectations / deequ) para garantizar consistencia lógica.",
-      "category": "quality_assurance"
+    "docs/specs": {
+      "purpose": "Especificaciones técnicas detalladas, linaje de datos, contratos de esquemas y requerimientos no funcionales.",
+      "role": "technical_specs",
+      "relevance": "high",
+      "crawl": true,
+      "read_priority": "p1",
+      "token_density": "sparse",
+      "instructions": "Contratos técnicos de integración."
     },
-    "Tools": {
-      "purpose": "Scripts utilitarios internos, herramientas de automatización local, linters, y configuraciones de debugging personalizado.",
-      "category": "tooling"
+    "docs/notes": {
+      "purpose": "Bitácoras de ingeniería, registro de deuda técnica, decisiones rápidas (ADRs) y análisis de causa raíz (RCA).",
+      "role": "engineers_notes",
+      "relevance": "medium",
+      "crawl": true,
+      "read_priority": "p2",
+      "token_density": "sparse",
+      "instructions": "Notas de ingeniería y registros de decisiones."
     },
     "config": {
-      "purpose": "Parámetros de entorno (dev, staging, prod), llaves de configuración de esquemas y variables de conexión desacopladas del código.",
-      "category": "configuration"
-    },
-    "infrastructure": {
-      "purpose": "Scripts de Infraestructura como Código (IaC) utilizando AWS CDK, Terraform o plantillas ARM/Bicep para aprovisionamiento multi-cloud.",
-      "category": "devops_iac"
+      "purpose": "Parámetros de entorno (dev, staging, prod) y variables de configuración desacopladas.",
+      "role": "configuration",
+      "relevance": "high",
+      "crawl": true,
+      "read_priority": "p1",
+      "token_density": "sparse",
+      "instructions": "Variables y parámetros. NUNCA colocar claves secretas en texto plano."
     },
     "data/raw": {
-      "purpose": "Zona de aterrizaje local (Bronze) para almacenamiento de fuentes de datos puras e inmutables sin transformaciones.",
-      "category": "data_storage"
+      "purpose": "Zona de aterrizaje local (Bronze) para fuentes puras e inmutables. Ignorado en Git y AI.",
+      "role": "bronze_storage",
+      "relevance": "zero_for_llm",
+      "crawl": false,
+      "read_priority": "p3",
+      "token_density": "massive_binary",
+      "instructions": "RAMA DE DATOS CRUDOS. PROHIBIDO EXPLORAR O VOLCAR CONTENIDO EN CONTEXTO."
     },
     "data/processed": {
-      "purpose": "Datos refinados localmente (Silver/Gold) bajo esquemas validados, optimizados para consultas y entrenamiento de modelos.",
-      "category": "data_storage"
+      "purpose": "Datos transformados localmente (Silver/Gold) en formatos estructurados (Parquet/Delta).",
+      "role": "silver_gold_storage",
+      "relevance": "zero_for_llm",
+      "crawl": false,
+      "read_priority": "p3",
+      "token_density": "massive_binary",
+      "instructions": "RAMA DE DATOS REFINADOS. PROHIBIDO EXPLORAR O VOLCAR CONTENIDO EN CONTEXTO."
     },
     "data/sandbox": {
-      "purpose": "Entorno aislado para experimentación rápida de científicos de datos y arquitectos sin alterar zonas críticas.",
-      "category": "data_storage"
+      "purpose": "Entorno aislado para experimentación de científicos de datos y arquitectos.",
+      "role": "sandbox",
+      "relevance": "zero_for_llm",
+      "crawl": false,
+      "read_priority": "p3",
+      "token_density": "dense",
+      "instructions": "ZONA SCRATCH. No explorar ni indexar en contexto agéntico."
     },
     "schemas": {
-      "purpose": "Definiciones strictly de esquemas (Avro, JSON Schema, DDL de SQL) para garantizar gobernanza y control de deriva de esquemas.",
-      "category": "data_governance"
+      "purpose": "Definiciones estrictas de esquemas (Avro, JSON Schema, DDL de SQL) para control de deriva de datos.",
+      "role": "data_contracts",
+      "relevance": "high",
+      "crawl": true,
+      "read_priority": "p1",
+      "token_density": "sparse",
+      "instructions": "Contratos formales de datos. Consultar antes de emitir transformaciones SQL o PySpark."
     },
     "scripts": {
-      "purpose": "Scripts operativos del sistema (bash, make, powershell) para tareas de mantenimiento, sincronización de buckets y automatización local.",
-      "category": "operations"
+      "purpose": "Scripts operativos del sistema operativo (bash, powershell, make) para tareas de mantenimiento.",
+      "role": "ops_automation",
+      "relevance": "medium",
+      "crawl": true,
+      "read_priority": "p2",
+      "token_density": "sparse",
+      "instructions": "Automatización operativa de terminal."
+    },
+    "tests": {
+      "purpose": "Suites de pruebas unitarias, integración y calidad de datos (Great Expectations / pytest).",
+      "role": "test_suites",
+      "relevance": "high",
+      "crawl": true,
+      "read_priority": "p1",
+      "token_density": "medium",
+      "instructions": "Pruebas de verificación de software y pipelines."
+    },
+    "tools": {
+      "purpose": "Scripts utilitarios internos, herramientas de automatización local y linters.",
+      "role": "tooling",
+      "relevance": "medium",
+      "crawl": true,
+      "read_priority": "p2",
+      "token_density": "sparse",
+      "instructions": "Herramientas locales del proyecto."
     },
     "logs": {
-      "purpose": "Trazas locales de ejecución, auditorías de consultas y dumps de errores para análisis predictivo de fallas de pipelines.",
-      "category": "observability"
+      "purpose": "Trazas locales de ejecución, auditorías y dumps de errores.",
+      "role": "logs",
+      "relevance": "zero_for_llm",
+      "crawl": false,
+      "read_priority": "p3",
+      "token_density": "massive_text",
+      "instructions": "ARCHIVOS DE REGISTRO. No inspeccionar de forma recursiva a menos que se analice un error puntual."
+    },
+    ".context": {
+      "purpose": "Directorio de telemetría, esquemas y mapas satelitales de Context Engineering de iDirectory.",
+      "role": "context_engineering",
+      "relevance": "critical",
+      "crawl": true,
+      "read_priority": "p0",
+      "token_density": "sparse",
+      "key_files": [
+        "tree.json"
+      ],
+      "instructions": "Contiene el mapa satelital precargado del repositorio (tree.json)."
     }
   },
   "routing_rules": {
-    ".md": "docs/engineers_notes",
-    ".pdf": "docs/technical_specs",
-    ".py": "src/core",
-    ".ipynb": "03_Research_AI/Notebooks",
+    ".md": "docs/notes",
+    ".pdf": "docs/specs",
+    ".drawio": "docs/architecture",
+    ".png": "docs/architecture",
+    ".ipynb": "03_research/notebooks",
+    ".py": "src/cloud_jobs",
+    ".sql": "src/cloud_jobs",
+    ".prompt": "03_research/prompts",
+    ".pbix": "src/dashboards",
+    ".pbip": "src/dashboards",
+    ".yaml": "config",
+    ".yml": "config",
+    ".json": "schemas",
+    ".avsc": "schemas",
     ".tf": "infrastructure",
-    ".sql": "schemas",
-    ".json": "schemas"
+    ".csv": "data/raw",
+    ".parquet": "data/processed",
+    ".delta": "data/processed"
   }
 }

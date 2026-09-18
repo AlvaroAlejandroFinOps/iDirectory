@@ -1,119 +1,47 @@
-# ==============================================================================
-# MANIFIESTO DE GOBERNANZA DE DIRECTORIOS Y TAXONOMÍA DE PROYECTO
-# Diseñado para consumo de LLMs (Gemini / Antigravity Agentic Engine) y Automatización
-# ==============================================================================
-
-version: "1.0"
-project_type: "Thinking Multi-Cloud, AI & Data Architecture"
-last_updated: "2026-09-09"
-
+version: 3.0
+project_type: "iDirectory: Multi-Cloud, AI & Data Context Engineering Architecture"
+created_by: Gravity HyperScale Thinking
 manifest:
-  001_Seed:
-    purpose: "Semilla de proyecto y contexto primario para agentes de IA y arquitectos."
-    category: "governance"
-    access_level: "read_only_agent"
-
-  02_Foundation:
-    Engine:
-      purpose: "Núcleo del framework de automatización del proyecto. Contiene lógica de ruteo, indexación y EngineReadme.md de gobernanza."
-      category: "core_framework"
-
-  03_Research_AI:
-    Notebooks:
-      purpose: "Notebooks de desarrollo interactivo y experimentación (Jupyter/Fabric/Databricks/Colab) para análisis exploratorio (EDA) y algoritmos."
-      category: "research"
-      allowed_extensions: [".ipynb", ".py"]
-    llm_prompts:
-      purpose: "Estructuras de prompts para LLMs, system prompts, árboles de contexto y plantillas de inferencia generativa."
-      category: "ai_engineering"
-      allowed_extensions: [".json", ".yaml", ".md", ".txt"]
-    experiments:
-      purpose: "Espacio de pruebas de concepto (PoCs), prototipos de modelos, I+D y benchmarks algorítmicos."
-      category: "research"
-
-  src:
-    cloud_jobs:
-      purpose: "Scripts productivos, definiciones de pipelines y orquestación multi-cloud (Fabric PySpark, AWS Glue/EMR, GCP Dataproc/Dataflow, Azure Synapse)."
-      category: "data_engineering"
-      cloud_targets: ["AWS", "GCP", "Azure", "Microsoft Fabric"]
-    data_generation:
-      purpose: "Módulos de generación y simulación de datos sintéticos. Rigor matemático en distribuciones y volumetría estadística para pruebas de carga."
-      category: "data_engineering"
-    core:
-      purpose: "Lógica de negocio transversal, servicios modulares, utilitarios de backend y componentes de desarrollo de software."
-      category: "backend"
-    dashboards:
-      purpose: "Aplicaciones de visualización, tableros de BI, cuadros de mando interactivos (Streamlit, Dash, PowerBI, Looker)."
-      category: "analytics"
-
-  Artefactos:
-    Planes:
-      Vigentes:
-        purpose: "Planes de capacidad activos (F-SKUs), presupuestos de cómputo cloud vigentes, hitos del proyecto y documentación activa."
-        category: "management"
-      Historico_Obsoletos:
-        purpose: "Histórico de planes evaluados, arquitecturas descartadas y documentación obsoleta preservada como respaldo y trazabilidad."
-        category: "archive"
-
-  docs:
-    technical_specs:
-      purpose: "Especificaciones técnicas detalladas, mapeos de linaje de datos, contratos de esquemas y requerimientos no funcionales."
-      category: "documentation"
-    engineers_notes:
-      purpose: "Bitácoras de ingeniería, registro de deuda técnica, decisiones de diseño rápido y análisis de causa raíz (RCA)."
-      category: "documentation"
-    architecture:
-      purpose: "Diagramas de arquitectura multi-cloud, flujos de datos e información estratégica de las capas Medallion (Bronze, Silver, Gold)."
-      category: "documentation"
-
-  tests:
-    purpose: "Suites de pruebas unitarias, de integración y de calidad de datos (Great Expectations / deequ) para garantizar consistencia lógica."
-    category: "quality_assurance"
-
-  Tools:
-    purpose: "Scripts utilitarios internos, herramientas de automatización local, linters, y configuraciones de debugging personalizado."
-    category: "tooling"
-
-  config:
-    purpose: "Parámetros de entorno (dev, staging, prod), llaves de configuración de esquemas y variables de conexión desacopladas del código."
-    category: "configuration"
-
-  infrastructure:
-    purpose: "Scripts de Infraestructura como Código (IaC) utilizando AWS CDK, Terraform o plantillas ARM/Bicep para aprovisionamiento multi-cloud."
-    category: "devops_iac"
-
-  data:
-    raw:
-      purpose: "Zona de aterrizaje local (Bronze) para almacenamiento de fuentes de datos puras e inmutables sin transformaciones."
-      category: "data_storage"
-      medallion_tier: "Bronze"
-    processed:
-      purpose: "Datos refinados localmente (Silver/Gold) bajo esquemas validados, optimizados para consultas y entrenamiento de modelos."
-      category: "data_storage"
-      medallion_tier: "Silver/Gold"
-    sandbox:
-      purpose: "Entorno aislado para experimentación rápida de científicos de datos y arquitectos sin alterar zonas críticas."
-      category: "data_storage"
-      medallion_tier: "Sandbox"
-
-  schemas:
-    purpose: "Definiciones estrictas de esquemas (Avro, JSON Schema, DDL de SQL) para garantizar gobernanza y control de deriva de esquemas."
-    category: "data_governance"
-
-  scripts:
-    purpose: "Scripts operativos del sistema (bash, make, powershell) para tareas de mantenimiento, sincronización de buckets y automatización local."
-    category: "operations"
-
-  logs:
-    purpose: "Trazas locales de ejecución, auditorías de consultas y dumps de errores para análisis predictivo de fallas de pipelines."
-    category: "observability"
-
-# Matriz de Ruteo Automático para Agentes
+  01_seed: Semilla de proyecto y memoria técnica (ThinkingSeed Master). ADN arquitectónico del sistema.
+  02_foundation/engine: "Núcleo del framework de automatización, lógica de ruteo, indexación y governance engine."
+  03_research/notebooks: Notebooks de desarrollo interactivo (Jupyter/Colab/Fabric/Databricks) para análisis exploratorio (EDA).
+  03_research/prompts: "Estructuras de prompts para LLMs, system prompts, árboles de contexto y plantillas de inferencia."
+  03_research/experiments: "Pruebas de concepto (PoCs), prototipos de modelos algorítmicos, benchmarks e I+D."
+  src/cloud_jobs: "Scripts productivos, pipelines y orquestación multi-cloud (Fabric PySpark, AWS Glue, GCP Dataproc, Azure Synapse)."
+  src/data_generation: Módulos de generación y simulación de datos sintéticos con rigor probabilístico y volumetría estadística.
+  src/core: "Lógica de negocio transversal, utilitarios de backend, clientes de servicios y módulos comunes."
+  src/dashboards: "Tableros de Business Intelligence y apps de visualización interactiva (Streamlit, Dash, PowerBI, Looker)."
+  artifacts/plans/active: "Planes de capacidad activos (F-SKUs), presupuestos cloud vigentes e hitos operativos en curso."
+  artifacts/plans/archive: "Histórico de planes evaluados, arquitecturas descartadas y documentación obsoleta preservada por trazabilidad."
+  docs/architecture: "Diagramas de arquitectura multi-cloud, topologías C4 y flujos de datos de las capas Medallion."
+  docs/specs: "Especificaciones técnicas detalladas, linaje de datos, contratos de esquemas y requerimientos no funcionales."
+  docs/notes: "Bitácoras de ingeniería, registro de deuda técnica, decisiones rápidas (ADRs) y análisis de causa raíz (RCA)."
+  config: "Parámetros de entorno (dev, staging, prod) y variables de configuración desacopladas."
+  data/raw: Zona de aterrizaje local (Bronze) para fuentes puras e inmutables. Ignorado en Git y AI.
+  data/processed: Datos transformados localmente (Silver/Gold) en formatos estructurados (Parquet/Delta).
+  data/sandbox: Entorno aislado para experimentación de científicos de datos y arquitectos.
+  schemas: "Definiciones estrictas de esquemas (Avro, JSON Schema, DDL de SQL) para control de deriva de datos."
+  scripts: "Scripts operativos del sistema operativo (bash, powershell, make) para tareas de mantenimiento."
+  tests: "Suites de pruebas unitarias, integración y calidad de datos (Great Expectations / pytest)."
+  tools: "Scripts utilitarios internos, herramientas de automatización local y linters."
+  logs: "Trazas locales de ejecución, auditorías y dumps de errores."
+  .context: "Directorio de telemetría, esquemas y mapas satelitales de Context Engineering de iDirectory."
 routing_rules:
-  ".md": "docs/engineers_notes"
-  ".pdf": "docs/technical_specs"
-  ".py": "src/core"
-  ".ipynb": "03_Research_AI/Notebooks"
-  ".tf": "infrastructure"
-  ".sql": "schemas"
-  ".json": "schemas"
+  .md: docs/notes
+  .pdf: docs/specs
+  .drawio: docs/architecture
+  .png: docs/architecture
+  .ipynb: 03_research/notebooks
+  .py: src/cloud_jobs
+  .sql: src/cloud_jobs
+  .prompt: 03_research/prompts
+  .pbix: src/dashboards
+  .pbip: src/dashboards
+  .yaml: config
+  .yml: config
+  .json: schemas
+  .avsc: schemas
+  .tf: infrastructure
+  .csv: data/raw
+  .parquet: data/processed
+  .delta: data/processed
