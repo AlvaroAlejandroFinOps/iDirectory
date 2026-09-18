@@ -47,61 +47,86 @@ known_analysis_limits:
 - **1.1 Proyecto en una frase:** Framework de gobernanza, ruteo heurístico inteligente y scaffolding estandarizado (**iDirectory**), creado por **Gravity HyperScale Thinking** y concebido para proyectos Multi-Cloud (GCP, AWS, Azure, Fabric), Data Engineering, Inteligencia Artificial / LLMs y sistemas analíticos. `[CONFIRMADO]`
 - **1.2 Problema que resuelve:** Erradica el caos organizativo, la deriva estructural y la dispersión de artefactos heterogéneos en repositorios modernos de alta escala, proporcionando un mapa canónico tanto a ingenieros humanos como a agentes de IA autónomos. `[CONFIRMADO]`
 - **1.3 Usuarios o sistemas consumidores:** Ingenieros Cloud, Arquitectos de Datos, Científicos de Datos, Desarrolladores de IA y Agentes Autónomos de Codificación (Antigravity, Gemini CLI, Claude, Copilot). `[CONFIRMADO]`
-- **1.4 Alcance y límites del sistema:** Incluye el motor CLI (`FWengine.py`), manifiesto canónico de directorios (`FOLDER_MANIFEST`), motor de ruteo y reubicación heurística (`ROUTING_MAP`), integración con skills de Antigravity (`/idir`, `GEMINI.md`) y generación de documentación técnica bilingüe de nivel académico (`README.md`, `README_ES.md`). No incluye ejecución de cargas de datos remotas ni provisión de cloud en tiempo de ejecución. `[CONFIRMADO]`
+- **1.4 Alcance y límites del sistema:** Incluye el motor CLI (`FWengine.py` v3.0), satélite topológico (`.context/tree.json`), semáforos de poda y relevancia (`.context.yaml`), máscara de exclusión (`.agentignore`), integración multi-proveedor (`AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `.cursorrules`, `.agents/skills/idir/SKILL.md`) y documentación bilingüe Paper-Grade (`README.md`, `README_ES.md`). `[CONFIRMADO]`
 
 ---
 
 ## 2. ARQUITECTURA Y TOPOLOGÍA
-- **2.1 Estilo arquitectónico:** Motor de Scaffolding y Gobernanza desacoplado, autocontenido en Python Standard Library (`pathlib`, `argparse`, `sys`, `os`), complementado con integración agéntica y documentación formal Paper-Grade. `[CONFIRMADO]`
+- **2.1 Estilo arquitectónico:** Motor de Scaffolding, Gobernanza y Context Engineering desacoplado, autocontenido en Python Standard Library pura (`pathlib`, `json`, `argparse`, `sys`, `os`), complementado con integración agéntica multi-proveedor y documentación formal Paper-Grade. `[CONFIRMADO]`
 - **2.2 Árbol estructural del repositorio:**
 ```text
 iDirectory/
-├── .agents/                                # Customizaciones y skills locales del agente
+├── .context/                                   # Telemetría y mapas satelitales de Context Engineering
+│   └── tree.json                               # Mapa topológico consolidado (~250 tokens)
+├── .agents/                                    # Customizaciones de agentes Antigravity/Gemini
 │   └── skills/
-│       └── idir/                           # Skill canónica /idir para gobernanza automática
+│       └── idir/                               # Skill canónica /idir v3.0
 │           └── SKILL.md
-├── 001_Seed/                               # Semilla de proyecto y memoria técnica (ThinkingSeed Master)
+├── .claude/                                    # Adaptadores de comandos para Claude Code
+│   └── commands/
+│       └── idir.md
+├── 01_seed/                                    # Semilla de proyecto y memoria técnica (ThinkingSeed Master)
+│   ├── .context.yaml                           # Beacon local (Priority: P0, Relevance: Critical)
 │   └── seed-idirectory-master.md
-├── 02_Foundation/
-│   └── Engine/                             # Núcleo del framework y manifiesto de gobernanza
-│       └── EngineReadme.md                 # Documentación maestra generada de directorios
-├── 03_Research_AI/                         # Investigación e Inteligencia Artificial
-│   ├── Notebooks/                          # Notebooks de exploración (EDA, algoritmos interactivos)
-│   ├── llm_prompts/                        # System prompts, árboles de contexto y plantillas LLM
-│   └── experiments/                        # PoCs, prototipos de modelos y benchmarks
-├── src/                                    # Código fuente productivo
-│   ├── cloud_jobs/                         # Scripts de producción y pipelines Multi-Cloud (Fabric, AWS, GCP, Azure)
-│   ├── data_generation/                    # Generación y simulación de datos sintéticos
-│   ├── core/                               # Lógica de negocio modular y backend
-│   └── dashboards/                         # Tableros BI y visualización (Streamlit, PowerBI, Dash)
-├── data/                                   # Arquitectura Medallion local (Ignorado en Git)
-│   ├── raw/                                # Bronze: Fuentes puras e inmutables
-│   ├── processed/                          # Silver/Gold: Datos transformados y optimizados
-│   └── sandbox/                            # Zona de experimentación rápida
-├── schemas/                                # Definiciones formales de esquemas (Avro, JSON Schema, DDL)
-├── infrastructure/                         # IaC Multi-Cloud (Terraform, Bicep, ARM, CDK)
-├── config/                                 # Parámetros de entorno y variables desacopladas
-├── tests/                                  # Pruebas unitarias, integración y calidad de datos
-├── Artefactos/                             # Entregables y planes estratégicos
-│   └── Planes/
-│       ├── Vigentes/                       # Planes de capacidad activos (F-SKUs, presupuestos)
-│       └── Historico_Obsoletos/            # Histórico de arquitecturas descartadas y respaldo
-├── docs/                                   # Documentación técnica viva
-│   ├── architecture/                       # Diagramas de arquitectura y flujos Medallion
-│   ├── technical_specs/                    # Especificaciones funcionales y no funcionales
-│   └── engineers_notes/                    # Bitácoras de ingeniería y RCA
-├── Tools/                                  # Utilitarios locales, linters y scripts de debugging
-├── scripts/                                # Scripts operativos (bash, powershell, make)
-├── logs/                                   # Trazas locales de ejecución y auditoría
-├── FWengine.py                             # Motor principal del framework (CLI de inicialización y ruteo)
-├── GEMINI.md                               # Reglas inviolables del proyecto y gobernanza Antigravity
-├── README.md                               # Documentación de alta ingeniería formal (Inglés)
-├── README_ES.md                            # Documentación de alta ingeniería formal (Español)
-└── .gitignore                              # Reglas de exclusión para datos y entornos
+├── 02_foundation/
+│   ├── .context.yaml                           # Beacon local
+│   └── engine/                                 # Núcleo del framework y governance engine
+│       ├── .context.yaml
+│       └── engine_readme.md                    # Documentación maestra generada de directorios
+├── 03_research/                                # Investigación e Inteligencia Artificial
+│   ├── .context.yaml                           # Beacon local
+│   ├── notebooks/                              # Notebooks de exploración (EDA, algoritmos interactivos)
+│   ├── prompts/                                # System prompts, árboles de contexto y plantillas LLM
+│   └── experiments/                            # PoCs, prototipos de modelos y benchmarks
+├── src/                                        # Código fuente productivo
+│   ├── .context.yaml                           # Beacon local
+│   ├── cloud_jobs/                             # Scripts de producción y pipelines Multi-Cloud (Fabric, AWS, GCP, Azure)
+│   ├── data_generation/                        # Generación y simulación de datos sintéticos
+│   ├── core/                                   # Lógica de negocio modular y backend
+│   └── dashboards/                             # Tableros BI y visualización (Streamlit, PowerBI, Dash)
+├── data/                                       # Arquitectura Medallion local (Ignorado en Git y AI)
+│   ├── .context.yaml                           # Beacon local (crawl: false, relevance: zero_for_llm)
+│   ├── raw/                                    # Bronze: Fuentes puras e inmutables
+│   ├── processed/                              # Silver/Gold: Datos transformados y optimizados
+│   └── sandbox/                                # Zona de experimentación rápida
+├── schemas/                                    # Definiciones formales de esquemas (Avro, JSON Schema, DDL)
+│   └── .context.yaml                           # Beacon local
+├── infrastructure/                             # IaC Multi-Cloud (Terraform, Bicep, ARM, CDK)
+│   └── .context.yaml                           # Beacon local
+├── config/                                     # Parámetros de entorno y variables desacopladas
+│   └── .context.yaml                           # Beacon local
+├── tests/                                      # Pruebas unitarias, integración y calidad de datos
+│   └── .context.yaml                           # Beacon local
+├── artifacts/                                  # Entregables y planes estratégicos
+│   ├── .context.yaml                           # Beacon local
+│   └── plans/
+│       ├── active/                             # Planes de capacidad activos (F-SKUs, presupuestos)
+│       └── archive/                            # Histórico de arquitecturas descartadas (crawl: false)
+├── docs/                                       # Documentación técnica viva
+│   ├── .context.yaml                           # Beacon local
+│   ├── architecture/                           # Diagramas de arquitectura y flujos Medallion
+│   ├── specs/                                  # Especificaciones funcionales y contratos
+│   └── notes/                                  # Bitácoras de ingeniería, ADRs y RCA
+├── tools/                                      # Utilitarios locales, linters y scripts de debugging
+│   └── .context.yaml                           # Beacon local
+├── scripts/                                    # Scripts operativos (bash, powershell, make)
+│   └── .context.yaml                           # Beacon local
+├── logs/                                       # Trazas locales de ejecución y auditoría (crawl: false)
+│   └── .context.yaml                           # Beacon local
+├── AGENTS.md                                   # Regla Maestra Universal (Single Source of Truth)
+├── GEMINI.md                                   # Shim de gobernanza para Google Gemini / Antigravity
+├── CLAUDE.md                                   # Shim de gobernanza para Anthropic Claude Code
+├── .cursorrules                                # Reglas contextuales para Cursor / Windsurf
+├── .agentignore                                # Máscara de exclusión para indexadores de IA
+├── .gitignore                                  # Reglas de exclusión para Git
+├── FWengine.py                                 # Motor principal v3.0 (CLI de inicialización, beacons y ruteo)
+├── README.md                                   # Documentación de alta ingeniería formal (Inglés)
+└── README_ES.md                                # Documentación de alta ingeniería formal (Español)
 ```
 - **2.3 Responsabilidad por directorio y archivo clave:**
-  - `FWengine.py`: Orquestador CLI principal que alberga `FOLDER_MANIFEST` y `ROUTING_MAP`. `[CONFIRMADO]`
-  - `GEMINI.md`: Manifiesto de instrucciones y reglas inviolables para agentes de IA Antigravity con enlace al comando rápido `/idir`. `[CONFIRMADO]`
+  - `FWengine.py`: Orquestador CLI principal que alberga la lógica de ruteo, MiniYAML, beacons y satélite topológico. `[CONFIRMADO]`
+  - `AGENTS.md`: Contrato maestro universal de Context Engineering con el Protocolo Bootloader de 4 pasos. `[CONFIRMADO]`
+  - `.context/tree.json`: Satélite topológico precargado que previene el blind crawling (~250 tokens). `[CONFIRMADO]`
   - `.agents/skills/idir/SKILL.md`: Declaración formal de la habilidad del agente para invocar `FWengine.py`. `[CONFIRMADO]`
   - `02_Foundation/Engine/EngineReadme.md`: Documento derivado que describe la gobernanza para desarrolladores y agentes en el espacio de trabajo. `[CONFIRMADO]`
 - **2.4 Límites modulares y acoplamiento:** Desacoplamiento total; `FWengine.py` no depende de librerías de terceros (Zero-Dependency CLI). `[CONFIRMADO]`

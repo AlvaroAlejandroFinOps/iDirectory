@@ -1,0 +1,9 @@
+version: 1.0
+directory: src/data_generation
+role: synthetic_data
+purpose: Módulos de generación y simulación de datos sintéticos con rigor probabilístico y volumetría estadística.
+relevance: medium
+crawl: true
+read_priority: p2
+token_density: medium
+instructions: Generadores de pruebas de carga y benchmarking sintético.

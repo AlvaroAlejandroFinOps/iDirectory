@@ -1,0 +1,11 @@
+version: 1.0
+directory: 02_foundation/engine
+role: core_engine
+purpose: "Núcleo del framework de automatización, lógica de ruteo, indexación y governance engine."
+relevance: critical
+crawl: true
+read_priority: p1
+token_density: low
+instructions: Contiene los utilitarios de gobernanza y especificación formal de directorios.
+key_files:
+  - "engine_readme.md"

@@ -1,0 +1,9 @@
+version: 1.0
+directory: docs/notes
+role: engineers_notes
+purpose: "Bitácoras de ingeniería, registro de deuda técnica, decisiones rápidas (ADRs) y análisis de causa raíz (RCA)."
+relevance: medium
+crawl: true
+read_priority: p2
+token_density: sparse
+instructions: Notas de ingeniería y registros de decisiones.

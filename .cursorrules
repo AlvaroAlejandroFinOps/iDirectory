@@ -1,0 +1,7 @@
+# Cursor & Windsurf Rules for iDirectory Context Engineering
+# Always adhere to the 4-step bootloader defined in AGENTS.md:
+# 1. Check AGENTS.md
+# 2. Check .context/tree.json (Do NOT scan folders with crawl: false like data/raw, logs, artifacts/plans/archive)
+# 3. Read 01_seed/seed-idirectory-master.md for architecture invariants
+# 4. Read .context.yaml in the active folder
+# Use `python FWengine.py route "<file>" --move` to place files canonically.

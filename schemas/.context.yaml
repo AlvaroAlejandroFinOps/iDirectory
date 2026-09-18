@@ -1,0 +1,9 @@
+version: 1.0
+directory: schemas
+role: data_contracts
+purpose: "Definiciones estrictas de esquemas (Avro, JSON Schema, DDL de SQL) para control de deriva de datos."
+relevance: high
+crawl: true
+read_priority: p1
+token_density: sparse
+instructions: Contratos formales de datos. Consultar antes de emitir transformaciones SQL o PySpark.

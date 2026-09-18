@@ -1,0 +1,9 @@
+version: 1.0
+directory: src/core
+role: shared_backend
+purpose: "Lógica de negocio transversal, utilitarios de backend, clientes de servicios y módulos comunes."
+relevance: high
+crawl: true
+read_priority: p1
+token_density: medium
+instructions: Servicios backend reutilizables por jobs y dashboards.

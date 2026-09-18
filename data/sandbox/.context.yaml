@@ -1,0 +1,9 @@
+version: 1.0
+directory: data/sandbox
+role: sandbox
+purpose: Entorno aislado para experimentación de científicos de datos y arquitectos.
+relevance: zero_for_llm
+crawl: false
+read_priority: p3
+token_density: dense
+instructions: ZONA SCRATCH. No explorar ni indexar en contexto agéntico.

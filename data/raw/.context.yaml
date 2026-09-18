@@ -1,0 +1,9 @@
+version: 1.0
+directory: data/raw
+role: bronze_storage
+purpose: Zona de aterrizaje local (Bronze) para fuentes puras e inmutables. Ignorado en Git y AI.
+relevance: zero_for_llm
+crawl: false
+read_priority: p3
+token_density: massive_binary
+instructions: RAMA DE DATOS CRUDOS. PROHIBIDO EXPLORAR O VOLCAR CONTENIDO EN CONTEXTO.

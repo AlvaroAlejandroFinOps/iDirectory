@@ -1,0 +1,9 @@
+version: 1.0
+directory: scripts
+role: ops_automation
+purpose: "Scripts operativos del sistema operativo (bash, powershell, make) para tareas de mantenimiento."
+relevance: medium
+crawl: true
+read_priority: p2
+token_density: sparse
+instructions: Automatización operativa de terminal.

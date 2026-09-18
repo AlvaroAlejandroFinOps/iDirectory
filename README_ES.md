@@ -1,3 +1,4 @@
+![alt text](iDirectory.png)
 # iDirectory: Motor de Andamiaje y Gobernanza Multi-Cloud por Gravity HyperScale Thinking
 
 **Idioma:** [English](README.md) | [Español](README_ES.md)

@@ -1,0 +1,9 @@
+version: 1.0
+directory: tests
+role: test_suites
+purpose: "Suites de pruebas unitarias, integración y calidad de datos (Great Expectations / pytest)."
+relevance: high
+crawl: true
+read_priority: p1
+token_density: medium
+instructions: Pruebas de verificación de software y pipelines.

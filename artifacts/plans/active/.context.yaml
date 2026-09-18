@@ -1,0 +1,9 @@
+version: 1.0
+directory: artifacts/plans/active
+role: active_plans
+purpose: "Planes de capacidad activos (F-SKUs), presupuestos cloud vigentes e hitos operativos en curso."
+relevance: high
+crawl: true
+read_priority: p1
+token_density: sparse
+instructions: Planes y decisiones vigentes. Consultar antes de modificar infraestructura o presupuestos.

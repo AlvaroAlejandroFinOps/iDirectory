@@ -1,0 +1,9 @@
+version: 1.0
+directory: data/processed
+role: silver_gold_storage
+purpose: Datos transformados localmente (Silver/Gold) en formatos estructurados (Parquet/Delta).
+relevance: zero_for_llm
+crawl: false
+read_priority: p3
+token_density: massive_binary
+instructions: RAMA DE DATOS REFINADOS. PROHIBIDO EXPLORAR O VOLCAR CONTENIDO EN CONTEXTO.

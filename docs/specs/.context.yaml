@@ -1,0 +1,9 @@
+version: 1.0
+directory: docs/specs
+role: technical_specs
+purpose: "Especificaciones técnicas detalladas, linaje de datos, contratos de esquemas y requerimientos no funcionales."
+relevance: high
+crawl: true
+read_priority: p1
+token_density: sparse
+instructions: Contratos técnicos de integración.

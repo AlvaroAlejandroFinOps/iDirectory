@@ -1,0 +1,12 @@
+version: 1.0
+directory: src/cloud_jobs
+role: production_pipelines
+purpose: "Scripts productivos, pipelines y orquestación multi-cloud (Fabric PySpark, AWS Glue, GCP Dataproc, Azure Synapse)."
+relevance: high
+crawl: true
+read_priority: p1
+token_density: medium
+instructions: Cargas productivas de datos. Conservar invariantes de arquitectura e idempotencia.
+dependencies:
+  - "schemas"
+  - "config"

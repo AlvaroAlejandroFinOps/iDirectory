@@ -1,0 +1,9 @@
+version: 1.0
+directory: artifacts/plans/archive
+role: archived_plans
+purpose: "Histórico de planes evaluados, arquitecturas descartadas y documentación obsoleta preservada por trazabilidad."
+relevance: zero_for_llm
+crawl: false
+read_priority: p3
+token_density: sparse
+instructions: RAMA MUERTA / ARCHIVADA. No explorar a menos que se pida explícitamente auditar el pasado.

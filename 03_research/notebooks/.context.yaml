@@ -1,0 +1,9 @@
+version: 1.0
+directory: 03_research/notebooks
+role: eda
+purpose: Notebooks de desarrollo interactivo (Jupyter/Colab/Fabric/Databricks) para análisis exploratorio (EDA).
+relevance: low
+crawl: false
+read_priority: p2
+token_density: dense
+instructions: Notebooks exploratorios. No iterar de forma recursiva a menos que se solicite un análisis específico.

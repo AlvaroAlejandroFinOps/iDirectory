@@ -1,0 +1,9 @@
+version: 1.0
+directory: src/dashboards
+role: bi_viz
+purpose: "Tableros de Business Intelligence y apps de visualización interactiva (Streamlit, Dash, PowerBI, Looker)."
+relevance: medium
+crawl: true
+read_priority: p2
+token_density: medium
+instructions: Aplicaciones de visualización frontend y consumo analítico.

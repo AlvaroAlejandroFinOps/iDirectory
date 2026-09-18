@@ -1,0 +1,9 @@
+version: 1.0
+directory: tools
+role: tooling
+purpose: "Scripts utilitarios internos, herramientas de automatización local y linters."
+relevance: medium
+crawl: true
+read_priority: p2
+token_density: sparse
+instructions: Herramientas locales del proyecto.

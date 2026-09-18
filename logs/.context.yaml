@@ -1,0 +1,9 @@
+version: 1.0
+directory: logs
+role: logs
+purpose: "Trazas locales de ejecución, auditorías y dumps de errores."
+relevance: zero_for_llm
+crawl: false
+read_priority: p3
+token_density: massive_text
+instructions: ARCHIVOS DE REGISTRO. No inspeccionar de forma recursiva a menos que se analice un error puntual.

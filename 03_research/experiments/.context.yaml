@@ -1,0 +1,9 @@
+version: 1.0
+directory: 03_research/experiments
+role: pocs_benchmarks
+purpose: "Pruebas de concepto (PoCs), prototipos de modelos algorítmicos, benchmarks e I+D."
+relevance: medium
+crawl: false
+read_priority: p2
+token_density: medium
+instructions: Espacio de pruebas descartables y experimentos temporales.

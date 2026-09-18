@@ -1,0 +1,142 @@
+{
+  "$schema": "./schema/tree.schema.json",
+  "version": "3.0",
+  "project": "iDirectory",
+  "architecture": "Gravity HyperScale Thinking",
+  "bootloader": [
+    "AGENTS.md",
+    ".context/tree.json",
+    "01_seed/seed-idirectory-master.md"
+  ],
+  "nodes": {
+    "01_seed": {
+      "role": "dna",
+      "prio": "p0",
+      "crawl": false,
+      "key_files": [
+        "seed-idirectory-master.md"
+      ]
+    },
+    "02_foundation/engine": {
+      "role": "core_engine",
+      "prio": "p1",
+      "crawl": true,
+      "key_files": [
+        "engine_readme.md"
+      ]
+    },
+    "03_research/notebooks": {
+      "role": "eda",
+      "prio": "p2",
+      "crawl": false
+    },
+    "03_research/prompts": {
+      "role": "prompt_engineering",
+      "prio": "p1",
+      "crawl": true
+    },
+    "03_research/experiments": {
+      "role": "pocs_benchmarks",
+      "prio": "p2",
+      "crawl": false
+    },
+    "src/cloud_jobs": {
+      "role": "production_pipelines",
+      "prio": "p1",
+      "crawl": true
+    },
+    "src/data_generation": {
+      "role": "synthetic_data",
+      "prio": "p2",
+      "crawl": true
+    },
+    "src/core": {
+      "role": "shared_backend",
+      "prio": "p1",
+      "crawl": true
+    },
+    "src/dashboards": {
+      "role": "bi_viz",
+      "prio": "p2",
+      "crawl": true
+    },
+    "artifacts/plans/active": {
+      "role": "active_plans",
+      "prio": "p1",
+      "crawl": true
+    },
+    "artifacts/plans/archive": {
+      "role": "archived_plans",
+      "prio": "p3",
+      "crawl": false
+    },
+    "docs/architecture": {
+      "role": "architecture_diagrams",
+      "prio": "p1",
+      "crawl": true
+    },
+    "docs/specs": {
+      "role": "technical_specs",
+      "prio": "p1",
+      "crawl": true
+    },
+    "docs/notes": {
+      "role": "engineers_notes",
+      "prio": "p2",
+      "crawl": true
+    },
+    "config": {
+      "role": "configuration",
+      "prio": "p1",
+      "crawl": true
+    },
+    "data/raw": {
+      "role": "bronze_storage",
+      "prio": "p3",
+      "crawl": false
+    },
+    "data/processed": {
+      "role": "silver_gold_storage",
+      "prio": "p3",
+      "crawl": false
+    },
+    "data/sandbox": {
+      "role": "sandbox",
+      "prio": "p3",
+      "crawl": false
+    },
+    "schemas": {
+      "role": "data_contracts",
+      "prio": "p1",
+      "crawl": true
+    },
+    "scripts": {
+      "role": "ops_automation",
+      "prio": "p2",
+      "crawl": true
+    },
+    "tests": {
+      "role": "test_suites",
+      "prio": "p1",
+      "crawl": true
+    },
+    "tools": {
+      "role": "tooling",
+      "prio": "p2",
+      "crawl": true
+    },
+    "logs": {
+      "role": "logs",
+      "prio": "p3",
+      "crawl": false
+    },
+    ".context": {
+      "role": "context_engineering",
+      "prio": "p0",
+      "crawl": true,
+      "key_files": [
+        "tree.json"
+      ]
+    }
+  }
+}

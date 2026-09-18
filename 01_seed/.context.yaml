@@ -1,0 +1,11 @@
+version: 1.0
+directory: 01_seed
+role: dna
+purpose: Semilla de proyecto y memoria técnica (ThinkingSeed Master). ADN arquitectónico del sistema.
+relevance: critical
+crawl: false
+read_priority: p0
+token_density: medium
+instructions: LECTURA OBLIGATORIA (Paso 3 del Bootloader) antes de generar o alterar código.
+key_files:
+  - "seed-idirectory-master.md"

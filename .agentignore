@@ -1,0 +1,12 @@
+# Máscara de Exclusión para Agentes de IA (iDirectory Context Engineering)
+data/raw/
+data/processed/
+data/sandbox/
+logs/
+*.parquet
+*.csv
+*.delta/
+.venv/
+__pycache__/
+.git/
+artifacts/plans/archive/

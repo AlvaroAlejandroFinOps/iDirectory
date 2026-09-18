@@ -1,0 +1,9 @@
+version: 1.0
+directory: config
+role: configuration
+purpose: "Parámetros de entorno (dev, staging, prod) y variables de configuración desacopladas."
+relevance: high
+crawl: true
+read_priority: p1
+token_density: sparse
+instructions: Variables y parámetros. NUNCA colocar claves secretas en texto plano.
