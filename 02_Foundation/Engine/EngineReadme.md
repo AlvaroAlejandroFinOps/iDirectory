@@ -1,4 +1,4 @@
-# FRAMEWORK - Directorio Thinking Architecture
+# IDIRECTORY - iDirectory Architecture (Gravity HyperScale Thinking)
 
 Estructura modular híbrida optimizada para Multi-Cloud (GCP, AWS, Azure, Fabric), IA/LLMs, Ingeniería de Datos e I+D.
 

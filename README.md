@@ -1,10 +1,10 @@
-# DT-FW: Thinking Directory Scaffolding & Multi-Cloud Governance Engine
+# iDirectory: Multi-Cloud Governance & Scaffolding Engine by Gravity HyperScale Thinking
 
 **Language:** [English](README.md) | [Español](README_ES.md)
 
 [![Runtime: Python 3.9+](https://img.shields.io/badge/Python-3.9%2B-1a1a1a.svg?style=flat-square)](https://www.python.org/)
-[![Architecture: Thinking Directory](https://img.shields.io/badge/Architecture-Thinking--Directory-2b2b2b.svg?style=flat-square)](#2-system-architecture--topology)
-[![Governance: Multi--Cloud](https://img.shields.io/badge/Governance-Multi--Cloud-34495e.svg?style=flat-square)](#1-executive-abstract)
+[![Architecture: iDirectory](https://img.shields.io/badge/Architecture-iDirectory-2b2b2b.svg?style=flat-square)](#2-system-architecture--topology)
+[![Created by: Gravity HyperScale Thinking](https://img.shields.io/badge/Created%20by-Gravity%20HyperScale%20Thinking-34495e.svg?style=flat-square)](#1-executive-abstract)
 [![Engine: Deterministic CLI](https://img.shields.io/badge/Engine-Deterministic--CLI-4b5563.svg?style=flat-square)](#3-mathematical-formulation--analytical-engines)
 [![License: MIT](https://img.shields.io/badge/License-MIT-000000.svg?style=flat-square)](LICENSE)
 
@@ -12,25 +12,26 @@
 
 ## 1. Executive Abstract
 
-The **Thinking Directory Governance Engine (DT-FW)** addresses the structural decay and spatial fragmentation observed in modern multi-cloud data engineering repositories, AI/LLM research environments, and enterprise software ecosystems. Modern hybrid stacks operating across Google Cloud Platform, Amazon Web Services, Microsoft Azure, and Microsoft Fabric suffer from heterogeneous layout specifications, unmanaged local data artifacts, and ambiguous file routing. This lack of architectural taxonomy degrades autonomous AI agent performance (such as Large Language Model code assistants) due to non-deterministic context exploration and inconsistent artifact placement.
+**iDirectory**, engineered and originated by **Gravity HyperScale Thinking**, addresses the structural decay and spatial fragmentation observed in modern multi-cloud data engineering repositories, AI/LLM research environments, and enterprise software ecosystems. Modern hybrid stacks operating across Google Cloud Platform, Amazon Web Services, Microsoft Azure, and Microsoft Fabric suffer from heterogeneous layout specifications, unmanaged local data artifacts, and ambiguous file routing. This lack of architectural taxonomy degrades autonomous AI agent performance (such as Large Language Model code assistants) due to non-deterministic context exploration and inconsistent artifact placement.
 
-DT-FW establishes an automated, zero-dependency scaffolding framework and heuristic routing engine. By combining deterministic directory taxonomy generation with an extension-and-name pattern heuristic matrix, the framework enforces canonical workspace organization, isolates local Medallion storage tiers (Bronze, Silver, Gold), and maintains transparent governance manifests for human engineers and autonomous agents alike.
+**iDirectory** establishes an automated, zero-dependency scaffolding framework and heuristic routing engine (`FWengine.py`). By combining deterministic directory taxonomy generation with an extension-and-name pattern heuristic matrix, the engine enforces canonical workspace organization, isolates local Medallion storage tiers (Bronze, Silver, Gold), and maintains transparent governance manifests for human engineers and autonomous agents alike.
 
 ---
 
 ## 2. System Architecture & Topology
 
-The topology of DT-FW is structured around a centralized governance engine (`FWengine.py`) operating over a deterministic directory hierarchy. The diagram below illustrates the control flow, layer boundaries, and artifact routing pathways enforced by the framework:
+The topology of **iDirectory** is structured around a centralized governance engine (`FWengine.py`) operating over a deterministic directory hierarchy. The diagram below illustrates the control flow, layer boundaries, and artifact routing pathways enforced by the framework:
 
 ```text
 +-----------------------------------------------------------------------------------+
 |                                 USER / AI AGENT                                   |
-|                        (CLI Commands / Slash / Direct Execution)                 |
+|                        (CLI Commands / Slash / Direct Execution)                  |
 +-----------------------------------------------------------------------------------+
                                           |
                                           v
 +-----------------------------------------------------------------------------------+
-|                            FWENGINE GOVERNANCE CORE                               |
+|                           iDIRECTORY GOVERNANCE CORE                              |
+|                    (Created by Gravity HyperScale Thinking)                       |
 |                                 (FWengine.py)                                     |
 +-----------------------------------------------------------------------------------+
         |                                                 |
@@ -52,10 +53,10 @@ The topology of DT-FW is structured around a centralized governance engine (`FWe
 |  +-- 02_Foundation/Engine/     (Framework Core & Governance Manifests)            |
 |  +-- 03_Research_AI/           (EDA Notebooks, LLM Prompts, PoC Experiments)      |
 |  +-- src/                      (Cloud Jobs, Core Logic, Data Gen, Dashboards)     |
-|  +-- data/                     (Medallion Storage: raw/, processed/, sandbox/)   |
-|  +-- schemas/                  (Avro, JSON Schemas, DDL Definitions)               |
+|  +-- data/                     (Medallion Storage: raw/, processed/, sandbox/)    |
+|  +-- schemas/                  (Avro, JSON Schemas, DDL Definitions)              |
 |  +-- infrastructure/           (IaC: Terraform, Bicep, ARM, AWS CDK)              |
-|  +-- config/                   (Environment & Schemas Parameters)                  |
+|  +-- config/                   (Environment & Schemas Parameters)                 |
 |  +-- tests/                    (Unit, Integration & Data Quality Suites)          |
 |  +-- Artefactos/Planes/        (Vigentes & Historico_Obsoletos Documentation)     |
 |  +-- docs/                     (Architecture, Technical Specs, Engineer Notes)    |
@@ -89,7 +90,7 @@ If both evaluations yield $\perp$, the file defaults to $d_{\text{default}} = \t
 
 ## 4. Empirical Performance & Benchmarks
 
-Operational benchmarks evaluated on standard enterprise developer hardware (x86_64, NVMe PCIe 4.0 storage, Python 3.11.4 interpreter runtime):
+Operational benchmarks evaluated on standard enterprise developer hardware (x86_64, NVMe PCIe 4.0 storage, Python 3.11 interpreter runtime):
 
 | Metric | Baseline (Manual Setup) | Target (SLO) | Production / Empirical Result |
 |:-------|:------------------------|:-------------|:------------------------------|
@@ -105,8 +106,12 @@ Operational benchmarks evaluated on standard enterprise developer hardware (x86_
 
 ```text
 .
+├── .agents/
+│   └── skills/
+│       └── idir/                    # Antigravity skill manifest for automated governance (/idir)
+│           └── SKILL.md
 ├── 001_Seed/
-│   └── seed-framework-master.md     # Primary technical memory and project DNA snapshot
+│   └── seed-idirectory-master.md    # Primary technical memory and project DNA snapshot
 ├── 02_Foundation/
 │   └── Engine/
 │       └── EngineReadme.md          # Generated governance manifest for directory functions
@@ -137,6 +142,7 @@ Operational benchmarks evaluated on standard enterprise developer hardware (x86_
 ├── Tools/                           # Internal developer tooling, linters, and helpers
 ├── scripts/                         # Operational bash and PowerShell maintenance scripts
 ├── logs/                            # Local execution traces and query audit dumps
+├── tests/                           # Verification suites and invariant tests
 ├── GEMINI.md                        # Local governance and agent operational rules
 ├── FWengine.py                      # Main Python CLI engine for initialization and routing
 ├── README.md                        # Master documentation (English)
@@ -149,14 +155,14 @@ Operational benchmarks evaluated on standard enterprise developer hardware (x86_
 
 ### 6.1. Environment Setup & Prerequisites
 
-DT-FW requires no external third-party packages and relies exclusively on the standard Python interpreter.
+**iDirectory** requires no external third-party packages and relies exclusively on the standard Python interpreter.
 
 ```bash
 # Verify Python environment runtime
 python --version
 
 # Clone repository or navigate to workspace target
-cd "d:/0001 HyperScale Thinking/PROYECTOS CLOUD/iContext/iDirectory"
+cd "path/to/iDirectory"
 ```
 
 ### 6.2. Pipeline Execution
@@ -195,7 +201,7 @@ python -m unittest discover -s tests -p "*_test.py"
 
 ## 7. Domain Glossary
 
-* **Thinking Directory:** An opinionated, governance-first folder taxonomy designed to harmonize human engineering practices with autonomous AI agent contextual retrieval.
+* **iDirectory:** High-governance folder taxonomy and scaffolding engine created by Gravity HyperScale Thinking, designed to harmonize human engineering practices with autonomous AI agent contextual retrieval.
 * **Seed (ThinkingSeed Master):** A comprehensive markdown snapshot (`001_Seed/`) acting as the structural technical memory and passive Ground Truth for AI agents.
 * **Medallion Architecture:** Data design pattern dividing data processing into Bronze (`data/raw`), Silver/Gold (`data/processed`), and Sandbox (`data/sandbox`) isolation zones.
 * **Heuristic Routing:** Automated rule-based classification algorithm mapping file extensions and nominal tokens to target canonical directories.
@@ -211,11 +217,11 @@ python -m unittest discover -s tests -p "*_test.py"
 ### BibTeX Citation
 
 ```bibtex
-@software{dt_fw_engine_2026,
-  author = {Alvaro Alejandro / DeepMind Cloud Projects},
-  title = {DT-FW: Thinking Directory Scaffolding & Multi-Cloud Governance Engine},
+@software{idirectory_engine_2026,
+  author = {Gravity HyperScale Thinking},
+  title = {iDirectory: Multi-Cloud Governance & Scaffolding Engine},
   year = {2026},
   publisher = {GitHub},
-  url = {https://github.com/AlvaroAlejandroFinOps/iDirectory-ArquitecturaEngine}
+  url = {https://github.com/AlvaroAlejandroFinOps/iDirectory}
 }
 ```

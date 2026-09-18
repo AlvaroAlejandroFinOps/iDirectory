@@ -1,6 +1,6 @@
 # Reglas del Proyecto y Gobernanza Antigravity / Gemini
 
-Este repositorio utiliza el sistema de gobernanza y ruteo inteligente **Directorio Thinking Architecture**.
+Este repositorio utiliza el sistema de gobernanza y ruteo inteligente **iDirectory**, creado por **Gravity HyperScale Thinking**.
 
 ---
 

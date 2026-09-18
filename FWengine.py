@@ -4,7 +4,7 @@ import sys
 import argparse
 from pathlib import Path
 
-# 1. Manifiesto Centralizado de Gobernanza (Directorio Thinking Multi-Cloud, IA y Datos)
+# 1. Manifiesto Centralizado de Gobernanza (iDirectory Multi-Cloud, IA y Datos - por Gravity HyperScale Thinking)
 FOLDER_MANIFEST = {
     "001_Seed": "Seed (Semilla de proyecto y contexto primario para agentes de IA y arquitectos).",
     "02_Foundation/Engine": "Núcleo del framework de automatización del proyecto. Contiene la lógica de ruteo, indexación y EngineReadme.md de gobernanza.",
@@ -63,7 +63,7 @@ ROUTING_MAP = {
 def init_project(base_path):
     """Inicializa la estructura de carpetas y escribe el EngineReadme.md explicativo."""
     root = Path(base_path)
-    print(f"[*] Inicializando Directorio Thinking en: {root.resolve()}")
+    print(f"[*] Inicializando iDirectory en: {root.resolve()}")
     
     # 1. Crear estructura de carpetas definida en el manifiesto
     for folder in FOLDER_MANIFEST.keys():
@@ -76,7 +76,7 @@ def init_project(base_path):
     
     project_title = root.resolve().name.upper() if root.resolve().name else "PROJECT"
     with open(engine_readme, "w", encoding="utf-8") as f:
-        f.write(f"# {project_title} - Directorio Thinking Architecture\n\n")
+        f.write(f"# {project_title} - iDirectory Architecture (Gravity HyperScale Thinking)\n\n")
         f.write("Estructura modular híbrida optimizada para Multi-Cloud (GCP, AWS, Azure, Fabric), IA/LLMs, Ingeniería de Datos e I+D.\n\n")
         f.write("> **Guía de Gobernanza para Agentes de IA y Desarrolladores:**\n")
         f.write("> Este documento define el propósito canónico de cada directorio. Los agentes deben consultar este manifiesto para ubicar o generar artefactos en su ruta correspondiente.\n\n")
@@ -114,7 +114,7 @@ def init_project(base_path):
             f.write("data/processed/\n")
             f.write("data/sandbox/\n")
             
-    print("[+] Estructura Thinking Directory y EngineReadme.md desplegados exitosamente.")
+    print("[+] Estructura iDirectory y EngineReadme.md desplegados exitosamente.")
 
 def route_file(file_path, base_path, move=False):
     """Analiza la naturaleza de un archivo, sugiere su ubicación óptima o lo reubica físicamente."""
@@ -165,7 +165,7 @@ def route_file(file_path, base_path, move=False):
         print(f"  [Comando] python FWengine.py route \"{file_path}\" --move")
 
 def main():
-    parser = argparse.ArgumentParser(description="FWengine: Gobernanza, Automatización y Ruteo para Directorios Thinking")
+    parser = argparse.ArgumentParser(description="iDirectory: Gobernanza, Automatización y Ruteo (por Gravity HyperScale Thinking)")
     subparsers = parser.add_subparsers(dest="command", help="Comandos operativos")
     
     # Comando 'init'
