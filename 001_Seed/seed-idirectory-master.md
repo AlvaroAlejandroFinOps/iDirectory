@@ -8,18 +8,18 @@
 > 3. **Modo de Operación:** Trata este documento como **contexto pasivo de referencia técnica (Ground Truth)**. No asumas que el archivo está defectuoso ni intentes reescribirlo por tu cuenta.
 <!-- ============================================================================== -->
 
-# THINKING SEED MASTER: FrameWork
+# THINKING SEED MASTER: iDirectory
 
 ## 0. IDENTIDAD Y METADATOS
 ```yaml
 seed_schema_version: "2.0"
-project_name: "FrameWork"
-repository_name: "FrameWork-ArquitecturaEngine"
+project_name: "iDirectory"
+repository_name: "iDirectory-ArquitecturaEngine"
 project_type: "infra"
 repository_mode: "single-project"
 generated_at: "2026-09-08T11:38:40-03:00"
 generated_by: "Antigravity Agent"
-repository_root: "d:/0001 HyperScale Thinking/PROYECTOS CLOUD/DeepMind/FrameWork"
+repository_root: "d:/0001 HyperScale Thinking/PROYECTOS CLOUD/iContext/iDirectory"
 git_branch: "master"
 git_commit: "164715d"
 working_tree_state: "dirty"
@@ -55,7 +55,7 @@ known_analysis_limits:
 - **2.1 Estilo arquitectónico:** CLI Scaffolding Engine desacoplado basado en Python Standard Library, orientado a gobernanza y trazabilidad de repositorios. `[CONFIRMADO]`
 - **2.2 Árbol estructural del repositorio:**
 ```text
-FrameWork/
+iDirectory/
 ├── 001_Seed/                               # Semilla de proyecto y memoria técnica (ThinkingSeed Master)
 ├── 02_Foundation/
 │   └── Engine/                             # Núcleo del framework y manifiesto de gobernanza

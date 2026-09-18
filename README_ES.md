@@ -156,7 +156,7 @@ DT-FW no requiere paquetes externos de terceros y depende exclusivamente del int
 python --version
 
 # Clonar repositorio o navegar a la ruta del workspace
-cd "d:/0001 HyperScale Thinking/PROYECTOS CLOUD/DeepMind/FrameWork"
+cd "d:/0001 HyperScale Thinking/PROYECTOS CLOUD/iContext/iDirectory"
 ```
 
 ### 6.2. Ejecución del Pipeline
@@ -216,6 +216,6 @@ python -m unittest discover -s tests -p "*_test.py"
   title = {DT-FW: Thinking Directory Scaffolding & Multi-Cloud Governance Engine},
   year = {2026},
   publisher = {GitHub},
-  url = {https://github.com/AlvaroAlejandroFinOps/FrameWork-ArquitecturaEngine}
+  url = {https://github.com/AlvaroAlejandroFinOps/iDirectory-ArquitecturaEngine}
 }
 ```

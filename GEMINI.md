@@ -4,22 +4,22 @@ Este repositorio utiliza el sistema de gobernanza y ruteo inteligente **Director
 
 ---
 
-## 🚀 Comando Rápido / Slash Work: `/dir`
+## 🚀 Comando Rápido / Slash Work: `/idir`
 
-Utiliza la habilidad `/dir` para ejecutar la lógica de gobernanza y ruteo definida en [`FWengine.py`](file:///d:/0001%20HyperScale%20Thinking/PROYECTOS%20CLOUD/DeepMind/FrameWork/FWengine.py).
+Utiliza la habilidad `/idir` para ejecutar la lógica de gobernanza y ruteo definida en [`FWengine.py`](file:///d:/0001%20HyperScale%20Thinking/PROYECTOS%20CLOUD/iContext/iDirectory/FWengine.py).
 
 ### Acciones Soportadas:
 1. **Inicialización de Estructura**:
    ```powershell
-   python "d:\0001 HyperScale Thinking\PROYECTOS CLOUD\DeepMind\FrameWork\FWengine.py" init
+   python "d:\0001 HyperScale Thinking\PROYECTOS CLOUD\iContext\iDirectory\FWengine.py" init
    ```
 2. **Auditoría / Recomendación de ubicación de archivo**:
    ```powershell
-   python "d:\0001 HyperScale Thinking\PROYECTOS CLOUD\DeepMind\FrameWork\FWengine.py" route "<ruta_del_archivo>"
+   python "d:\0001 HyperScale Thinking\PROYECTOS CLOUD\iContext\iDirectory\FWengine.py" route "<ruta_del_archivo>"
    ```
 3. **Reubicación Física Automática**:
    ```powershell
-   python "d:\0001 HyperScale Thinking\PROYECTOS CLOUD\DeepMind\FrameWork\FWengine.py" route "<ruta_del_archivo>" --move
+   python "d:\0001 HyperScale Thinking\PROYECTOS CLOUD\iContext\iDirectory\FWengine.py" route "<ruta_del_archivo>" --move
    ```
 
 ---
@@ -40,4 +40,4 @@ Utiliza la habilidad `/dir` para ejecutar la lógica de gobernanza y ruteo defin
 ---
 
 ## 🤖 Regla para Agentes de IA
-Al crear o guardar nuevos archivos, consulta siempre el manifiesto de `FWengine.py` o ejecuta `/dir route` para garantizar que los artefactos se ubiquen en su directorio canónico correspondiente.
+Al crear o guardar nuevos archivos, consulta siempre el manifiesto de `FWengine.py` o ejecuta `/idir route` para garantizar que los artefactos se ubiquen en su directorio canónico correspondiente.
