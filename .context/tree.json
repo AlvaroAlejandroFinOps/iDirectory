@@ -65,6 +65,15 @@
       "prio": "p1",
       "crawl": true
     },
+    "artifacts/plans/metricsthinking": {
+      "role": "metrics_evaluation",
+      "prio": "p0",
+      "crawl": true,
+      "key_files": [
+        "MetricsThinking.md",
+        "MetricsThinking.json"
+      ]
+    },
     "artifacts/plans/archive": {
       "role": "archived_plans",
       "prio": "p3",

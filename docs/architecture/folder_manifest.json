@@ -103,6 +103,19 @@
       "token_density": "sparse",
       "instructions": "Planes y decisiones vigentes. Consultar antes de modificar infraestructura o presupuestos."
     },
+    "artifacts/plans/metricsthinking": {
+      "purpose": "Evaluación forense de métricas de avance del proyecto, scores de madurez y roadmap de remediación SDD (MetricsThinking™).",
+      "role": "metrics_evaluation",
+      "relevance": "critical",
+      "crawl": true,
+      "read_priority": "p0",
+      "token_density": "sparse",
+      "key_files": [
+        "MetricsThinking.md",
+        "MetricsThinking.json"
+      ],
+      "instructions": "LECTURA OBLIGATORIA / PRIORIDAD P0. Contiene la nota global de madurez del proyecto, cuellos de botella inmediatos y roadmap de remediación priorizado."
+    },
     "artifacts/plans/archive": {
       "purpose": "Histórico de planes evaluados, arquitecturas descartadas y documentación obsoleta preservada por trazabilidad.",
       "role": "archived_plans",

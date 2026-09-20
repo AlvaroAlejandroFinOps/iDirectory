@@ -20,6 +20,7 @@ Framework modular gobernado por **Gravity HyperScale Thinking** con Context Engi
 - **`src/core/`**: Lógica de negocio transversal, utilitarios de backend, clientes de servicios y módulos comunes. `[Priority: p1]`
 - **`src/dashboards/`**: Tableros de Business Intelligence y apps de visualización interactiva (Streamlit, Dash, PowerBI, Looker). `[Priority: p2]`
 - **`artifacts/plans/active/`**: Planes de capacidad activos (F-SKUs), presupuestos cloud vigentes e hitos operativos en curso. `[Priority: p1]`
+- **`artifacts/plans/metricsthinking/`**: Evaluación forense de métricas de avance del proyecto, scores de madurez y roadmap de remediación SDD (MetricsThinking™). `[Priority: p0]`
 - **`artifacts/plans/archive/`**: Histórico de planes evaluados, arquitecturas descartadas y documentación obsoleta preservada por trazabilidad. `[Priority: p3]`
 - **`docs/architecture/`**: Diagramas de arquitectura multi-cloud, topologías C4 y flujos de datos de las capas Medallion. `[Priority: p1]`
 - **`docs/specs/`**: Especificaciones técnicas detalladas, linaje de datos, contratos de esquemas y requerimientos no funcionales. `[Priority: p1]`

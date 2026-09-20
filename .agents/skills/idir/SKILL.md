@@ -64,7 +64,7 @@ python "d:\0001 HyperScale Thinking\PROYECTOS CLOUD\iContext\iDirectory\FWengine
 | `.tf` | `infrastructure/` | IaC (Terraform) |
 | `.csv` | `data/raw/` | Zona Bronze local (crawl: false) |
 | `.parquet`, `.delta` | `data/processed/` | Zona Silver/Gold local (crawl: false) |
-| `.md`, `.txt`, `.pdf` (planes) | `artifacts/plans/` | `active/` vigentes, `archive/` descartados |
+| `.md`, `.txt`, `.pdf` (planes) | `artifacts/plans/` | `active/` vigentes, `metricsthinking/` evaluaciones, `archive/` descartados |
 | `.md`, `.txt`, `.pdf` (doc) | `docs/` | `specs/`, `notes/`, `architecture/` |
 
 ---

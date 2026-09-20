@@ -190,6 +190,16 @@ FOLDER_METADATA: Dict[str, Dict[str, Any]] = {
         "token_density": "sparse",
         "instructions": "Planes y decisiones vigentes. Consultar antes de modificar infraestructura o presupuestos."
     },
+    "artifacts/plans/metricsthinking": {
+        "purpose": "Evaluación forense de métricas de avance del proyecto, scores de madurez y roadmap de remediación SDD (MetricsThinking™).",
+        "role": "metrics_evaluation",
+        "relevance": "critical",
+        "crawl": True,
+        "read_priority": "p0",
+        "token_density": "sparse",
+        "key_files": ["MetricsThinking.md", "MetricsThinking.json"],
+        "instructions": "LECTURA OBLIGATORIA / PRIORIDAD P0. Contiene la nota global de madurez del proyecto, cuellos de botella inmediatos y roadmap de remediación priorizado."
+    },
     "artifacts/plans/archive": {
         "purpose": "Histórico de planes evaluados, arquitecturas descartadas y documentación obsoleta preservada por trazabilidad.",
         "role": "archived_plans",
@@ -551,6 +561,8 @@ def route_file(file_path: str, base_path: str, move: bool = False):
     elif ext in [".md", ".txt", ".pdf"]:
         if any(w in name_lower for w in ["obsoleto", "historico", "old", "backup", "archive"]):
             dest_subfolder = "artifacts/plans/archive"
+        elif any(w in name_lower for w in ["metricsthinking", "metric", "score", "madurez", "auditoria"]):
+            dest_subfolder = "artifacts/plans/metricsthinking"
         elif any(w in name_lower for w in ["plan", "budget", "hitos", "sku"]):
             dest_subfolder = "artifacts/plans/active"
         elif any(w in name_lower for w in ["prompt", "system"]):

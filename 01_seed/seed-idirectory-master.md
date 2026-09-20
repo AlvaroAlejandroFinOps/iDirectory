@@ -17,16 +17,16 @@ project_name: "iDirectory"
 repository_name: "iDirectory"
 project_type: "infra"
 repository_mode: "single-project"
-generated_at: "2026-09-17T22:55:00-03:00"
-generated_by: "Antigravity Agent (Gemini Flash)"
+generated_at: "2026-09-20T00:33:00-03:00"
+generated_by: "Antigravity Agent (Gemini 3.6 Flash)"
 repository_root: "d:/0001 HyperScale Thinking/PROYECTOS CLOUD/iContext/iDirectory"
 git_branch: "master"
-git_commit: "ce02ae29181bea07db56304656eca7e25bcde221"
-working_tree_state: "clean"
+git_commit: "eadff5604e48cadc2ab46914e2bc8ed7935ab9b4"
+working_tree_state: "dirty"
 analysis_mode: "static"
 coverage_level: "high"
 known_analysis_limits:
-  - "Inspección estática basada en código fuente, manifiestos del framework, árbol de directorios, beacons .context.yaml, mapa topológico .context/tree.json y reglas multi-proveedor."
+  - "Inspección estática basada en código fuente, manifiestos del framework, árbol de directorios, beacons .context.yaml, mapa topológico .context/tree.json, auditoría MetricsThinking™ y reglas multi-proveedor."
 ```
 
 ### 0.1 Instrucciones para el modelo receptor
@@ -47,12 +47,12 @@ known_analysis_limits:
 - **1.1 Proyecto en una frase:** Framework de gobernanza, ruteo heurístico y Context Engineering (**iDirectory v3.0**), creado y concebido por **Gravity HyperScale Thinking** para optimizar el rendimiento, reducir hasta en un 92% el desperdicio de tokens y evitar la degradación de contexto en agentes autónomos de IA y equipos de ingeniería de datos multi-cloud. `[CONFIRMADO]`
 - **1.2 Problema que resuelve:** Erradica la exploración ciega (*blind tree crawling*), la dispersión desordenada de artefactos y la saturación de la ventana de contexto en modelos de lenguaje cuando analizan repositorios complejos de software y datos. `[CONFIRMADO]`
 - **1.3 Usuarios o sistemas consumidores:** Agentes de codificación autónomos (Google Antigravity/Gemini, Anthropic Claude Code, OpenAI/Codex, Cursor, Windsurf, Aider), Arquitectos de Datos, Ingenieros Cloud y Científicos de Datos. `[CONFIRMADO]`
-- **1.4 Alcance y límites del sistema:** Incluye el motor CLI (`FWengine.py` v3.0), satélite topológico precargado (`.context/tree.json`), semáforos de poda de ramas muertas (`.context.yaml`), máscara de exclusión de IA (`.agentignore`), reglas unificadas multi-proveedor (`AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `.cursorrules`, `.agents/skills/idir/SKILL.md`) y documentación de nivel Paper-Grade (`README.md`, `README_ES.md`). No incluye ejecución de cargas de datos remotas ni aprovisionamiento cloud en runtime. `[CONFIRMADO]`
+- **1.4 Alcance y límites del sistema:** Incluye el motor CLI (`FWengine.py` v3.0), satélite topológico precargado (`.context/tree.json`), semáforos de poda de ramas muertas (`.context.yaml`), máscara de exclusión de IA (`.agentignore`), evaluación de madurez (`artifacts/plans/metricsthinking/`), reglas unificadas multi-proveedor (`AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `.cursorrules`, `.agents/skills/idir/SKILL.md`) y documentación de nivel Paper-Grade (`README.md`, `README_ES.md`). No incluye ejecución de cargas de datos remotas ni aprovisionamiento cloud en runtime. `[CONFIRMADO]`
 
 ---
 
 ## 2. ARQUITECTURA Y TOPOLOGÍA
-- **2.1 Estilo arquitectónico:** Motor de Scaffolding, Gobernanza y Context Engineering modular, desacoplado y autocontenido en Python Standard Library pura (`pathlib`, `json`, `argparse`, `sys`, `os`), complementado con integración agéntica multi-proveedor y documentación formal Paper-Grade. `[CONFIRMADO]`
+- **2.1 Estilo arquitectónico:** Motor de Scaffolding, Gobernanza y Context Engineering modular, desacoplado y autocontenido en Python Standard Library pura (`pathlib`, `json`, `argparse`, `sys`, `os`), complementado con integración agéntica multi-proveedor, auditoría MetricsThinking™ y documentación formal Paper-Grade. `[CONFIRMADO]`
 - **2.2 Árbol estructural del repositorio (All-Lowercase):**
 ```text
 iDirectory/
@@ -101,10 +101,16 @@ iDirectory/
 │   ├── .context.yaml                           # Beacon local
 │   └── plans/
 │       ├── active/                             # Planes de capacidad activos (F-SKUs, presupuestos)
+│       ├── metricsthinking/                    # Evaluación forense de madurez del proyecto (Priority: P0)
+│       │   ├── .context.yaml                   # Beacon local (Priority: P0, Relevance: Critical)
+│       │   ├── MetricsThinking.md              # Reporte Markdown con score, bottleneck y roadmap
+│       │   └── MetricsThinking.json            # Dataset estructurado de auditoría SDD
 │       └── archive/                            # Histórico de arquitecturas descartadas (crawl: false)
 ├── docs/                                       # Documentación técnica viva
 │   ├── .context.yaml                           # Beacon local
 │   ├── architecture/                           # Diagramas de arquitectura y flujos Medallion
+│   │   ├── folder_manifest.json                # Manifiesto JSON de la topología
+│   │   └── folder_manifest.yaml                # Manifiesto YAML de la topología
 │   ├── specs/                                  # Especificaciones funcionales y contratos
 │   └── notes/                                  # Bitácoras de ingeniería, ADRs y RCA
 ├── tools/                                      # Utilitarios locales, linters y scripts de debugging
@@ -119,6 +125,7 @@ iDirectory/
 ├── .cursorrules                                # Reglas contextuales para Cursor / Windsurf
 ├── .agentignore                                # Máscara de exclusión para indexadores de IA
 ├── .gitignore                                  # Reglas de exclusión para Git
+├── LICENSE                                     # Licencia MIT del proyecto
 ├── FWengine.py                                 # Motor principal v3.0 (CLI de inicialización, beacons y ruteo)
 ├── README.md                                   # Documentación de alta ingeniería formal (Inglés)
 └── README_ES.md                                # Documentación de alta ingeniería formal (Español)
@@ -127,6 +134,7 @@ iDirectory/
   - `FWengine.py`: Orquestador CLI principal que alberga la lógica de ruteo, MiniYAML, generación de beacons y satélite topológico. `[CONFIRMADO]`
   - `AGENTS.md`: Contrato maestro universal de Context Engineering con el Protocolo Bootloader de 4 pasos. `[CONFIRMADO]`
   - `.context/tree.json`: Satélite topológico precargado que previene el blind crawling (~250 tokens). `[CONFIRMADO]`
+  - `artifacts/plans/metricsthinking/`: Directorio crítico P0 que almacena las métricas cuantitativas y roadmap de madurez SDD (`MetricsThinking.md` y `MetricsThinking.json`). `[CONFIRMADO]`
   - `.agents/skills/idir/SKILL.md`: Declaración formal de la habilidad del agente para invocar `FWengine.py`. `[CONFIRMADO]`
   - `02_foundation/engine/engine_readme.md`: Documento derivado que describe la gobernanza para desarrolladores y agentes en el espacio de trabajo. `[CONFIRMADO]`
 - **2.4 Límites modulares y acoplamiento:** Desacoplamiento total; `FWengine.py` no depende de librerías de terceros (Zero-Dependency CLI). `[CONFIRMADO]`
@@ -141,7 +149,8 @@ iDirectory/
   - `python FWengine.py map [--sync]`: Regenera el mapa satelital `.context/tree.json`. `[CONFIRMADO]`
   - `python FWengine.py context [--budget|--compact]`: Muestra telemetría de densidad y presupuesto de tokens por directorio o emite cadena de inyección rápida para prompts. `[CONFIRMADO]`
   - `python FWengine.py audit`: Audita inconsistencias de mayúsculas, carpetas huérfanas y beacons ausentes. `[CONFIRMADO]`
-  - Invocación vía Slash Command `/idir`: Agentes Antigravity ejecutan la lógica CLI de forma contextual y transparente. `[CONFIRMADO]`
+  - Invocación vía Slash Command `/idir` o `/dir`: Agentes Antigravity ejecutan la lógica CLI de forma contextual y transparente. `[CONFIRMADO]`
+  - Invocación vía Slash Command `/metrics`: Ejecuta el motor evaluador de madurez y genera el reporte en `artifacts/plans/metricsthinking/`. `[CONFIRMADO]`
 - **3.2 Diagrama de flujo principal E2E:**
 ```mermaid
 graph TD
@@ -163,10 +172,11 @@ graph TD
 
 ## 4. MODELO DE DATOS, CONTRATOS Y PERSISTENCIA
 - **4.1 Esquemas y entidades principales:**
-  - `FOLDER_METADATA` (`dict[str, dict]`): Metadatos completos por directorio incluyendo propósito, rol, relevancia, directiva `crawl`, prioridad de lectura y densidad de tokens. `[CONFIRMADO]`
+  - `FOLDER_METADATA` (`dict[str, dict]`): Metadatos completos por directorio incluyendo propósito, rol, relevancia, directiva `crawl`, prioridad de lectura y densidad de tokens (incluyendo `artifacts/plans/metricsthinking`). `[CONFIRMADO]`
   - `ROUTING_MAP` (`dict[str, str]`): Mapeo determinista de extensiones (`.py`, `.ipynb`, `.md`, `.sql`, `.tf`, `.yaml`, `.csv`, `.parquet`, etc.) a sus carpetas canónicas en minúsculas. `[CONFIRMADO]`
   - Schema de Beacons (`.context.yaml`): Estructura YAML serializada con `MiniYAML` que define rol, propósito, prioridad, dependencias y reglas de poda. `[CONFIRMADO]`
   - Schema Satelital (`.context/tree.json`): Diccionario estructurado con nodos y prioridades para carga ultraligera en agentes. `[CONFIRMADO]`
+  - Schema MetricsThinking™ (`MetricsThinking.json`): Contrato de evaluación de madurez SDD con scores ponderados, bandas de madurez y roadmap de remediación. `[CONFIRMADO]`
 - **4.2 Almacenamiento, motores y migraciones:** Persistencia directa en sistema de archivos local utilizando operaciones seguras de `pathlib.Path` (`mkdir(parents=True, exist_ok=True)`, `rename`). `[CONFIRMADO]`
 - **4.3 Interfaces externas:** CLI estandarizado sin dependencias externas. `[CONFIRMADO]`
 
@@ -206,20 +216,20 @@ graph TD
 ---
 
 ## 9. ESTADO REAL, DEUDA TÉCNICA Y LIMITACIONES
-- **9.1 Nivel de madurez y avance real:** Versión v3.0 consolidada; motor CLI funcional, topología normalizada all-lowercase, beacons desplegados, satélite topológico activo y soporte multi-proveedor verificado con auditoría `PASS`. `[CONFIRMADO]`
+- **9.1 Nivel de madurez y avance real:** Versión v3.0 consolidada; motor CLI funcional, topología normalizada all-lowercase, beacons desplegados, satélite topológico activo y soporte multi-proveedor verificado con auditoría `PASS`. Score MetricsThinking™: `32.50%` (Cuello de botella actual: M02 Arquitectura a 75%, M05 Core Engine a 0%). `[CONFIRMADO]`
 - **9.2 Deuda técnica identificada:**
-  - Crear el archivo `LICENSE` (MIT) formal para publicar el repositorio en GitHub. `[CONFIRMADO]`
+  - Desarrollar la suite de pruebas automatizadas en `tests/` y parsers del núcleo en `src/core/`. `[FALTANTE]`
   - Sincronizar el diagrama ASCII de la Sección 5 en `README.md` y `README_ES.md` con los nombres normalizados en minúsculas. `[CONFIRMADO]`
 - **9.3 Inconsistencias entre código y documentación:** Ninguna detectada en el motor y la topología física; pendiente reflejar la nueva topología minúscula en el árbol visual de los READMEs públicos. `[CONFIRMADO]`
 
 ---
 
 ## 10. REGLAS PARA MODIFICAR EL PROYECTO
-- **10.1 Convenciones de estilo:** Python PEP8 estricto, tipado y sintaxis canónica de `pathlib.Path` para neutralidad de plataforma operativa. Todos los nombres de carpetas en minúsculas estrictas (`all-lowercase`). `[CONFIRMADO]`
+- **10.1 Convenciones de estilo:** Python PEP8 estricto, tipado y sintaxis canónica de `pathlib.Path` para neutralidad de plataforma operativa. Todos los nombres de carpetas en minúsculas strictly (`all-lowercase`). `[CONFIRMADO]`
 - **10.2 Reglas arquitectónicas inviolables:**
   - `01_seed/` es prioritario e inamovible como repositorio del ADN técnico. `[CONFIRMADO]`
   - No agregar dependencias de terceros a `FWengine.py`; debe mantenerse exclusivamente con la librería estándar de Python. `[CONFIRMADO]`
-  - Todo agente debe seguir estrictamente el Protocolo Bootloader de 4 pasos declarado en `AGENTS.md`. `[CONFIRMADO]`
+  - Todo agente debe seguir strictly el Protocolo Bootloader de 4 pasos declarado en `AGENTS.md`. `[CONFIRMADO]`
 - **10.3 Checklist de verificación previa a commit:**
   1. Ejecutar `python FWengine.py audit` y comprobar que devuelva código de salida 0 sin violaciones.
   2. Verificar que ningún dato sensible o binario pesado haya sido añadido fuera de `.gitignore` y `.agentignore`.
@@ -249,4 +259,3 @@ Si el usuario adjuntó esta semilla **sin una instrucción específica**, no int
 1. Un saludo confirmando que asimilaste el ADN de **iDirectory v3.0** y su stack principal.
 2. Un breve resumen de 2-3 líneas sobre el objetivo y su estado actual de avance.
 3. Una frase poniéndote a disposición para resolver dudas sobre su funcionamiento o colaborar en los siguientes pasos de desarrollo.
-

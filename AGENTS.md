@@ -55,7 +55,7 @@ Los agentes pueden interactuar con la gobernanza del proyecto mediante terminal 
 - **`02_foundation/engine/`**: Núcleo del framework y `engine_readme.md`.
 - **`03_research/`**: Notebooks (`notebooks/`), prompts (`prompts/`) y experimentos (`experiments/`).
 - **`src/`**: Pipelines de datos (`cloud_jobs/`), sintéticos (`data_generation/`), dashboards (`dashboards/`) y core (`core/`).
-- **`artifacts/plans/`**: Planes vigentes (`active/`) e históricos descartados (`archive/`).
+- **`artifacts/plans/`**: Planes vigentes (`active/`), evaluaciones de madurez (`metricsthinking/`) e históricos descartados (`archive/`).
 - **`docs/`**: Especificaciones (`specs/`), notas y ADRs (`notes/`), arquitectura (`architecture/`).
 - **`config/`**: Parámetros desacoplados y configuración de entorno.
 - **`schemas/`**: Esquemas estrictos de datos (Avro, JSON Schema, DDL).

@@ -1,0 +1,561 @@
+{
+  "project_name": "iDirectory",
+  "project_path": "D:\\0001 HyperScale Thinking\\PROYECTOS CLOUD\\iContext\\iDirectory",
+  "audit_date": "2026-09-20 00:25:04",
+  "auditor": "MetricsThinking™ Universal Auditor",
+  "profile_used": "default",
+  "git_commit": "eadff56",
+  "git_branch": "master",
+  "modules": [
+    {
+      "module_id": "M01",
+      "name": "Descubrimiento y Alcance",
+      "weight": 0.05,
+      "stage_group": "Fundamentos",
+      "criteria": [
+        {
+          "criterion_id": "M01-C01",
+          "name": "Problem Statement Formalizado",
+          "fulfilled": true,
+          "evidence_path": "01_seed/seed-idirectory-master.md",
+          "evidence_detail": "Problem statement formalizado en '01_seed/seed-idirectory-master.md'.",
+          "remediation_hint": "Declarar formalmente el Problem Statement en 01_seed o README.md."
+        },
+        {
+          "criterion_id": "M01-C02",
+          "name": "Límites y Scope Declarados",
+          "fulfilled": true,
+          "evidence_path": "01_seed/seed-idirectory-master.md",
+          "evidence_detail": "Límites de alcance y fronteras del sistema identificados en '01_seed/seed-idirectory-master.md'.",
+          "remediation_hint": "Definir secciones 'In Scope' y 'Out of Scope' explícitas."
+        },
+        {
+          "criterion_id": "M01-C03",
+          "name": "Casos de Uso Formales",
+          "fulfilled": true,
+          "evidence_path": "01_seed/seed-idirectory-master.md",
+          "evidence_detail": "Perfiles de uso y casos definidos en '01_seed/seed-idirectory-master.md'.",
+          "remediation_hint": "Documentar casos de uso o perfiles de consumidores formales."
+        }
+      ],
+      "phase_completion_pct": 100.0,
+      "weighted_contribution_pct": 5.0,
+      "status": "complete"
+    },
+    {
+      "module_id": "M02",
+      "name": "Arquitectura y Diseño Técnico",
+      "weight": 0.1,
+      "stage_group": "Fundamentos",
+      "criteria": [
+        {
+          "criterion_id": "M02-C01",
+          "name": "AST / Modelos Canónicos Desacoplados",
+          "fulfilled": false,
+          "evidence_path": null,
+          "evidence_detail": "No se encontraron modelos de dominio canónicos o AST desacoplados.",
+          "remediation_hint": "Crear modelos de datos/AST neutrales en src/core/ast o similar."
+        },
+        {
+          "criterion_id": "M02-C02",
+          "name": "ADRs Documentados",
+          "fulfilled": true,
+          "evidence_path": "docs/notes/.context.yaml",
+          "evidence_detail": "Decisiones arquitectónicas formales identificadas (1 archivos, e.g. 'docs/notes/.context.yaml').",
+          "remediation_hint": "Registrar ADRs formales en docs/notes o docs/architecture."
+        },
+        {
+          "criterion_id": "M02-C03",
+          "name": "Contratos JSON Schema Validados",
+          "fulfilled": true,
+          "evidence_path": "schemas/.context.yaml",
+          "evidence_detail": "Contratos formales de datos / esquemas presentes (1 esquemas, e.g. 'schemas/.context.yaml').",
+          "remediation_hint": "Añadir esquemas JSON Schema o Pydantic validados en schemas/."
+        },
+        {
+          "criterion_id": "M02-C04",
+          "name": "Topología y Grafos Formales",
+          "fulfilled": true,
+          "evidence_path": ".context/tree.json",
+          "evidence_detail": "Mapa topológico satelital y grafo formal del proyecto activo en '.context/tree.json'.",
+          "remediation_hint": "Implementar análisis de dependencias/grafos en core."
+        }
+      ],
+      "phase_completion_pct": 75.0,
+      "weighted_contribution_pct": 7.5,
+      "status": "inprogress"
+    },
+    {
+      "module_id": "M03",
+      "name": "Gobernanza y Cumplimiento",
+      "weight": 0.05,
+      "stage_group": "Fundamentos",
+      "criteria": [
+        {
+          "criterion_id": "M03-C01",
+          "name": "Detección y Marcado de PII",
+          "fulfilled": true,
+          "evidence_path": "01_seed/seed-idirectory-master.md",
+          "evidence_detail": "Políticas de privacidad y clasificación PII documentadas en '01_seed/seed-idirectory-master.md'.",
+          "remediation_hint": "Integrar etiquetado o enmascarado de PII en los modelos de datos."
+        },
+        {
+          "criterion_id": "M03-C02",
+          "name": "Reglas de Calidad Formales (cQS)",
+          "fulfilled": false,
+          "evidence_path": null,
+          "evidence_detail": "No se encontraron reglas cuantitativas de calidad formal (cQS).",
+          "remediation_hint": "Implementar reglas de calidad de datos o código cQS."
+        },
+        {
+          "criterion_id": "M03-C03",
+          "name": "Validación Estricta de Esquemas / Context",
+          "fulfilled": true,
+          "evidence_path": ".context/tree.json",
+          "evidence_detail": "Gobernanza contextual iDirectory activa con 24 archivos de contexto (.context.yaml).",
+          "remediation_hint": "Asegurar validadores estrictos o gobernanza .context.yaml."
+        }
+      ],
+      "phase_completion_pct": 66.67,
+      "weighted_contribution_pct": 3.33,
+      "status": "inprogress"
+    },
+    {
+      "module_id": "M04",
+      "name": "Aprovisionamiento y Readiness",
+      "weight": 0.05,
+      "stage_group": "Fundamentos",
+      "criteria": [
+        {
+          "criterion_id": "M04-C01",
+          "name": "Entorno Reproducible",
+          "fulfilled": false,
+          "evidence_path": null,
+          "evidence_detail": "No se encontró manifiesto de dependencias estándar (pyproject.toml, package.json, etc.).",
+          "remediation_hint": "Definir pyproject.toml o package.json formal."
+        },
+        {
+          "criterion_id": "M04-C02",
+          "name": "Dependencias Versionadas",
+          "fulfilled": false,
+          "evidence_path": null,
+          "evidence_detail": "Las dependencias no cuentan con versiones fijadas o restringidas.",
+          "remediation_hint": "Fijar versiones estrictas en el manifiesto de dependencias."
+        },
+        {
+          "criterion_id": "M04-C03",
+          "name": "Fixture Enterprise Disponible",
+          "fulfilled": true,
+          "evidence_path": "data/processed/.context.yaml",
+          "evidence_detail": "Fixtures y datos de prueba disponibles (2 archivos, e.g. 'data/processed/.context.yaml').",
+          "remediation_hint": "Proveer fixtures o esquemas de prueba deterministas en tests/fixtures o data/."
+        }
+      ],
+      "phase_completion_pct": 33.33,
+      "weighted_contribution_pct": 1.67,
+      "status": "inprogress"
+    },
+    {
+      "module_id": "M05",
+      "name": "Construcción Núcleo (Core Engine)",
+      "weight": 0.25,
+      "stage_group": "Construcción",
+      "criteria": [
+        {
+          "criterion_id": "M05-C01",
+          "name": "Parsers Funcionales",
+          "fulfilled": false,
+          "evidence_path": null,
+          "evidence_detail": "No se encontraron parsers ni rutinas funcionales de ingesta de datos.",
+          "remediation_hint": "Implementar parsers para lectura de especificaciones de entrada."
+        },
+        {
+          "criterion_id": "M05-C02",
+          "name": "Inferencia Operativa de Roles",
+          "fulfilled": false,
+          "evidence_path": null,
+          "evidence_detail": "Falta módulo o motor central de procesamiento de lógica de negocio.",
+          "remediation_hint": "Desarrollar lógica central de inferencia o transformación."
+        },
+        {
+          "criterion_id": "M05-C03",
+          "name": "Resolución de Relaciones y Ciclos",
+          "fulfilled": false,
+          "evidence_path": null,
+          "evidence_detail": "No se encontró componente de resolución de relaciones o dependencias.",
+          "remediation_hint": "Asegurar algoritmos para resolver dependencias o relaciones."
+        },
+        {
+          "criterion_id": "M05-C04",
+          "name": "Generador Canónico de Métricas / Lógica",
+          "fulfilled": false,
+          "evidence_path": null,
+          "evidence_detail": "No se detectó generador de métricas ni sintetizador canónico.",
+          "remediation_hint": "Implementar generador de código o síntesis de medidas."
+        }
+      ],
+      "phase_completion_pct": 0.0,
+      "weighted_contribution_pct": 0.0,
+      "status": "pending"
+    },
+    {
+      "module_id": "M06",
+      "name": "Integración e Interoperabilidad",
+      "weight": 0.15,
+      "stage_group": "Construcción",
+      "criteria": [
+        {
+          "criterion_id": "M06-C01",
+          "name": "Emisores de Dialecto Nativo",
+          "fulfilled": false,
+          "evidence_path": null,
+          "evidence_detail": "No se encontraron emisores nativos de plataforma o destino.",
+          "remediation_hint": "Crear emisores hacia tecnologías destino en src/core/emitter o similar."
+        },
+        {
+          "criterion_id": "M06-C02",
+          "name": "Escritura Atómica y Safe-Encoding",
+          "fulfilled": false,
+          "evidence_path": null,
+          "evidence_detail": "Falta estandarización de escritura atómica y safe-encoding UTF-8.",
+          "remediation_hint": "Usar atomic write y UTF-8 seguro para serializar artefactos."
+        },
+        {
+          "criterion_id": "M06-C03",
+          "name": "Exportación Multi-Formato",
+          "fulfilled": true,
+          "evidence_path": null,
+          "evidence_detail": "Soporte de representación multi-formato verificado en el repositorio (.json, .md, .png, .py, .yaml).",
+          "remediation_hint": "Ofrecer serialización a JSON, Markdown o diagramas."
+        }
+      ],
+      "phase_completion_pct": 33.33,
+      "weighted_contribution_pct": 5.0,
+      "status": "inprogress"
+    },
+    {
+      "module_id": "M07",
+      "name": "Aseguramiento de Calidad (QA & Stress)",
+      "weight": 0.1,
+      "stage_group": "Certificación",
+      "criteria": [
+        {
+          "criterion_id": "M07-C01",
+          "name": "Cobertura y Tasa de Éxito de Pruebas",
+          "fulfilled": true,
+          "evidence_path": "tests/.context.yaml",
+          "evidence_detail": "Suite de pruebas presente (1 archivos de prueba en tests/, e.g. 'tests/.context.yaml').",
+          "remediation_hint": "Desarrollar suite de tests en tests/."
+        },
+        {
+          "criterion_id": "M07-C02",
+          "name": "Golden Regression Tests Validados",
+          "fulfilled": false,
+          "evidence_path": null,
+          "evidence_detail": "No se encontraron pruebas de regresión con archivos Golden/Snapshots.",
+          "remediation_hint": "Añadir tests de regresión con archivos golden / snapshots esperados."
+        },
+        {
+          "criterion_id": "M07-C03",
+          "name": "Suites de Estrés / Benchmark Masivo",
+          "fulfilled": false,
+          "evidence_path": null,
+          "evidence_detail": "No se detectaron suites de benchmarking ni pruebas de estrés por tiers.",
+          "remediation_hint": "Implementar benchmarks o stress tests en tests/ o scripts/."
+        }
+      ],
+      "phase_completion_pct": 33.33,
+      "weighted_contribution_pct": 3.33,
+      "status": "inprogress"
+    },
+    {
+      "module_id": "M08",
+      "name": "Validación y Aceptación Organizacional",
+      "weight": 0.1,
+      "stage_group": "Certificación",
+      "criteria": [
+        {
+          "criterion_id": "M08-C01",
+          "name": "Proyecciones por Rol (Persona Lenses)",
+          "fulfilled": false,
+          "evidence_path": null,
+          "evidence_detail": "No se encontraron proyecciones adaptadas por rol organizativo.",
+          "remediation_hint": "Implementar proyecciones adaptadas a diferentes perfiles (lenses/personas)."
+        },
+        {
+          "criterion_id": "M08-C02",
+          "name": "Leadership Cockpit / Tableros Ejecutivos",
+          "fulfilled": true,
+          "evidence_path": "src/dashboards/.context.yaml",
+          "evidence_detail": "Módulos de dashboard / cockpit operativo presentes en 'src/dashboards/.context.yaml'.",
+          "remediation_hint": "Proveer dashboard o cockpit de resumen ejecutivo."
+        },
+        {
+          "criterion_id": "M08-C03",
+          "name": "CLI de Diagnóstico y Exploración",
+          "fulfilled": false,
+          "evidence_path": null,
+          "evidence_detail": "No se detectó interfaz CLI ni punto de entrada interactivo en consola.",
+          "remediation_hint": "Exponer comandos CLI de diagnóstico o auditoría."
+        }
+      ],
+      "phase_completion_pct": 33.33,
+      "weighted_contribution_pct": 3.33,
+      "status": "inprogress"
+    },
+    {
+      "module_id": "M09",
+      "name": "Despliegue y Automatización (CI/CD)",
+      "weight": 0.1,
+      "stage_group": "Certificación",
+      "criteria": [
+        {
+          "criterion_id": "M09-C01",
+          "name": "Pipeline CI/CD Automatizado",
+          "fulfilled": false,
+          "evidence_path": null,
+          "evidence_detail": "No se encontró pipeline de CI/CD automatizado (.github/workflows/).",
+          "remediation_hint": "Configurar workflow de CI en .github/workflows/ci.yml."
+        },
+        {
+          "criterion_id": "M09-C02",
+          "name": "Empaquetado y Distribución Estandarizada",
+          "fulfilled": false,
+          "evidence_path": null,
+          "evidence_detail": "Falta estandarización formal de empaquetado o pre-commit hooks.",
+          "remediation_hint": "Configurar empaquetado buildable o .pre-commit-config.yaml."
+        }
+      ],
+      "phase_completion_pct": 0.0,
+      "weighted_contribution_pct": 0.0,
+      "status": "pending"
+    },
+    {
+      "module_id": "M10",
+      "name": "Cierre, Extensibilidad y Documentación",
+      "weight": 0.05,
+      "stage_group": "Entrega",
+      "criteria": [
+        {
+          "criterion_id": "M10-C01",
+          "name": "Documentación Técnica Exhaustiva (Seed)",
+          "fulfilled": true,
+          "evidence_path": "01_seed/.context.yaml",
+          "evidence_detail": "Memoria técnica formal (ThinkingSeed) identificada en '01_seed/.context.yaml'.",
+          "remediation_hint": "Generar ThinkingSeed Master completo en 01_seed/."
+        },
+        {
+          "criterion_id": "M10-C02",
+          "name": "CLI Help Documentado",
+          "fulfilled": true,
+          "evidence_path": "README_ES.md",
+          "evidence_detail": "Instrucciones operativas y ayuda de comandos documentadas en 'README_ES.md'.",
+          "remediation_hint": "Documentar comandos CLI y opciones en README o help."
+        },
+        {
+          "criterion_id": "M10-C03",
+          "name": "Adaptadores Multicanal / Roadmap",
+          "fulfilled": false,
+          "evidence_path": null,
+          "evidence_detail": "No se encontraron interfaces de extensión ni roadmap formal documentado.",
+          "remediation_hint": "Documentar roadmap y adaptadores futuros en el plan maestro."
+        }
+      ],
+      "phase_completion_pct": 66.67,
+      "weighted_contribution_pct": 3.33,
+      "status": "inprogress"
+    }
+  ],
+  "remediation_plan": [
+    {
+      "priority": "P1",
+      "module_id": "M05",
+      "criterion_id": "M05-C01",
+      "action": "Implementar parsers para lectura de especificaciones de entrada.",
+      "impact_score": 6.25,
+      "files_to_touch": [
+        "src/core/"
+      ]
+    },
+    {
+      "priority": "P1",
+      "module_id": "M05",
+      "criterion_id": "M05-C02",
+      "action": "Desarrollar lógica central de inferencia o transformación.",
+      "impact_score": 6.25,
+      "files_to_touch": [
+        "src/core/"
+      ]
+    },
+    {
+      "priority": "P1",
+      "module_id": "M05",
+      "criterion_id": "M05-C03",
+      "action": "Asegurar algoritmos para resolver dependencias o relaciones.",
+      "impact_score": 6.25,
+      "files_to_touch": [
+        "src/core/"
+      ]
+    },
+    {
+      "priority": "P1",
+      "module_id": "M05",
+      "criterion_id": "M05-C04",
+      "action": "Implementar generador de código o síntesis de medidas.",
+      "impact_score": 6.25,
+      "files_to_touch": [
+        "src/core/"
+      ]
+    },
+    {
+      "priority": "P1",
+      "module_id": "M02",
+      "criterion_id": "M02-C01",
+      "action": "Crear modelos de datos/AST neutrales en src/core/ast o similar.",
+      "impact_score": 2.5,
+      "files_to_touch": [
+        "docs/notes/ADR-001.md",
+        "schemas/"
+      ]
+    },
+    {
+      "priority": "P2",
+      "module_id": "M06",
+      "criterion_id": "M06-C01",
+      "action": "Crear emisores hacia tecnologías destino en src/core/emitter o similar.",
+      "impact_score": 5.0,
+      "files_to_touch": [
+        "src/core/emitter/"
+      ]
+    },
+    {
+      "priority": "P2",
+      "module_id": "M06",
+      "criterion_id": "M06-C02",
+      "action": "Usar atomic write y UTF-8 seguro para serializar artefactos.",
+      "impact_score": 5.0,
+      "files_to_touch": [
+        "src/core/emitter/"
+      ]
+    },
+    {
+      "priority": "P2",
+      "module_id": "M09",
+      "criterion_id": "M09-C01",
+      "action": "Configurar workflow de CI en .github/workflows/ci.yml.",
+      "impact_score": 5.0,
+      "files_to_touch": [
+        ".github/workflows/ci.yml"
+      ]
+    },
+    {
+      "priority": "P2",
+      "module_id": "M09",
+      "criterion_id": "M09-C02",
+      "action": "Configurar empaquetado buildable o .pre-commit-config.yaml.",
+      "impact_score": 5.0,
+      "files_to_touch": [
+        ".github/workflows/ci.yml"
+      ]
+    },
+    {
+      "priority": "P2",
+      "module_id": "M07",
+      "criterion_id": "M07-C02",
+      "action": "Añadir tests de regresión con archivos golden / snapshots esperados.",
+      "impact_score": 3.33,
+      "files_to_touch": [
+        "tests/"
+      ]
+    },
+    {
+      "priority": "P2",
+      "module_id": "M07",
+      "criterion_id": "M07-C03",
+      "action": "Implementar benchmarks o stress tests en tests/ o scripts/.",
+      "impact_score": 3.33,
+      "files_to_touch": [
+        "tests/"
+      ]
+    },
+    {
+      "priority": "P2",
+      "module_id": "M08",
+      "criterion_id": "M08-C01",
+      "action": "Implementar proyecciones adaptadas a diferentes perfiles (lenses/personas).",
+      "impact_score": 3.33,
+      "files_to_touch": [
+        "src/dashboards/",
+        "tools/"
+      ]
+    },
+    {
+      "priority": "P2",
+      "module_id": "M08",
+      "criterion_id": "M08-C03",
+      "action": "Exponer comandos CLI de diagnóstico o auditoría.",
+      "impact_score": 3.33,
+      "files_to_touch": [
+        "src/dashboards/",
+        "tools/"
+      ]
+    },
+    {
+      "priority": "P3",
+      "module_id": "M03",
+      "criterion_id": "M03-C02",
+      "action": "Implementar reglas de calidad de datos o código cQS.",
+      "impact_score": 1.67,
+      "files_to_touch": [
+        ".context.yaml",
+        "schemas/"
+      ]
+    },
+    {
+      "priority": "P3",
+      "module_id": "M04",
+      "criterion_id": "M04-C01",
+      "action": "Definir pyproject.toml o package.json formal.",
+      "impact_score": 1.67,
+      "files_to_touch": [
+        "pyproject.toml",
+        "tests/fixtures/"
+      ]
+    },
+    {
+      "priority": "P3",
+      "module_id": "M04",
+      "criterion_id": "M04-C02",
+      "action": "Fijar versiones estrictas en el manifiesto de dependencias.",
+      "impact_score": 1.67,
+      "files_to_touch": [
+        "pyproject.toml",
+        "tests/fixtures/"
+      ]
+    },
+    {
+      "priority": "P3",
+      "module_id": "M10",
+      "criterion_id": "M10-C03",
+      "action": "Documentar roadmap y adaptadores futuros en el plan maestro.",
+      "impact_score": 1.67,
+      "files_to_touch": [
+        "01_seed/",
+        "docs/"
+      ]
+    }
+  ],
+  "stats": {
+    "total_files_scanned": 43,
+    "seeds_detected": 2,
+    "manifests_detected": 0,
+    "context_files_detected": 24,
+    "schemas_detected": 1,
+    "tests_detected": 1,
+    "source_files_detected": 0,
+    "is_git": true
+  },
+  "consolidated_score": 32.5,
+  "maturity_band": "Fase Inicial / Riesgo Alto (0.0% - 49.9%)",
+  "active_bottleneck": "M02: Arquitectura y Diseño Técnico (75.0% completado)"
+}
