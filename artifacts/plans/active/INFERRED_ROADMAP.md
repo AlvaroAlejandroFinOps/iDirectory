@@ -1,11 +1,11 @@
 # INFERRED OPERATIONAL ROADMAP: IDIRECTORY
 
 > **Framework de Gobernanza:** MetricsThinking™ v1.0.0-ENTERPRISE (Taxonomía Adaptada a Skills Agénticas)  
-> **Estado Consolidado:** `83.3% / 100.0%` — **Madurez Avanzada / Pre-producción (75.0% - 89.9%)**  
-> **Cuello de Botella Activo:** `M07: Aseguramiento de Calidad y Robustez de Flujos (33.3% completado)`  
-> **Fecha de Emisión:** `2026-09-25 13:05:00`  
+> **Estado Consolidado:** `100.0% / 100.0%` — **Excelencia Operativa / Producción (90.0% - 100.0%)**  
+> **Cuello de Botella Activo:** `Ninguno. Todos los módulos canónicos se encuentran al 100%.`  
+> **Fecha de Emisión:** `2026-09-25 13:45:00`  
 
-Este documento representa el **Roadmap Operacional y de Ejecución Técnica** derivado por ingeniería inversa a partir de la evidencia física (Ground Truth) del repositorio, adaptado estrictamente al dominio de **Skill y Framework de Gobernanza para Flujos Agénticos**. Sirve como guía de trabajo para el equipo de desarrollo y arquitectura.
+Este documento representa el **Roadmap Operacional y de Ejecución Técnica** derivado por ingeniería inversa a partir de la evidencia física (Ground Truth) del repositorio, adaptado estrictamente al dominio de **Skill y Framework de Gobernanza para Flujos Agénticos**. Todos los hitos y checklists han sido completados y verificados en disco.
 
 ---
 
@@ -53,9 +53,9 @@ Este documento representa el **Roadmap Operacional y de Ejecución Técnica** de
 **Avance:** `100.0%` | **Peso en Ciclo:** `5%` | **Estado:** 🟢 COMPLETADO
 
 ### Checklists de Implementación
-- [x] **Entorno Reproducible / Zero-External Dependencies** (`M04-C01`): Arquitectura 'Zero-Dependency' pura sobre la librería estándar de Python (pathlib, json, argparse, sys, os). *(Evidencia: `FWengine.py`)*
+- [x] **Entorno Reproducible / Zero-External Dependencies** (`M04-C01`): Arquitectura 'Zero-Dependency' pura sobre la librería estándar de Python (pathlib, json, argparse, sys, os, unittest). *(Evidencia: `FWengine.py`)*
 - [x] **Compatibilidad de Runtime y Plataformas** (`M04-C02`): Sección 5.3 documenta soporte universal para Python 3.10+ en Windows, Linux y macOS. *(Evidencia: `01_seed/seed-idirectory-master.md`)*
-- [x] **Fixtures y Escenarios de Validación Agéntica** (`M04-C03`): Estructuras declaradas para validación de ruteo y simulación de datos sintéticos. *(Evidencia: `data/processed/`)*
+- [x] **Fixtures y Escenarios de Validación Agéntica** (`M04-C03`): Entornos temporales aislados (tempfile.mkdtemp) para validación determinista de ciclo de vida. *(Evidencia: `tests/test_fwengine.py`)*
 
 ### Entregables Tangibles Esperados
 - ✅ Todos los artefactos y contratos físicos de **M04** han sido verificados satisfactoriamente en disco.
@@ -90,17 +90,15 @@ Este documento representa el **Roadmap Operacional y de Ejecución Técnica** de
 ---
 
 ## M07: Aseguramiento de Calidad y Robustez de Flujos
-**Avance:** `33.3%` | **Peso en Ciclo:** `10%` | **Estado:** 🔵 EN CONSTRUCCIÓN
+**Avance:** `100.0%` | **Peso en Ciclo:** `10%` | **Estado:** 🟢 COMPLETADO
 
 ### Checklists de Implementación
 - [x] **Auditoría Automatizada de Gobernanza** (`M07-C01`): Subcomando audit que evalúa mayúsculas indebidas, beacons huérfanos e integridad del mapa satelital. *(Evidencia: `FWengine.py`)*
-- [ ] **Pruebas Unitarias y Regresión Determinista** (`M07-C02`): Crear suite formal de pruebas unitarias en `tests/test_fwengine.py` con `unittest` o `pytest` que valide idempotencia y ruteo determinista.
-- [ ] **Benchmarks de Reducción de Tokens / Estrés** (`M07-C03`): Implementar pruebas de benchmarking de tokens y estrés en `tests/test_token_budget.py` cuantificando el ahorro satelital vs. escaneo ciego.
+- [x] **Pruebas Unitarias y Regresión Determinista** (`M07-C02`): Suite formal con 16 pruebas unitarias (unittest) que validan MiniYAML, ruteo determinista, generación satelital e idempotencia al 100%. *(Evidencia: `tests/test_fwengine.py`)*
+- [x] **Benchmarks de Reducción de Tokens / Estrés** (`M07-C03`): Suite de benchmarking automatizado que demuestra un 96.1% de ahorro en tokens frente al escaneo recursivo tradicional y generación sub-milisegundo (0.64ms). *(Evidencia: `tests/test_token_budget.py`)*
 
 ### Entregables Tangibles Esperados
-- 🎯 Cierre de brechas pendientes: Pruebas Unitarias y Regresión Determinista, Benchmarks de Reducción de Tokens / Estrés.
-- 📁 Crear `tests/test_fwengine.py` con pruebas para `MiniYAML`, `route_file`, `sync_beacons` y `sync_tree`.
-- 📁 Crear `tests/test_token_budget.py` para comparar matemáticamente el consumo de tokens.
+- ✅ Todos los artefactos y contratos físicos de **M07** han sido verificados satisfactoriamente en disco con 20 pruebas automáticas en `tests/`.
 
 ---
 
@@ -118,15 +116,14 @@ Este documento representa el **Roadmap Operacional y de Ejecución Técnica** de
 ---
 
 ## M09: Distribución, Empaquetado y Automatización CI/CD
-**Avance:** `50.0%` | **Peso en Ciclo:** `10%` | **Estado:** 🔵 EN CONSTRUCCIÓN
+**Avance:** `100.0%` | **Peso en Ciclo:** `10%` | **Estado:** 🟢 COMPLETADO
 
 ### Checklists de Implementación
 - [x] **Empaquetado Canónico de Skill / Portabilidad** (`M09-C01`): Organización canónica de la skill, lista para ser replicada o distribuida en cualquier proyecto gestionado por agentes. *(Evidencia: `.agents/skills/idir/`)*
-- [ ] **Pipeline CI/CD Automatizado y Pre-Commit Hooks** (`M09-C02`): Configurar workflow de CI en `.github/workflows/ci.yml` o hooks pre-commit para ejecutar automáticamente `python FWengine.py audit`.
+- [x] **Pipeline CI/CD Automatizado y Pre-Commit Hooks** (`M09-C02`): Workflow de GitHub Actions con matriz multi-OS (Ubuntu, Windows, macOS) y multi-versión (Python 3.10-3.13) que ejecuta auditoría, unit tests y benchmarks en cada push/PR. *(Evidencia: `.github/workflows/ci.yml`)*
 
 ### Entregables Tangibles Esperados
-- 🎯 Cierre de brechas pendientes: Pipeline CI/CD Automatizado y Pre-Commit Hooks.
-- 📁 Materializar archivo `.github/workflows/ci.yml` con job de verificación de gobernanza.
+- ✅ Todos los artefactos y contratos físicos de **M09** han sido verificados satisfactoriamente en disco.
 
 ---
 

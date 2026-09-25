@@ -1,0 +1,1574 @@
+[
+  {
+    "id": "repo_01",
+    "name": "Gravity - Hyperscale Thinking",
+    "path": "D:\\0001 HyperScale Thinking\\Gravity - Hyperscale Thinking\\Gravity - Hyperscale Thinking",
+    "total_files": 44804,
+    "total_bytes": 1420768316,
+    "total_tokens": 481022531,
+    "clean_codebase_tokens": 10899017,
+    "satellite_tokens": 24474,
+    "satellite_files_count": 12,
+    "satellite_files": [
+      {
+        "file": "AGENTS.md",
+        "tokens": 895,
+        "bytes": 3356
+      },
+      {
+        "file": "GEMINI.md",
+        "tokens": 1668,
+        "bytes": 6262
+      },
+      {
+        "file": "README.md",
+        "tokens": 4375,
+        "bytes": 15254
+      },
+      {
+        "file": "README_ES.md",
+        "tokens": 4519,
+        "bytes": 16310
+      },
+      {
+        "file": ".venv\\Lib\\site-packages\\pyarrow\\tests\\data\\orc\\README.md",
+        "tokens": 251,
+        "bytes": 954
+      },
+      {
+        "file": ".venv\\Lib\\site-packages\\sklearn\\externals\\array_api_compat\\README.md",
+        "tokens": 18,
+        "bytes": 68
+      },
+      {
+        "file": ".venv\\Lib\\site-packages\\sklearn\\externals\\array_api_extra\\README.md",
+        "tokens": 17,
+        "bytes": 67
+      },
+      {
+        "file": ".venv\\Lib\\site-packages\\torchgen\\packaged\\autograd\\README.md",
+        "tokens": 39,
+        "bytes": 150
+      },
+      {
+        "file": "001 Seed\\seed-Gravity - Hyperscale Thinking-master.md",
+        "tokens": 4935,
+        "bytes": 18609
+      },
+      {
+        "file": "001 Seed\\Seed.md",
+        "tokens": 7115,
+        "bytes": 30647
+      },
+      {
+        "file": "001 Seed\\ThinkingSeed.md",
+        "tokens": 395,
+        "bytes": 1492
+      },
+      {
+        "file": "001 Seed\\ThinkingSeed_Master.md",
+        "tokens": 247,
+        "bytes": 950
+      }
+    ],
+    "prunable_files": 44606,
+    "prunable_tokens": 470123514,
+    "token_saving_pct": 99.99,
+    "tree_found": false,
+    "beacons_count": 0,
+    "beacons_found": [],
+    "seed_found": [
+      "001 Seed\\seed-Gravity - Hyperscale Thinking-master.md",
+      "001 Seed\\Seed.md",
+      "001 Seed\\ThinkingSeed.md",
+      "001 Seed\\ThinkingSeed_Master.md"
+    ],
+    "rules_found": [
+      "AGENTS.md",
+      "GEMINI.md",
+      "README.md",
+      "README_ES.md",
+      ".venv\\Lib\\site-packages\\pyarrow\\tests\\data\\orc\\README.md",
+      ".venv\\Lib\\site-packages\\sklearn\\externals\\array_api_compat\\README.md",
+      ".venv\\Lib\\site-packages\\sklearn\\externals\\array_api_extra\\README.md",
+      ".venv\\Lib\\site-packages\\torchgen\\packaged\\autograd\\README.md"
+    ],
+    "top_folders": {
+      ".": {
+        "files": 13,
+        "bytes": 4583306,
+        "tokens": 1583928
+      },
+      ".agents": {
+        "files": 3,
+        "bytes": 10978,
+        "tokens": 2927
+      },
+      ".git": {
+        "files": 0,
+        "bytes": 0,
+        "tokens": 0
+      },
+      ".venv": {
+        "files": 44593,
+        "bytes": 1380242148,
+        "tokens": 470021233
+      },
+      "001 Seed": {
+        "files": 4,
+        "bytes": 51698,
+        "tokens": 12692
+      },
+      "Artefactos": {
+        "files": 9,
+        "bytes": 88580,
+        "tokens": 23418
+      },
+      "config": {
+        "files": 0,
+        "bytes": 0,
+        "tokens": 0
+      },
+      "data": {
+        "files": 148,
+        "bytes": 35527464,
+        "tokens": 9247925
+      },
+      "docs": {
+        "files": 8,
+        "bytes": 35307,
+        "tokens": 9643
+      },
+      "Engine": {
+        "files": 1,
+        "bytes": 3200,
+        "tokens": 842
+      },
+      "GraphNodes": {
+        "files": 1,
+        "bytes": 588,
+        "tokens": 173
+      },
+      "infrastructure": {
+        "files": 0,
+        "bytes": 0,
+        "tokens": 0
+      },
+      "logs": {
+        "files": 0,
+        "bytes": 0,
+        "tokens": 0
+      },
+      "Notebooks": {
+        "files": 0,
+        "bytes": 0,
+        "tokens": 0
+      },
+      "schemas": {
+        "files": 0,
+        "bytes": 0,
+        "tokens": 0
+      },
+      "scripts": {
+        "files": 0,
+        "bytes": 0,
+        "tokens": 0
+      },
+      "src": {
+        "files": 14,
+        "bytes": 52926,
+        "tokens": 25116
+      },
+      "tests": {
+        "files": 4,
+        "bytes": 40088,
+        "tokens": 17971
+      },
+      "Tools": {
+        "files": 3,
+        "bytes": 50289,
+        "tokens": 22911
+      },
+      "__pycache__": {
+        "files": 3,
+        "bytes": 81744,
+        "tokens": 53752
+      }
+    },
+    "ext_dist": {
+      "no_ext": 413,
+      ".md": 57,
+      ".py": 12492,
+      ".png": 12,
+      ".jpeg": 1,
+      ".txt": 136,
+      ".bat": 3,
+      ".cfg": 2,
+      ".pyd": 230,
+      ".pth": 1,
+      ".whl": 1,
+      ".typed": 54,
+      ".pyc": 11160,
+      ".pem": 2,
+      ".gz": 103,
+      ".pkl": 11,
+      ".bz2": 9,
+      ".gzip": 5,
+      ".lzma": 5,
+      ".xz": 5,
+      ".npy": 31,
+      ".z": 3,
+      ".pyi": 362,
+      ".json": 24,
+      ".yaml": 6,
+      ".markdown-it": 1,
+      ".c": 11,
+      ".eigen": 1,
+      ".a99": 2,
+      ".b99": 2,
+      ".pxd": 72,
+      ".h": 9906,
+      ".f90": 62,
+      ".f": 25,
+      ".pyf": 8,
+      ".inc": 1,
+      ".f95": 1,
+      ".template": 1,
+      ".lib": 109,
+      ".npz": 20,
+      ".rst": 21,
+      ".csv": 36,
+      ".pyx": 87,
+      ".build": 26,
+      ".ini": 2,
+      ".pc": 1,
+      ".cpp": 48,
+      ".fits": 1,
+      ".dll": 28,
+      ".cc": 98,
+      ".proto": 8,
+      ".onnx": 1918,
+      ".pb": 6356,
+      ".in": 3,
+      ".apache": 2,
+      ".bsd": 2,
+      ".exe": 39,
+      ".pxi": 19,
+      ".hpp": 83,
+      ".cmake": 29,
+      ".feather": 1,
+      ".orc": 4,
+      ".parquet": 4,
+      ".a": 106,
+      ".arff": 16,
+      ".mat": 111,
+      ".sav": 48,
+      ".nc": 3,
+      ".dat": 26,
+      ".wav": 22,
+      ".ani": 1,
+      ".r": 1,
+      ".xml": 1,
+      ".tmpl": 2,
+      ".html": 3,
+      ".jpg": 2,
+      ".tp": 24,
+      ".css": 4,
+      ".js": 3,
+      ".g4": 2,
+      ".al": 16,
+      ".lark": 2,
+      ".xsl": 3,
+      ".cuh": 62,
+      ".mjs": 2,
+      ".thrift": 1,
+      ".ld": 1,
+      ".jinja": 21,
+      ".cu": 8,
+      ".sh": 1,
+      ".1": 2,
+      ".ps1": 1,
+      ".lance": 45,
+      ".txn": 49,
+      ".manifest": 49
+    }
+  },
+  {
+    "id": "repo_02",
+    "name": "Gravity - Deep Space",
+    "path": "D:\\0001 HyperScale Thinking\\Gravity - Hyperscale Thinking\\Gravity - Deep Space",
+    "total_files": 37,
+    "total_bytes": 1260830,
+    "total_tokens": 517820,
+    "clean_codebase_tokens": 475775,
+    "satellite_tokens": 3630,
+    "satellite_files_count": 3,
+    "satellite_files": [
+      {
+        "file": ".agents\\AGENTS.md",
+        "tokens": 357,
+        "bytes": 1321
+      },
+      {
+        "file": ".pytest_cache\\README.md",
+        "tokens": 86,
+        "bytes": 302
+      },
+      {
+        "file": "001 Seed\\seed.md",
+        "tokens": 3187,
+        "bytes": 12175
+      }
+    ],
+    "prunable_files": 10,
+    "prunable_tokens": 42045,
+    "token_saving_pct": 99.3,
+    "tree_found": false,
+    "beacons_count": 0,
+    "beacons_found": [],
+    "seed_found": [
+      "001 Seed\\seed.md"
+    ],
+    "rules_found": [
+      ".agents\\AGENTS.md",
+      ".pytest_cache\\README.md"
+    ],
+    "top_folders": {
+      ".": {
+        "files": 5,
+        "bytes": 476090,
+        "tokens": 204337
+      },
+      ".agents": {
+        "files": 1,
+        "bytes": 1321,
+        "tokens": 357
+      },
+      ".git": {
+        "files": 0,
+        "bytes": 0,
+        "tokens": 0
+      },
+      ".pytest_cache": {
+        "files": 5,
+        "bytes": 855,
+        "tokens": 234
+      },
+      "001 Seed": {
+        "files": 1,
+        "bytes": 12175,
+        "tokens": 3187
+      },
+      "Artefactos": {
+        "files": 0,
+        "bytes": 0,
+        "tokens": 0
+      },
+      "config": {
+        "files": 0,
+        "bytes": 0,
+        "tokens": 0
+      },
+      "data": {
+        "files": 5,
+        "bytes": 48588,
+        "tokens": 13710
+      },
+      "docs": {
+        "files": 3,
+        "bytes": 18929,
+        "tokens": 5088
+      },
+      "Engine": {
+        "files": 1,
+        "bytes": 3084,
+        "tokens": 811
+      },
+      "infrastructure": {
+        "files": 0,
+        "bytes": 0,
+        "tokens": 0
+      },
+      "logs": {
+        "files": 0,
+        "bytes": 0,
+        "tokens": 0
+      },
+      "Notebooks": {
+        "files": 0,
+        "bytes": 0,
+        "tokens": 0
+      },
+      "schemas": {
+        "files": 0,
+        "bytes": 0,
+        "tokens": 0
+      },
+      "scripts": {
+        "files": 1,
+        "bytes": 454,
+        "tokens": 131
+      },
+      "src": {
+        "files": 13,
+        "bytes": 680908,
+        "tokens": 278801
+      },
+      "tests": {
+        "files": 2,
+        "bytes": 18426,
+        "tokens": 11164
+      },
+      "Tools": {
+        "files": 0,
+        "bytes": 0,
+        "tokens": 0
+      }
+    },
+    "ext_dist": {
+      "no_ext": 4,
+      ".png": 2,
+      ".txt": 1,
+      ".bat": 2,
+      ".ps1": 1,
+      ".md": 9,
+      ".tag": 1,
+      ".yaml": 1,
+      ".json": 2,
+      ".py": 5,
+      ".pyc": 5,
+      ".js": 2,
+      ".html": 1,
+      ".css": 1
+    }
+  },
+  {
+    "id": "repo_03",
+    "name": "ultraThinking",
+    "path": "D:\\0001 HyperScale Thinking\\PROYECTOS CLOUD\\iContext\\ultraThinking",
+    "total_files": 36,
+    "total_bytes": 461122,
+    "total_tokens": 123032,
+    "clean_codebase_tokens": 123032,
+    "satellite_tokens": 21799,
+    "satellite_files_count": 4,
+    "satellite_files": [
+      {
+        "file": "README.md",
+        "tokens": 5388,
+        "bytes": 16845
+      },
+      {
+        "file": "README_ES.md",
+        "tokens": 5511,
+        "bytes": 17857
+      },
+      {
+        "file": "001_Seed\\seed-ultraThinking-master.md",
+        "tokens": 4062,
+        "bytes": 15488
+      },
+      {
+        "file": "Evals\\Context Test\\seed-context-entropy-auditor-master.md",
+        "tokens": 6838,
+        "bytes": 26177
+      }
+    ],
+    "prunable_files": 0,
+    "prunable_tokens": 0,
+    "token_saving_pct": 82.28,
+    "tree_found": false,
+    "beacons_count": 0,
+    "beacons_found": [],
+    "seed_found": [
+      "001_Seed\\seed-ultraThinking-master.md",
+      "Evals\\Context Test\\seed-context-entropy-auditor-master.md"
+    ],
+    "rules_found": [
+      "README.md",
+      "README_ES.md"
+    ],
+    "top_folders": {
+      ".": {
+        "files": 3,
+        "bytes": 39681,
+        "tokens": 12244
+      },
+      ".agents": {
+        "files": 1,
+        "bytes": 1307,
+        "tokens": 353
+      },
+      "001_Seed": {
+        "files": 1,
+        "bytes": 15488,
+        "tokens": 4062
+      },
+      "adapters": {
+        "files": 6,
+        "bytes": 3052,
+        "tokens": 822
+      },
+      "Artefactos": {
+        "files": 1,
+        "bytes": 3351,
+        "tokens": 891
+      },
+      "Evals": {
+        "files": 11,
+        "bytes": 383640,
+        "tokens": 100719
+      },
+      "integration": {
+        "files": 1,
+        "bytes": 2247,
+        "tokens": 607
+      },
+      "protocols": {
+        "files": 8,
+        "bytes": 7021,
+        "tokens": 1894
+      },
+      "reviewers": {
+        "files": 3,
+        "bytes": 2765,
+        "tokens": 746
+      },
+      "templates": {
+        "files": 1,
+        "bytes": 2570,
+        "tokens": 694
+      }
+    },
+    "ext_dist": {
+      ".md": 36
+    }
+  },
+  {
+    "id": "repo_04",
+    "name": "ThinkingSeed",
+    "path": "D:\\0001 HyperScale Thinking\\PROYECTOS CLOUD\\iContext\\ThinkingSeed",
+    "total_files": 909,
+    "total_bytes": 20412701,
+    "total_tokens": 8428265,
+    "clean_codebase_tokens": 3008148,
+    "satellite_tokens": 28169,
+    "satellite_files_count": 34,
+    "satellite_files": [
+      {
+        "file": "AGENTS.md",
+        "tokens": 228,
+        "bytes": 847
+      },
+      {
+        "file": "CLAUDE.md",
+        "tokens": 581,
+        "bytes": 2162
+      },
+      {
+        "file": "GEMINI.md",
+        "tokens": 719,
+        "bytes": 2697
+      },
+      {
+        "file": "README_ES.md",
+        "tokens": 3391,
+        "bytes": 13073
+      },
+      {
+        "file": "ThinkingSeed Master.md",
+        "tokens": 7613,
+        "bytes": 28559
+      },
+      {
+        "file": "ThinkingSeed_MasterHybrid.md",
+        "tokens": 1302,
+        "bytes": 4885
+      },
+      {
+        "file": ".context\\tree.json",
+        "tokens": 834,
+        "bytes": 2993
+      },
+      {
+        "file": "01_seed\\.context.yaml",
+        "tokens": 95,
+        "bytes": 367
+      },
+      {
+        "file": "01_seed\\seed-ThinkingSeed-master.md",
+        "tokens": 6159,
+        "bytes": 23467
+      },
+      {
+        "file": "01_seed\\seed-ThinkingSeed.md",
+        "tokens": 3896,
+        "bytes": 14948
+      },
+      {
+        "file": "02_foundation\\engine\\.context.yaml",
+        "tokens": 97,
+        "bytes": 375
+      },
+      {
+        "file": "03_research\\experiments\\.context.yaml",
+        "tokens": 82,
+        "bytes": 317
+      },
+      {
+        "file": "03_research\\notebooks\\.context.yaml",
+        "tokens": 95,
+        "bytes": 364
+      },
+      {
+        "file": "03_research\\prompts\\.context.yaml",
+        "tokens": 84,
+        "bytes": 324
+      },
+      {
+        "file": "artifacts\\benchmark_seed_coverage.md",
+        "tokens": 1222,
+        "bytes": 4073
+      },
+      {
+        "file": "artifacts\\plans\\active\\.context.yaml",
+        "tokens": 93,
+        "bytes": 354
+      },
+      {
+        "file": "artifacts\\plans\\archive\\.context.yaml",
+        "tokens": 100,
+        "bytes": 385
+      },
+      {
+        "file": "config\\.context.yaml",
+        "tokens": 81,
+        "bytes": 312
+      },
+      {
+        "file": "data\\processed\\.context.yaml",
+        "tokens": 91,
+        "bytes": 346
+      },
+      {
+        "file": "data\\raw\\.context.yaml",
+        "tokens": 87,
+        "bytes": 333
+      },
+      {
+        "file": "data\\sandbox\\.context.yaml",
+        "tokens": 77,
+        "bytes": 297
+      },
+      {
+        "file": "docs\\architecture\\.context.yaml",
+        "tokens": 84,
+        "bytes": 324
+      },
+      {
+        "file": "docs\\notes\\.context.yaml",
+        "tokens": 83,
+        "bytes": 325
+      },
+      {
+        "file": "docs\\specs\\.context.yaml",
+        "tokens": 79,
+        "bytes": 307
+      },
+      {
+        "file": "logs\\.context.yaml",
+        "tokens": 82,
+        "bytes": 317
+      },
+      {
+        "file": "schemas\\.context.yaml",
+        "tokens": 90,
+        "bytes": 342
+      },
+      {
+        "file": "scripts\\.context.yaml",
+        "tokens": 76,
+        "bytes": 292
+      },
+      {
+        "file": "src\\cloud_jobs\\.context.yaml",
+        "tokens": 107,
+        "bytes": 411
+      },
+      {
+        "file": "src\\core\\.context.yaml",
+        "tokens": 80,
+        "bytes": 309
+      },
+      {
+        "file": "src\\dashboards\\.context.yaml",
+        "tokens": 84,
+        "bytes": 325
+      },
+      {
+        "file": "src\\data_generation\\.context.yaml",
+        "tokens": 87,
+        "bytes": 339
+      },
+      {
+        "file": "tests\\.context.yaml",
+        "tokens": 75,
+        "bytes": 292
+      },
+      {
+        "file": "tests\\ThinkingSeed_Mini.md",
+        "tokens": 247,
+        "bytes": 945
+      },
+      {
+        "file": "Tools\\.context.yaml",
+        "tokens": 68,
+        "bytes": 262
+      }
+    ],
+    "prunable_files": 861,
+    "prunable_tokens": 5420117,
+    "token_saving_pct": 99.67,
+    "tree_found": true,
+    "beacons_count": 23,
+    "beacons_found": [
+      "01_seed",
+      "02_foundation\\engine",
+      "03_research\\experiments",
+      "03_research\\notebooks",
+      "03_research\\prompts",
+      "artifacts\\plans\\active",
+      "artifacts\\plans\\archive",
+      "config",
+      "data\\processed",
+      "data\\raw",
+      "data\\sandbox",
+      "docs\\architecture",
+      "docs\\notes",
+      "docs\\specs",
+      "logs",
+      "schemas",
+      "scripts",
+      "src\\cloud_jobs",
+      "src\\core",
+      "src\\dashboards",
+      "src\\data_generation",
+      "tests",
+      "Tools"
+    ],
+    "seed_found": [
+      "ThinkingSeed Master.md",
+      "ThinkingSeed_MasterHybrid.md",
+      "01_seed\\seed-ThinkingSeed-master.md",
+      "01_seed\\seed-ThinkingSeed.md",
+      "artifacts\\benchmark_seed_coverage.md",
+      "tests\\ThinkingSeed_Mini.md"
+    ],
+    "rules_found": [
+      "AGENTS.md",
+      "CLAUDE.md",
+      "GEMINI.md",
+      "README_ES.md"
+    ],
+    "top_folders": {
+      ".": {
+        "files": 13,
+        "bytes": 4782401,
+        "tokens": 1710413
+      },
+      ".agents": {
+        "files": 2,
+        "bytes": 15952,
+        "tokens": 4258
+      },
+      ".context": {
+        "files": 1,
+        "bytes": 2993,
+        "tokens": 834
+      },
+      ".git": {
+        "files": 0,
+        "bytes": 0,
+        "tokens": 0
+      },
+      ".github": {
+        "files": 1,
+        "bytes": 645,
+        "tokens": 174
+      },
+      ".venv": {
+        "files": 861,
+        "bytes": 12027704,
+        "tokens": 5420117
+      },
+      "01_seed": {
+        "files": 3,
+        "bytes": 38782,
+        "tokens": 10150
+      },
+      "01_Status": {
+        "files": 0,
+        "bytes": 0,
+        "tokens": 0
+      },
+      "02_foundation": {
+        "files": 2,
+        "bytes": 4217,
+        "tokens": 1114
+      },
+      "03_research": {
+        "files": 3,
+        "bytes": 1005,
+        "tokens": 261
+      },
+      "artifacts": {
+        "files": 3,
+        "bytes": 4812,
+        "tokens": 1415
+      },
+      "config": {
+        "files": 1,
+        "bytes": 312,
+        "tokens": 81
+      },
+      "data": {
+        "files": 3,
+        "bytes": 976,
+        "tokens": 255
+      },
+      "docs": {
+        "files": 3,
+        "bytes": 956,
+        "tokens": 246
+      },
+      "logs": {
+        "files": 1,
+        "bytes": 317,
+        "tokens": 82
+      },
+      "schemas": {
+        "files": 1,
+        "bytes": 342,
+        "tokens": 90
+      },
+      "scripts": {
+        "files": 3,
+        "bytes": 24580,
+        "tokens": 6620
+      },
+      "src": {
+        "files": 4,
+        "bytes": 1384,
+        "tokens": 358
+      },
+      "tests": {
+        "files": 2,
+        "bytes": 1237,
+        "tokens": 322
+      },
+      "Tools": {
+        "files": 2,
+        "bytes": 3504086,
+        "tokens": 1271475
+      }
+    },
+    "ext_dist": {
+      "no_ext": 11,
+      ".md": 15,
+      ".png": 2,
+      ".json": 1,
+      ".cfg": 1,
+      ".typed": 12,
+      ".py": 413,
+      ".pyc": 411,
+      ".txt": 5,
+      ".pem": 1,
+      ".exe": 11,
+      ".bat": 2,
+      ".ps1": 1,
+      ".yaml": 23
+    }
+  },
+  {
+    "id": "repo_05",
+    "name": "MetricsThinking",
+    "path": "D:\\0001 HyperScale Thinking\\PROYECTOS CLOUD\\Data & AI Strategy\\MetricsThinking",
+    "total_files": 95,
+    "total_bytes": 631005,
+    "total_tokens": 273693,
+    "clean_codebase_tokens": 156408,
+    "satellite_tokens": 39871,
+    "satellite_files_count": 32,
+    "satellite_files": [
+      {
+        "file": "AGENTS.md",
+        "tokens": 416,
+        "bytes": 1547
+      },
+      {
+        "file": "README.md",
+        "tokens": 3529,
+        "bytes": 13287
+      },
+      {
+        "file": "README_ES.md",
+        "tokens": 3682,
+        "bytes": 14015
+      },
+      {
+        "file": ".context\\tree.json",
+        "tokens": 834,
+        "bytes": 2996
+      },
+      {
+        "file": ".pytest_cache\\README.md",
+        "tokens": 86,
+        "bytes": 302
+      },
+      {
+        "file": "01_seed\\.context.yaml",
+        "tokens": 95,
+        "bytes": 367
+      },
+      {
+        "file": "01_seed\\seed-metricsthinking-master.md",
+        "tokens": 2470,
+        "bytes": 9663
+      },
+      {
+        "file": "02_foundation\\engine\\.context.yaml",
+        "tokens": 97,
+        "bytes": 375
+      },
+      {
+        "file": "03_research\\experiments\\.context.yaml",
+        "tokens": 82,
+        "bytes": 317
+      },
+      {
+        "file": "03_research\\notebooks\\.context.yaml",
+        "tokens": 95,
+        "bytes": 364
+      },
+      {
+        "file": "03_research\\prompts\\.context.yaml",
+        "tokens": 84,
+        "bytes": 324
+      },
+      {
+        "file": "artifacts\\MetricsThinking.json",
+        "tokens": 4574,
+        "bytes": 17404
+      },
+      {
+        "file": "artifacts\\MetricsThinking.md",
+        "tokens": 4168,
+        "bytes": 14038
+      },
+      {
+        "file": "artifacts\\plans\\active\\.context.yaml",
+        "tokens": 93,
+        "bytes": 354
+      },
+      {
+        "file": "artifacts\\plans\\active\\INFERRED_ROADMAP.md",
+        "tokens": 2641,
+        "bytes": 10071
+      },
+      {
+        "file": "artifacts\\plans\\archive\\.context.yaml",
+        "tokens": 100,
+        "bytes": 385
+      },
+      {
+        "file": "artifacts\\plans\\metricsthinking\\MetricsThinking.json",
+        "tokens": 5740,
+        "bytes": 21945
+      },
+      {
+        "file": "artifacts\\plans\\metricsthinking\\MetricsThinking.md",
+        "tokens": 4781,
+        "bytes": 15729
+      },
+      {
+        "file": "config\\.context.yaml",
+        "tokens": 81,
+        "bytes": 312
+      },
+      {
+        "file": "docs\\architecture\\.context.yaml",
+        "tokens": 84,
+        "bytes": 324
+      },
+      {
+        "file": "docs\\notes\\.context.yaml",
+        "tokens": 225,
+        "bytes": 867
+      },
+      {
+        "file": "docs\\specs\\.context.yaml",
+        "tokens": 79,
+        "bytes": 307
+      },
+      {
+        "file": "integrations\\claude\\CLAUDE.md",
+        "tokens": 631,
+        "bytes": 2345
+      },
+      {
+        "file": "schemas\\.context.yaml",
+        "tokens": 90,
+        "bytes": 342
+      },
+      {
+        "file": "scripts\\.context.yaml",
+        "tokens": 76,
+        "bytes": 292
+      },
+      {
+        "file": "src\\cloud_jobs\\.context.yaml",
+        "tokens": 107,
+        "bytes": 411
+      },
+      {
+        "file": "src\\core\\.context.yaml",
+        "tokens": 80,
+        "bytes": 309
+      },
+      {
+        "file": "src\\dashboards\\.context.yaml",
+        "tokens": 84,
+        "bytes": 325
+      },
+      {
+        "file": "src\\data_generation\\.context.yaml",
+        "tokens": 87,
+        "bytes": 339
+      },
+      {
+        "file": "tests\\.context.yaml",
+        "tokens": 75,
+        "bytes": 292
+      },
+      {
+        "file": "tests\\other\\MetricsThinking_ThinkingSeed.md",
+        "tokens": 4537,
+        "bytes": 15139
+      },
+      {
+        "file": "tools\\.context.yaml",
+        "tokens": 68,
+        "bytes": 262
+      }
+    ],
+    "prunable_files": 21,
+    "prunable_tokens": 117285,
+    "token_saving_pct": 85.43,
+    "tree_found": true,
+    "beacons_count": 19,
+    "beacons_found": [
+      "01_seed",
+      "02_foundation\\engine",
+      "03_research\\experiments",
+      "03_research\\notebooks",
+      "03_research\\prompts",
+      "artifacts\\plans\\active",
+      "artifacts\\plans\\archive",
+      "config",
+      "docs\\architecture",
+      "docs\\notes",
+      "docs\\specs",
+      "schemas",
+      "scripts",
+      "src\\cloud_jobs",
+      "src\\core",
+      "src\\dashboards",
+      "src\\data_generation",
+      "tests",
+      "tools"
+    ],
+    "seed_found": [
+      "01_seed\\seed-metricsthinking-master.md",
+      "tests\\other\\MetricsThinking_ThinkingSeed.md"
+    ],
+    "rules_found": [
+      "AGENTS.md",
+      "README.md",
+      "README_ES.md",
+      ".pytest_cache\\README.md",
+      "integrations\\claude\\CLAUDE.md"
+    ],
+    "top_folders": {
+      ".": {
+        "files": 8,
+        "bytes": 85705,
+        "tokens": 59112
+      },
+      ".agents": {
+        "files": 1,
+        "bytes": 6419,
+        "tokens": 1707
+      },
+      ".context": {
+        "files": 1,
+        "bytes": 2996,
+        "tokens": 834
+      },
+      ".git": {
+        "files": 0,
+        "bytes": 0,
+        "tokens": 0
+      },
+      ".github": {
+        "files": 1,
+        "bytes": 1024,
+        "tokens": 265
+      },
+      ".pytest_cache": {
+        "files": 4,
+        "bytes": 1599,
+        "tokens": 430
+      },
+      "01_seed": {
+        "files": 2,
+        "bytes": 10030,
+        "tokens": 2565
+      },
+      "02_foundation": {
+        "files": 2,
+        "bytes": 4220,
+        "tokens": 1115
+      },
+      "03_research": {
+        "files": 3,
+        "bytes": 1005,
+        "tokens": 261
+      },
+      "artifacts": {
+        "files": 11,
+        "bytes": 111381,
+        "tokens": 30354
+      },
+      "config": {
+        "files": 4,
+        "bytes": 30681,
+        "tokens": 8069
+      },
+      "docs": {
+        "files": 6,
+        "bytes": 35415,
+        "tokens": 9305
+      },
+      "integrations": {
+        "files": 3,
+        "bytes": 4283,
+        "tokens": 1152
+      },
+      "schemas": {
+        "files": 4,
+        "bytes": 6125,
+        "tokens": 1687
+      },
+      "scripts": {
+        "files": 3,
+        "bytes": 16057,
+        "tokens": 7463
+      },
+      "src": {
+        "files": 23,
+        "bytes": 206718,
+        "tokens": 93733
+      },
+      "tests": {
+        "files": 18,
+        "bytes": 107085,
+        "tokens": 55573
+      },
+      "tools": {
+        "files": 1,
+        "bytes": 262,
+        "tokens": 68
+      }
+    },
+    "ext_dist": {
+      "no_ext": 5,
+      ".md": 20,
+      ".toml": 1,
+      ".txt": 1,
+      ".json": 8,
+      ".yml": 1,
+      ".tag": 1,
+      ".yaml": 22,
+      ".mdc": 1,
+      ".py": 18,
+      ".pyc": 17
+    }
+  },
+  {
+    "id": "repo_06",
+    "name": "SemanticFlow",
+    "path": "D:\\0001 HyperScale Thinking\\PROYECTOS CLOUD\\Data & AI Strategy\\SemanticFlow",
+    "total_files": 12090,
+    "total_bytes": 222897381,
+    "total_tokens": 95297872,
+    "clean_codebase_tokens": 6618150,
+    "satellite_tokens": 29039,
+    "satellite_files_count": 30,
+    "satellite_files": [
+      {
+        "file": "README.md",
+        "tokens": 4628,
+        "bytes": 17467
+      },
+      {
+        "file": "README_ES.md",
+        "tokens": 4860,
+        "bytes": 18477
+      },
+      {
+        "file": ".context\\tree.json",
+        "tokens": 834,
+        "bytes": 2993
+      },
+      {
+        "file": ".pytest_cache\\README.md",
+        "tokens": 86,
+        "bytes": 302
+      },
+      {
+        "file": "01_seed\\.context.yaml",
+        "tokens": 95,
+        "bytes": 367
+      },
+      {
+        "file": "01_seed\\seed-semanticflow-master.md",
+        "tokens": 8098,
+        "bytes": 32006
+      },
+      {
+        "file": "01_seed\\seed-semanticflow.md",
+        "tokens": 4361,
+        "bytes": 17338
+      },
+      {
+        "file": "02_Foundation\\Engine\\.context.yaml",
+        "tokens": 97,
+        "bytes": 375
+      },
+      {
+        "file": "03_research\\experiments\\.context.yaml",
+        "tokens": 82,
+        "bytes": 317
+      },
+      {
+        "file": "03_research\\notebooks\\.context.yaml",
+        "tokens": 95,
+        "bytes": 364
+      },
+      {
+        "file": "03_research\\prompts\\.context.yaml",
+        "tokens": 84,
+        "bytes": 324
+      },
+      {
+        "file": "artifacts\\plans\\active\\.context.yaml",
+        "tokens": 93,
+        "bytes": 354
+      },
+      {
+        "file": "artifacts\\plans\\archive\\.context.yaml",
+        "tokens": 100,
+        "bytes": 385
+      },
+      {
+        "file": "artifacts\\plans\\metricsthinking\\MetricsThinking.md",
+        "tokens": 4195,
+        "bytes": 14312
+      },
+      {
+        "file": "config\\.context.yaml",
+        "tokens": 81,
+        "bytes": 312
+      },
+      {
+        "file": "data\\processed\\.context.yaml",
+        "tokens": 91,
+        "bytes": 346
+      },
+      {
+        "file": "data\\raw\\.context.yaml",
+        "tokens": 87,
+        "bytes": 333
+      },
+      {
+        "file": "data\\sandbox\\.context.yaml",
+        "tokens": 77,
+        "bytes": 297
+      },
+      {
+        "file": "docs\\architecture\\.context.yaml",
+        "tokens": 84,
+        "bytes": 324
+      },
+      {
+        "file": "docs\\notes\\.context.yaml",
+        "tokens": 83,
+        "bytes": 325
+      },
+      {
+        "file": "docs\\specs\\.context.yaml",
+        "tokens": 79,
+        "bytes": 307
+      },
+      {
+        "file": "logs\\.context.yaml",
+        "tokens": 82,
+        "bytes": 317
+      },
+      {
+        "file": "schemas\\.context.yaml",
+        "tokens": 90,
+        "bytes": 342
+      },
+      {
+        "file": "scripts\\.context.yaml",
+        "tokens": 76,
+        "bytes": 292
+      },
+      {
+        "file": "src\\cloud_jobs\\.context.yaml",
+        "tokens": 107,
+        "bytes": 411
+      },
+      {
+        "file": "src\\core\\.context.yaml",
+        "tokens": 80,
+        "bytes": 309
+      },
+      {
+        "file": "src\\dashboards\\.context.yaml",
+        "tokens": 84,
+        "bytes": 325
+      },
+      {
+        "file": "src\\data_generation\\.context.yaml",
+        "tokens": 87,
+        "bytes": 339
+      },
+      {
+        "file": "tests\\.context.yaml",
+        "tokens": 75,
+        "bytes": 292
+      },
+      {
+        "file": "tools\\.context.yaml",
+        "tokens": 68,
+        "bytes": 262
+      }
+    ],
+    "prunable_files": 11065,
+    "prunable_tokens": 88679722,
+    "token_saving_pct": 99.97,
+    "tree_found": true,
+    "beacons_count": 23,
+    "beacons_found": [
+      "01_seed",
+      "02_Foundation\\Engine",
+      "03_research\\experiments",
+      "03_research\\notebooks",
+      "03_research\\prompts",
+      "artifacts\\plans\\active",
+      "artifacts\\plans\\archive",
+      "config",
+      "data\\processed",
+      "data\\raw",
+      "data\\sandbox",
+      "docs\\architecture",
+      "docs\\notes",
+      "docs\\specs",
+      "logs",
+      "schemas",
+      "scripts",
+      "src\\cloud_jobs",
+      "src\\core",
+      "src\\dashboards",
+      "src\\data_generation",
+      "tests",
+      "tools"
+    ],
+    "seed_found": [
+      "01_seed\\seed-semanticflow-master.md",
+      "01_seed\\seed-semanticflow.md"
+    ],
+    "rules_found": [
+      "README.md",
+      "README_ES.md",
+      ".pytest_cache\\README.md"
+    ],
+    "top_folders": {
+      ".": {
+        "files": 13,
+        "bytes": 1771347,
+        "tokens": 712926
+      },
+      ".context": {
+        "files": 1,
+        "bytes": 2993,
+        "tokens": 834
+      },
+      ".git": {
+        "files": 0,
+        "bytes": 0,
+        "tokens": 0
+      },
+      ".github": {
+        "files": 1,
+        "bytes": 1535,
+        "tokens": 400
+      },
+      ".pytest_cache": {
+        "files": 5,
+        "bytes": 5835,
+        "tokens": 1562
+      },
+      ".venv": {
+        "files": 10968,
+        "bytes": 201692564,
+        "tokens": 88185051
+      },
+      "01_seed": {
+        "files": 3,
+        "bytes": 49711,
+        "tokens": 12554
+      },
+      "02_Foundation": {
+        "files": 3,
+        "bytes": 8496,
+        "tokens": 2242
+      },
+      "03_research": {
+        "files": 3,
+        "bytes": 1005,
+        "tokens": 261
+      },
+      "artifacts": {
+        "files": 22,
+        "bytes": 330247,
+        "tokens": 88390
+      },
+      "config": {
+        "files": 2,
+        "bytes": 11115,
+        "tokens": 2908
+      },
+      "data": {
+        "files": 3,
+        "bytes": 976,
+        "tokens": 255
+      },
+      "docs": {
+        "files": 12,
+        "bytes": 57704,
+        "tokens": 15115
+      },
+      "logs": {
+        "files": 1,
+        "bytes": 317,
+        "tokens": 82
+      },
+      "output": {
+        "files": 736,
+        "bytes": 795314,
+        "tokens": 209123
+      },
+      "schemas": {
+        "files": 3,
+        "bytes": 3635,
+        "tokens": 994
+      },
+      "scripts": {
+        "files": 3,
+        "bytes": 5393,
+        "tokens": 2258
+      },
+      "src": {
+        "files": 144,
+        "bytes": 624168,
+        "tokens": 266912
+      },
+      "tests": {
+        "files": 166,
+        "bytes": 17534764,
+        "tokens": 5795937
+      },
+      "tools": {
+        "files": 1,
+        "bytes": 262,
+        "tokens": 68
+      }
+    },
+    "ext_dist": {
+      "no_ext": 770,
+      ".md": 97,
+      ".toml": 2,
+      ".png": 9,
+      ".json": 147,
+      ".yml": 1,
+      ".tag": 1,
+      ".cfg": 2,
+      ".pth": 2,
+      ".py": 4763,
+      ".typed": 32,
+      ".pyc": 4837,
+      ".txt": 51,
+      ".pyd": 67,
+      ".pyi": 320,
+      ".js": 1,
+      ".html": 2,
+      ".css": 1,
+      ".scss": 1,
+      ".gz": 5,
+      ".yaml": 25,
+      ".markdown-it": 1,
+      ".bz2": 4,
+      ".a99": 2,
+      ".b99": 2,
+      ".pxd": 7,
+      ".c": 5,
+      ".h": 27,
+      ".f90": 62,
+      ".f": 25,
+      ".pyf": 8,
+      ".inc": 1,
+      ".f95": 1,
+      ".template": 1,
+      ".lib": 66,
+      ".npy": 5,
+      ".npz": 2,
+      ".rst": 2,
+      ".csv": 61,
+      ".pyx": 4,
+      ".build": 3,
+      ".ini": 1,
+      ".pc": 1,
+      ".pkl": 1,
+      ".cpp": 1,
+      ".fits": 1,
+      ".dll": 3,
+      ".apache": 1,
+      ".bsd": 1,
+      ".tpl": 8,
+      ".pem": 1,
+      ".exe": 23,
+      ".tab": 4,
+      ".zi": 1,
+      ".bat": 2,
+      ".ps1": 1,
+      ".pbip": 30,
+      ".pbir": 30,
+      ".pbism": 30,
+      ".tmdl": 524,
+      ".mmd": 1
+    }
+  }
+]
