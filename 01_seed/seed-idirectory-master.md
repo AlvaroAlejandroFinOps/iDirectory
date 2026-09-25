@@ -216,9 +216,9 @@ graph TD
 ---
 
 ## 9. ESTADO REAL, DEUDA TÉCNICA Y LIMITACIONES
-- **9.1 Nivel de madurez y avance real:** Versión v3.0 consolidada; motor CLI funcional, topología normalizada all-lowercase, beacons desplegados, satélite topológico activo y soporte multi-proveedor verificado con auditoría `PASS`. Score MetricsThinking™: `32.50%` (Cuello de botella actual: M02 Arquitectura a 75%, M05 Core Engine a 0%). `[CONFIRMADO]`
+- **9.1 Nivel de madurez y avance real:** Versión v3.0 consolidada; motor CLI funcional, topología normalizada all-lowercase, beacons desplegados, satélite topológico activo y soporte multi-proveedor verificado con auditoría `PASS`. Score MetricsThinking™: `83.33%` (Banda: Madurez Avanzada / Pre-producción. Cuello de botella actual: M07 Aseguramiento de Calidad a 33.3%, M09 CI/CD a 50.0%). `[CONFIRMADO]`
 - **9.2 Deuda técnica identificada:**
-  - Desarrollar la suite de pruebas automatizadas en `tests/` y parsers del núcleo en `src/core/`. `[FALTANTE]`
+  - Desarrollar la suite de pruebas automatizadas en `tests/test_fwengine.py` (idempotencia y ruteo determinista) y benchmarks de reducción de tokens (`tests/test_token_budget.py`). `[FALTANTE]`
   - Sincronizar el diagrama ASCII de la Sección 5 en `README.md` y `README_ES.md` con los nombres normalizados en minúsculas. `[CONFIRMADO]`
 - **9.3 Inconsistencias entre código y documentación:** Ninguna detectada en el motor y la topología física; pendiente reflejar la nueva topología minúscula en el árbol visual de los READMEs públicos. `[CONFIRMADO]`
 
