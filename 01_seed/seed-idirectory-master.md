@@ -17,16 +17,16 @@ project_name: "iDirectory"
 repository_name: "iDirectory"
 project_type: "infra"
 repository_mode: "single-project"
-generated_at: "2026-09-20T00:33:00-03:00"
-generated_by: "Antigravity Agent (Gemini 3.6 Flash)"
+generated_at: "2026-09-25T13:33:14-03:00"
+generated_by: "Antigravity Agent (Gemini 3.8 Flash)"
 repository_root: "d:/0001 HyperScale Thinking/PROYECTOS CLOUD/iContext/iDirectory"
 git_branch: "master"
-git_commit: "eadff5604e48cadc2ab46914e2bc8ed7935ab9b4"
-working_tree_state: "dirty"
+git_commit: "4461915"
+working_tree_state: "clean"
 analysis_mode: "static"
 coverage_level: "high"
 known_analysis_limits:
-  - "Inspección estática basada en código fuente, manifiestos del framework, árbol de directorios, beacons .context.yaml, mapa topológico .context/tree.json, auditoría MetricsThinking™ y reglas multi-proveedor."
+  - "Inspección estática exhaustiva basada en código fuente de FWengine.py, manifiestos del framework, árbol normalizado de directorios, 24 beacons .context.yaml, mapa topológico satelital .context/tree.json, auditoría MetricsThinking™ adaptada a skills agénticas y reglas multi-proveedor."
 ```
 
 ### 0.1 Instrucciones para el modelo receptor
@@ -44,10 +44,10 @@ known_analysis_limits:
 ---
 
 ## 1. RESUMEN EJECUTIVO
-- **1.1 Proyecto en una frase:** Framework de gobernanza, ruteo heurístico y Context Engineering (**iDirectory v3.0**), creado y concebido por **Gravity HyperScale Thinking** para optimizar el rendimiento, reducir hasta en un 92% el desperdicio de tokens y evitar la degradación de contexto en agentes autónomos de IA y equipos de ingeniería de datos multi-cloud. `[CONFIRMADO]`
-- **1.2 Problema que resuelve:** Erradica la exploración ciega (*blind tree crawling*), la dispersión desordenada de artefactos y la saturación de la ventana de contexto en modelos de lenguaje cuando analizan repositorios complejos de software y datos. `[CONFIRMADO]`
+- **1.1 Proyecto en una frase:** Framework de gobernanza, ruteo heurístico y Context Engineering (**iDirectory v3.0**), concebido por **Gravity HyperScale Thinking** para optimizar el rendimiento, reducir hasta en un 92% el desperdicio de tokens y prevenir la degradación de contexto en agentes autónomos de IA y equipos de ingeniería de datos multi-cloud. `[CONFIRMADO]`
+- **1.2 Problema que resuelve:** Erradica la exploración ciega (*blind tree crawling*), la dispersión desordenada de artefactos y la saturación de la ventana de contexto en modelos de lenguaje cuando analizan repositorios complejos de software, datos e IA. `[CONFIRMADO]`
 - **1.3 Usuarios o sistemas consumidores:** Agentes de codificación autónomos (Google Antigravity/Gemini, Anthropic Claude Code, OpenAI/Codex, Cursor, Windsurf, Aider), Arquitectos de Datos, Ingenieros Cloud y Científicos de Datos. `[CONFIRMADO]`
-- **1.4 Alcance y límites del sistema:** Incluye el motor CLI (`FWengine.py` v3.0), satélite topológico precargado (`.context/tree.json`), semáforos de poda de ramas muertas (`.context.yaml`), máscara de exclusión de IA (`.agentignore`), evaluación de madurez (`artifacts/plans/metricsthinking/`), reglas unificadas multi-proveedor (`AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `.cursorrules`, `.agents/skills/idir/SKILL.md`) y documentación de nivel Paper-Grade (`README.md`, `README_ES.md`). No incluye ejecución de cargas de datos remotas ni aprovisionamiento cloud en runtime. `[CONFIRMADO]`
+- **1.4 Alcance y límites del sistema:** Incluye el motor CLI (`FWengine.py` v3.0 con Zero-Dependency en Python Standard Library), satélite topológico precargado (`.context/tree.json`), semáforos de poda de ramas muertas (`.context.yaml`), máscara de exclusión de IA (`.agentignore`), evaluación de madurez (`artifacts/plans/metricsthinking/`), roadmap operacional (`artifacts/plans/active/INFERRED_ROADMAP.md`), reglas unificadas multi-proveedor (`AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `.cursorrules`, `.agents/skills/idir/SKILL.md`) y documentación de nivel Paper-Grade (`README.md`, `README_ES.md`). No incluye ejecución de cargas de datos remotas ni aprovisionamiento cloud en runtime. `[CONFIRMADO]`
 
 ---
 
@@ -57,6 +57,8 @@ known_analysis_limits:
 ```text
 iDirectory/
 ├── .context/                                   # Telemetría y mapas satelitales de Context Engineering
+│   ├── schema/
+│   │   └── tree.schema.json                    # Contrato JSON Schema del satélite topológico
 │   └── tree.json                               # Mapa topológico consolidado (~250 tokens)
 ├── .agents/                                    # Customizaciones de agentes Antigravity/Gemini
 │   └── skills/
@@ -100,7 +102,8 @@ iDirectory/
 ├── artifacts/                                  # Entregables y planes estratégicos
 │   ├── .context.yaml                           # Beacon local
 │   └── plans/
-│       ├── active/                             # Planes de capacidad activos (F-SKUs, presupuestos)
+│       ├── active/                             # Planes vigentes y roadmap operacional
+│       │   └── INFERRED_ROADMAP.md             # Roadmap desacoplado en 10 fases con checklists
 │       ├── metricsthinking/                    # Evaluación forense de madurez del proyecto (Priority: P0)
 │       │   ├── .context.yaml                   # Beacon local (Priority: P0, Relevance: Critical)
 │       │   ├── MetricsThinking.md              # Reporte Markdown con score, bottleneck y roadmap
@@ -135,6 +138,7 @@ iDirectory/
   - `AGENTS.md`: Contrato maestro universal de Context Engineering con el Protocolo Bootloader de 4 pasos. `[CONFIRMADO]`
   - `.context/tree.json`: Satélite topológico precargado que previene el blind crawling (~250 tokens). `[CONFIRMADO]`
   - `artifacts/plans/metricsthinking/`: Directorio crítico P0 que almacena las métricas cuantitativas y roadmap de madurez SDD (`MetricsThinking.md` y `MetricsThinking.json`). `[CONFIRMADO]`
+  - `artifacts/plans/active/INFERRED_ROADMAP.md`: Roadmap operacional desacoplado en 10 fases derivado de la evidencia física. `[CONFIRMADO]`
   - `.agents/skills/idir/SKILL.md`: Declaración formal de la habilidad del agente para invocar `FWengine.py`. `[CONFIRMADO]`
   - `02_foundation/engine/engine_readme.md`: Documento derivado que describe la gobernanza para desarrolladores y agentes en el espacio de trabajo. `[CONFIRMADO]`
 - **2.4 Límites modulares y acoplamiento:** Desacoplamiento total; `FWengine.py` no depende de librerías de terceros (Zero-Dependency CLI). `[CONFIRMADO]`
@@ -150,7 +154,8 @@ iDirectory/
   - `python FWengine.py context [--budget|--compact]`: Muestra telemetría de densidad y presupuesto de tokens por directorio o emite cadena de inyección rápida para prompts. `[CONFIRMADO]`
   - `python FWengine.py audit`: Audita inconsistencias de mayúsculas, carpetas huérfanas y beacons ausentes. `[CONFIRMADO]`
   - Invocación vía Slash Command `/idir` o `/dir`: Agentes Antigravity ejecutan la lógica CLI de forma contextual y transparente. `[CONFIRMADO]`
-  - Invocación vía Slash Command `/metrics`: Ejecuta el motor evaluador de madurez y genera el reporte en `artifacts/plans/metricsthinking/`. `[CONFIRMADO]`
+  - Invocación vía Slash Command `/metrics`: Ejecuta el motor evaluador de madurez y sincroniza el reporte en `artifacts/plans/metricsthinking/`. `[CONFIRMADO]`
+  - Invocación vía Slash Command `/seedMaster`: Actualiza este ADN técnico profundo del proyecto. `[CONFIRMADO]`
 - **3.2 Diagrama de flujo principal E2E:**
 ```mermaid
 graph TD
@@ -172,11 +177,12 @@ graph TD
 
 ## 4. MODELO DE DATOS, CONTRATOS Y PERSISTENCIA
 - **4.1 Esquemas y entidades principales:**
-  - `FOLDER_METADATA` (`dict[str, dict]`): Metadatos completos por directorio incluyendo propósito, rol, relevancia, directiva `crawl`, prioridad de lectura y densidad de tokens (incluyendo `artifacts/plans/metricsthinking`). `[CONFIRMADO]`
+  - `FOLDER_METADATA` (`dict[str, dict]`): Metadatos completos por directorio incluyendo propósito, rol, relevancia, directiva `crawl`, prioridad de lectura y densidad de tokens. `[CONFIRMADO]`
   - `ROUTING_MAP` (`dict[str, str]`): Mapeo determinista de extensiones (`.py`, `.ipynb`, `.md`, `.sql`, `.tf`, `.yaml`, `.csv`, `.parquet`, etc.) a sus carpetas canónicas en minúsculas. `[CONFIRMADO]`
   - Schema de Beacons (`.context.yaml`): Estructura YAML serializada con `MiniYAML` que define rol, propósito, prioridad, dependencias y reglas de poda. `[CONFIRMADO]`
-  - Schema Satelital (`.context/tree.json`): Diccionario estructurado con nodos y prioridades para carga ultraligera en agentes. `[CONFIRMADO]`
+  - Schema Satelital (`.context/tree.json`): Diccionario estructurado validado contra `.context/schema/tree.schema.json` para carga ultraligera en agentes. `[CONFIRMADO]`
   - Schema MetricsThinking™ (`MetricsThinking.json`): Contrato de evaluación de madurez SDD con scores ponderados, bandas de madurez y roadmap de remediación. `[CONFIRMADO]`
+  - Roadmap Operacional (`INFERRED_ROADMAP.md`): Contrato operacional desacoplado en 10 etapas con checklists de avance interactivos. `[CONFIRMADO]`
 - **4.2 Almacenamiento, motores y migraciones:** Persistencia directa en sistema de archivos local utilizando operaciones seguras de `pathlib.Path` (`mkdir(parents=True, exist_ok=True)`, `rename`). `[CONFIRMADO]`
 - **4.3 Interfaces externas:** CLI estandarizado sin dependencias externas. `[CONFIRMADO]`
 
@@ -216,11 +222,14 @@ graph TD
 ---
 
 ## 9. ESTADO REAL, DEUDA TÉCNICA Y LIMITACIONES
-- **9.1 Nivel de madurez y avance real:** Versión v3.0 consolidada; motor CLI funcional, topología normalizada all-lowercase, beacons desplegados, satélite topológico activo y soporte multi-proveedor verificado con auditoría `PASS`. Score MetricsThinking™: `83.33%` (Banda: Madurez Avanzada / Pre-producción. Cuello de botella actual: M07 Aseguramiento de Calidad a 33.3%, M09 CI/CD a 50.0%). `[CONFIRMADO]`
-- **9.2 Deuda técnica identificada:**
-  - Desarrollar la suite de pruebas automatizadas en `tests/test_fwengine.py` (idempotencia y ruteo determinista) y benchmarks de reducción de tokens (`tests/test_token_budget.py`). `[FALTANTE]`
+- **9.1 Nivel de madurez y avance real:** Versión v3.0 consolidada; motor CLI funcional, topología normalizada all-lowercase, beacons desplegados, satélite topológico activo y soporte multi-proveedor verificado con auditoría `PASS`. Score MetricsThinking™: `83.33%` (Banda: Madurez Avanzada / Pre-producción. Criterios cumplidos: 27/30 = 90.0%). `[CONFIRMADO]`
+- **9.2 Cuello de botella activo:** `M07: Aseguramiento de Calidad y Robustez de Flujos` (33.3% completado). `[CONFIRMADO]`
+- **9.3 Deuda técnica identificada:**
+  - Desarrollar la suite de pruebas unitarias automatizadas en `tests/test_fwengine.py` (validando idempotencia de `init`, `sync_beacons`, `sync_tree` y ruteo determinista de `route_file`). `[FALTANTE]`
+  - Desarrollar prueba automatizada de benchmarking de tokens y estrés en `tests/test_token_budget.py` que valide cuantitativamente el ahorro de tokens (>90%) del satélite frente a escaneos ciegos recursivos. `[FALTANTE]`
+  - Configurar pipeline de CI/CD en `.github/workflows/ci.yml` para automatizar la auditoría de `FWengine.py` antes de merge. `[FALTANTE]`
   - Sincronizar el diagrama ASCII de la Sección 5 en `README.md` y `README_ES.md` con los nombres normalizados en minúsculas. `[CONFIRMADO]`
-- **9.3 Inconsistencias entre código y documentación:** Ninguna detectada en el motor y la topología física; pendiente reflejar la nueva topología minúscula en el árbol visual de los READMEs públicos. `[CONFIRMADO]`
+- **9.4 Inconsistencias entre código y documentación:** Ninguna detectada en el motor y la topología física; pendiente reflejar la nueva topología minúscula en el árbol visual de los READMEs públicos. `[CONFIRMADO]`
 
 ---
 
