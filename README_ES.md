@@ -1,5 +1,5 @@
 ![alt text](iDirectory.png)
-# iDirectory: Motor de Andamiaje, Gobernanza Multi-Cloud y Context Engineering por Gravity HyperScale Thinking
+# iDirectory: Estándar de ingeniería de contexto para agentes de IA autónomos por Gravity HyperScale Thinking
 
 **Idioma:** [English](README.md) | [Español](README_ES.md)
 

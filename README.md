@@ -1,5 +1,5 @@
 ![alt text](iDirectory.png)
-# iDirectory: Multi-Cloud Governance & Scaffolding Engine by Gravity HyperScale Thinking
+# iDirectory: The Context Engineering Standard for Autonomous AI Agents by Gravity HyperScale Thinking
 
 **Language:** [English](README.md) | [Español](README_ES.md)
 
