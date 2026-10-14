@@ -5,7 +5,8 @@ purpose: Semilla de proyecto y memoria técnica (ThinkingSeed Master). ADN arqui
 relevance: critical
 crawl: false
 read_priority: p0
+seed_reference: required
 token_density: medium
-instructions: LECTURA OBLIGATORIA (Paso 3 del Bootloader) antes de generar o alterar código.
+instructions: LECTURA CONDICIONAL (Tier 2 / Disparadores de Arquitectura). Prohibido precargar en Tier 1.
 key_files:
   - "seed-idirectory-master.md"

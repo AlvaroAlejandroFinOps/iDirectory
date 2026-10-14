@@ -5,6 +5,7 @@ purpose: "Scripts productivos, pipelines y orquestación multi-cloud (Fabric PyS
 relevance: high
 crawl: true
 read_priority: p1
+seed_reference: optional
 token_density: medium
 instructions: Cargas productivas de datos. Conservar invariantes de arquitectura e idempotencia.
 dependencies:

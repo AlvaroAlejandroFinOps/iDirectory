@@ -5,5 +5,6 @@ purpose: Módulos de generación y simulación de datos sintéticos con rigor pr
 relevance: medium
 crawl: true
 read_priority: p2
+seed_reference: optional
 token_density: medium
 instructions: Generadores de pruebas de carga y benchmarking sintético.

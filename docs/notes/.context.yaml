@@ -5,5 +5,6 @@ purpose: "Bitácoras de ingeniería, registro de deuda técnica, decisiones ráp
 relevance: medium
 crawl: true
 read_priority: p2
+seed_reference: optional
 token_density: sparse
 instructions: Notas de ingeniería y registros de decisiones.

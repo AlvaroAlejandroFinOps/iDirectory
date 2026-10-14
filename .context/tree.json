@@ -3,16 +3,27 @@
   "version": "3.0",
   "project": "iDirectory",
   "architecture": "Gravity HyperScale Thinking",
-  "bootloader": [
-    "AGENTS.md",
-    ".context/tree.json",
-    "01_seed/seed-idirectory-master.md"
-  ],
+  "updated_at": "2026-10-14T22:30:42.509536+00:00",
+  "timestamp": 1792017042.5090246,
+  "bootloader": {
+    "tier_1": [
+      "AGENTS.md",
+      ".context/tree.json",
+      "[target_folder]/.context.yaml"
+    ],
+    "tier_2": [
+      "AGENTS.md",
+      ".context/tree.json",
+      "01_seed/seed-idirectory-master.md",
+      "[target_folder]/.context.yaml"
+    ]
+  },
   "nodes": {
     "01_seed": {
       "role": "dna",
       "prio": "p0",
       "crawl": false,
+      "seed_ref": "required",
       "key_files": [
         "seed-idirectory-master.md"
       ]
@@ -21,6 +32,7 @@
       "role": "core_engine",
       "prio": "p1",
       "crawl": true,
+      "seed_ref": "optional",
       "key_files": [
         "engine_readme.md"
       ]
@@ -28,47 +40,56 @@
     "03_research/notebooks": {
       "role": "eda",
       "prio": "p2",
-      "crawl": false
+      "crawl": false,
+      "seed_ref": "optional"
     },
     "03_research/prompts": {
       "role": "prompt_engineering",
       "prio": "p1",
-      "crawl": true
+      "crawl": true,
+      "seed_ref": "optional"
     },
     "03_research/experiments": {
       "role": "pocs_benchmarks",
       "prio": "p2",
-      "crawl": false
+      "crawl": false,
+      "seed_ref": "optional"
     },
     "src/cloud_jobs": {
       "role": "production_pipelines",
       "prio": "p1",
-      "crawl": true
+      "crawl": true,
+      "seed_ref": "optional"
     },
     "src/data_generation": {
       "role": "synthetic_data",
       "prio": "p2",
-      "crawl": true
+      "crawl": true,
+      "seed_ref": "optional"
     },
     "src/core": {
       "role": "shared_backend",
       "prio": "p1",
-      "crawl": true
+      "crawl": true,
+      "seed_ref": "optional"
     },
     "src/dashboards": {
       "role": "bi_viz",
       "prio": "p2",
-      "crawl": true
+      "crawl": true,
+      "seed_ref": "optional"
     },
     "artifacts/plans/active": {
       "role": "active_plans",
       "prio": "p1",
-      "crawl": true
+      "crawl": true,
+      "seed_ref": "optional"
     },
     "artifacts/plans/metricsthinking": {
       "role": "metrics_evaluation",
       "prio": "p0",
       "crawl": true,
+      "seed_ref": "required",
       "key_files": [
         "MetricsThinking.md",
         "MetricsThinking.json"
@@ -77,72 +98,86 @@
     "artifacts/plans/archive": {
       "role": "archived_plans",
       "prio": "p3",
-      "crawl": false
+      "crawl": false,
+      "seed_ref": "optional"
     },
     "docs/architecture": {
       "role": "architecture_diagrams",
       "prio": "p1",
-      "crawl": true
+      "crawl": true,
+      "seed_ref": "optional"
     },
     "docs/specs": {
       "role": "technical_specs",
       "prio": "p1",
-      "crawl": true
+      "crawl": true,
+      "seed_ref": "optional"
     },
     "docs/notes": {
       "role": "engineers_notes",
       "prio": "p2",
-      "crawl": true
+      "crawl": true,
+      "seed_ref": "optional"
     },
     "config": {
       "role": "configuration",
       "prio": "p1",
-      "crawl": true
+      "crawl": true,
+      "seed_ref": "optional"
     },
     "data/raw": {
       "role": "bronze_storage",
       "prio": "p3",
-      "crawl": false
+      "crawl": false,
+      "seed_ref": "optional"
     },
     "data/processed": {
       "role": "silver_gold_storage",
       "prio": "p3",
-      "crawl": false
+      "crawl": false,
+      "seed_ref": "optional"
     },
     "data/sandbox": {
       "role": "sandbox",
       "prio": "p3",
-      "crawl": false
+      "crawl": false,
+      "seed_ref": "optional"
     },
     "schemas": {
       "role": "data_contracts",
       "prio": "p1",
-      "crawl": true
+      "crawl": true,
+      "seed_ref": "optional"
     },
     "scripts": {
       "role": "ops_automation",
       "prio": "p2",
-      "crawl": true
+      "crawl": true,
+      "seed_ref": "optional"
     },
     "tests": {
       "role": "test_suites",
       "prio": "p1",
-      "crawl": true
+      "crawl": true,
+      "seed_ref": "optional"
     },
     "tools": {
       "role": "tooling",
       "prio": "p2",
-      "crawl": true
+      "crawl": true,
+      "seed_ref": "optional"
     },
     "logs": {
       "role": "logs",
       "prio": "p3",
-      "crawl": false
+      "crawl": false,
+      "seed_ref": "optional"
     },
     ".context": {
       "role": "context_engineering",
       "prio": "p0",
       "crawl": true,
+      "seed_ref": "optional",
       "key_files": [
         "tree.json"
       ]

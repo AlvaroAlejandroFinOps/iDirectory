@@ -5,5 +5,6 @@ purpose: "Tableros de Business Intelligence y apps de visualización interactiva
 relevance: medium
 crawl: true
 read_priority: p2
+seed_reference: optional
 token_density: medium
 instructions: Aplicaciones de visualización frontend y consumo analítico.

@@ -9,6 +9,7 @@ import sys
 import json
 import shutil
 import tempfile
+import time
 import unittest
 from pathlib import Path
 
@@ -28,6 +29,10 @@ from FWengine import (
     compute_context_budget,
     audit_repository,
     init_project,
+    resolve_beacon,
+    inspect_python_header,
+    route_file,
+    check_satellite_freshness,
 )
 
 
@@ -241,5 +246,149 @@ class TestTokenBudgetComputation(unittest.TestCase):
         self.assertIn("crawl", first)
 
 
+class TestBeaconInheritance(unittest.TestCase):
+    """Verifies hierarchical beacon directive resolution and strict pruning inheritance."""
+
+    def setUp(self):
+        self.test_dir = tempfile.mkdtemp(prefix="idir_inherit_test_")
+        self.test_path = Path(self.test_dir)
+        init_project(str(self.test_path))
+
+    def tearDown(self):
+        if self.test_path.exists():
+            shutil.rmtree(self.test_path, ignore_errors=True)
+
+    def test_child_inherits_from_parent_beacon(self):
+        """A subfolder inside src/cloud_jobs must inherit its parent directives."""
+        subfolder = self.test_path / "src" / "cloud_jobs" / "etl_daily"
+        subfolder.mkdir(parents=True, exist_ok=True)
+        # Verify no local beacon exists
+        self.assertFalse((subfolder / ".context.yaml").exists())
+
+        resolved = resolve_beacon(subfolder, self.test_path)
+        self.assertEqual(resolved["role"], "production_pipelines")
+        self.assertEqual(resolved["read_priority"], "p1")
+        self.assertTrue(resolved["crawl"])
+        self.assertTrue(resolved["inherited"])
+        self.assertEqual(resolved["inherited_from"], "src/cloud_jobs")
+
+    def test_strict_pruning_inheritance(self):
+        """If an ancestor declares crawl: false, no child can override it."""
+        deep_raw = self.test_path / "data" / "raw" / "incoming" / "batch_01"
+        deep_raw.mkdir(parents=True, exist_ok=True)
+
+        resolved = resolve_beacon(deep_raw, self.test_path)
+        self.assertFalse(resolved["crawl"], "Subdirectorio dentro de data/raw debe heredar crawl: False.")
+
+        # Even if a child local beacon declares crawl: true, pruning is invariant
+        child_beacon = deep_raw / ".context.yaml"
+        child_beacon.write_text("crawl: true\nrole: custom_raw\n", encoding="utf-8")
+        resolved_override = resolve_beacon(deep_raw, self.test_path)
+        self.assertFalse(resolved_override["crawl"], "Poda debe ser absorbente aun si el hijo declara crawl: true.")
+
+
+class TestHybridRouting(unittest.TestCase):
+    """Verifies light header inspection and content-based routing for Python files."""
+
+    def setUp(self):
+        self.test_dir = tempfile.mkdtemp(prefix="idir_route_test_")
+        self.test_path = Path(self.test_dir)
+        init_project(str(self.test_path))
+
+    def tearDown(self):
+        if self.test_path.exists():
+            shutil.rmtree(self.test_path, ignore_errors=True)
+
+    def test_inspect_pytest_routes_to_tests(self):
+        test_file = self.test_path / "sample_service.py"
+        test_file.write_text("import pytest\n\ndef test_add():\n    assert 1 + 1 == 2\n", encoding="utf-8")
+        dest = route_file(str(test_file), base_path=str(self.test_path), move=False)
+        self.assertEqual(dest.parent.name, "tests")
+
+    def test_inspect_cloud_jobs_routes_to_cloud_jobs(self):
+        spark_file = self.test_path / "daily_aggregate.py"
+        spark_file.write_text("from pyspark.sql import SparkSession\nfrom google.cloud import bigquery\n", encoding="utf-8")
+        dest = route_file(str(spark_file), base_path=str(self.test_path), move=False)
+        self.assertTrue(str(dest).replace("\\", "/").endswith("src/cloud_jobs/daily_aggregate.py"))
+
+    def test_inspect_dashboards_routes_to_dashboards(self):
+        dash_file = self.test_path / "executive_report.py"
+        dash_file.write_text("import streamlit as st\nimport plotly.express as px\nst.title('KPIs')\n", encoding="utf-8")
+        dest = route_file(str(dash_file), base_path=str(self.test_path), move=False)
+        self.assertTrue(str(dest).replace("\\", "/").endswith("src/dashboards/executive_report.py"))
+
+    def test_inspect_fallback_routes_to_core(self):
+        core_file = self.test_path / "auth_provider.py"
+        core_file.write_text("class AuthProvider:\n    def authenticate(self, token: str) -> bool:\n        return True\n", encoding="utf-8")
+        dest = route_file(str(core_file), base_path=str(self.test_path), move=False)
+        self.assertTrue(str(dest).replace("\\", "/").endswith("src/core/auth_provider.py"))
+
+
+class TestFileSystemHardening(unittest.TestCase):
+    """Verifies security controls against path traversal and atomic Windows NTFS casing handling."""
+
+    def setUp(self):
+        self.test_dir = tempfile.mkdtemp(prefix="idir_fs_test_")
+        self.test_path = Path(self.test_dir)
+        init_project(str(self.test_path))
+
+    def tearDown(self):
+        if self.test_path.exists():
+            shutil.rmtree(self.test_path, ignore_errors=True)
+
+    def test_path_traversal_blocked(self):
+        # 1. Archivo ubicado fuera de la raíz del proyecto
+        outside_file = self.test_path / "normal.txt"
+        outside_file.write_text("hello", encoding="utf-8")
+        with self.assertRaises(PermissionError):
+            route_file(str(outside_file), base_path=str(self.test_path / "subdir"), move=True)
+
+        # 2. Argumento con '../' intentando escapar
+        with self.assertRaises(PermissionError):
+            route_file("../escape.py", base_path=str(self.test_path), move=True)
+
+    def test_casing_collision_atomic_rename(self):
+        """Moving or normalizing a file with uppercase letters must rename to lowercase without error."""
+        file_path = self.test_path / "MyPipelineJob.py"
+        file_path.write_text("from pyspark.sql import functions as F\n", encoding="utf-8")
+
+        dest = route_file(str(file_path), base_path=str(self.test_path), move=True)
+        self.assertTrue(dest.exists())
+        self.assertEqual(dest.name, "mypipelinejob.py")
+        self.assertFalse(file_path.exists())
+
+
+class TestSatelliteFreshness(unittest.TestCase):
+    """Verifies drift detection between .context/tree.json and key project directories."""
+
+    def setUp(self):
+        self.test_dir = tempfile.mkdtemp(prefix="idir_fresh_test_")
+        self.test_path = Path(self.test_dir)
+        init_project(str(self.test_path))
+
+    def tearDown(self):
+        if self.test_path.exists():
+            shutil.rmtree(self.test_path, ignore_errors=True)
+
+    def test_fresh_satellite_returns_no_drift(self):
+        sync_tree(self.test_path)
+        status = check_satellite_freshness(self.test_path)
+        self.assertTrue(status["fresh"])
+        self.assertFalse(status["drift_detected"])
+
+    def test_drift_detected_on_new_file(self):
+        sync_tree(self.test_path)
+        # Create a new file in src/core and advance its mtime
+        new_file = self.test_path / "src" / "core" / "new_module.py"
+        new_file.write_text("# new code", encoding="utf-8")
+        future_time = time.time() + 10.0
+        os.utime(new_file, (future_time, future_time))
+
+        status = check_satellite_freshness(self.test_path)
+        self.assertFalse(status["fresh"])
+        self.assertTrue(status["drift_detected"])
+
+
 if __name__ == "__main__":
     unittest.main()
+

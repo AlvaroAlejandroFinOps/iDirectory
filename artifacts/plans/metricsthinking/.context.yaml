@@ -5,6 +5,7 @@ purpose: "Evaluación forense de métricas de avance del proyecto, scores de mad
 relevance: critical
 crawl: true
 read_priority: p0
+seed_reference: required
 token_density: sparse
 instructions: "LECTURA OBLIGATORIA / PRIORIDAD P0. Contiene la nota global de madurez del proyecto, cuellos de botella inmediatos y roadmap de remediación priorizado."
 key_files:

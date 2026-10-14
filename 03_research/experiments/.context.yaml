@@ -5,5 +5,6 @@ purpose: "Pruebas de concepto (PoCs), prototipos de modelos algorítmicos, bench
 relevance: medium
 crawl: false
 read_priority: p2
+seed_reference: optional
 token_density: medium
 instructions: Espacio de pruebas descartables y experimentos temporales.

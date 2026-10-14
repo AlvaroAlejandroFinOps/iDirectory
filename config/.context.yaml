@@ -5,5 +5,6 @@ purpose: "Parámetros de entorno (dev, staging, prod) y variables de configuraci
 relevance: high
 crawl: true
 read_priority: p1
+seed_reference: optional
 token_density: sparse
 instructions: Variables y parámetros. NUNCA colocar claves secretas en texto plano.

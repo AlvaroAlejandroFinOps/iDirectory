@@ -5,5 +5,6 @@ purpose: "Suites de pruebas unitarias, integración y calidad de datos (Great Ex
 relevance: high
 crawl: true
 read_priority: p1
+seed_reference: optional
 token_density: medium
 instructions: Pruebas de verificación de software y pipelines.

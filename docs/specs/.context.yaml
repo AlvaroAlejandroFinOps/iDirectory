@@ -5,5 +5,6 @@ purpose: "Especificaciones técnicas detalladas, linaje de datos, contratos de e
 relevance: high
 crawl: true
 read_priority: p1
+seed_reference: optional
 token_density: sparse
 instructions: Contratos técnicos de integración.

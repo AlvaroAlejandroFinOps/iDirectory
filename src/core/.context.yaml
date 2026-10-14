@@ -5,5 +5,6 @@ purpose: "Lógica de negocio transversal, utilitarios de backend, clientes de se
 relevance: high
 crawl: true
 read_priority: p1
+seed_reference: optional
 token_density: medium
 instructions: Servicios backend reutilizables por jobs y dashboards.

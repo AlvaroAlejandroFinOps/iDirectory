@@ -4,8 +4,18 @@ Este repositorio utiliza el sistema de gobernanza y ruteo inteligente **iDirecto
 
 ---
 
-## 🚀 REGLA MAESTRA OBLIGATORIA
-Para optimizar el uso de tokens y evitar la degradación de contexto, los agentes de Gemini/Antigravity **DEBEN** leer y seguir estrictamente la especificación maestra en [`AGENTS.md`](file:///d:/0001%20HyperScale%20Thinking/PROYECTOS%20CLOUD/iContext/iDirectory/AGENTS.md) y consultar el mapa satelital [`.context/tree.json`](file:///d:/0001%20HyperScale%20Thinking/PROYECTOS%20CLOUD/iContext/iDirectory/.context/tree.json) antes de explorar o modificar código.
+## 🚀 REGLA MAESTRA OBLIGATORIA (TWO-TIER BOOTLOADER)
+Para optimizar el uso de tokens y evitar la degradación de contexto (*Context Drift* y dispersión en cabezales de atención), los agentes de Gemini/Antigravity **DEBEN** seguir el protocolo de dos niveles definido en [`AGENTS.md`](file:///d:/0001%20HyperScale%20Thinking/PROYECTOS%20CLOUD/iContext/iDirectory/AGENTS.md):
+
+1. **Tier 1 (Operación Quirúrgica / Ejecución Atómica - Predeterminado):**
+   - Secuencia: `AGENTS.md` -> `.context/tree.json` -> `.context.yaml` objetivo (o herencia ascendente) -> Ejecución.
+   - **Prohibido precargar la semilla (`seed-idirectory-master.md`)** en este nivel para no quemar ~6,800 tokens de forma innecesaria.
+2. **Tier 2 (Planificación Arquitectónica / Auditoría Mayor):**
+   - Ingesta profunda del seed activada **únicamente** ante disparadores explícitos:
+     - *Disparador 1 (Usuario):* `/seedMaster`, `/metrics`, `/ultraThinking`, `/plan` o rediseño integral.
+     - *Disparador 2 (Beacon):* Directiva `seed_reference: required` en `.context.yaml`.
+     - *Disparador 3 (Agente):* Duda no resuelta sobre contratos o dependencias no declaradas (lectura puntual).
+3. **Contrato de Cierre:** Si creas o reestructuras directorios, ejecuta `beacon --sync` y `map --sync`.
 
 ---
 

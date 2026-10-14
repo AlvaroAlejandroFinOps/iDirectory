@@ -5,5 +5,6 @@ purpose: "Planes de capacidad activos (F-SKUs), presupuestos cloud vigentes e hi
 relevance: high
 crawl: true
 read_priority: p1
+seed_reference: optional
 token_density: sparse
 instructions: Planes y decisiones vigentes. Consultar antes de modificar infraestructura o presupuestos.

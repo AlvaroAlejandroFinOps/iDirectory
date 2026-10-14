@@ -15,7 +15,9 @@ Implementa:
 import os
 import sys
 import json
+import time
 import argparse
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, Any, List, Optional
 
@@ -103,9 +105,10 @@ FOLDER_METADATA: Dict[str, Dict[str, Any]] = {
         "relevance": "critical",
         "crawl": False,
         "read_priority": "p0",
+        "seed_reference": "required",
         "token_density": "medium",
         "key_files": ["seed-idirectory-master.md"],
-        "instructions": "LECTURA OBLIGATORIA (Paso 3 del Bootloader) antes de generar o alterar código."
+        "instructions": "LECTURA CONDICIONAL (Tier 2 / Disparadores de Arquitectura). Prohibido precargar en Tier 1."
     },
     "02_foundation/engine": {
         "purpose": "Núcleo del framework de automatización, lógica de ruteo, indexación y governance engine.",
@@ -113,6 +116,7 @@ FOLDER_METADATA: Dict[str, Dict[str, Any]] = {
         "relevance": "critical",
         "crawl": True,
         "read_priority": "p1",
+        "seed_reference": "optional",
         "token_density": "low",
         "key_files": ["engine_readme.md"],
         "instructions": "Contiene los utilitarios de gobernanza y especificación formal de directorios."
@@ -123,6 +127,7 @@ FOLDER_METADATA: Dict[str, Dict[str, Any]] = {
         "relevance": "low",
         "crawl": False,
         "read_priority": "p2",
+        "seed_reference": "optional",
         "token_density": "dense",
         "instructions": "Notebooks exploratorios. No iterar de forma recursiva a menos que se solicite un análisis específico."
     },
@@ -132,6 +137,7 @@ FOLDER_METADATA: Dict[str, Dict[str, Any]] = {
         "relevance": "high",
         "crawl": True,
         "read_priority": "p1",
+        "seed_reference": "optional",
         "token_density": "sparse",
         "instructions": "Plantillas de inferencia y configuración de agentes."
     },
@@ -141,6 +147,7 @@ FOLDER_METADATA: Dict[str, Dict[str, Any]] = {
         "relevance": "medium",
         "crawl": False,
         "read_priority": "p2",
+        "seed_reference": "optional",
         "token_density": "medium",
         "instructions": "Espacio de pruebas descartables y experimentos temporales."
     },
@@ -150,6 +157,7 @@ FOLDER_METADATA: Dict[str, Dict[str, Any]] = {
         "relevance": "high",
         "crawl": True,
         "read_priority": "p1",
+        "seed_reference": "optional",
         "token_density": "medium",
         "dependencies": ["schemas", "config"],
         "instructions": "Cargas productivas de datos. Conservar invariantes de arquitectura e idempotencia."
@@ -160,6 +168,7 @@ FOLDER_METADATA: Dict[str, Dict[str, Any]] = {
         "relevance": "medium",
         "crawl": True,
         "read_priority": "p2",
+        "seed_reference": "optional",
         "token_density": "medium",
         "instructions": "Generadores de pruebas de carga y benchmarking sintético."
     },
@@ -169,6 +178,7 @@ FOLDER_METADATA: Dict[str, Dict[str, Any]] = {
         "relevance": "high",
         "crawl": True,
         "read_priority": "p1",
+        "seed_reference": "optional",
         "token_density": "medium",
         "instructions": "Servicios backend reutilizables por jobs y dashboards."
     },
@@ -178,6 +188,7 @@ FOLDER_METADATA: Dict[str, Dict[str, Any]] = {
         "relevance": "medium",
         "crawl": True,
         "read_priority": "p2",
+        "seed_reference": "optional",
         "token_density": "medium",
         "instructions": "Aplicaciones de visualización frontend y consumo analítico."
     },
@@ -187,6 +198,7 @@ FOLDER_METADATA: Dict[str, Dict[str, Any]] = {
         "relevance": "high",
         "crawl": True,
         "read_priority": "p1",
+        "seed_reference": "optional",
         "token_density": "sparse",
         "instructions": "Planes y decisiones vigentes. Consultar antes de modificar infraestructura o presupuestos."
     },
@@ -196,6 +208,7 @@ FOLDER_METADATA: Dict[str, Dict[str, Any]] = {
         "relevance": "critical",
         "crawl": True,
         "read_priority": "p0",
+        "seed_reference": "required",
         "token_density": "sparse",
         "key_files": ["MetricsThinking.md", "MetricsThinking.json"],
         "instructions": "LECTURA OBLIGATORIA / PRIORIDAD P0. Contiene la nota global de madurez del proyecto, cuellos de botella inmediatos y roadmap de remediación priorizado."
@@ -206,6 +219,7 @@ FOLDER_METADATA: Dict[str, Dict[str, Any]] = {
         "relevance": "zero_for_llm",
         "crawl": False,
         "read_priority": "p3",
+        "seed_reference": "optional",
         "token_density": "sparse",
         "instructions": "RAMA MUERTA / ARCHIVADA. No explorar a menos que se pida explícitamente auditar el pasado."
     },
@@ -215,6 +229,7 @@ FOLDER_METADATA: Dict[str, Dict[str, Any]] = {
         "relevance": "high",
         "crawl": True,
         "read_priority": "p1",
+        "seed_reference": "optional",
         "token_density": "sparse",
         "instructions": "Diagramas y especificaciones de alto nivel de sistemas."
     },
@@ -224,6 +239,7 @@ FOLDER_METADATA: Dict[str, Dict[str, Any]] = {
         "relevance": "high",
         "crawl": True,
         "read_priority": "p1",
+        "seed_reference": "optional",
         "token_density": "sparse",
         "instructions": "Contratos técnicos de integración."
     },
@@ -233,6 +249,7 @@ FOLDER_METADATA: Dict[str, Dict[str, Any]] = {
         "relevance": "medium",
         "crawl": True,
         "read_priority": "p2",
+        "seed_reference": "optional",
         "token_density": "sparse",
         "instructions": "Notas de ingeniería y registros de decisiones."
     },
@@ -242,6 +259,7 @@ FOLDER_METADATA: Dict[str, Dict[str, Any]] = {
         "relevance": "high",
         "crawl": True,
         "read_priority": "p1",
+        "seed_reference": "optional",
         "token_density": "sparse",
         "instructions": "Variables y parámetros. NUNCA colocar claves secretas en texto plano."
     },
@@ -251,6 +269,7 @@ FOLDER_METADATA: Dict[str, Dict[str, Any]] = {
         "relevance": "zero_for_llm",
         "crawl": False,
         "read_priority": "p3",
+        "seed_reference": "optional",
         "token_density": "massive_binary",
         "instructions": "RAMA DE DATOS CRUDOS. PROHIBIDO EXPLORAR O VOLCAR CONTENIDO EN CONTEXTO."
     },
@@ -260,6 +279,7 @@ FOLDER_METADATA: Dict[str, Dict[str, Any]] = {
         "relevance": "zero_for_llm",
         "crawl": False,
         "read_priority": "p3",
+        "seed_reference": "optional",
         "token_density": "massive_binary",
         "instructions": "RAMA DE DATOS REFINADOS. PROHIBIDO EXPLORAR O VOLCAR CONTENIDO EN CONTEXTO."
     },
@@ -269,6 +289,7 @@ FOLDER_METADATA: Dict[str, Dict[str, Any]] = {
         "relevance": "zero_for_llm",
         "crawl": False,
         "read_priority": "p3",
+        "seed_reference": "optional",
         "token_density": "dense",
         "instructions": "ZONA SCRATCH. No explorar ni indexar en contexto agéntico."
     },
@@ -278,6 +299,7 @@ FOLDER_METADATA: Dict[str, Dict[str, Any]] = {
         "relevance": "high",
         "crawl": True,
         "read_priority": "p1",
+        "seed_reference": "optional",
         "token_density": "sparse",
         "instructions": "Contratos formales de datos. Consultar antes de emitir transformaciones SQL o PySpark."
     },
@@ -287,6 +309,7 @@ FOLDER_METADATA: Dict[str, Dict[str, Any]] = {
         "relevance": "medium",
         "crawl": True,
         "read_priority": "p2",
+        "seed_reference": "optional",
         "token_density": "sparse",
         "instructions": "Automatización operativa de terminal."
     },
@@ -296,6 +319,7 @@ FOLDER_METADATA: Dict[str, Dict[str, Any]] = {
         "relevance": "high",
         "crawl": True,
         "read_priority": "p1",
+        "seed_reference": "optional",
         "token_density": "medium",
         "instructions": "Pruebas de verificación de software y pipelines."
     },
@@ -305,6 +329,7 @@ FOLDER_METADATA: Dict[str, Dict[str, Any]] = {
         "relevance": "medium",
         "crawl": True,
         "read_priority": "p2",
+        "seed_reference": "optional",
         "token_density": "sparse",
         "instructions": "Herramientas locales del proyecto."
     },
@@ -314,6 +339,7 @@ FOLDER_METADATA: Dict[str, Dict[str, Any]] = {
         "relevance": "zero_for_llm",
         "crawl": False,
         "read_priority": "p3",
+        "seed_reference": "optional",
         "token_density": "massive_text",
         "instructions": "ARCHIVOS DE REGISTRO. No inspeccionar de forma recursiva a menos que se analice un error puntual."
     },
@@ -323,6 +349,7 @@ FOLDER_METADATA: Dict[str, Dict[str, Any]] = {
         "relevance": "critical",
         "crawl": True,
         "read_priority": "p0",
+        "seed_reference": "optional",
         "token_density": "sparse",
         "key_files": ["tree.json"],
         "instructions": "Contiene el mapa satelital precargado del repositorio (tree.json)."
@@ -375,6 +402,7 @@ def generate_beacon_content(folder: str, meta: Dict[str, Any]) -> str:
         "relevance": meta.get("relevance", "medium"),
         "crawl": meta.get("crawl", True),
         "read_priority": meta.get("read_priority", "p2"),
+        "seed_reference": meta.get("seed_reference", "optional"),
         "token_density": meta.get("token_density", "sparse"),
         "instructions": meta.get("instructions", "Directorio estándar.")
     }
@@ -383,6 +411,90 @@ def generate_beacon_content(folder: str, meta: Dict[str, Any]) -> str:
     if "dependencies" in meta:
         beacon_data["dependencies"] = meta["dependencies"]
     return MiniYAML.dump(beacon_data)
+
+
+def resolve_beacon(dir_path: Path, root_path: Path) -> Dict[str, Any]:
+    """
+    Resuelve recursivamente las directivas de un directorio por herencia jerárquica.
+    Si carece de .context.yaml físico, asciende hacia root_path heredando directivas.
+    Invariante estricto: si cualquier ancestro declara crawl: False, crawl será False.
+    """
+    dir_path = dir_path.resolve()
+    root_path = root_path.resolve()
+
+    try:
+        rel = dir_path.relative_to(root_path)
+    except ValueError:
+        return {
+            "role": "general",
+            "purpose": "",
+            "relevance": "medium",
+            "crawl": True,
+            "read_priority": "p2",
+            "seed_reference": "optional",
+            "token_density": "sparse",
+            "instructions": "Directorio externo o sin jerarquía.",
+            "inherited": False,
+            "inherited_from": None
+        }
+
+    chain: List[Path] = []
+    curr = dir_path
+    while curr != root_path:
+        chain.append(curr)
+        curr = curr.parent
+
+    resolved: Dict[str, Any] = {
+        "role": "general",
+        "purpose": "",
+        "relevance": "medium",
+        "crawl": True,
+        "read_priority": "p2",
+        "seed_reference": "optional",
+        "token_density": "sparse",
+        "instructions": "Directorio con herencia canónica."
+    }
+
+    inherited = False
+    inherited_from = None
+    has_crawl_false = False
+
+    # De ancestro más cercano a root hasta dir_path
+    for p in reversed(chain):
+        p_rel = str(p.relative_to(root_path)).replace("\\", "/").lower()
+        node_meta = {}
+
+        beacon_file = p / ".context.yaml"
+        if beacon_file.exists():
+            try:
+                with open(beacon_file, "r", encoding="utf-8") as f:
+                    node_meta = MiniYAML.load(f.read())
+            except Exception:
+                node_meta = {}
+        elif p_rel in FOLDER_METADATA:
+            node_meta = dict(FOLDER_METADATA[p_rel])
+
+        if node_meta:
+            if p != dir_path:
+                inherited = True
+                inherited_from = p_rel
+            for k in ["role", "purpose", "relevance", "read_priority", "seed_reference", "token_density", "instructions"]:
+                if k in node_meta:
+                    resolved[k] = node_meta[k]
+            if "priority" in node_meta and "read_priority" not in node_meta:
+                resolved["read_priority"] = node_meta["priority"]
+            if node_meta.get("crawl") is False:
+                has_crawl_false = True
+
+    if has_crawl_false:
+        resolved["crawl"] = False
+    else:
+        if "crawl" in node_meta:
+            resolved["crawl"] = node_meta["crawl"]
+
+    resolved["inherited"] = inherited
+    resolved["inherited_from"] = inherited_from
+    return resolved
 
 
 def sync_beacons(root_path: Path) -> int:
@@ -403,28 +515,98 @@ def sync_beacons(root_path: Path) -> int:
 
 def generate_tree_json(root_path: Path) -> Dict[str, Any]:
     """Genera el mapa satelital compacto de todo el repositorio (~250 tokens)."""
+    now_ts = time.time()
     tree_data = {
         "$schema": "./schema/tree.schema.json",
         "version": "3.0",
         "project": root_path.resolve().name,
         "architecture": "Gravity HyperScale Thinking",
-        "bootloader": [
-            "AGENTS.md",
-            ".context/tree.json",
-            "01_seed/seed-idirectory-master.md"
-        ],
+        "updated_at": datetime.now(timezone.utc).isoformat(),
+        "timestamp": now_ts,
+        "bootloader": {
+            "tier_1": [
+                "AGENTS.md",
+                ".context/tree.json",
+                "[target_folder]/.context.yaml"
+            ],
+            "tier_2": [
+                "AGENTS.md",
+                ".context/tree.json",
+                "01_seed/seed-idirectory-master.md",
+                "[target_folder]/.context.yaml"
+            ]
+        },
         "nodes": {}
     }
     for folder, meta in FOLDER_METADATA.items():
         node_info = {
             "role": meta.get("role", "general"),
             "prio": meta.get("read_priority", "p2"),
-            "crawl": meta.get("crawl", True)
+            "crawl": meta.get("crawl", True),
+            "seed_ref": meta.get("seed_reference", "optional")
         }
         if "key_files" in meta:
             node_info["key_files"] = meta["key_files"]
         tree_data["nodes"][folder] = node_info
     return tree_data
+
+
+def check_satellite_freshness(root_path: Path) -> Dict[str, Any]:
+    """Verifica si .context/tree.json está al día respecto a los cambios en carpetas clave."""
+    tree_file = root_path / ".context" / "tree.json"
+    if not tree_file.exists():
+        return {
+            "fresh": False,
+            "drift_detected": True,
+            "satellite_time": 0.0,
+            "latest_mtime": 0.0,
+            "latest_path": None,
+            "reason": "El archivo .context/tree.json no existe. Ejecute 'python FWengine.py map --sync'."
+        }
+
+    try:
+        with open(tree_file, "r", encoding="utf-8") as f:
+            tree_data = json.load(f)
+        satellite_time = float(tree_data.get("timestamp", tree_file.stat().st_mtime))
+    except Exception:
+        satellite_time = tree_file.stat().st_mtime
+
+    key_folders = [
+        "01_seed", "02_foundation", "03_research", "src", "config",
+        "schemas", "tests", "docs", "tools", "scripts"
+    ]
+
+    latest_mtime = 0.0
+    latest_path = None
+
+    for kf in key_folders:
+        dir_path = root_path / kf
+        if not dir_path.exists():
+            continue
+        d_mtime = dir_path.stat().st_mtime
+        if d_mtime > latest_mtime:
+            latest_mtime = d_mtime
+            latest_path = dir_path
+        for item in dir_path.rglob("*"):
+            if item.is_file() and not item.name.startswith(".") and "__pycache__" not in item.parts:
+                try:
+                    m = item.stat().st_mtime
+                    if m > latest_mtime:
+                        latest_mtime = m
+                        latest_path = item
+                except OSError:
+                    pass
+
+    drift = latest_mtime > (satellite_time + 1.0)
+    rel_path_str = str(latest_path.relative_to(root_path)).replace("\\", "/") if latest_path else "desconocido"
+    return {
+        "fresh": not drift,
+        "drift_detected": drift,
+        "satellite_time": satellite_time,
+        "latest_mtime": latest_mtime,
+        "latest_path": rel_path_str
+    }
+
 
 
 def sync_tree(root_path: Path) -> Path:
@@ -495,11 +677,11 @@ def init_project(base_path: str):
     with open(readme_path, "w", encoding="utf-8") as f:
         f.write(f"# {root.resolve().name.upper()} - iDirectory Architecture v3.0\n\n")
         f.write("Framework modular gobernado por **Gravity HyperScale Thinking** con Context Engineering nativo.\n\n")
-        f.write("> **Protocolo de Ingesta para Agentes (Bootloader):**\n")
+        f.write("> **Protocolo de Ingesta para Agentes (Two-Tier Bootloader):**\n")
         f.write("> 1. Lee `AGENTS.md` (o `GEMINI.md` / `CLAUDE.md`).\n")
         f.write("> 2. Lee `.context/tree.json` (Mapa Topológico Satelital de ~250 tokens).\n")
-        f.write("> 3. Lee `01_seed/seed-idirectory-master.md` (ADN y Ground Truth del proyecto).\n")
-        f.write("> 4. Lee el `.context.yaml` del directorio objetivo antes de modificar archivos.\n\n")
+        f.write("> 3. **Tier 1 (Atómico):** Lee el `.context.yaml` objetivo (o herencia del padre) y ejecuta. (NO cargar seed).\n")
+        f.write("> 4. **Tier 2 (Arquitectura):** Carga `01_seed/seed-idirectory-master.md` solo ante disparadores explícitos (/seedMaster, /metrics, /ultraThinking).\n\n")
         f.write("## Manifiesto de Directorios y Roles\n\n")
         for folder, meta in FOLDER_METADATA.items():
             f.write(f"- **`{folder}/`**: {meta['purpose']} `[Priority: {meta['read_priority']}]`\n")
@@ -542,22 +724,62 @@ def init_project(base_path: str):
     print("[+] Estructura iDirectory v3.0 inicializada con éxito.")
 
 
-def route_file(file_path: str, base_path: str, move: bool = False):
-    """Analiza la naturaleza de un archivo, sugiere su ubicación o lo mueve."""
-    src_file = Path(file_path)
+def inspect_python_header(file_path: Path, max_chars: int = 1000) -> str:
+    """Lee de forma no bloqueante hasta max_chars para clasificar archivos .py según imports y patrones."""
+    try:
+        with open(file_path, "r", encoding="utf-8", errors="replace") as f:
+            sample = f.read(max_chars).lower()
+    except Exception:
+        return "src/core"
+
+    # 1. Tests y suites de verificación
+    if any(marker in sample for marker in ["pytest", "unittest", "test_"]):
+        return "tests"
+    # 2. Pipelines productivos y big data cloud
+    if any(marker in sample for marker in ["pyspark", "google.cloud", "boto3", "azure"]):
+        return "src/cloud_jobs"
+    # 3. Dashboards y BI / Viz
+    if any(marker in sample for marker in ["streamlit", "dash", "plotly"]):
+        return "src/dashboards"
+    # 4. Fallback y lógica compartida / APIs
+    return "src/core"
+
+
+def route_file(file_path: str, base_path: str = ".", move: bool = False) -> Optional[Path]:
+    """Analiza la naturaleza de un archivo, sugiere su ubicación o lo mueve de forma segura."""
+    base_dir = Path(base_path).resolve()
+
+    # Blindaje contra Path Traversal en la ruta del archivo
+    raw_path = Path(file_path)
+    if ".." in raw_path.parts:
+        raise PermissionError(f"[-] Error de Seguridad: Intento de Path Traversal bloqueado ('..' detectado en '{file_path}').")
+
+    src_file = raw_path if raw_path.is_absolute() else (base_dir / raw_path)
     if not src_file.exists():
         print(f"[-] Error: El archivo '{file_path}' no existe en el origen.")
-        return
+        return None
 
+    src_resolved = src_file.resolve()
+    try:
+        src_resolved.relative_to(base_dir)
+    except ValueError:
+        raise PermissionError(f"[-] Error de Seguridad: Intento de Path Traversal bloqueado. El archivo '{src_resolved}' está fuera de la raíz '{base_dir}'.")
     ext = src_file.suffix.lower()
-    dest_subfolder = ROUTING_MAP.get(ext)
     name_lower = src_file.name.lower()
 
     # Heurística contextual avanzada
-    if ext == ".ipynb":
+    if ext == ".py":
+        if "test" in name_lower or "spec" in name_lower:
+            dest_subfolder = "tests"
+        else:
+            dest_subfolder = inspect_python_header(src_resolved)
+    elif ext == ".sql":
+        if "test" in name_lower or "spec" in name_lower:
+            dest_subfolder = "tests"
+        else:
+            dest_subfolder = "src/cloud_jobs"
+    elif ext == ".ipynb":
         dest_subfolder = "03_research/notebooks"
-    elif ext in [".py", ".sql"] and ("test" in name_lower or "spec" in name_lower):
-        dest_subfolder = "tests"
     elif ext in [".md", ".txt", ".pdf"]:
         if any(w in name_lower for w in ["obsoleto", "historico", "old", "backup", "archive"]):
             dest_subfolder = "artifacts/plans/archive"
@@ -571,31 +793,66 @@ def route_file(file_path: str, base_path: str, move: bool = False):
             dest_subfolder = "docs/specs"
         elif any(w in name_lower for w in ["arquitectura", "c4", "flow", "diagram"]):
             dest_subfolder = "docs/architecture"
-    elif not dest_subfolder:
-        if any(w in name_lower for w in ["experiment", "benchmark", "poc"]):
-            dest_subfolder = "03_research/experiments"
-        elif any(w in name_lower for w in ["dashboard", "report", "viz", "bi"]):
-            dest_subfolder = "src/dashboards"
-        elif any(w in name_lower for w in ["gen", "mock", "synthetic"]):
-            dest_subfolder = "src/data_generation"
         else:
-            dest_subfolder = "tools"
+            dest_subfolder = ROUTING_MAP.get(ext, "docs/notes")
+    else:
+        dest_subfolder = ROUTING_MAP.get(ext)
+        if not dest_subfolder:
+            if any(w in name_lower for w in ["experiment", "benchmark", "poc"]):
+                dest_subfolder = "03_research/experiments"
+            elif any(w in name_lower for w in ["dashboard", "report", "viz", "bi"]):
+                dest_subfolder = "src/dashboards"
+            elif any(w in name_lower for w in ["gen", "mock", "synthetic"]):
+                dest_subfolder = "src/data_generation"
+            else:
+                dest_subfolder = "tools"
 
-    dest_dir = Path(base_path) / dest_subfolder
-    dest_path = dest_dir / src_file.name
+    # Blindaje contra Path Traversal
+    dest_dir = (base_dir / dest_subfolder).resolve()
+    try:
+        dest_dir.relative_to(base_dir)
+    except ValueError:
+        raise PermissionError(f"[-] Error de Seguridad: Intento de Path Traversal bloqueado. Destino fuera de la raíz: '{dest_dir}'")
+
+    dest_file_name = src_file.name.lower()
+    dest_path = (dest_dir / dest_file_name).resolve()
+    try:
+        dest_path.relative_to(base_dir)
+    except ValueError:
+        raise PermissionError(f"[-] Error de Seguridad: Intento de Path Traversal bloqueado. Archivo fuera de la raíz: '{dest_path}'")
 
     print(f"\n[Análisis de Ruteo iDirectory v3.0]")
     print(f"  -> Archivo: '{src_file.name}'")
     print(f"  -> Extensión/Patrón: {ext if ext else 'Nominal'}")
     print(f"  -> Destino óptimo: {dest_subfolder}/")
+    print(f"  -> Nombre normalizado: {dest_file_name}")
 
     if move:
         dest_dir.mkdir(parents=True, exist_ok=True)
-        src_file.rename(dest_path)
-        print(f"  [+] ACCIÓN: Archivo reubicado exitosamente en -> {dest_path}")
+        # Mitigación de colisión de casing en filesystems case-insensitive (Windows NTFS)
+        if src_resolved == dest_path:
+            if src_file.name != dest_file_name:
+                temp_path = dest_dir / f".tmp_{os.getpid()}_{dest_file_name}"
+                src_file.rename(temp_path)
+                temp_path.rename(dest_path)
+                print(f"  [+] ACCIÓN: Archivo normalizado a minúsculas atómicamente -> {dest_path}")
+            else:
+                print(f"  [*] El archivo ya está en la ubicación canónica con nombre en minúsculas.")
+        else:
+            if dest_path.exists():
+                temp_path = dest_dir / f".tmp_{os.getpid()}_{dest_file_name}"
+                src_file.rename(temp_path)
+                if dest_path.exists():
+                    dest_path.unlink()
+                temp_path.rename(dest_path)
+            else:
+                src_file.rename(dest_path)
+            print(f"  [+] ACCIÓN: Archivo reubicado exitosamente en -> {dest_path}")
+        return dest_path
     else:
         print(f"  [Sugerencia] Añade '--move' para mover el archivo automáticamente:")
         print(f"  python FWengine.py route \"{file_path}\" --move")
+        return dest_path
 
 
 def audit_repository(root_path: Path) -> bool:
@@ -610,13 +867,14 @@ def audit_repository(root_path: Path) -> bool:
                 print(f"  [!] VIOLACIÓN TOPOLÓGICA (Mayúsculas detectadas): '{item.name}/'")
                 violations += 1
 
-    # 2. Chequeo de beacons ausentes
+    # 2. Chequeo de beacons ausentes en nodos canónicos
     missing_beacons = 0
     for folder, meta in FOLDER_METADATA.items():
         if folder == ".context":
             continue
-        beacon_file = root_path / folder / ".context.yaml"
-        if (root_path / folder).exists() and not beacon_file.exists():
+        folder_dir = root_path / folder
+        beacon_file = folder_dir / ".context.yaml"
+        if folder_dir.exists() and not beacon_file.exists():
             print(f"  [!] BEACON AUSENTE en: '{folder}/'")
             missing_beacons += 1
             violations += 1
@@ -659,11 +917,13 @@ def main():
     # map
     map_parser = subparsers.add_parser("map", help="Gestiona el mapa satelital (.context/tree.json)")
     map_parser.add_argument("--sync", action="store_true", help="Regenera el satélite .context/tree.json")
+    map_parser.add_argument("--check-freshness", action="store_true", help="Comprueba si tree.json sufre drift respecto al filesystem")
 
     # context
     context_parser = subparsers.add_parser("context", help="Telemetría de Context Engineering y token budget")
     context_parser.add_argument("--budget", action="store_true", help="Desglosa el presupuesto de tokens por carpeta")
     context_parser.add_argument("--compact", action="store_true", help="Emite string compacto para inyección en prompts")
+    context_parser.add_argument("--check-freshness", action="store_true", help="Comprueba si tree.json sufre drift respecto al filesystem")
 
     # audit
     subparsers.add_parser("audit", help="Audita violaciones de mayúsculas, huérfanos y beacons")
@@ -682,10 +942,25 @@ def main():
             count = sync_beacons(root)
             print(f"[+] {count} Beacons (.context.yaml) sincronizados exitosamente.")
     elif args.command == "map":
-        tree_path = sync_tree(root)
-        print(f"[+] Mapa satelital sincronizado en: {tree_path}")
+        if getattr(args, "check_freshness", False):
+            freshness = check_satellite_freshness(root)
+            if freshness["fresh"]:
+                print("[PASS] Satélite al día: .context/tree.json está sincronizado con los directorios clave.")
+            else:
+                print(f"[!] DRIFT DETECTADO: El mapa satelital está desactualizado respecto a '{freshness['latest_path']}'.")
+                print("    Acción recomendada: Ejecute 'python FWengine.py map --sync' y 'python FWengine.py beacon --sync'.")
+        else:
+            tree_path = sync_tree(root)
+            print(f"[+] Mapa satelital sincronizado en: {tree_path}")
     elif args.command == "context":
-        if args.compact:
+        if getattr(args, "check_freshness", False):
+            freshness = check_satellite_freshness(root)
+            if freshness["fresh"]:
+                print("[PASS] Satélite al día: .context/tree.json está sincronizado con los directorios clave.")
+            else:
+                print(f"[!] DRIFT DETECTADO: El mapa satelital está desactualizado respecto a '{freshness['latest_path']}'.")
+                print("    Acción recomendada: Ejecute 'python FWengine.py map --sync' y 'python FWengine.py beacon --sync'.")
+        elif args.compact:
             tree = generate_tree_json(root)
             nodes_summary = "; ".join([f"{k}:{v['role']}({v['prio']})" for k, v in tree["nodes"].items() if v["crawl"]])
             print(f"IDIR_TOPOLOGY: [{nodes_summary}]")
@@ -708,4 +983,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    main()

@@ -1,7 +1,8 @@
 # Cursor & Windsurf Rules for iDirectory Context Engineering
-# Always adhere to the 4-step bootloader defined in AGENTS.md:
-# 1. Check AGENTS.md
-# 2. Check .context/tree.json (Do NOT scan folders with crawl: false like data/raw, logs, artifacts/plans/archive)
-# 3. Read 01_seed/seed-idirectory-master.md for architecture invariants
-# 4. Read .context.yaml in the active folder
+# Always adhere to the Two-Tier Bootloader defined in AGENTS.md:
+# Tier 1 (Atomic): AGENTS.md -> .context/tree.json -> target .context.yaml (Do NOT load 01_seed)
+# Tier 2 (Architecture): Triggered only on /seedMaster, /metrics or explicit architectural design
+# Honor crawl: false on dead branches (data/raw, data/processed, logs, artifacts/plans/archive)
+# Subfolders inherit directives recursively from parent beacons.
 # Use `python FWengine.py route "<file>" --move` to place files canonically.
+

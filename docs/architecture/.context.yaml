@@ -5,5 +5,6 @@ purpose: "Diagramas de arquitectura multi-cloud, topologías C4 y flujos de dato
 relevance: high
 crawl: true
 read_priority: p1
+seed_reference: optional
 token_density: sparse
 instructions: Diagramas y especificaciones de alto nivel de sistemas.

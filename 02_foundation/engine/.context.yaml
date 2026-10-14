@@ -5,6 +5,7 @@ purpose: "Núcleo del framework de automatización, lógica de ruteo, indexació
 relevance: critical
 crawl: true
 read_priority: p1
+seed_reference: optional
 token_density: low
 instructions: Contiene los utilitarios de gobernanza y especificación formal de directorios.
 key_files:
