@@ -1570,5 +1570,365 @@
       ".tmdl": 524,
       ".mmd": 1
     }
+  },
+  {
+    "id": "repo_07",
+    "name": "FlowAgentic",
+    "path": "D:\\0001 HyperScale Thinking\\PROYECTOS CLOUD\\iContext\\FlowAgentic",
+    "total_files": 1385,
+    "total_bytes": 17115989,
+    "total_tokens": 4278523,
+    "clean_codebase_tokens": 598516,
+    "satellite_tokens": 61832,
+    "satellite_files_count": 33,
+    "satellite_files": [
+      {
+        "file": "README.md",
+        "bytes": 29050,
+        "tokens": 7262
+      },
+      {
+        "file": "README_ES.md",
+        "bytes": 31234,
+        "tokens": 7808
+      },
+      {
+        "file": ".context/tree.json",
+        "bytes": 4263,
+        "tokens": 1065
+      },
+      {
+        "file": ".pytest_cache/README.md",
+        "bytes": 302,
+        "tokens": 75
+      },
+      {
+        "file": "01_seed/.context.yaml",
+        "bytes": 405,
+        "tokens": 101
+      },
+      {
+        "file": "01_seed/seed-flowagentic-master.md",
+        "bytes": 21443,
+        "tokens": 5360
+      },
+      {
+        "file": "02_foundation/engine/.context.yaml",
+        "bytes": 401,
+        "tokens": 100
+      },
+      {
+        "file": "03_research/experiments/.context.yaml",
+        "bytes": 343,
+        "tokens": 85
+      },
+      {
+        "file": "03_research/notebooks/.context.yaml",
+        "bytes": 390,
+        "tokens": 97
+      },
+      {
+        "file": "03_research/prompts/.context.yaml",
+        "bytes": 350,
+        "tokens": 87
+      },
+      {
+        "file": "artifacts/plans/seedmax_final.md",
+        "bytes": 58466,
+        "tokens": 14616
+      },
+      {
+        "file": "artifacts/plans/active/.context.yaml",
+        "bytes": 380,
+        "tokens": 95
+      },
+      {
+        "file": "artifacts/plans/archive/.context.yaml",
+        "bytes": 411,
+        "tokens": 102
+      },
+      {
+        "file": "artifacts/plans/archive/README.md",
+        "bytes": 11908,
+        "tokens": 2977
+      },
+      {
+        "file": "artifacts/plans/metricsthinking/.context.yaml",
+        "bytes": 561,
+        "tokens": 140
+      },
+      {
+        "file": "artifacts/reengineering/input/seed-ThinkingSeed-master.md",
+        "bytes": 23467,
+        "tokens": 5866
+      },
+      {
+        "file": "artifacts/reengineering/output/reengineering-seedmax.md",
+        "bytes": 58466,
+        "tokens": 14616
+      },
+      {
+        "file": "config/.context.yaml",
+        "bytes": 338,
+        "tokens": 84
+      },
+      {
+        "file": "data/processed/.context.yaml",
+        "bytes": 372,
+        "tokens": 93
+      },
+      {
+        "file": "data/raw/.context.yaml",
+        "bytes": 359,
+        "tokens": 89
+      },
+      {
+        "file": "data/sandbox/.context.yaml",
+        "bytes": 323,
+        "tokens": 80
+      },
+      {
+        "file": "docs/architecture/.context.yaml",
+        "bytes": 350,
+        "tokens": 87
+      },
+      {
+        "file": "docs/notes/.context.yaml",
+        "bytes": 351,
+        "tokens": 87
+      },
+      {
+        "file": "docs/specs/.context.yaml",
+        "bytes": 333,
+        "tokens": 83
+      },
+      {
+        "file": "logs/.context.yaml",
+        "bytes": 343,
+        "tokens": 85
+      },
+      {
+        "file": "schemas/.context.yaml",
+        "bytes": 368,
+        "tokens": 92
+      },
+      {
+        "file": "scripts/.context.yaml",
+        "bytes": 318,
+        "tokens": 79
+      },
+      {
+        "file": "src/cloud_jobs/.context.yaml",
+        "bytes": 437,
+        "tokens": 109
+      },
+      {
+        "file": "src/core/.context.yaml",
+        "bytes": 335,
+        "tokens": 83
+      },
+      {
+        "file": "src/dashboards/.context.yaml",
+        "bytes": 351,
+        "tokens": 87
+      },
+      {
+        "file": "src/data_generation/.context.yaml",
+        "bytes": 365,
+        "tokens": 91
+      },
+      {
+        "file": "tests/.context.yaml",
+        "bytes": 318,
+        "tokens": 79
+      },
+      {
+        "file": "tools/.context.yaml",
+        "bytes": 288,
+        "tokens": 72
+      }
+    ],
+    "prunable_files": 1174,
+    "prunable_tokens": 3680007,
+    "token_saving_pct": 98.55,
+    "tree_found": true,
+    "beacons_count": 24,
+    "beacons_found": [
+      "01_seed/.context.yaml",
+      "02_foundation/engine/.context.yaml",
+      "03_research/experiments/.context.yaml",
+      "03_research/notebooks/.context.yaml",
+      "03_research/prompts/.context.yaml",
+      "artifacts/plans/active/.context.yaml",
+      "artifacts/plans/archive/.context.yaml",
+      "artifacts/plans/metricsthinking/.context.yaml",
+      "config/.context.yaml",
+      "data/processed/.context.yaml",
+      "data/raw/.context.yaml",
+      "data/sandbox/.context.yaml",
+      "docs/architecture/.context.yaml",
+      "docs/notes/.context.yaml",
+      "docs/specs/.context.yaml",
+      "logs/.context.yaml",
+      "schemas/.context.yaml",
+      "scripts/.context.yaml",
+      "src/cloud_jobs/.context.yaml",
+      "src/core/.context.yaml",
+      "src/dashboards/.context.yaml",
+      "src/data_generation/.context.yaml",
+      "tests/.context.yaml",
+      "tools/.context.yaml"
+    ],
+    "seed_found": [
+      "01_seed/seed-flowagentic-master.md",
+      "artifacts/plans/seedmax_final.md",
+      "artifacts/reengineering/input/seed-ThinkingSeed-master.md",
+      "artifacts/reengineering/output/reengineering-seedmax.md"
+    ],
+    "rules_found": [
+      "README.md",
+      "README_ES.md",
+      ".pytest_cache/README.md",
+      "artifacts/plans/archive/README.md"
+    ],
+    "top_folders": {
+      ".": {
+        "files": 6,
+        "bytes": 103408,
+        "tokens": 25849
+      },
+      ".antigravity": {
+        "files": 1,
+        "bytes": 1763,
+        "tokens": 440
+      },
+      ".context": {
+        "files": 1,
+        "bytes": 4263,
+        "tokens": 1065
+      },
+      ".git": {
+        "files": 232,
+        "bytes": 1170558,
+        "tokens": 292563
+      },
+      ".pytest_cache": {
+        "files": 4,
+        "bytes": 3260,
+        "tokens": 813
+      },
+      ".venv": {
+        "files": 861,
+        "bytes": 12018508,
+        "tokens": 3004331
+      },
+      ".vscode": {
+        "files": 1,
+        "bytes": 128,
+        "tokens": 32
+      },
+      "01_seed": {
+        "files": 2,
+        "bytes": 21848,
+        "tokens": 5461
+      },
+      "02_foundation": {
+        "files": 2,
+        "bytes": 4429,
+        "tokens": 1107
+      },
+      "03_research": {
+        "files": 3,
+        "bytes": 1083,
+        "tokens": 269
+      },
+      "artifacts": {
+        "files": 28,
+        "bytes": 540177,
+        "tokens": 135035
+      },
+      "config": {
+        "files": 1,
+        "bytes": 338,
+        "tokens": 84
+      },
+      "data": {
+        "files": 3,
+        "bytes": 1054,
+        "tokens": 262
+      },
+      "docs": {
+        "files": 4,
+        "bytes": 10646,
+        "tokens": 2660
+      },
+      "logs": {
+        "files": 50,
+        "bytes": 1200093,
+        "tokens": 300005
+      },
+      "orchestrator": {
+        "files": 45,
+        "bytes": 459396,
+        "tokens": 114836
+      },
+      "schemas": {
+        "files": 4,
+        "bytes": 9764,
+        "tokens": 2440
+      },
+      "scripts": {
+        "files": 1,
+        "bytes": 318,
+        "tokens": 79
+      },
+      "specs": {
+        "files": 102,
+        "bytes": 1337627,
+        "tokens": 334372
+      },
+      "src": {
+        "files": 10,
+        "bytes": 17652,
+        "tokens": 4409
+      },
+      "tests": {
+        "files": 22,
+        "bytes": 187711,
+        "tokens": 46920
+      },
+      "tools": {
+        "files": 1,
+        "bytes": 288,
+        "tokens": 72
+      },
+      "__pycache__": {
+        "files": 1,
+        "bytes": 21677,
+        "tokens": 5419
+      }
+    },
+    "ext_dist": {
+      "": 226,
+      ".ps1": 3,
+      ".py": 433,
+      ".md": 142,
+      ".json": 38,
+      ".sample": 14,
+      ".idx": 1,
+      ".pack": 1,
+      ".rev": 1,
+      ".tag": 1,
+      ".cfg": 1,
+      ".typed": 12,
+      ".pyc": 438,
+      ".txt": 5,
+      ".pem": 1,
+      ".exe": 11,
+      ".bat": 2,
+      ".yaml": 24,
+      ".log": 30,
+      ".sh": 1
+    }
   }
 ]

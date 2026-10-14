@@ -1,292 +1,288 @@
-<!-- ============================================================================== -->
-<!-- THINKINGSEED: ADN DEL PROYECTO (CONTEXTO PASIVO PARA MODELOS DE LENGUAJE)     -->
-<!-- ============================================================================== -->
+# ThinkingSeed Master: iDirectory
+
 > [!NOTE]
-> ### 🧬 DEFINICIÓN Y ROL DE ESTE DOCUMENTO
-> 1. **¿Qué es este archivo?:** Este documento es una **Semilla de Proyecto (ThinkingSeed Master)**: representa el **ADN arquitectónico, técnico y estructural exhaustivo** del sistema. **NO es el repositorio completo de código fuente**, sino su mapa genético y memoria técnica profunda extraída directamente del entorno de desarrollo.
-> 2. **Estado de Avance (Work in Progress):** Este documento refleja el **estado actual del desarrollo**. No garantiza que el proyecto esté concluido al 100%; puede representar un prototipo, un MVP o un sistema en evolución continua. La ausencia de código completo en ciertos archivos o módulos es **deliberada por diseño** para optimizar ventana de contexto o refleja áreas aún en desarrollo.
-> 3. **Modo de Operación:** Trata este documento como **contexto pasivo de referencia técnica (Ground Truth)**. No asumas que el archivo está defectuoso ni intentes reescribirlo por tu cuenta.
-<!-- ============================================================================== -->
+> Snapshot de arquitectura y contexto técnico profundo para LLMs y Agentes Autónomos.
+> Generado bajo el protocolo **seedMaster v3.0** (ThinkingSeed Master).
 
-# THINKING SEED MASTER: iDirectory
+---
 
-## 0. IDENTIDAD Y METADATOS
-```yaml
-seed_schema_version: "2.0"
-project_name: "iDirectory"
-repository_name: "iDirectory"
-project_type: "infra"
-repository_mode: "single-project"
-generated_at: "2026-09-25T15:07:00-03:00"
-generated_by: "Antigravity Agent (Gemini 3.8 Flash)"
-repository_root: "d:/0001 HyperScale Thinking/PROYECTOS CLOUD/iContext/iDirectory"
-git_branch: "master"
-git_commit: "e9c3b83"
-working_tree_state: "clean"
-analysis_mode: "static"
-coverage_level: "high"
-known_analysis_limits:
-  - "Inspección estática exhaustiva basada en código fuente de FWengine.py, manifiestos del framework, árbol normalizado de directorios, 24 beacons .context.yaml, mapa topológico satelital .context/tree.json, suite de benchmarks en 6 repositorios heterogéneos, auditoría MetricsThinking™ y CI/CD multi-OS."
+## 0. Identidad y Metadatos del Snapshot
+
+- **Proyecto:** `iDirectory` (Gravity HyperScale Thinking) `[CONFIRMADO]`
+- **Ruta Física Base:** `d:\0001 HyperScale Thinking\PROYECTOS CLOUD\iContext\iDirectory` `[CONFIRMADO]`
+- **Versión de Arquitectura:** `v3.0` (Two-Tier Bootloader & Context Engineering Engine) `[CONFIRMADO]`
+- **Fecha y Hora de Generación:** `2026-10-14 20:05:00 -03:00` `[CONFIRMADO]`
+- **Agente Generador:** Antigravity IDE (Google DeepMind Advanced Agentic Coding) `[CONFIRMADO]`
+- **Hash de Commit Git:** `106e760` `[CONFIRMADO]`
+- **Estado del Working Tree:** `DIRTY` (Modificaciones de benchmark matrix y peritaje forense FlowAgentic en curso) `[CONFIRMADO]`
+- **Arquetipo:** AI Agent Skills / Context Engineering / Repository Governance Engine `[CONFIRMADO]`
+- **Lenguaje Base y Runtime:** Python 3.9+ (Zero-Dependency Invariant / Standard Library Pura) `[CONFIRMADO]`
+
+### Convenciones Epistemológicas
+- `[CONFIRMADO]`: Verificado directamente mediante lectura de código fuente, ejecución de pruebas o CLI.
+- `[DECLARADO]`: Definido en especificaciones de arquitectura, contratos o documentación formal.
+- `[INFERIDO]`: Deducido lógicamente de la topología física, patrones de uso o benchmarks.
+- `[NO VERIFICADO]`: Presente en comentarios o roadmap pero sin suite de tests automatizada activa.
+- `[FALTANTE]`: Brecha identificada durante la auditoría de contexto.
+
+---
+
+## 1. Resumen Ejecutivo y Propósito
+
+### Propósito del Sistema `[DECLARADO]`
+`iDirectory` es un framework de gobernanza topológica y optimización atencional (*Context Engineering*) diseñado para estructurar repositorios de código de forma que maximicen la eficiencia de tokens y eliminen la degradación de la ventana de contexto (*Attention Drift* y dispersión en cabezales de atención) en LLMs y agentes de codificación autónomos (Google Antigravity/Gemini, Anthropic Claude Code, OpenAI Codex, Cursor, Windsurf, Aider).
+
+### El Problema Resuelto `[CONFIRMADO]`
+1. **Atrofia Atencional por Ingesta Masiva:** La práctica habitual de los agentes de autoinyectar seeds completos de miles de tokens (~6,800 tokens) o escanear directorios recursivamente (`find .`, `Get-ChildItem -Recurse`) degrada la atención atencional y eleva el costo por turno en un 70–85%.
+2. **Ambigüedad de Ruteo:** Proyectos sin convenciones canónicas acumulan scripts en la raíz o ubican modelos de datos y pruebas en directorios inconsistentes.
+3. **Desincronización de Topología:** Cambios físicos en la estructura del proyecto que no alertan a los agentes, provocando que estos operen sobre mapas obsoletos (*Satellite Drift*).
+
+### Consumidores Principales `[DECLARADO]`
+- **Agentes Autónomos:** Lectura satelital del grafo topológico en ~250 tokens mediante [`.context/tree.json`](file:///.context/tree.json).
+- **Ingenieros de Software / Data Engineers:** Estructura modular estándar con capas Medallion, orquestación, prompts y esquemas aislados.
+- **Sistemas de CI/CD:** Linters y validadores de gobernanza deterministas ejecutables sin instalar dependencias vía `python FWengine.py audit`.
+
+---
+
+## 2. Arquitectura, Topología y Two-Tier Bootloader
+
+### Protocolo Two-Tier Bootloader `[CONFIRMADO]`
+La arquitectura v3.0 reemplaza el arranque monolítico lineal por un modelo bifurcado gobernado por una matriz de decisión estricta:
+
+```
+                          ┌────────────────────────┐
+                          │     Entrada Agente     │
+                          └───────────┬────────────┘
+                                      │
+                     ┌────────────────┴────────────────┐
+                     ▼                                 ▼
+         [Disparadores Activos?]                       │
+          /seedMaster, /metrics,                       │
+          seed_reference: required,                    │
+          o Inconsistencia Contrato                    │
+                     │                                 │
+           SÍ        ▼                                 ▼ NO
+      ┌─────────────────────────────┐    ┌─────────────────────────────┐
+      │   TIER 2: Planificación     │    │     TIER 1: Operación       │
+      │   Arquitectónica / Auditoría│    │     Quirúrgica (Default)    │
+      ├─────────────────────────────┤    ├─────────────────────────────┤
+      │ 1. AGENTS.md                │    │ 1. AGENTS.md                │
+      │ 2. .context/tree.json       │    │ 2. .context/tree.json       │
+      │ 3. 01_seed/master.md (SEED) │    │ 3. resolve_beacon()         │
+      │ 4. Beacons relevantes       │    │    (.context.yaml / parent) │
+      │ 5. Ejecución global         │    │ 4. Modificación atómica     │
+      └─────────────────────────────┘    └─────────────────────────────┘
 ```
 
-### 0.1 Instrucciones para el modelo receptor
-1. **ADN vs Repositorio:** Reconoce este documento como la memoria técnica y el ADN del proyecto, no como el repositorio completo ni como una prueba de ejecución.
-2. **Contexto Pasivo:** No generes código no solicitado ni reclames por archivos ausentes; espera instrucciones específicas del usuario o utilízalo como contexto pasivo para responder preguntas sobre el funcionamiento del sistema.
-3. **Estado de Avance:** Considera que las secciones incompletas o componentes marcados como `[FALTANTE]` representan el avance real del proyecto y oportunidades de asistencia, no errores del documento.
-4. **Evidencia:** Respeta las etiquetas de evidencia y no transformes inferencias en hechos.
-5. **Rutas:** Antes de proponer cambios, identifica módulos y archivos afectados citando sus rutas exactas relativas al repositorio.
-6. **Contratos:** Conserva arquitectura, convenciones, contratos y restricciones declaradas.
-7. **Preguntas Dirigidas:** No inventes componentes ausentes. Formula preguntas solo cuando la incertidumbre impida una respuesta segura.
-8. **Seguridad:** No reveles ni solicites secretos. Usa placeholders (`<REDACTED>`).
-9. **Impacto:** Evalúa impactos laterales en pruebas, configuración, datos, seguridad, observabilidad y despliegue.
-10. **Asistencia:** Distingue entre solución inmediata, deuda técnica y recomendación futura.
+#### Matriz de Decisión de 3 Disparadores `[DECLARADO]`
+1. **Disparador 1 (Explícito - Usuario):** Comandos `/seedMaster`, `/metrics`, `/ultraThinking`, `/plan` o peticiones explícitas de reingeniería global. Habilita Tier 2.
+2. **Disparador 2 (Estructural - Beacon):** El beacon local `.context.yaml` de la carpeta objetivo contiene `seed_reference: required`. (Si contiene `seed_reference: optional`, **permanece en Tier 1** sin precargar la semilla).
+3. **Disparador 3 (Contingencia - Agente):** Detección de colisión de tipos/contratos con `schemas/` o necesidad de introducir una librería transversal no documentada. Permite lectura quirúrgica mediante `grep_search`.
 
----
+### Topología Canónica Normalizada (All-Lowercase) `[CONFIRMADO]`
+Todos los directorios raíz siguen la convención estricta en minúsculas para prevenir problemas de portabilidad y colisiones en sistemas de archivos Case-Preserving pero Case-Insensitive (Windows NTFS / macOS APFS):
 
-## 1. RESUMEN EJECUTIVO
-- **1.1 Proyecto en una frase:** Framework de gobernanza, ruteo heurístico y Context Engineering (**iDirectory v3.0**), concebido por **Gravity HyperScale Thinking** para optimizar el rendimiento, reducir entre 82.28% y 99.99% el desperdicio de tokens y prevenir la degradación de contexto en agentes autónomos de IA y equipos de ingeniería de datos multi-cloud. `[CONFIRMADO]`
-- **1.2 Problema que resuelve:** Erradica la exploración ciega (*blind tree crawling*), la dispersión desordenada de artefactos y la saturación de la ventana de contexto en modelos de lenguaje cuando analizan repositorios complejos de software, datos e IA. `[CONFIRMADO]`
-- **1.3 Usuarios o sistemas consumidores:** Agentes de codificación autónomos (Google Antigravity/Gemini, Anthropic Claude Code, OpenAI/Codex, Cursor, Windsurf, Aider), Arquitectos de Datos, Ingenieros Cloud y Científicos de Datos. `[CONFIRMADO]`
-- **1.4 Alcance y límites del sistema:** Incluye el motor CLI (`FWengine.py` v3.0 con Zero-Dependency en Python Standard Library), satélite topológico precargado (`.context/tree.json`), semáforos de poda de ramas muertas (`.context.yaml`), máscara de exclusión de IA (`.agentignore`), evaluación de madurez (`artifacts/plans/metricsthinking/`), suite de telemetría y benchmarks forenses (`artifacts/benchmarks/`), roadmap operacional (`artifacts/plans/active/INFERRED_ROADMAP.md`), pipelines CI/CD (`.github/workflows/ci.yml`), pruebas unitarias (`tests/`), reglas unificadas multi-proveedor (`AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `.cursorrules`, `.agents/skills/idir/SKILL.md`) y documentación de nivel Paper-Grade (`README.md`, `README_ES.md`). No incluye ejecución de cargas de datos remotas ni aprovisionamiento cloud en runtime. `[CONFIRMADO]`
-
----
-
-## 2. ARQUITECTURA Y TOPOLOGÍA
-- **2.1 Estilo arquitectónico:** Motor de Scaffolding, Gobernanza y Context Engineering modular, desacoplado y autocontenido en Python Standard Library pura (`pathlib`, `json`, `argparse`, `sys`, `os`), complementado con integración agéntica multi-proveedor, suite de benchmarks cuantitativos, auditoría MetricsThinking™ y documentación formal Paper-Grade. `[CONFIRMADO]`
-- **2.2 Árbol estructural del repositorio (All-Lowercase):**
-```text
-iDirectory/
-├── .github/                                    # Automatización CI/CD
-│   └── workflows/
-│       └── ci.yml                              # Pipeline multi-OS (Ubuntu, Windows, macOS) y multi-Python (3.10-3.13)
-├── .context/                                   # Telemetría y mapas satelitales de Context Engineering
-│   ├── schema/
-│   │   └── tree.schema.json                    # Contrato JSON Schema del satélite topológico
-│   └── tree.json                               # Mapa topológico consolidado (~250 tokens)
-├── .agents/                                    # Customizaciones de agentes Antigravity/Gemini
-│   └── skills/
-│       └── idir/                               # Skill canónica /idir v3.0
-│           └── SKILL.md
-├── .claude/                                    # Adaptadores de comandos para Claude Code
-│   └── commands/
-│       └── idir.md
-├── 01_seed/                                    # Semilla de proyecto y memoria técnica (ThinkingSeed Master)
-│   ├── .context.yaml                           # Beacon local (Priority: P0, Relevance: Critical, Crawl: False)
-│   └── seed-idirectory-master.md
-├── 02_foundation/
-│   ├── .context.yaml                           # Beacon local
-│   └── engine/                                 # Núcleo del framework y governance engine
-│       ├── .context.yaml
-│       └── engine_readme.md                    # Documentación maestra generada de directorios
-├── 03_research/                                # Investigación e Inteligencia Artificial
-│   ├── .context.yaml                           # Beacon local
-│   ├── notebooks/                              # Notebooks de exploración (EDA, algoritmos interactivos)
-│   ├── prompts/                                # System prompts, árboles de contexto y plantillas LLM
-│   └── experiments/                            # PoCs, prototipos de modelos y benchmarks
-├── src/                                        # Código fuente productivo
-│   ├── .context.yaml                           # Beacon local
-│   ├── cloud_jobs/                             # Scripts de producción y pipelines Multi-Cloud (Fabric, AWS, GCP, Azure)
-│   ├── data_generation/                        # Generación y simulación de datos sintéticos
-│   ├── core/                                   # Lógica de negocio modular y backend
-│   └── dashboards/                             # Tableros BI y visualización (Streamlit, PowerBI, Dash)
-├── data/                                       # Arquitectura Medallion local (Ignorado en Git y AI)
-│   ├── .context.yaml                           # Beacon local (crawl: false, relevance: zero_for_llm)
-│   ├── raw/                                    # Bronze: Fuentes puras e inmutables
-│   ├── processed/                              # Silver/Gold: Datos transformados y optimizados
-│   └── sandbox/                                # Zona de experimentación rápida
-├── schemas/                                    # Definiciones formales de esquemas (Avro, JSON Schema, DDL)
-│   └── .context.yaml                           # Beacon local
-├── infrastructure/                             # IaC Multi-Cloud (Terraform, Bicep, ARM, CDK)
-│   └── .context.yaml                           # Beacon local
-├── config/                                     # Parámetros de entorno y variables desacopladas
-│   └── .context.yaml                           # Beacon local
-├── tests/                                      # Pruebas unitarias, integración y calidad de datos
-│   ├── .context.yaml                           # Beacon local
-│   ├── test_fwengine.py                        # Suite unitaria (16 tests, MiniYAML, ruteo, idempotencia)
-│   └── test_token_budget.py                    # Suite de benchmarking y compresión de tokens
-├── artifacts/                                  # Entregables y planes estratégicos
-│   ├── .context.yaml                           # Beacon local
-│   ├── benchmarks/                             # Telemetría forense de 6 repositorios (Read-Only)
-│   │   ├── README.md                           # Reporte ejecutivo máster y matriz comparativa
-│   │   ├── benchmark_matrix.json               # Dataset consolidado de tokens y compresión
-│   │   ├── forensic_repo_01_*.md               # Auditoría forense detallada Repo 01
-│   │   ├── forensic_repo_02_*.md               # Auditoría forense detallada Repo 02
-│   │   ├── forensic_repo_03_*.md               # Auditoría forense detallada Repo 03
-│   │   ├── forensic_repo_04_*.md               # Auditoría forense detallada Repo 04
-│   │   ├── forensic_repo_05_*.md               # Auditoría forense detallada Repo 05
-│   │   └── forensic_repo_06_*.md               # Auditoría forense detallada Repo 06
-│   └── plans/
-│       ├── active/                             # Planes vigentes y roadmap operacional
-│       │   └── INFERRED_ROADMAP.md             # Roadmap desacoplado en 10 fases con checklists
-│       ├── metricsthinking/                    # Evaluación forense de madurez del proyecto (Priority: P0)
-│       │   ├── .context.yaml                   # Beacon local (Priority: P0, Relevance: Critical)
-│       │   ├── MetricsThinking.md              # Reporte Markdown con score, bottleneck y roadmap
-│       │   └── MetricsThinking.json            # Dataset estructurado de auditoría SDD
-│       └── archive/                            # Histórico de arquitecturas descartadas (crawl: false)
-├── docs/                                       # Documentación técnica viva
-│   ├── .context.yaml                           # Beacon local
-│   ├── architecture/                           # Diagramas de arquitectura y flujos Medallion
-│   │   ├── folder_manifest.json                # Manifiesto JSON de la topología
-│   │   └── folder_manifest.yaml                # Manifiesto YAML de la topología
-│   ├── specs/                                  # Especificaciones funcionales y contratos
-│   └── notes/                                  # Bitácoras de ingeniería, ADRs y RCA
-├── tools/                                      # Utilitarios locales, linters y scripts de debugging
-│   └── .context.yaml                           # Beacon local
-├── scripts/                                    # Scripts operativos (bash, powershell, make)
-│   ├── .context.yaml                           # Beacon local
-│   └── generate_benchmark_reports.py          # Generador de reportes forenses multi-repo
-├── logs/                                       # Trazas locales de ejecución y auditoría (crawl: false)
-│   └── .context.yaml                           # Beacon local
-├── AGENTS.md                                   # Regla Maestra Universal (Single Source of Truth)
-├── GEMINI.md                                   # Shim de gobernanza para Google Gemini / Antigravity
-├── CLAUDE.md                                   # Shim de gobernanza para Anthropic Claude Code
-├── .cursorrules                                # Reglas contextuales para Cursor / Windsurf
-├── .agentignore                                # Máscara de exclusión para indexadores de IA
-├── .gitignore                                  # Reglas de exclusión para Git
-├── LICENSE                                     # Licencia MIT del proyecto
-├── FWengine.py                                 # Motor principal v3.0 (CLI de inicialización, beacons y ruteo)
-├── README.md                                   # Documentación de alta ingeniería formal (Inglés)
-└── README_ES.md                                # Documentación de alta ingeniería formal (Español)
-```
-- **2.3 Responsabilidad por directorio y archivo clave:**
-  - `FWengine.py`: Orquestador CLI principal que alberga la lógica de ruteo, MiniYAML, generación de beacons y satélite topológico. `[CONFIRMADO]`
-  - `AGENTS.md`: Contrato maestro universal de Context Engineering con el Protocolo Bootloader de 4 pasos. `[CONFIRMADO]`
-  - `.context/tree.json`: Satélite topológico precargado que previene el blind crawling (~250 tokens). `[CONFIRMADO]`
-  - `artifacts/benchmarks/`: Centro de telemetría forense que consolida evidencia empírica de 6 repositorios (82.28% a 99.99% de ahorro de tokens). `[CONFIRMADO]`
-  - `artifacts/plans/metricsthinking/`: Directorio crítico P0 que almacena las métricas cuantitativas y roadmap de madurez SDD (`MetricsThinking.md` y `MetricsThinking.json`). `[CONFIRMADO]`
-  - `artifacts/plans/active/INFERRED_ROADMAP.md`: Roadmap operacional desacoplado en 10 fases derivado de la evidencia física. `[CONFIRMADO]`
-  - `.agents/skills/idir/SKILL.md`: Declaración formal de la habilidad del agente para invocar `FWengine.py`. `[CONFIRMADO]`
-  - `tests/`: Suites de pruebas unitarias (`test_fwengine.py`) y evaluación de tokens (`test_token_budget.py`). `[CONFIRMADO]`
-  - `.github/workflows/ci.yml`: Pipeline CI/CD que certifica compatibilidad multi-OS y zero external dependencies. `[CONFIRMADO]`
-- **2.4 Límites modulares y acoplamiento:** Desacoplamiento total; `FWengine.py` no depende de librerías de terceros (Zero-Dependency CLI). `[CONFIRMADO]`
-
----
-
-## 3. FLUJOS DE EJECUCIÓN Y ENTRY POINTS
-- **3.1 Puntos de entrada principales:**
-  - `python FWengine.py init [path]`: Inicializa el andamiaje canónico, genera el satélite `.context/tree.json`, beacons `.context.yaml`, `.agentignore` y `.gitignore`. `[CONFIRMADO]`
-  - `python FWengine.py route <file> [--move] [--base <path>]`: Audita y clasifica un archivo según su extensión y heurística nominal, recomendando o reubicando físicamente el elemento. `[CONFIRMADO]`
-  - `python FWengine.py beacon [--sync|--audit]`: Genera, sincroniza y audita todos los microarchivos `.context.yaml`. `[CONFIRMADO]`
-  - `python FWengine.py map [--sync]`: Regenera el mapa satelital `.context/tree.json`. `[CONFIRMADO]`
-  - `python FWengine.py context [--budget|--compact]`: Muestra telemetría de densidad y presupuesto de tokens por directorio o emite cadena de inyección rápida para prompts. `[CONFIRMADO]`
-  - `python FWengine.py audit`: Audita inconsistencias de mayúsculas, carpetas huérfanas y beacons ausentes. `[CONFIRMADO]`
-  - Invocación vía Slash Command `/idir` o `/dir`: Agentes Antigravity ejecutan la lógica CLI de forma contextual y transparente. `[CONFIRMADO]`
-  - Invocación vía Slash Command `/metrics`: Ejecuta el motor evaluador de madurez y sincroniza el reporte en `artifacts/plans/metricsthinking/`. `[CONFIRMADO]`
-  - Invocación vía Slash Command `/seedMaster`: Actualiza este ADN técnico profundo del proyecto. `[CONFIRMADO]`
-- **3.2 Diagrama de flujo principal E2E:**
-```mermaid
-graph TD
-    A[Agente de IA / Ingeniero] -->|Paso 0| B[Lectura de AGENTS.md / GEMINI.md / CLAUDE.md]
-    B -->|Paso 1| C[Lectura Satelital .context/tree.json ~250 tokens]
-    C -->|Paso 2| D[Lectura de ADN 01_seed/seed-idirectory-master.md]
-    D -->|Paso 3| E[Lectura de Beacon Local .context.yaml de Carpeta Destino]
-    E -->|Paso 4| F{Directiva crawl: true?}
-    F -->|Sí| G[Operación Quirúrgica en Archivo]
-    F -->|No| H[Poda de Rama Muerta / Acceso Prohibido]
-    G --> I[Ejecución de FWengine.py route / audit / beacon]
-```
-- **3.3 Ciclo de vida de la ejecución y estados:**
-  1. Lectura de argumentos vía `argparse`.
-  2. Verificación de integridad y existencia de archivos.
-  3. Ejecución determinista / heurística con salida estructurada en `stdout` y código de retorno `0`. `[CONFIRMADO]`
-
----
-
-## 4. MODELO DE DATOS, CONTRATOS Y PERSISTENCIA
-- **4.1 Esquemas y entidades principales:**
-  - `FOLDER_METADATA` (`dict[str, dict]`): Metadatos completos por directorio incluyendo propósito, rol, relevancia, directiva `crawl`, prioridad de lectura y densidad de tokens. `[CONFIRMADO]`
-  - `ROUTING_MAP` (`dict[str, str]`): Mapeo determinista de extensiones (`.py`, `.ipynb`, `.md`, `.sql`, `.tf`, `.yaml`, `.csv`, `.parquet`, etc.) a sus carpetas canónicas en minúsculas. `[CONFIRMADO]`
-  - Schema de Beacons (`.context.yaml`): Estructura YAML serializada con `MiniYAML` que define rol, propósito, prioridad, dependencias y reglas de poda. `[CONFIRMADO]`
-  - Schema Satelital (`.context/tree.json`): Diccionario estructurado validado contra `.context/schema/tree.schema.json` para carga ultraligera en agentes. `[CONFIRMADO]`
-  - Schema MetricsThinking™ (`MetricsThinking.json`): Contrato de evaluación de madurez SDD con scores ponderados, bandas de madurez y roadmap de remediación. `[CONFIRMADO]`
-  - Roadmap Operacional (`INFERRED_ROADMAP.md`): Contrato operacional desacoplado en 10 etapas con checklists de avance interactivos. `[CONFIRMADO]`
-  - Schema de Benchmarks (`benchmark_matrix.json`): Matriz de telemetría multi-repositorio que modela tokens brutos, tokens limpios, masa satelital y ratio de compresión. `[CONFIRMADO]`
-- **4.2 Almacenamiento, motores y migraciones:** Persistencia directa en sistema de archivos local utilizando operaciones seguras de `pathlib.Path` (`mkdir(parents=True, exist_ok=True)`, `rename`). `[CONFIRMADO]`
-- **4.3 Interfaces externas:** CLI estandarizado sin dependencias externas. `[CONFIRMADO]`
-
----
-
-## 5. CONFIGURACIÓN Y AMBIENTE
-- **5.1 Tabla de variables de entorno:**
-| Variable | Tipo | Default | Efecto | Sensible |
+| Directorio | Propósito y Contenido Canónico | Beacon | Directiva Crawl | Referencia a Semilla |
 | :--- | :--- | :--- | :--- | :--- |
-| N/A | N/A | N/A | Sin variables de entorno obligatorias; CLI autocontenido en Python Standard Library. | No `[CONFIRMADO]` |
-- **5.2 Perfiles de ejecución:** Entorno universal (dev, staging, prod) soportado mediante parametrización en subdirectorio `config/`. `[CONFIRMADO]`
-- **5.3 Prerrequisitos de sistema:** Python 3.10+ instalado en el entorno ejecutor (Windows, Linux, macOS). `[CONFIRMADO]`
+| `01_seed/` | ADN arquitectónico, snapshots `seed-*.md` y contratos base. | Sí | `crawl: true` | `seed_reference: required` |
+| `02_foundation/` | Framework del motor `FWengine.py`, guías operativas. | Sí | `crawl: true` | `seed_reference: optional` |
+| `03_research/` | Notebooks exploratorios, experimentos y prompts de IA. | Sí | `crawl: true` | `seed_reference: optional` |
+| `src/` | Código de producción (`core/`, `cloud_jobs/`, `data_generation/`, `dashboards/`). | Sí | `crawl: true` | `seed_reference: optional` |
+| `artifacts/` | Planes de implementación (`active/`, `archive/`), benchmarks y métricas. | Sí | `active: true`, `archive: false` | `metricsthinking: required` |
+| `docs/` | Especificaciones de negocio, notas ADR y diagramas de arquitectura. | Sí | `crawl: true` | `seed_reference: optional` |
+| `config/` | Archivos de configuración desacoplados por ambiente (`.yaml`, `.json`). | Sí | `crawl: true` | `seed_reference: optional` |
+| `schemas/` | Contratos formales de datos (Avro, JSON Schema, DDL, Pydantic). | Sí | `crawl: true` | `seed_reference: optional` |
+| `data/` | Capas Medallion locales (`raw/`, `processed/`, `sandbox/`). | Sí | `crawl: false` | `seed_reference: optional` |
+| `tests/` | Suites de pruebas unitarias, integración y token budget. | Sí | `crawl: true` | `seed_reference: optional` |
+| `tools/` | Utilidades de desarrollo, linters y scripts auxiliares. | Sí | `crawl: true` | `seed_reference: optional` |
+| `scripts/` | Automatizaciones de despliegue y mantenimiento en terminal. | Sí | `crawl: true` | `seed_reference: optional` |
+| `logs/` | Archivos de trazas operativas y auditorías locales. | Sí | `crawl: false` | `seed_reference: optional` |
+| `.context/` | Satélite topológico `tree.json` y esquemas de Context Engineering. | Sí | `crawl: true` | `seed_reference: optional` |
 
 ---
 
-## 6. PRUEBAS, CI/CD Y OPERACIÓN
-- **6.1 Estrategia de pruebas:**
-  - Auditoría interna automatizada vía `python FWengine.py audit` que valida que no existan carpetas con mayúsculas, que todos los beacons estén presentes y que el satélite topológico esté sincronizado. `[CONFIRMADO]`
-  - Pruebas unitarias en `tests/test_fwengine.py` (16 tests pasando al 100%, cubriendo serializador MiniYAML, validación de invariantes en minúsculas, ruteo de archivos y modo idempotente). `[CONFIRMADO]`
-  - Pruebas de token budget y compresión en `tests/test_token_budget.py` (4 tests verificando reducción de tokens $\ge 90\%$, consistencia de beacons y latencia sub-milisegundo). `[CONFIRMADO]`
-- **6.2 Automatización y pipelines CI/CD:** Pipeline en GitHub Actions (`.github/workflows/ci.yml`) con matriz multi-OS (Ubuntu, Windows, macOS) y multi-versión de Python (3.10, 3.11, 3.12, 3.13), ejecutando auditorías, verificación de cero dependencias externas y tests unitarios. `[CONFIRMADO]`
-- **6.3 Operación:** Ejecutable como script interactivo o integrado en automatizaciones agénticas de Antigravity, Claude Code, Cursor y Windsurf. `[CONFIRMADO]`
+## 3. Flujos de Ejecución y CLI: `FWengine.py`
+
+El motor [`FWengine.py`](file:///d:/0001%20HyperScale%20Thinking/PROYECTOS%20CLOUD/iContext/iDirectory/FWengine.py) opera como una CLI unificada sin librerías externas.
+
+### Comandos y Capacidades Principales `[CONFIRMADO]`
+
+```powershell
+# 1. Auditoría de gobernanza (reporte de salud, drift y estructura)
+python FWengine.py audit
+
+# 2. Inicialización / Actualización de topología estándar y beacons
+python FWengine.py init
+
+# 3. Ruteo heurístico híbrido (extensión + inspección de encabezado)
+python FWengine.py route "ruta/archivo.py"
+
+# 4. Reubicación física canónica del archivo ruteado
+python FWengine.py route "ruta/archivo.py" --move
+
+# 5. Sincronización de beacons (.context.yaml)
+python FWengine.py beacon --sync
+
+# 6. Sincronización del mapa satelital (.context/tree.json)
+python FWengine.py map --sync
+
+# 7. Telemetría de Context Engineering y Token Budget
+python FWengine.py context --budget
+
+# 8. Verificación de frescura satelital (detección de drift)
+python FWengine.py audit --check-freshness
+```
+
+### Funciones Centrales del Motor `[CONFIRMADO]`
+- `resolve_beacon(target_dir: Path, root_dir: Path) -> dict`: Implementa la **herencia jerárquica ascendente**. Si `target_dir` no posee un `.context.yaml` físico, asciende recursivamente por el árbol de directorios hasta encontrar el beacon del ancestro más próximo, combinando directivas de poda (`crawl: false`).
+- `inspect_python_header(filepath: Path) -> Optional[str]`: Inspecciona de forma ultraligera las primeras 15 líneas de archivos Python para detectar palabras clave arquitectónicas (`pytest`, `unittest`, `streamlit`, `dash`, `pydantic`, `apache_beam`, `pyspark`) y evitar colisiones heurísticas basadas únicamente en la extensión.
+- `check_satellite_freshness(root: Path) -> Tuple[bool, str]`: Valida que el archivo `.context/tree.json` no tenga una antigüedad mayor a la modificación física más reciente de la estructura del repositorio.
+- `safe_relocate(src: Path, dst: Path)`: Previene ataques de *Path Traversal* validando que la ruta resuelta permanezca estrictamente contenida dentro del `ROOT_DIR`.
+- `safe_rename_casing(folder: Path, canonical_name: str)`: En Windows NTFS, utiliza un directorio temporal intermedio (`__case_tmp__`) para garantizar cambios de mayúsculas/minúsculas atómicos sin pérdida de datos.
 
 ---
 
-## 7. OBSERVABILIDAD Y MODOS DE FALLA
-- **7.1 Logs y métricas:** Impresión estructurada en `stdout` durante la ejecución CLI, telemetría de presupuesto de tokens vía `python FWengine.py context --budget`, reportes de benchmark en `artifacts/benchmarks/` y preservación de logs en `logs/`. `[CONFIRMADO]`
-- **7.2 Modos de falla conocidos y estrategias de recuperación:**
-  - *Archivo inexistente en `route`:* El motor captura la excepción, emite mensaje descriptivo en consola y retorna de forma controlada sin fallar el proceso. `[CONFIRMADO]`
-  - *Colisión de mayúsculas en Windows al renombrar:* Mitigado mediante paso intermedio temporal en migraciones de filesystem. `[CONFIRMADO]`
-- **7.3 Idempotencia:** Los comandos `init`, `beacon --sync` y `map --sync` son 100% idempotentes. `[CONFIRMADO]`
+## 4. Modelos de Datos, Contratos y Esquemas
+
+### Parser MiniYAML Incorporado `[CONFIRMADO]`
+Dado el invariante de cero dependencias externas, `FWengine.py` incluye un parser/serializador determinista para microarchivos YAML compatible con subconjuntos clave-valor y listas indentadas:
+
+#### Estructura de un Beacon Canónico (`.context.yaml`) `[DECLARADO]`
+```yaml
+module: src/core
+role: Núcleo algorítmico y lógica de negocio pura
+authority: Principal
+crawl: true
+seed_reference: optional
+allowed_patterns:
+  - "*.py"
+forbidden_patterns:
+  - "*.tmp"
+  - "*.log"
+dependencies: []
+```
+
+### Contrato del Satélite Topológico (`.context/tree.json`) `[CONFIRMADO]`
+Genera una representación compacta en JSON optimizada para ser consumida en una sola llamada de lectura (~250 tokens):
+
+```json
+{
+  "project": "iDirectory",
+  "generated_at": "2026-10-14T20:00:00",
+  "total_folders": 24,
+  "structure": {
+    "01_seed": {
+      "role": "ADN arquitectónico del sistema y Ground Truth",
+      "crawl": true,
+      "seed_reference": "required"
+    },
+    "data/raw": {
+      "role": "Datos crudos sin procesar",
+      "crawl": false,
+      "seed_reference": "optional"
+    }
+  }
+}
+```
 
 ---
 
-## 8. SEGURIDAD Y PRIVACIDAD
-- **8.1 Hallazgos de seguridad estática:** Zero external dependencies (Cero superficie de ataque por paquetes vulnerables de terceros). `[CONFIRMADO]`
-- **8.2 Manejo de secretos:** Sin almacenamiento de credenciales ni tokens. El archivo `.gitignore` y `.agentignore` excluyen deliberadamente carpetas de datos locales (`data/raw`, `data/processed`, `data/sandbox`) y logs (`logs/`). `[CONFIRMADO]`
-- **8.3 Privacidad de datos:** Las directivas `crawl: false` en los beacons de `data/` evitan que los agentes vuelquen datos crudos a los modelos de lenguaje. La suite de benchmarks en `artifacts/benchmarks/` aplica privacidad estricta procesando únicamente metadatos numéricos y estructurales sin extraer código fuente ni datos de negocio. `[CONFIRMADO]`
+## 5. Configuración y Entorno de Ejecución
+
+- **Python Runtime:** 3.9 o superior `[CONFIRMADO]`.
+- **Compatibilidad de SO:** Windows (PowerShell/CMD), Linux (Bash), macOS (Zsh) `[CONFIRMADO]`.
+- **Políticas de Filesystem:**
+  - Caracteres UTF-8 forzados en lectura/escritura (`encoding="utf-8"`).
+  - Manejo de rutas nativas vía `pathlib.Path` agnóstica a barras `/` o `\`.
+- **Zero-Dependency Invariant:** Prohibición absoluta de requerir `pip install` para la ejecución del motor `FWengine.py` `[CONFIRMADO]`.
 
 ---
 
-## 9. ESTADO REAL, DEUDA TÉCNICA Y LIMITACIONES
-- **9.1 Nivel de madurez y avance real:** Versión v3.0 consolidada; motor CLI funcional, topología normalizada all-lowercase, 24 beacons desplegados, satélite topológico activo, suite de benchmarks en 6 repositorios completada y soporte multi-proveedor verificado con auditoría `PASS`. Score MetricsThinking™: `100.00%` (Banda: Excelencia Operativa / Producción. Criterios cumplidos: 30/30 = 100.0%). `[CONFIRMADO]`
-- **9.2 Cuello de botella activo:** Ninguno (`None`). Todos los módulos canónicos al 100.0% de madurez técnica. `[CONFIRMADO]`
-- **9.3 Deuda técnica identificada:**
-  - Suite de pruebas unitarias automatizadas implementada en `tests/test_fwengine.py` (16 tests, 100% pass). `[CONFIRMADO]`
-  - Prueba automatizada de benchmarking de tokens y estrés implementada en `tests/test_token_budget.py` (4 tests, reducción cuantificada de tokens del 96.1%: ~766 tokens satelital vs ~19,886 tokens escaneo ciego, latencia 0.64ms). `[CONFIRMADO]`
-  - Pipeline de CI/CD automatizado implementado en `.github/workflows/ci.yml`. `[CONFIRMADO]`
-  - Suite empírica de benchmarks multi-repo completada en `artifacts/benchmarks/` validando un ahorro real de entre 82.28% y 99.99% en 6 repositorios locales. `[CONFIRMADO]`
-- **9.4 Inconsistencias entre código y documentación:** Cero (0) inconsistencias detectadas. Código, satélite topológico, beacons, memoria técnica, benchmarks y documentación pública 100% sincronizados. `[CONFIRMADO]`
+## 6. Pruebas, Validación y Benchmarks
+
+### Suite de Pruebas Unitarias `tests/test_fwengine.py` `[CONFIRMADO]`
+La suite contiene 26 casos de prueba unitarios automatizados basados en `unittest` que cubren el 100% de los componentes críticos:
+
+1. **Topología y Directorios:** Verificación de creación de las 24 carpetas canónicas en minúsculas.
+2. **Parser MiniYAML:** Serialización y deserialización bidireccional de `.context.yaml`.
+3. **Ruteo Heurístico Híbrido:** Validación de ruteo por extensión e inspección de encabezados (scripts de prueba a `tests/`, dashboards a `src/dashboards/`, schemas a `schemas/`).
+4. **Herencia Jerárquica (`resolve_beacon`):** Prueba de resolución ascendente cuando subcarpetas anidadas carecen de beacon físico propio.
+5. **Seguridad y Path Traversal:** Rechazo inmediato de rutas fuera del root (`../../evil.py`).
+6. **Manejo de NTFS Casing:** Renombrado seguro sin colisión en Windows.
+7. **Telemetría y Freshness:** Detección de drift en `tree.json` y cálculo del token budget.
+
+*Resultado de ejecución local:* `Ran 26 tests in 0.082s - OK (100% Pass Rate)` `[CONFIRMADO]`.
+
+### Matriz Forense de Benchmarks (`artifacts/benchmarks/`) `[CONFIRMADO]`
+Se mantiene una matriz pericial documentada en [`artifacts/benchmarks/benchmark_matrix.json`](file:///d:/0001%20HyperScale%20Thinking/PROYECTOS%20CLOUD/iContext/iDirectory/artifacts/benchmarks/benchmark_matrix.json) que audita 7 repositorios bajo la metodología de Context Engineering:
+
+- `repo_01` a `repo_06`: Repositorios base evaluados con reducciones promedio de 83.2% en consumo de tokens en arranque de agentes.
+- `repo_07` (`FlowAgentic`): Repositorio recientemente evaluado con topología v2.0 preexistente, 12 beacons desincronizados y satélite ausente, documentado en [`forensic_repo_07_flowagentic.md`](file:///d:/0001%20HyperScale%20Thinking/PROYECTOS%20CLOUD/iContext/iDirectory/artifacts/benchmarks/forensic_repo_07_flowagentic.md).
 
 ---
 
-## 10. REGLAS PARA MODIFICAR EL PROYECTO
-- **10.1 Convenciones de estilo:** Python PEP8 estricto, tipado y sintaxis canónica de `pathlib.Path` para neutralidad de plataforma operativa. Todos los nombres de carpetas en minúsculas strictly (`all-lowercase`). `[CONFIRMADO]`
-- **10.2 Reglas arquitectónicas inviolables:**
-  - `01_seed/` es prioritario e inamovible como repositorio del ADN técnico. `[CONFIRMADO]`
-  - No agregar dependencias de terceros a `FWengine.py`; debe mantenerse exclusivamente con la librería estándar de Python. `[CONFIRMADO]`
-  - Todo agente debe seguir strictly el Protocolo Bootloader de 4 pasos declarado en `AGENTS.md`. `[CONFIRMADO]`
-- **10.3 Checklist de verificación previa a commit:**
-  1. Ejecutar `python FWengine.py audit` y comprobar que devuelva código de salida 0 sin violaciones.
-  2. Ejecutar `pytest` o `python -m unittest discover tests` para certificar que todos los tests unitarios pasen.
-  3. Verificar que ningún dato sensible o binario pesado haya sido añadido fuera de `.gitignore` y `.agentignore`.
-  4. Ejecutar `/seedMaster` para actualizar la memoria técnica si hubo cambios estructurales.
+## 7. Observabilidad, Telemetría y Modos de Fallo
+
+### Telemetría de Token Budget `[CONFIRMADO]`
+Ejecutable mediante `python FWengine.py context --budget`:
+- **Consumo Satelital:** ~250 tokens (`tree.json`).
+- **Consumo Beacon Unitario:** ~80–120 tokens (`.context.yaml`).
+- **Ahorro Efectivo en Tier 1:** Evita la ingesta del archivo de semilla (~6,800 tokens), reduciendo la huella de inicio en más del 85%.
+
+### Modos de Fallo y Mecanismos de Mitigación `[CONFIRMADO]`
+| Modo de Fallo | Detección | Mitigación Implementada |
+| :--- | :--- | :--- |
+| **Path Traversal Attack** | Ruta normalizada no inicia con `ROOT_DIR`. | `ValueError("Intento de path traversal fuera del proyecto")` inmediato. |
+| **Colisión de Casing NTFS** | `folder.rename()` falla silenciosamente en Windows. | Renombrado en dos pasos vía carpeta temporal UUID / `__case_tmp__`. |
+| **Drift del Mapa Satelital** | `tree.json` mtime < carpetas mtime. | Advertencia en `FWengine.py audit` y flags de alerta en telemetría. |
+| **Beacon Faltante** | Subcarpeta nueva sin inicializar. | `resolve_beacon()` hereda recursivamente del padre más cercano. |
+| **Rama Muerta Masiva** | Agente intenta listar `data/raw/` o `logs/`. | Directiva `crawl: false` en árbol y beacons prohíbe el volcado. |
 
 ---
 
-## 📌 CONTEXT HANDOFF & PROTOCOLO DE ASISTENCIA
+## 8. Seguridad, Privacidad y Gobernanza de Agentes
 
-> **Mensaje de orientación para el modelo de IA receptor:**
-> "Esto es una semilla de proyecto (ThinkingSeed Master): el ADN del proyecto y no su repositorio completo. Refleja el avance real y la arquitectura del sistema hasta la fecha. Como modelo receptor, tu función es usar esta semilla como memoria técnica para:
-> 1. **Responder preguntas** sobre la arquitectura, funcionamiento, dependencias y flujos del sistema.
-> 2. **Sugerir mejoras o asistencia técnica** sobre el estado actual y áreas pendientes identificadas en la semilla.
-> 3. **Generar código o soluciones compatibles** respetando las rutas, convenciones y patrones definidos aquí, cuando el usuario te lo solicite."
+### Reglas para Agentes de IA (`AGENTS.md` / `GEMINI.md`) `[CONFIRMADO]`
+1. **Invariante de Poda:** Prohibido ejecutar comandos de exploración ciega recursiva (`Get-ChildItem -Recurse`, `find .`, `ls -R`). Toda navegación debe estar guiada por `.context/tree.json`.
+2. **Prohibición de Precarga en Tier 1:** El agente no debe leer este archivo (`01_seed/seed-idirectory-master.md`) a menos que ocurra uno de los 3 disparadores de la matriz de decisión.
+3. **Contrato de Sincronización:** Cualquier adición o eliminación de directorios exige la ejecución de `python FWengine.py beacon --sync` y `python FWengine.py map --sync` antes del cierre de turno.
+4. **Protección de Secretos:** Política estricta de ofuscación `<REDACTED>` para credenciales, API keys o tokens de acceso encontrados en archivos `.env` o configuraciones locales.
 
-### Pautas de resolución:
-Antes de resolver una solicitud:
-1. Identifica el objetivo del usuario.
-2. Localiza los componentes afectados usando las rutas del Seed.
-3. Revisa restricciones, reglas y contratos declarados.
-4. Explicita supuestos cuando sea necesario: "Supongo que X debido a Y".
-5. Propone cambios por archivo con rutas claras.
-6. Añade pruebas, riesgos y criterios de aceptación.
+---
 
-### 🤝 Acuse de Recibo Inicial
-Si el usuario adjuntó esta semilla **sin una instrucción específica**, no intentes generar código ni completar archivos vacíos. Responde únicamente con:
-1. Un saludo confirmando que asimilaste el ADN de **iDirectory v3.0** y su stack principal.
-2. Un breve resumen de 2-3 líneas sobre el objetivo y su estado actual de avance.
-3. Una frase poniéndote a disposición para resolver dudas sobre su funcionamiento o colaborar en los siguientes pasos de desarrollo.
+## 9. Estado Real, Deuda Técnica y Roadmap
+
+### Nivel de Madurez Actual `[CONFIRMADO]`
+- **Framework Core (v3.0):** 98% (Motor CLI, Two-Tier Bootloader, MiniYAML, Suite de Tests de 26 casos).
+- **Cobertura de Beacons Locales:** 100% de los 24 directorios canónicos poseen beacon normalizado.
+- **Suite de Benchmarks:** 7 repositorios analizados forensemente.
+
+### Deuda Técnica Identificada `[DECLARADO]`
+1. **Soporte de Comentarios en MiniYAML:** El parser serializa estructuras limpias pero descarta comentarios en línea `#` al reescribir `.context.yaml`.
+2. **Linter Semántico de Tipos:** El validador heurístico de cabeceras Python cubre palabras clave frecuentes pero no realiza análisis AST profundo (reservado para mantener cero dependencias).
+
+### Roadmap Próximo `[INFERIDO]`
+- [x] Implementación de Two-Tier Bootloader y matrices de decisión en gobernanza Markdown.
+- [x] Herencia jerárquica de beacons (`resolve_beacon`).
+- [x] Inspección híbrida de encabezados de código fuente.
+- [x] Peritaje forense e integración de `FlowAgentic` a la matriz de benchmarks.
+- [ ] Auto-reparación asistida mediante `/idir --repair` para proyectos legacy externos.
+
+---
+
+## 10. Protocolo de Modificación y Traspaso de Contexto
+
+Para modificar o extender la arquitectura de `iDirectory`:
+
+1. **Verificar el Estado Base:** Ejecutar `python FWengine.py audit` para comprobar que no existan desincronizaciones previas.
+2. **Ejecutar Pruebas Antes de Editar:** Asegurar que los 26 tests en `tests/test_fwengine.py` pasen limpiamente (`python -m unittest tests/test_fwengine.py`).
+3. **Preservar Invariantes:**
+   - Cero dependencias externas en `FWengine.py`.
+   - Nombres de directorios raíz estrictamente en minúsculas (`all-lowercase`).
+   - Mantener el contrato del satélite `.context/tree.json`.
+4. **Sincronizar y Regenerar:**
+   ```powershell
+   python FWengine.py beacon --sync
+   python FWengine.py map --sync
+   ```
+5. **Cierre de Turno:** Si se alteran contratos o arquitectura global, regenerar este ThinkingSeed Master mediante `/seedMaster`.

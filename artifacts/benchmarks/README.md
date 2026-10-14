@@ -1,9 +1,9 @@
 # iDirectory™ Context Engineering & Satellite Navigation Benchmark
-## Executive Master Audit & Comparative Analysis across 6 Repositories
+## Executive Master Audit & Comparative Analysis across 7 Repositories
 
 **Auditor & Engine:** Google Gemini 3.7 Flash (Antigravity Agentic Harness)  
 **Methodology:** Context Engineering v3.0 / MetricsThinking™ Framework  
-**Scope:** 6 Heterogeneous Local Repositories (Read-Only Forensic Telemetry)  
+**Scope:** 7 Heterogeneous Local Repositories (Read-Only Forensic Telemetry)  
 **Date:** 2026-09-25  
 
 ---
@@ -29,6 +29,7 @@ El presente benchmark evalúa cuantitativa y cualitativamente el impacto del par
 | **Gravity - Hyperscale Thinking** | 44,804 | **481,022,531** | 10,899,017 | **24,474** | **99.99%** | ADN / Grafo Maestro |
 | **SemanticFlow** | 12,090 | **95,297,872** | 6,618,150 | **29,039** | **99.97%** | Nativo v3.0 (Tree + 23 Beacons) |
 | **ThinkingSeed** | 909 | **8,428,265** | 3,008,148 | **28,169** | **99.67%** | Nativo v3.0 (Tree + 23 Beacons) |
+| **FlowAgentic** | 1,385 | **4,278,523** | 598,516 | **61,832** | **98.55%** | Nativo v3.0 (Tree + 24 Beacons) |
 | **Gravity - Deep Space** | 37 | **517,820** | 475,775 | **3,630** | **99.30%** | ADN Monolítico |
 | **MetricsThinking** | 95 | **273,693** | 156,408 | **39,871** | **85.43%** | Nativo v3.0 (Tree + 19 Beacons) |
 | **ultraThinking** | 36 | **123,032** | 123,032 | **21,799** | **82.28%** | ADN / Metodología Pura |
