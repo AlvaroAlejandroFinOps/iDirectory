@@ -1,0 +1,82 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "../schemas/tree.schema.json",
+  "title": "iDirectory Topological Satellite Schema",
+  "description": "Formal JSON Schema Draft-07 validating .context/tree.json in iDirectory v3.1.",
+  "type": "object",
+  "required": [
+    "$schema",
+    "version",
+    "project",
+    "architecture",
+    "updated_at",
+    "timestamp",
+    "bootloader",
+    "nodes"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "const": "../schemas/tree.schema.json"
+    },
+    "version": {
+      "type": "string"
+    },
+    "project": {
+      "type": "string",
+      "minLength": 1
+    },
+    "architecture": {
+      "type": "string"
+    },
+    "updated_at": {
+      "type": "string"
+    },
+    "timestamp": {
+      "type": "number"
+    },
+    "bootloader": {
+      "type": "object",
+      "required": ["tier_1", "tier_2"],
+      "properties": {
+        "tier_1": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "tier_2": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "nodes": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["role", "prio", "crawl", "seed_ref"],
+        "properties": {
+          "role": { "type": "string" },
+          "prio": {
+            "type": "string",
+            "enum": ["p0", "p1", "p2", "p3"]
+          },
+          "crawl": { "type": "boolean" },
+          "seed_ref": {
+            "type": "string",
+            "enum": ["required", "optional"]
+          },
+          "tier1_preload": { "type": "boolean" },
+          "key_files": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

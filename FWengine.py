@@ -14,12 +14,13 @@ Implementa:
 
 import os
 import sys
+import ast
 import json
 import time
 import argparse
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List, Optional, Set
 
 # ==============================================================================
 # 1. MiniYAML: Serializador / Deserializador ligero sin dependencias (PyYAML-free)
@@ -98,16 +99,22 @@ class MiniYAML:
 # ==============================================================================
 # 2. Manifiesto Topológico Canónico v3.0 (All-Lowercase Topology)
 # ==============================================================================
+IGNORED_DISCOVERY_DIRS: Set[str] = {
+    ".git", ".github", ".venv", "venv", "env", "__pycache__",
+    ".pytest_cache", ".mypy_cache", ".ruff_cache", "node_modules",
+    "target", "dist", "build", ".idea", ".vscode", ".agents", ".context"
+}
+
 FOLDER_METADATA: Dict[str, Dict[str, Any]] = {
     "01_seed": {
         "purpose": "Semilla de proyecto y memoria técnica (ThinkingSeed Master). ADN arquitectónico del sistema.",
         "role": "dna",
         "relevance": "critical",
-        "crawl": False,
+        "crawl": True,
         "read_priority": "p0",
         "seed_reference": "required",
+        "tier1_preload": False,
         "token_density": "medium",
-        "key_files": ["seed-idirectory-master.md"],
         "instructions": "LECTURA CONDICIONAL (Tier 2 / Disparadores de Arquitectura). Prohibido precargar en Tier 1."
     },
     "02_foundation/engine": {
@@ -392,9 +399,54 @@ ROUTING_MAP = {
 # 3. Núcleo de Context Engineering (Beacons, Tree & Budgeting)
 # ==============================================================================
 
-def generate_beacon_content(folder: str, meta: Dict[str, Any]) -> str:
+def resolve_seed_key_files(root_path: Path) -> List[str]:
+    """
+    Governs: [R-001], [ADR-006], [INV-08].
+    Scans (root_path / "01_seed").glob("seed-*.md") for physical seed files.
+    Returns sorted filenames if present; otherwise returns [f"seed-{project_slug}-master.md"].
+    """
+    seed_dir = root_path / "01_seed"
+    if seed_dir.exists() and seed_dir.is_dir():
+        found = sorted(
+            f.name for f in seed_dir.glob("seed-*.md") if f.is_file()
+        )
+        if found:
+            return found
+    project_slug = root_path.resolve().name.lower().replace(" ", "-")
+    return [f"seed-{project_slug}-master.md"]
+
+
+def _resolve_physical_rel_path(root_path: Path, canonical_rel: str) -> str:
+    """
+    Governs: [R-004], [ADR-008], [INV-06].
+    Resolves the exact physical casing stored on disk (NTFS/APFS) for a relative path using os.listdir().
+    Returns canonical_rel if the directory does not exist yet on disk.
+    """
+    parts = canonical_rel.split("/")
+    curr = root_path
+    actual_parts: List[str] = []
+    for part in parts:
+        if not curr.exists() or not curr.is_dir():
+            return canonical_rel
+        try:
+            entries = os.listdir(curr)
+        except OSError:
+            return canonical_rel
+        match = next((e for e in entries if e.lower() == part.lower()), None)
+        if match is None:
+            return canonical_rel
+        actual_parts.append(match)
+        curr = curr / match
+    return "/".join(actual_parts)
+
+
+def generate_beacon_content(
+    folder: str,
+    meta: Dict[str, Any],
+    root_path: Optional[Path] = None
+) -> str:
     """Genera el contenido .context.yaml para un directorio."""
-    beacon_data = {
+    beacon_data: Dict[str, Any] = {
         "version": "1.0",
         "directory": folder,
         "role": meta.get("role", "general"),
@@ -403,10 +455,18 @@ def generate_beacon_content(folder: str, meta: Dict[str, Any]) -> str:
         "crawl": meta.get("crawl", True),
         "read_priority": meta.get("read_priority", "p2"),
         "seed_reference": meta.get("seed_reference", "optional"),
-        "token_density": meta.get("token_density", "sparse"),
-        "instructions": meta.get("instructions", "Directorio estándar.")
     }
-    if "key_files" in meta:
+    if "tier1_preload" in meta:
+        beacon_data["tier1_preload"] = meta["tier1_preload"]
+    beacon_data["token_density"] = meta.get("token_density", "sparse")
+    beacon_data["instructions"] = meta.get("instructions", "Directorio estándar.")
+    if folder == "01_seed":
+        beacon_data["key_files"] = (
+            resolve_seed_key_files(root_path)
+            if root_path is not None
+            else list(meta.get("key_files", []))
+        )
+    elif "key_files" in meta:
         beacon_data["key_files"] = meta["key_files"]
     if "dependencies" in meta:
         beacon_data["dependencies"] = meta["dependencies"]
@@ -497,6 +557,26 @@ def resolve_beacon(dir_path: Path, root_path: Path) -> Dict[str, Any]:
     return resolved
 
 
+def extract_preserved_comments(beacon_file: Path) -> List[str]:
+    """
+    Governs: [R-007], [ADR-010].
+    Extracts manual user comment lines (lines starting with '# USER_NOTE:' or trailing comment blocks)
+    from an existing .context.yaml file so they survive sync_beacons().
+    """
+    if not beacon_file.exists():
+        return []
+    try:
+        raw_lines = beacon_file.read_text(encoding="utf-8").splitlines()
+    except OSError:
+        return []
+    preserved: List[str] = []
+    for line in raw_lines:
+        stripped = line.strip()
+        if stripped.startswith("#"):
+            preserved.append(line)
+    return preserved
+
+
 def sync_beacons(root_path: Path) -> int:
     """Sincroniza o crea los microarchivos .context.yaml en cada directorio registrado."""
     count = 0
@@ -506,7 +586,10 @@ def sync_beacons(root_path: Path) -> int:
         dir_path = root_path / folder
         dir_path.mkdir(parents=True, exist_ok=True)
         beacon_file = dir_path / ".context.yaml"
-        beacon_content = generate_beacon_content(folder, meta)
+        preserved_comments = extract_preserved_comments(beacon_file)
+        beacon_content = generate_beacon_content(folder, meta, root_path=root_path)
+        if preserved_comments:
+            beacon_content = beacon_content + "\n" + "\n".join(preserved_comments)
         with open(beacon_file, "w", encoding="utf-8") as f:
             f.write(beacon_content + "\n")
         count += 1
@@ -516,8 +599,10 @@ def sync_beacons(root_path: Path) -> int:
 def generate_tree_json(root_path: Path) -> Dict[str, Any]:
     """Genera el mapa satelital compacto de todo el repositorio (~250 tokens)."""
     now_ts = time.time()
-    tree_data = {
-        "$schema": "./schema/tree.schema.json",
+    seed_files = resolve_seed_key_files(root_path)
+    primary_seed = f"01_seed/{seed_files[0]}"
+    tree_data: Dict[str, Any] = {
+        "$schema": "../schemas/tree.schema.json",
         "version": "3.0",
         "project": root_path.resolve().name,
         "architecture": "Gravity HyperScale Thinking",
@@ -532,22 +617,51 @@ def generate_tree_json(root_path: Path) -> Dict[str, Any]:
             "tier_2": [
                 "AGENTS.md",
                 ".context/tree.json",
-                "01_seed/seed-idirectory-master.md",
+                primary_seed,
                 "[target_folder]/.context.yaml"
             ]
         },
         "nodes": {}
     }
+
+    canonical_top_levels: Set[str] = {k.split("/")[0].lower() for k in FOLDER_METADATA.keys()}
+
     for folder, meta in FOLDER_METADATA.items():
-        node_info = {
+        physical_key = _resolve_physical_rel_path(root_path, folder)
+        node_info: Dict[str, Any] = {
             "role": meta.get("role", "general"),
             "prio": meta.get("read_priority", "p2"),
             "crawl": meta.get("crawl", True),
             "seed_ref": meta.get("seed_reference", "optional")
         }
-        if "key_files" in meta:
+        if "tier1_preload" in meta:
+            node_info["tier1_preload"] = meta["tier1_preload"]
+        if folder == "01_seed":
+            node_info["key_files"] = seed_files
+        elif "key_files" in meta:
             node_info["key_files"] = meta["key_files"]
-        tree_data["nodes"][folder] = node_info
+        tree_data["nodes"][physical_key] = node_info
+
+    # Auto-discover non-canonical first-level domain directories
+    if root_path.exists() and root_path.is_dir():
+        try:
+            disk_entries = sorted(os.listdir(root_path))
+        except OSError:
+            disk_entries = []
+        for entry in disk_entries:
+            if entry.startswith(".") or entry.lower() in IGNORED_DISCOVERY_DIRS:
+                continue
+            if entry.lower() in canonical_top_levels:
+                continue
+            full_entry = root_path / entry
+            if full_entry.is_dir():
+                tree_data["nodes"][entry] = {
+                    "role": "domain_extension",
+                    "prio": "p1",
+                    "crawl": True,
+                    "seed_ref": "optional"
+                }
+
     return tree_data
 
 
@@ -609,14 +723,38 @@ def check_satellite_freshness(root_path: Path) -> Dict[str, Any]:
 
 
 
+def format_compact_tree_json(data: Dict[str, Any]) -> str:
+    """
+    Governs: [R-005], [ADR-009], [INV-07].
+    Serializes tree.json with one compact JSON line per node in 'nodes', keeping total size < 500 tokens.
+    """
+    lines: List[str] = ["{"]
+    top_keys = [k for k in data.keys() if k != "nodes"]
+    for k in top_keys:
+        val_str = json.dumps(data[k], ensure_ascii=False, separators=(", ", ": "))
+        lines.append(f'  "{k}": {val_str},')
+    lines.append('  "nodes": {')
+    node_items = list(data.get("nodes", {}).items())
+    for idx, (node_key, node_val) in enumerate(node_items):
+        comma = "," if idx < len(node_items) - 1 else ""
+        compact_node = json.dumps(node_val, ensure_ascii=False, separators=(", ", ": "))
+        lines.append(f'    {json.dumps(node_key, ensure_ascii=False)}: {compact_node}{comma}')
+    lines.append("  }")
+    lines.append("}")
+    return "\n".join(lines) + "\n"
+
+
 def sync_tree(root_path: Path) -> Path:
-    """Escribe el satélite .context/tree.json."""
+    """
+    Governs: [R-005], [R-006], [INV-04], [INV-07].
+    Writes .context/tree.json using format_compact_tree_json() to guarantee < 600 tokens.
+    """
     context_dir = root_path / ".context"
     context_dir.mkdir(parents=True, exist_ok=True)
     tree_file = context_dir / "tree.json"
     data = generate_tree_json(root_path)
     with open(tree_file, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=2, ensure_ascii=False)
+        f.write(format_compact_tree_json(data))
     return tree_file
 
 
@@ -672,6 +810,7 @@ def init_project(base_path: str):
     print(f"  [+] {beacon_count} Context Beacons (.context.yaml) desplegados y sincronizados.")
 
     # 4. Desplegar engine_readme.md
+    primary_seed = resolve_seed_key_files(root)[0]
     readme_path = root / "02_foundation" / "engine" / "engine_readme.md"
     readme_path.parent.mkdir(parents=True, exist_ok=True)
     with open(readme_path, "w", encoding="utf-8") as f:
@@ -681,7 +820,7 @@ def init_project(base_path: str):
         f.write("> 1. Lee `AGENTS.md` (o `GEMINI.md` / `CLAUDE.md`).\n")
         f.write("> 2. Lee `.context/tree.json` (Mapa Topológico Satelital de ~250 tokens).\n")
         f.write("> 3. **Tier 1 (Atómico):** Lee el `.context.yaml` objetivo (o herencia del padre) y ejecuta. (NO cargar seed).\n")
-        f.write("> 4. **Tier 2 (Arquitectura):** Carga `01_seed/seed-idirectory-master.md` solo ante disparadores explícitos (/seedMaster, /metrics, /ultraThinking).\n\n")
+        f.write(f"> 4. **Tier 2 (Arquitectura):** Carga `01_seed/{primary_seed}` solo ante disparadores explícitos (/seedMaster, /metrics, /ultraThinking).\n\n")
         f.write("## Manifiesto de Directorios y Roles\n\n")
         for folder, meta in FOLDER_METADATA.items():
             f.write(f"- **`{folder}/`**: {meta['purpose']} `[Priority: {meta['read_priority']}]`\n")
@@ -724,28 +863,59 @@ def init_project(base_path: str):
     print("[+] Estructura iDirectory v3.0 inicializada con éxito.")
 
 
-def inspect_python_header(file_path: Path, max_chars: int = 1000) -> str:
-    """Lee de forma no bloqueante hasta max_chars para clasificar archivos .py según imports y patrones."""
+def inspect_python_header(file_path: Path, max_chars: int = 4096) -> str:
+    """
+    Governs: [R-008], [ADR-010], [INV-01].
+    Inspects Python files using ast.parse() to extract imported module names regardless of docstring length,
+    plus a non-blocking header scan up to max_chars=4096 as fallback.
+    """
     try:
         with open(file_path, "r", encoding="utf-8", errors="replace") as f:
-            sample = f.read(max_chars).lower()
-    except Exception:
+            full_source = f.read()
+    except OSError:
         return "src/core"
 
+    imported_tokens: List[str] = []
+    func_names: List[str] = []
+    try:
+        tree = ast.parse(full_source)
+        for node in ast.walk(tree):
+            if isinstance(node, ast.Import):
+                for alias in node.names:
+                    imported_tokens.append(alias.name.lower())
+            elif isinstance(node, ast.ImportFrom):
+                if node.module:
+                    imported_tokens.append(node.module.lower())
+                for alias in node.names:
+                    imported_tokens.append(alias.name.lower())
+            elif isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                func_names.append(node.name.lower())
+    except SyntaxError:
+        pass
+
+    ast_haystack = " ".join(imported_tokens + func_names)
+    sample = full_source[:max_chars].lower()
+    combined = f"{ast_haystack} {sample}"
+
     # 1. Tests y suites de verificación
-    if any(marker in sample for marker in ["pytest", "unittest", "test_"]):
+    if any(marker in combined for marker in ["pytest", "unittest", "test_"]):
         return "tests"
     # 2. Pipelines productivos y big data cloud
-    if any(marker in sample for marker in ["pyspark", "google.cloud", "boto3", "azure"]):
+    if any(marker in combined for marker in ["pyspark", "google.cloud", "boto3", "azure"]):
         return "src/cloud_jobs"
     # 3. Dashboards y BI / Viz
-    if any(marker in sample for marker in ["streamlit", "dash", "plotly"]):
+    if any(marker in combined for marker in ["streamlit", "dash", "plotly"]):
         return "src/dashboards"
     # 4. Fallback y lógica compartida / APIs
     return "src/core"
 
 
-def route_file(file_path: str, base_path: str = ".", move: bool = False) -> Optional[Path]:
+def route_file(
+    file_path: str,
+    base_path: str = ".",
+    move: bool = False,
+    overwrite: bool = False
+) -> Optional[Path]:
     """Analiza la naturaleza de un archivo, sugiere su ubicación o lo mueve de forma segura."""
     base_dir = Path(base_path).resolve()
 
@@ -840,6 +1010,8 @@ def route_file(file_path: str, base_path: str = ".", move: bool = False) -> Opti
                 print(f"  [*] El archivo ya está en la ubicación canónica con nombre en minúsculas.")
         else:
             if dest_path.exists():
+                if not overwrite:
+                    raise FileExistsError(f"[-] Colisión detectada en '{dest_path}'. Use --overwrite para reemplazar.")
                 temp_path = dest_dir / f".tmp_{os.getpid()}_{dest_file_name}"
                 src_file.rename(temp_path)
                 if dest_path.exists():
@@ -863,9 +1035,24 @@ def audit_repository(root_path: Path) -> bool:
     # 1. Chequeo de nombres con mayúsculas en carpetas de primer y segundo nivel
     for item in root_path.iterdir():
         if item.is_dir() and not item.name.startswith("."):
-            if any(c.isupper() for c in item.name):
-                print(f"  [!] VIOLACIÓN TOPOLÓGICA (Mayúsculas detectadas): '{item.name}/'")
+            try:
+                disk_name = next(e for e in os.listdir(root_path) if e.lower() == item.name.lower())
+            except (StopIteration, OSError):
+                disk_name = item.name
+            if any(c.isupper() for c in disk_name):
+                print(f"  [!] VIOLACIÓN TOPOLÓGICA (Mayúsculas detectadas): '{disk_name}/'")
                 violations += 1
+            # Segundo nivel
+            try:
+                sub_entries = os.listdir(item)
+            except OSError:
+                sub_entries = []
+            for sub in sub_entries:
+                sub_path = item / sub
+                if sub_path.is_dir() and not sub.startswith("."):
+                    if any(c.isupper() for c in sub):
+                        print(f"  [!] VIOLACIÓN TOPOLÓGICA (Mayúsculas detectadas en subdirectorio): '{disk_name}/{sub}/'")
+                        violations += 1
 
     # 2. Chequeo de beacons ausentes en nodos canónicos
     missing_beacons = 0
@@ -907,6 +1094,7 @@ def main():
     route_parser = subparsers.add_parser("route", help="Determina o ejecuta la reubicación canónica de un archivo")
     route_parser.add_argument("file", help="Ruta del archivo")
     route_parser.add_argument("--move", action="store_true", help="Mueve físicamente el archivo")
+    route_parser.add_argument("--overwrite", action="store_true", help="Sobrescribe el archivo destino en caso de colisión")
     route_parser.add_argument("--base", default=".", help="Directorio base")
 
     # beacon
@@ -934,7 +1122,7 @@ def main():
     if args.command == "init":
         init_project(args.path)
     elif args.command == "route":
-        route_file(args.file, args.base, args.move)
+        route_file(args.file, args.base, args.move, getattr(args, "overwrite", False))
     elif args.command == "beacon":
         if args.audit:
             audit_repository(root)

@@ -221,6 +221,48 @@ class TestLifecycleAndIdempotence(unittest.TestCase):
         beacon_file.unlink()
         self.assertFalse(audit_repository(self.test_path))
 
+    def test_dynamic_seed_name_resolution(self):
+        """Verifies that in a repo named SemanticFlow, 01_seed/.context.yaml and tree.json reference seed-semanticflow-master.md."""
+        sem_dir = self.test_path / "SemanticFlow"
+        sem_dir.mkdir(parents=True, exist_ok=True)
+        init_project(str(sem_dir))
+
+        beacon_path = sem_dir / "01_seed" / ".context.yaml"
+        self.assertTrue(beacon_path.exists())
+        loaded_beacon = MiniYAML.load(beacon_path.read_text(encoding="utf-8"))
+        self.assertIn("key_files", loaded_beacon)
+        self.assertIn("seed-semanticflow-master.md", loaded_beacon["key_files"])
+        self.assertNotIn("seed-idirectory-master.md", loaded_beacon["key_files"])
+
+        tree_path = sem_dir / ".context" / "tree.json"
+        tree_data = json.loads(tree_path.read_text(encoding="utf-8"))
+        self.assertIn("01_seed/seed-semanticflow-master.md", tree_data["bootloader"]["tier_2"])
+        self.assertNotIn("seed-idirectory-master.md", str(tree_data))
+
+    def test_domain_extension_autodiscovery(self):
+        """Verifies that non-canonical first-level directories like crates/ are discovered as domain_extension."""
+        init_project(str(self.test_path))
+        crates_dir = self.test_path / "crates"
+        crates_dir.mkdir(parents=True, exist_ok=True)
+
+        tree_path = sync_tree(self.test_path)
+        tree_data = json.loads(tree_path.read_text(encoding="utf-8"))
+        self.assertIn("crates", tree_data["nodes"])
+        self.assertEqual(tree_data["nodes"]["crates"]["role"], "domain_extension")
+        self.assertEqual(tree_data["nodes"]["crates"]["prio"], "p1")
+        self.assertTrue(tree_data["nodes"]["crates"]["crawl"])
+
+    def test_tree_schema_file_exists(self):
+        """Verifies that the $schema pointer in .context/tree.json resolves to an existing file."""
+        init_project(str(self.test_path))
+        tree_path = sync_tree(self.test_path)
+        tree_data = json.loads(tree_path.read_text(encoding="utf-8"))
+        schema_rel = tree_data.get("$schema")
+        self.assertIsNotNone(schema_rel)
+        main_schema = PROJECT_ROOT / "schemas" / "tree.schema.json"
+        self.assertTrue(main_schema.exists(), f"El archivo {main_schema} debe existir físicamente.")
+        self.assertEqual(tree_data["$schema"], "../schemas/tree.schema.json")
+
 
 class TestTokenBudgetComputation(unittest.TestCase):
     """Tests the context token budget calculator."""
@@ -323,6 +365,14 @@ class TestHybridRouting(unittest.TestCase):
         dest = route_file(str(core_file), base_path=str(self.test_path), move=False)
         self.assertTrue(str(dest).replace("\\", "/").endswith("src/core/auth_provider.py"))
 
+    def test_header_inspection_with_long_docstring(self):
+        """Verifies that a python file with >2000 chars of docstrings before import pytest routes to tests."""
+        test_file = self.test_path / "long_header_service.py"
+        long_docstring = '"""\n' + ("A" * 2500) + '\n"""\nimport pytest\n\ndef test_feature():\n    pass\n'
+        test_file.write_text(long_docstring, encoding="utf-8")
+        dest = route_file(str(test_file), base_path=str(self.test_path), move=False)
+        self.assertEqual(dest.parent.name, "tests")
+
 
 class TestFileSystemHardening(unittest.TestCase):
     """Verifies security controls against path traversal and atomic Windows NTFS casing handling."""
@@ -356,6 +406,26 @@ class TestFileSystemHardening(unittest.TestCase):
         self.assertTrue(dest.exists())
         self.assertEqual(dest.name, "mypipelinejob.py")
         self.assertFalse(file_path.exists())
+
+    def test_route_move_collision_protection(self):
+        """Moving a file when target exists must raise FileExistsError if overwrite=False, and succeed if overwrite=True."""
+        src_file = self.test_path / "incoming_job.py"
+        src_file.write_text("print('version 1')\n", encoding="utf-8")
+        target_dir = self.test_path / "src" / "core"
+        target_dir.mkdir(parents=True, exist_ok=True)
+        dest_file = target_dir / "incoming_job.py"
+        dest_file.write_text("print('existing version')\n", encoding="utf-8")
+
+        # Without overwrite, must raise FileExistsError
+        with self.assertRaises(FileExistsError):
+            route_file(str(src_file), base_path=str(self.test_path), move=True, overwrite=False)
+        self.assertEqual(dest_file.read_text(encoding="utf-8"), "print('existing version')\n")
+        self.assertTrue(src_file.exists())
+
+        # With overwrite=True, must overwrite target
+        route_file(str(src_file), base_path=str(self.test_path), move=True, overwrite=True)
+        self.assertEqual(dest_file.read_text(encoding="utf-8"), "print('version 1')\n")
+        self.assertFalse(src_file.exists())
 
 
 class TestSatelliteFreshness(unittest.TestCase):

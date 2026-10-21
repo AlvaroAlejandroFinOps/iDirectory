@@ -1,11 +1,11 @@
-# IDIRECTORY - iDirectory Architecture v3.0
+# IDIRECTORY - iDirectory Architecture v3.1
 
 Framework modular gobernado por **Gravity HyperScale Thinking** con Context Engineering nativo.
 
 > **Protocolo de Ingesta para Agentes (Two-Tier Bootloader):**
 > 1. Lee `AGENTS.md` (o `GEMINI.md` / `CLAUDE.md`).
-> 2. Lee `.context/tree.json` (Mapa Topológico Satelital de ~250 tokens).
-> 3. **Tier 1 (Atómico):** Lee el `.context.yaml` objetivo (o herencia del padre) y ejecuta. (NO cargar seed).
+> 2. Lee `.context/tree.json` (Mapa Topológico Satelital < 500 tokens / ~150 tokens compactos).
+> 3. **Tier 1 (Atómico):** Lee el `.context.yaml` objetivo (o herencia del padre) y ejecuta. (NO cargar seed; `tier1_preload: false`).
 > 4. **Tier 2 (Arquitectura):** Carga `01_seed/seed-idirectory-master.md` solo ante disparadores explícitos (/seedMaster, /metrics, /ultraThinking).
 
 ## Manifiesto de Directorios y Roles

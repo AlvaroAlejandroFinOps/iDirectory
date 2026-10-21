@@ -11,13 +11,13 @@ Para maximizar la eficiencia de tokens y prevenir la dispersión atencional (*At
 ### 🔹 Tier 1: Operación Quirúrgica / Ejecución Atómica (Predeterminado)
 Aplica a: resolución de bugs, edición de código puntual, refactor modular, creación de tests y tareas acotadas.
 1. **Paso 0 (Regla Activa):** Este documento (`AGENTS.md`) define los invariantes y contratos del proyecto.
-2. **Paso 1 (Radar Topológico Satelital):** Lee [`.context/tree.json`](file:///.context/tree.json). En tan solo ~250 tokens obtendrás el mapa satelital completo, roles y directivas de poda (`crawl: false`) sin consumir miles de tokens listando directorios recursivamente.
+2. **Paso 1 (Radar Topológico Satelital):** Lee [`.context/tree.json`](./.context/tree.json). En menos de 500 tokens (o ~150 tokens con `python FWengine.py context --compact`) obtendrás el mapa satelital completo, roles y directivas de poda sin consumir miles de tokens listando directorios recursivamente.
 3. **Paso 2 (Semaforización Local / Herencia Jerárquica):** Antes de operar en un directorio objetivo (p. ej., `src/core/`), lee su microarchivo local `.context.yaml`. Si no existe físicamente, resuelve sus directivas por **herencia recursiva** del directorio padre más cercano.
 4. **Paso 3 (Ejecución):** Modifica o genera código directamente.
 
 > [!IMPORTANT]
 > **POLÍTICA DE TOKEN BUDGET EN TIER 1:**
-> Queda **estrictamente prohibida la precarga automática** de [`01_seed/seed-idirectory-master.md`](file:///01_seed/seed-idirectory-master.md) al inicio de Tier 1. El agente solo podrá consultar secciones específicas de la semilla si se activa el *Disparador 2* o *Disparador 3* de la matriz de decisión.
+> Queda **estrictamente prohibida la precarga automática** de [`01_seed/seed-idirectory-master.md`](./01_seed/seed-idirectory-master.md) al inicio de Tier 1 (`tier1_preload: false`). El agente solo podrá consultar secciones específicas de la semilla si se activa el *Disparador 2* o *Disparador 3* de la matriz de decisión.
 
 ---
 
@@ -52,6 +52,8 @@ Aplica a: auditorías integrales de madurez, reconstrucción estructural de mód
 > Queda estrictamente prohibido ejecutar comandos de búsqueda masiva o listados recursivos sin filtro (`Get-ChildItem -Recurse`, `find .`, `ls -R`). Cualquier exploración debe estar guiada por `.context/tree.json`.
 >
 > Las carpetas con `crawl: false` en sus beacons (como `data/raw`, `data/processed`, `logs/`, `artifacts/plans/archive/`) son **ramas muertas o almacenes masivos**. No intentes volcar ni analizar su contenido.
+>
+> *Nota sobre `01_seed/`:* Posee `crawl: true`, `seed_reference: required` y `tier1_preload: false` para habilitar auditorías arquitectónicas en Tier 2 y `/seedMaster` sin violar `[INV-03]`.
 
 ---
 

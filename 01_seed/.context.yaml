@@ -3,9 +3,10 @@ directory: 01_seed
 role: dna
 purpose: Semilla de proyecto y memoria técnica (ThinkingSeed Master). ADN arquitectónico del sistema.
 relevance: critical
-crawl: false
+crawl: true
 read_priority: p0
 seed_reference: required
+tier1_preload: false
 token_density: medium
 instructions: LECTURA CONDICIONAL (Tier 2 / Disparadores de Arquitectura). Prohibido precargar en Tier 1.
 key_files:

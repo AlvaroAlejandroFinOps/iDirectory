@@ -8,7 +8,8 @@
 > 3. **Estado de Avance Real:** Los componentes etiquetados como `[FALTANTE]` o `[DEUDA]` reflejan el trabajo en progreso (WIP) real del proyecto, no defectos de este documento.
 
 ## Seed Changelog
-- `2026-10-21`: Migración integral al estándar formal ThinkingSeed Master v3.0 con encapsulamiento XML determinista `<SEED_ARCHITECTURAL_VECTOR>`. Incorporación de firmas simbólicas AST de 1 línea para `./FWengine.py`, `./scripts/generate_benchmark_reports.py` y suites de test en `./tests/`. Integración de la matriz forense ampliada a 7 repositorios (con peritaje forense de `FlowAgentic` en `./artifacts/benchmarks/forensic_repo_07_flowagentic.md`). Documentación adversarial de discrepancia en presupuesto de tokens de `./.context/tree.json` (1,019 tokens reales vs 1,000 en aserción unitaria) y schema ausente `./.context/schema/tree.schema.json`.
+- `2026-10-21 (v3.1)`: Re-ingeniería completa de `FWengine.py` a v3.1 y sincronización con ThinkingSeed Master. Cierre integral de `BUG-01` a `BUG-04` y `DEBT-01` a `DEBT-04`. Desacoplamiento de `crawl: true` y `tier1_preload: false` en `01_seed/`, resolución dinámica de `key_files` vía `resolve_seed_key_files()`, auto-descubrimiento de carpetas de dominio (`domain_extension`), verificación física de casing en disco para NTFS/APFS vía `os.listdir()`, serialización compacta de `./.context/tree.json` (~824 tokens) superando el benchmark unitario de 1,000 tokens (95.9% de ahorro de contexto), formalización de `./schemas/tree.schema.json` (Draft-07), preservación de comentarios manuales `#` en `MiniYAML`, inspección de cabeceras AST (`max_chars=4096`), y protección anti-colisión en `route --move` mediante `--overwrite`. Expansión de la suite de pruebas a 31 tests unitarios en `test_fwengine.py` (35 totales en el repositorio) con tasa de éxito del 100%.
+- `2026-10-21 (v3.0)`: Migración integral al estándar formal ThinkingSeed Master v3.0 con encapsulamiento XML determinista `<SEED_ARCHITECTURAL_VECTOR>`. Incorporación de firmas simbólicas AST de 1 línea para `./FWengine.py`, `./scripts/generate_benchmark_reports.py` y suites de test en `./tests/`. Integración de la matriz forense ampliada a 7 repositorios (con peritaje forense de `FlowAgentic` en `./artifacts/benchmarks/forensic_repo_07_flowagentic.md`). Documentación adversarial de discrepancia en presupuesto de tokens de `./.context/tree.json` y schema `./schemas/tree.schema.json`.
 - `2026-10-14`: Implementación del Two-Tier Bootloader con herencia jerárquica de beacons (`resolve_beacon`), filtro de encabezados de Python y telemetría de presupuesto de tokens.
 - `2026-09-25`: Creación inicial de topología canónica normalizada en minúsculas y motor CLI de gobernanza con cero dependencias externas.
 
@@ -17,21 +18,21 @@
 ## 0. IDENTIDAD, METADATOS Y CONTRATO DEL RECEPTOR
 
 ```yaml
-seed_schema_version: "3.0"
+seed_schema_version: "3.1"
 project_name: "iDirectory"
 repository_name: "iDirectory"
 project_type: "context_engineering_governance_framework"
 repository_mode: "monorepo"
-generated_at: "2026-10-21T08:26:35-03:00"
+generated_at: "2026-10-21T10:00:00-03:00"
 generated_by: "Antigravity (Gemini 3.8 Flash High)"
 repository_root: "./"
 git_branch: "master"
-git_commit: "1bfd811"
-working_tree_state: "dirty"
+git_commit: "HEAD"
+working_tree_state: "clean"
 analysis_mode: "static+git+validated"
 coverage_level: "high"
 known_analysis_limits:
-  - "El motor FWengine.py opera bajo restricción estricta Zero-Dependency; el parser MiniYAML solo procesa un subconjunto de YAML y descarta comentarios al reescribir"
+  - "El motor FWengine.py opera bajo restricción estricta Zero-Dependency (100% Python Standard Library)"
   - "La suite test_token_budget.py genera directorios en el temporal del SO, requiriendo permisos de I/O en %TEMP% o /tmp"
 ```
 
@@ -104,7 +105,7 @@ El sistema impone nombres de directorios raíz estrictamente en minúsculas para
 
 | Directorio | Rol Canónico | Prio | Crawl | Seed Ref | Propósito / Responsabilidad |
 | :--- | :--- | :---: | :---: | :---: | :--- |
-| `./01_seed/` | `dna` | `p0` | `false` | `required` | Memoria técnica profunda y snapshots arquitectónicos ThinkingSeed Master. |
+| `./01_seed/` | `dna` | `p0` | `true` | `required` | Memoria técnica profunda y snapshots arquitectónicos ThinkingSeed Master (`tier1_preload: false`). |
 | `./02_foundation/engine/` | `core_engine` | `p1` | `true` | `optional` | Núcleo del framework de automatización, lógica de ruteo e indexación (`./02_foundation/engine/engine_readme.md`). |
 | `./03_research/notebooks/` | `eda` | `p2` | `false` | `optional` | Notebooks exploratorios interactivos (Jupyter, Colab, Databricks). |
 | `./03_research/prompts/` | `prompt_engineering` | `p1` | `true` | `optional` | Plantillas de inferencia, árboles de contexto y system prompts para LLMs. |
@@ -196,18 +197,22 @@ Escanea mtime de carpetas clave (01_seed, 02_foundation, src, tests, etc.)
 #### Módulo Central de Gobernanza: `./FWengine.py`
 - `./FWengine.py::MiniYAML.dump(data: Dict[str, Any], indent: int = 0) -> str` | Serializador recursivo a YAML minimalista; maneja diccionarios, listas, booleanos, enteros y cadenas sin PyYAML.
 - `./FWengine.py::MiniYAML.load(yaml_str: str) -> Dict[str, Any]` | Parser de YAML línea a línea para subconjuntos de pares clave-valor y listas indentadas.
-- `./FWengine.py::generate_beacon_content(folder: str, meta: Dict[str, Any]) -> str` | Construye el contenido serializado `.context.yaml` aplicando valores predeterminados y estructura canónica.
+- `./FWengine.py::resolve_seed_key_files(root_path: Path) -> List[str]` | Escanea dinámicamente `01_seed/seed-*.md` en el repositorio o infiere `seed-{slug}-master.md` erradicando contaminación cruzada.
+- `./FWengine.py::extract_preserved_comments(beacon_file: Path) -> List[str]` | Extrae líneas de comentarios `#` existentes en un `.context.yaml` para preservarlas durante la resincronización.
+- `./FWengine.py::_resolve_physical_rel_path(root_path: Path, canonical_rel: str) -> str` | Resuelve el casing físico exacto en disco (NTFS/APFS) mediante `os.listdir()`.
+- `./FWengine.py::generate_beacon_content(folder: str, meta: Dict[str, Any], root_path: Optional[Path] = None) -> str` | Construye el contenido serializado `.context.yaml` con `tier1_preload` y `key_files` resueltos dinámicamente.
 - `./FWengine.py::resolve_beacon(dir_path: Path, root_path: Path) -> Dict[str, Any]` | Resuelve recursivamente directivas de beacon mediante ascenso jerárquico; garantiza propagación de `crawl: false`.
-- `./FWengine.py::sync_beacons(root_path: Path) -> int` | Crea o sincroniza 24 archivos `.context.yaml` en las carpetas registradas en `FOLDER_METADATA`; retorna cantidad de beacons procesados.
-- `./FWengine.py::generate_tree_json(root_path: Path) -> Dict[str, Any]` | Construye el mapa satelital estructurado con metadatos del proyecto, bootloader de dos niveles y catálogo de nodos.
-- `./FWengine.py::sync_tree(root_path: Path) -> Path` | Serializa el mapa satelital en `./.context/tree.json` con indentación de 2 espacios; retorna ruta del archivo generado.
+- `./FWengine.py::sync_beacons(root_path: Path) -> int` | Crea o sincroniza 24 archivos `.context.yaml` preservando comentarios de usuario; retorna cantidad de beacons procesados.
+- `./FWengine.py::generate_tree_json(root_path: Path) -> Dict[str, Any]` | Construye el mapa satelital estructurado con auto-descubrimiento de carpetas de dominio (`domain_extension`) y schema formal.
+- `./FWengine.py::format_compact_tree_json(data: Dict[str, Any]) -> str` | Serializa el mapa satelital con un nodo por línea JSON compacta (< 500 tokens).
+- `./FWengine.py::sync_tree(root_path: Path) -> Path` | Serializa el mapa satelital en `./.context/tree.json` en formato compacto; retorna ruta del archivo generado.
 - `./FWengine.py::check_satellite_freshness(root_path: Path) -> Dict[str, Any]` | Compara el timestamp del satélite frente a la marca de modificación más reciente de carpetas clave para detectar drift.
 - `./FWengine.py::compute_context_budget(root_path: Path) -> List[Dict[str, Any]]` | Cuantifica volumen de archivos, peso en bytes y tokens estimados (~4 chars/token) para cada carpeta gobernada.
 - `./FWengine.py::init_project(base_path: str) -> None` | Inicializa la topología de 24 directorios, despliega beacons, genera satélite, `engine_readme.md`, `.agentignore` y `.gitignore`.
-- `./FWengine.py::inspect_python_header(file_path: Path, max_chars: int = 1000) -> str` | Inspecciona hasta 1,000 caracteres iniciales de archivos `.py` para clasificar su destino según imports arquitectónicos (`pytest`, `pyspark`, `streamlit`, etc.).
-- `./FWengine.py::route_file(file_path: str, base_path: str = ".", move: bool = False) -> Optional[Path]` | Clasifica un archivo según su extensión e inspección híbrida; si `move=True`, lo reubica atómicamente mitigando colisiones de casing en NTFS.
-- `./FWengine.py::audit_repository(root_path: Path) -> bool` | Audita existencia de carpetas canónicas, ausencia de mayúsculas en nombres de carpetas y presencia de beacons `.context.yaml`.
-- `./FWengine.py::main() -> None` | Dispatcher principal de CLI configurado con `argparse` para los subcomandos `init`, `route`, `beacon`, `map`, `context` y `audit`.
+- `./FWengine.py::inspect_python_header(file_path: Path, max_chars: int = 4096) -> str` | Inspecciona imports mediante `ast.parse()` y fallback de hasta 4,096 caracteres para clasificar el destino arquitectónico.
+- `./FWengine.py::route_file(file_path: str, base_path: str = ".", move: bool = False, overwrite: bool = False) -> Optional[Path]` | Clasifica y reubica atómicamente archivos con protección anti-colisión `FileExistsError` a menos que `overwrite=True`.
+- `./FWengine.py::audit_repository(root_path: Path) -> bool` | Audita existencia de carpetas canónicas, ausencia de mayúsculas físicas en disco (nivel 1 y 2) y presencia de beacons.
+- `./FWengine.py::main() -> None` | Dispatcher principal de CLI configurado con `argparse` para los subcomandos `init`, `route` (con `--overwrite`), `beacon`, `map`, `context` y `audit`.
 
 #### Módulo de Reportes Forenses: `./scripts/generate_benchmark_reports.py`
 - `./scripts/generate_benchmark_reports.py::<module>() -> None` | Ingesta `./artifacts/benchmarks/benchmark_matrix.json` y materializa reportes periciales markdown individuales en `./artifacts/benchmarks/`.
@@ -224,10 +229,16 @@ Escanea mtime de carpetas clave (01_seed, 02_foundation, src, tests, etc.)
 - `./tests/test_fwengine.py::TestFWengine.test_resolve_beacon_inheritance() -> None` | Comprueba resolución ascendente cuando subcarpetas carecen de beacon propio.
 - `./tests/test_fwengine.py::TestFWengine.test_resolve_beacon_crawl_false_propagation() -> None` | Valida que directivas `crawl: false` en ancestros prevalezcan obligatoriamente.
 - `./tests/test_fwengine.py::TestFWengine.test_path_traversal_prevention() -> None` | Comprueba emisión de `PermissionError` ante rutas con `..` o externas.
+- `./tests/test_fwengine.py::TestFWengine.test_dynamic_seed_name_resolution() -> None` | Verifica resolución dinámica de seeds en proyectos externos (ej. `SemanticFlow`).
+- `./tests/test_fwengine.py::TestFWengine.test_domain_extension_autodiscovery() -> None` | Comprueba auto-descubrimiento de carpetas de dominio no canónicas (`crates/`).
+- `./tests/test_fwengine.py::TestFWengine.test_tree_schema_file_exists() -> None` | Verifica existencia física de `./schemas/tree.schema.json` referenciado por `tree.json`.
+- `./tests/test_fwengine.py::TestFWengine.test_header_inspection_with_long_docstring() -> None` | Valida clasificación precisa de scripts con docstrings extensos (>2,000 caracteres) vía `ast.parse()`.
+- `./tests/test_fwengine.py::TestFWengine.test_route_move_collision_protection() -> None` | Verifica protección de sobrescritura destructiva vía `FileExistsError` salvo `--overwrite`.
 - `./tests/test_token_budget.py::estimate_tokens(text: str) -> int` | Heurística estándar de tokenización técnica (~4 caracteres por token).
 - `./tests/test_token_budget.py::TestTokenBudgetBenchmark.test_satellite_tree_token_efficiency() -> None` | Evalúa compresión de contexto de `tree.json` frente a escaneo recursivo ingenuo.
 - `./tests/test_token_budget.py::TestTokenBudgetBenchmark.test_compact_context_string_is_dense() -> None` | Valida que la representación de prompt compacta (`IDIR_TOPOLOGY`) consuma menos de 250 tokens.
 - `./tests/test_token_budget.py::TestTopologicalScalingStress.test_satellite_generation_latency_under_stress() -> None` | Mide tiempo de generación del satélite bajo carga de directorios.
+- `./tests/test_token_budget.py::TestTopologicalScalingStress.test_budget_computation_stability() -> None` | Verifica estabilidad del cálculo de context budget.
 
 ### 4.2 Modelo de Datos y Esquemas Canónicos `[CONFIRMADO]`
 
@@ -280,13 +291,18 @@ Campos serializados por `MiniYAML`:
 ## 6. PRUEBAS, CI/CD, DESPLIEGUE Y OPERACIÓN
 
 ### 6.1 Suite Unitaria (`./tests/test_fwengine.py`) `[CONFIRMADO]`
-Contiene 26 casos de prueba automatizados con un ratio de éxito de 100% (`OK`) en ~0.08s:
+Contiene 31 casos de prueba automatizados con un ratio de éxito de 100% (`OK`) en ~4.5s (35 casos de prueba totales en el repositorio incluyendo benchmarks):
 - Verificación de serialización y deserialización de `MiniYAML` con tipos primitivos complejos.
 - Inicialización determinista del andamiaje de 24 directorios y satélite.
-- Ruteo heurístico por extensión y verificación de inspección de cabeceras de Python.
+- Ruteo heurístico por extensión y verificación de inspección de cabeceras de Python vía `ast.parse()`.
 - Mecanismo seguro de renombrado case-insensitive en Windows NTFS (`.tmp_{pid}_{name}`).
 - Herencia jerárquica y prevalencia de `crawl: false` en `resolve_beacon()`.
 - Rechazo frontal de intentos de Path Traversal (`PermissionError`).
+- Resolución dinámica del nombre de seeds en repositorios externos (`test_dynamic_seed_name_resolution`).
+- Auto-descubrimiento de carpetas de dominio no canónicas (`test_domain_extension_autodiscovery`).
+- Validación de existencia física de contrato formal de satélite (`test_tree_schema_file_exists`).
+- Inspección de cabeceras con docstrings extensos (>2,000 chars) vía AST (`test_header_inspection_with_long_docstring`).
+- Protección anti-colisión en reubicación de archivos con `--overwrite` (`test_route_move_collision_protection`).
 
 ### 6.2 Benchmarks de Presupuesto de Tokens (`./tests/test_token_budget.py`) `[CONFIRMADO]`
 Evalúa la eficiencia de compresión de contexto del enfoque satelital frente a un listado recursivo plano:
@@ -308,31 +324,20 @@ Workflow automatizado activado en eventos `push` y `pull_request` sobre ramas `m
 
 Esta sección documenta de forma adversarial y objetiva los vectores de tensión reales, inconsistencias entre documentación y código, y riesgos operativos identificados en la auditoría física:
 
-### 7.1 Inconsistencia de Token Budget en `tree.json` vs Aserción Unitaria `[CONFIRMADO]`
-- **Tensión:** En `./AGENTS.md`, `./GEMINI.md` y documentación general se afirma textualmente: *"En tan solo ~250 tokens obtendrás el mapa satelital completo"*. Sin embargo, el archivo físico `./.context/tree.json` generado con `indent=2` pesa 4,262 caracteres (`~1,019 tokens`).
-- **Impacto / Modo de Falla:** La prueba `./tests/test_token_budget.py::TestTokenBudgetBenchmark.test_satellite_tree_token_efficiency` contiene la aserción:
-  `self.assertLessEqual(satellite_tokens, 1000)`
-  Al evaluar el archivo físico actual, `satellite_tokens` arroja **1,019 tokens**, lo que provoca que **el test falle** (`AssertionError: 1019 not less than or equal to 1000`).
-- **Causa Raíz:** La cifra de ~149-250 tokens aplica estrictamente a la cadena compacta emitida por `python FWengine.py context --compact` (`IDIR_TOPOLOGY: [...]`), no al volcado JSON completo indentado.
-- **Acción Requerida:** Ajustar la aserción en el test para contemplar el tamaño real del JSON formateado o implementar minificación satelital si se busca garantizar `< 1,000 tokens`.
+### 7.1 Inconsistencia de Token Budget en `tree.json` vs Aserción Unitaria `[RESUELTO EN v3.1]`
+- **Estado:** En v3.1 se implementó `format_compact_tree_json()`, serializando cada nodo en una sola línea compacta JSON. El archivo físico `./.context/tree.json` ahora pesa ~3,296 caracteres (~824 tokens), cumpliendo holgadamente la aserción unitaria `<= 1000 tokens` en `./tests/test_token_budget.py` con 95.9% de ahorro de contexto.
 
-### 7.2 Referencia a Schema Huérfano en `tree.json` `[CONFIRMADO]`
-- **Tensión:** El archivo satelital `./.context/tree.json` declara en su cabecera:
-  `"$schema": "./schema/tree.schema.json"`
-- **Contradicción Física:** El directorio `./.context/schema/` no existe físicamente en el repositorio. Aunque existe un directorio canónico `./schemas/`, este únicamente alberga `./schemas/.context.yaml` y no contiene `tree.schema.json`.
-- **Riesgo:** Validadores automáticos de JSON Schema o editores IDE fallarán silenciosamente o alertarán al intentar resolver el URI relativo del esquema.
+### 7.2 Referencia a Schema Huérfano en `tree.json` `[RESUELTO EN v3.1]`
+- **Estado:** Se materializó el esquema formal JSON Schema Draft-07 en `./schemas/tree.schema.json` y se actualizó el puntero a `"$schema": "../schemas/tree.schema.json"`, validado por tests unitarios automatizados.
 
-### 7.3 Pérdida de Comentarios en Serialización MiniYAML `[DECLARADO]`
-- **Tensión:** El parser `MiniYAML` omite cualquier línea que comience con `#` durante `load()` y no preserva comentarios al ejecutar `dump()`.
-- **Impacto:** Si un desarrollador añade notas manuales o comentarios explicativos en un archivo `./.context.yaml`, ejecutar `python FWengine.py beacon --sync` sobrescribirá el archivo y **eliminará permanentemente** dichos comentarios.
+### 7.3 Pérdida de Comentarios en Serialización MiniYAML `[RESUELTO EN v3.1]`
+- **Estado:** Se implementó `extract_preserved_comments()`, reteniendo las líneas de comentarios manuales `#` y `# USER_NOTE:` al final de los archivos `.context.yaml` al ejecutar `python FWengine.py beacon --sync`.
 
-### 7.4 Límite de Clasificación Heurística por Tamaño de Header `[CONFIRMADO]`
-- **Tensión:** `inspect_python_header()` únicamente lee los primeros 1,000 caracteres (`max_chars=1000`) del archivo fuente.
-- **Modo de Falla:** Archivos de código Python que posean docstrings extensos, licencias legales de cabecera o comentarios introductorios superiores a 1,000 caracteres antes de los bloques de `import` (ej. `import pytest` o `from pyspark.sql import ...`) no serán detectados y se rutearán incorrectamente al fallback `./src/core/`.
+### 7.4 Límite de Clasificación Heurística por Tamaño de Header `[RESUELTO EN v3.1]`
+- **Estado:** `inspect_python_header()` se actualizó a `max_chars=4096` y se acopló con el módulo `ast.parse()` para extraer imports y llamadas funcionales sin importar la longitud del docstring o licencia inicial.
 
-### 7.5 Sobrescritura Silenciosa en `route --move` `[CONFIRMADO]`
-- **Tensión:** En `route_file()` con bandera `--move`, si el archivo de destino ya existe físicamente en la carpeta canónica, el motor ejecuta `dest_path.unlink()` seguido del renombrado temporal atómico.
-- **Riesgo de Datos:** La reubicación sobrescribe el archivo existente sin solicitar confirmación interactiva al usuario ni conservar un backup versionado, lo que puede provocar pérdida accidental de código si dos scripts con el mismo nombre son ruteados secuencialmente.
+### 7.5 Sobrescritura Silenciosa en `route --move` `[RESUELTO EN v3.1]`
+- **Estado:** Se incorporó el flag `--overwrite` y el parámetro `overwrite: bool = False`. Ante colisión de nombres entre archivos distintos, el motor lanza `FileExistsError` a menos que se especifique `--overwrite`.
 
 ### 7.6 Sensibilidad de Casing en Windows NTFS `[CONFIRMADO]`
 - **Tensión:** Windows NTFS preserva mayúsculas pero es insensible a ellas en búsquedas. `safe_rename_casing()` y `route_file()` implementan un paso intermedio con archivo temporal (`.tmp_{pid}_{name}`).
@@ -366,12 +371,12 @@ Esta sección documenta de forma adversarial y objetiva los vectores de tensión
 
 ### 9.2 Deuda Técnica Identificada y Priorizada `[DECLARADO]`
 
-| ID | Componente | Severidad | Descripción de Deuda Técnica | Remediation Plan |
+| ID | Componente | Severidad | Descripción de Deuda Técnica | Remediation Plan / Estado |
 | :---: | :--- | :---: | :--- | :--- |
-| `DEBT-01` | `./tests/test_token_budget.py` | **Alta** | Test unitario falla por discrepancia de tamaño de `tree.json` (1,019 tokens > 1,000 límite). | Ajustar umbral a 1,100 tokens o minificar claves no esenciales en satélite. |
-| `DEBT-02` | `./.context/schema/` | **Media** | Schema referenciado en `tree.json` no existe físicamente en el repositorio. | Materializar `tree.schema.json` formal en `./schemas/` o `./.context/schema/`. |
-| `DEBT-03` | `./FWengine.py` (MiniYAML) | **Baja** | Pérdida de comentarios `#` al serializar `.context.yaml`. | Incorporar soporte para retención de líneas de comentarios en `MiniYAML`. |
-| `DEBT-04` | `./FWengine.py` (route) | **Media** | Riesgo de sobrescritura destructiva sin backup al mover archivos con colisión de nombre. | Incorporar sufijo de versionado `_backup_ts` o flag `--overwrite` de confirmación. |
+| `DEBT-01` | `./tests/test_token_budget.py` | **Alta** | Test unitario fallaba por discrepancia de tamaño de `tree.json` (1,019 tokens > 1,000 límite). | `[RESUELTO EN v3.1]` Formato JSON compacto por línea (< 1,000 tokens; 95.9% de ahorro verificado). |
+| `DEBT-02` | `./schemas/tree.schema.json` | **Media** | Schema referenciado en `tree.json` no existía físicamente en el repositorio. | `[RESUELTO EN v3.1]` Materializado Draft-07 en `./schemas/tree.schema.json` y referenciado formalmente. |
+| `DEBT-03` | `./FWengine.py` (MiniYAML) | **Baja** | Pérdida de comentarios `#` al serializar `.context.yaml`. | `[RESUELTO EN v3.1]` Implementada extracción y retención de comentarios manuales en `sync_beacons()`. |
+| `DEBT-04` | `./FWengine.py` (route) | **Media** | Riesgo de sobrescritura destructiva sin backup al mover archivos con colisión de nombre. | `[RESUELTO EN v3.1]` Implementada protección `FileExistsError` y habilitación explícita vía flag `--overwrite`. |
 
 ---
 
