@@ -3,8 +3,8 @@
   "version": "3.0",
   "project": "iDirectory",
   "architecture": "Gravity HyperScale Thinking",
-  "updated_at": "2026-10-14T23:02:24.389069+00:00",
-  "timestamp": 1792018944.389069,
+  "updated_at": "2026-10-21T11:32:39.656609+00:00",
+  "timestamp": 1792582359.656609,
   "bootloader": {
     "tier_1": [
       "AGENTS.md",
