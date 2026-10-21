@@ -753,7 +753,7 @@ def sync_tree(root_path: Path) -> Path:
     context_dir.mkdir(parents=True, exist_ok=True)
     tree_file = context_dir / "tree.json"
     data = generate_tree_json(root_path)
-    with open(tree_file, "w", encoding="utf-8") as f:
+    with open(tree_file, "w", encoding="utf-8", newline="\n") as f:
         f.write(format_compact_tree_json(data))
     return tree_file
 

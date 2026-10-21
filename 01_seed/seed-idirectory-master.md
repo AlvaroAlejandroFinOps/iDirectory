@@ -27,7 +27,7 @@ generated_at: "2026-10-21T10:00:00-03:00"
 generated_by: "Antigravity (Gemini 3.8 Flash High)"
 repository_root: "./"
 git_branch: "master"
-git_commit: "HEAD"
+git_commit: "eede2d3"
 working_tree_state: "clean"
 analysis_mode: "static+git+validated"
 coverage_level: "high"
@@ -258,14 +258,19 @@ Campos serializados por `MiniYAML`:
 - `dependencies: List[str]` (vínculos directos con otros módulos, opcional) `[CONFIRMADO]`
 
 #### Estructura del Satélite Topológico (`./.context/tree.json`)
-- `$schema: "./schema/tree.schema.json"` `[DECLARADO]`
+- `$schema: "../schemas/tree.schema.json"` `[CONFIRMADO]`
 - `version: "3.0"` `[CONFIRMADO]`
 - `project: str` (nombre del proyecto) `[CONFIRMADO]`
 - `architecture: "Gravity HyperScale Thinking"` `[CONFIRMADO]`
 - `updated_at: str` (ISO-8601 UTC timestamp) `[CONFIRMADO]`
 - `timestamp: float` (epoch unix timestamp para validación de freshness) `[CONFIRMADO]`
 - `bootloader: Dict[str, List[str]]` (secuencias de ingesta para `tier_1` y `tier_2`) `[CONFIRMADO]`
-- `nodes: Dict[str, NodeInfo]` (mapa de carpetas con `role`, `prio`, `crawl`, `seed_ref`, `key_files`) `[CONFIRMADO]`
+- `nodes: Dict[str, NodeInfo]` (mapa de carpetas con `role`, `prio`, `crawl`, `seed_ref`, `tier1_preload`, `key_files`) `[CONFIRMADO]`
+
+#### Estructura del Esquema Formal (`./schemas/tree.schema.json`) `[CONFIRMADO]`
+- Especificación: JSON Schema Draft-07 (`http://json-schema.org/draft-07/schema#`).
+- Propiedades requeridas: `$schema`, `version`, `project`, `architecture`, `updated_at`, `timestamp`, `bootloader`, `nodes`.
+- Validación de nodos: Valida estrictamente tipos de `role` (string), `prio` (string), `crawl` (boolean), `seed_ref` (enum `required` | `optional`), `tier1_preload` (boolean opcional) y `key_files` (array de strings opcional).
 
 ---
 
@@ -403,6 +408,7 @@ Esta sección documenta de forma adversarial y objetiva los vectores de tensión
 ### 10.3 Índice de Evidencias Físicas
 - Motor de gobernanza y CLI: `./FWengine.py` `[CONFIRMADO]`
 - Satélite topológico principal: `./.context/tree.json` `[CONFIRMADO]`
+- Esquema formal del satélite: `./schemas/tree.schema.json` `[CONFIRMADO]`
 - Manifiesto de skill agéntica: `./.agents/skills/idir/SKILL.md` `[CONFIRMADO]`
 - Reglas de gobernanza para agentes: `./AGENTS.md` y `./GEMINI.md` `[CONFIRMADO]`
 - Guía operativa del motor: `./02_foundation/engine/engine_readme.md` `[CONFIRMADO]`
@@ -435,7 +441,7 @@ Antes de resolver una solicitud:
 ### 🤝 Acuse de Recibo Inicial
 Si el usuario adjuntó esta semilla **sin una instrucción específica**, no intentes generar código ni completar archivos vacíos. Responde únicamente con:
 1. Un saludo confirmando que asimilaste el ADN arquitectónico v3.0 de **iDirectory** (`<SEED_ARCHITECTURAL_VECTOR>`) y su stack principal (Python Standard Library, Two-Tier Bootloader, Context Engineering).
-2. Un breve resumen de 2-3 líneas sobre el objetivo, su estado actual y sus principales vectores de tensión (discrepancia de tokens en `tree.json` y schema ausente).
+2. Un breve resumen de 2-3 líneas sobre el objetivo, su estado actual y sus principales vectores de tensión (mitigación de locks en casing atómico sobre Windows NTFS y blindaje anti-colisión en ruteo).
 3. Una frase poniéndote a disposición para resolver dudas sobre su funcionamiento o colaborar en los siguientes pasos de desarrollo.
 
 </SEED_ARCHITECTURAL_VECTOR>

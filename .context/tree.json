@@ -3,8 +3,8 @@
   "version": "3.0",
   "project": "iDirectory",
   "architecture": "Gravity HyperScale Thinking",
-  "updated_at": "2026-10-21T13:08:51.530544+00:00",
-  "timestamp": 1792588131.5295475,
+  "updated_at": "2026-10-21T13:56:56.213390+00:00",
+  "timestamp": 1792591016.2103972,
   "bootloader": {"tier_1": ["AGENTS.md", ".context/tree.json", "[target_folder]/.context.yaml"], "tier_2": ["AGENTS.md", ".context/tree.json", "01_seed/seed-idirectory-master.md", "[target_folder]/.context.yaml"]},
   "nodes": {
     "01_seed": {"role": "dna", "prio": "p0", "crawl": true, "seed_ref": "required", "tier1_preload": false, "key_files": ["seed-idirectory-master.md"]},
