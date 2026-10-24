@@ -82,7 +82,7 @@
           },
           "edge": {
             "type": "string",
-            "enum": ["focus", "parent", "child", "dep"]
+            "enum": ["focus", "parent", "child", "dep", "consumer"]
           },
           "pruned": {
             "type": "boolean"

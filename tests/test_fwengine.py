@@ -39,6 +39,7 @@ from FWengine import (
     scaffold_beacon_for_dir,
     generate_sliced_tree,
     format_sliced_tree,
+    validate_beacon_data,
     SLICE_CHAR_BUDGET,
 )
 
@@ -98,6 +99,16 @@ class TestMiniYAML(unittest.TestCase):
         loaded = MiniYAML.load(dumped)
         self.assertEqual(loaded["role"], original["role"])
         self.assertEqual(loaded["crawl"], original["crawl"])
+        self.assertEqual(loaded["key_files"], original["key_files"])
+
+    def test_escaped_quotes_roundtrip(self):
+        original = {
+            "purpose": 'Motor con "comillas" internas: v3.3',
+            "key_files": ['mod.py: fn(a="x") -> bool'],
+        }
+        dumped = MiniYAML.dump(original)
+        loaded = MiniYAML.load(dumped)
+        self.assertEqual(loaded["purpose"], original["purpose"])
         self.assertEqual(loaded["key_files"], original["key_files"])
 
 
@@ -587,6 +598,37 @@ class TestAutoScaffoldAndRemediation(unittest.TestCase):
         self.assertTrue((self.test_path / "01_seed" / ".context.yaml").exists())
         self.assertTrue(audit_repository(self.test_path))
 
+    def test_sync_beacons_preserves_agent_enrichment(self):
+        core_beacon = self.test_path / "src" / "core" / ".context.yaml"
+        with open(core_beacon, "a", encoding="utf-8") as fh:
+            fh.write('key_files:\n  - "auth.py (exports: verify_token)"\nimports_from:\n  - "schemas"\nexported_to:\n  - "src/cloud_jobs"\n')
+        sync_beacons(self.test_path)
+        reloaded = MiniYAML.load(core_beacon.read_text(encoding="utf-8"))
+        self.assertEqual(reloaded.get("key_files"), ["auth.py (exports: verify_token)"])
+        self.assertEqual(reloaded.get("imports_from"), ["schemas"])
+        self.assertEqual(reloaded.get("exported_to"), ["src/cloud_jobs"])
+        # force_defaults=True restores canonical defaults
+        sync_beacons(self.test_path, force_defaults=True)
+        restored = MiniYAML.load(core_beacon.read_text(encoding="utf-8"))
+        self.assertNotIn("imports_from", restored)
+
+    def test_audit_detects_and_fixes_invalid_beacon_schema(self):
+        core_beacon = self.test_path / "src" / "core" / ".context.yaml"
+        raw = core_beacon.read_text(encoding="utf-8").replace("read_priority: p1", "read_priority: p9")
+        core_beacon.write_text(raw + "# USER_NOTE: keep me\n", encoding="utf-8")
+        self.assertTrue(len(validate_beacon_data(MiniYAML.load(core_beacon.read_text(encoding="utf-8")))) > 0)
+        self.assertFalse(audit_repository(self.test_path, fix=False))
+        self.assertTrue(audit_repository(self.test_path, fix=True))
+        repaired_text = core_beacon.read_text(encoding="utf-8")
+        self.assertIn("# USER_NOTE: keep me", repaired_text)
+        self.assertEqual(validate_beacon_data(MiniYAML.load(repaired_text)), [])
+
+    def test_audit_detects_deep_uppercase_directory(self):
+        deep_upper = self.test_path / "src" / "core" / "MySubService"
+        deep_upper.mkdir(parents=True)
+        scaffold_beacon_for_dir(deep_upper, self.test_path)
+        self.assertFalse(audit_repository(self.test_path, fix=False))
+
 
 class TestTreeSlicing(unittest.TestCase):
     """Verifies focused subtree generation (map --slice), dependency traversal, and budget pruning."""
@@ -603,16 +645,18 @@ class TestTreeSlicing(unittest.TestCase):
     def test_tree_slicing_structure_and_dependencies(self):
         core_beacon = self.test_path / "src" / "core" / ".context.yaml"
         with open(core_beacon, "a", encoding="utf-8") as fh:
-            fh.write('imports_from:\n  - "schemas"\n')
+            fh.write('key_files:\n  - "auth.py"\nimports_from:\n  - "schemas"\nexported_to:\n  - "src/cloud_jobs"\n')
         (self.test_path / "src" / "core" / "auth").mkdir()
         sliced = generate_sliced_tree(self.test_path, "src/core")
         nodes = sliced["nodes"]
         self.assertTrue(sliced["sliced"])
         self.assertEqual(sliced["focus_node"], "src/core")
         self.assertEqual(nodes["src/core"]["edge"], "focus")
+        self.assertEqual(nodes["src/core"].get("key_files"), ["auth.py"])
         self.assertEqual(nodes["src"]["edge"], "parent")
         self.assertEqual(nodes["src/core/auth"]["edge"], "child")
         self.assertEqual(nodes["schemas"]["edge"], "dep")
+        self.assertEqual(nodes["src/cloud_jobs"]["edge"], "consumer")
         for key in nodes:
             self.assertNotIn("\\", key)
         self.assertLessEqual(len(format_sliced_tree(sliced)), SLICE_CHAR_BUDGET)

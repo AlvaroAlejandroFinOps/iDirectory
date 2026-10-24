@@ -7,7 +7,7 @@
 [![Arquitectura: iDirectory v3.2](https://img.shields.io/badge/Arquitectura-iDirectory%20v3.2-2b2b2b.svg?style=flat-square)](#2-arquitectura-y-topología-del-sistema)
 [![Creado por: Gravity HyperScale Thinking](https://img.shields.io/badge/Creado%20por-Gravity%20HyperScale%20Thinking-34495e.svg?style=flat-square)](#1-resumen-ejecutivo)
 [![Motor: CLI Determinista](https://img.shields.io/badge/Motor-CLI--Determinista-4b5563.svg?style=flat-square)](#3-formulación-matemática-y-motores-analíticos)
-[![Verificación: 50/50 Superadas (100%)](https://img.shields.io/badge/Verificaci%C3%B3n-50%2F50%20Superadas%20(100%25)-1a1a1a.svg?style=flat-square)](#6-protocolo-de-ejecución-y-verificación)
+[![Verificación: 54/54 Superadas (100%)](https://img.shields.io/badge/Verificaci%C3%B3n-54%2F54%20Superadas%20(100%25)-1a1a1a.svg?style=flat-square)](#6-protocolo-de-ejecución-y-verificación)
 [![Licencia: MIT](https://img.shields.io/badge/Licencia-MIT-000000.svg?style=flat-square)](LICENSE)
 
 ---
@@ -125,7 +125,7 @@ Métricas operativas evaluadas sobre hardware de desarrollo estándar (x86_64, a
 | Huella de Memoria (Ejecución CLI) | N/A | < 25.0 MB | **8.4 MB** |
 | Rendimiento de Reubicación (`--move`) | ~2 ops/s | > 500 ops/s | **1,420 ops/s** |
 | Dependencias Externas de Terceros | N/A | 0 | **0 (Solo Librería Estándar de Python)** |
-| Tasa de Éxito en Suite de Invariantes | N/A | 100% | **50/50 Pruebas Superadas (100%)** |
+| Tasa de Éxito en Suite de Invariantes | N/A | 100% | **54/54 Pruebas Superadas (100%)** |
 
 ### 4.2. Benchmark de Compresión de Tokens Multi-Repositorio
 
@@ -193,8 +193,8 @@ iDirectory/
 ├── infrastructure/                  # Infraestructura como Código (Terraform, Bicep, AWS CDK)
 ├── config/                          # Parámetros de entorno (dev, staging, prod)
 ├── tests/                           # Suites de verificación y pruebas de invariantes
-│   ├── test_fwengine.py             # 37 pruebas unitarias (CLI, MiniYAML, ruteo, reintento I/O NTFS, auto-scaffold, tree slicing)
-│   └── test_token_budget.py         # 13 pruebas de benchmarking (compresión de tokens, densidad de balizas, presupuestos de subgrafos)
+│   ├── test_fwengine.py             # 48 pruebas unitarias (CLI, MiniYAML, ruteo, reintento I/O NTFS, auto-scaffold, tree slicing)
+│   └── test_token_budget.py         # 6 pruebas de benchmarking (compresión de tokens, densidad de balizas, presupuestos de subgrafos)
 ├── artifacts/
 │   ├── benchmarks/                  # Suite de telemetría forense multi-repo (6 repos analizados)
 │   │   ├── README.md                # Reporte máster de benchmark y análisis comparativo ejecutivo
@@ -314,7 +314,7 @@ Los agentes autónomos pueden enriquecer micro-balizas con metadatos semánticos
 
 ### 6.3. Suite de Verificación y Pruebas de Invariantes
 
-Ejecuta la suite completa de 50 pruebas unitarias y de compresión de tokens utilizando el framework estándar `unittest`:
+Ejecuta la suite completa de 54 pruebas unitarias y de compresión de tokens utilizando el framework estándar `unittest`:
 
 ```bash
 python -m unittest discover tests

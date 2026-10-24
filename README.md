@@ -7,7 +7,7 @@
 [![Architecture: iDirectory v3.2](https://img.shields.io/badge/Architecture-iDirectory%20v3.2-2b2b2b.svg?style=flat-square)](#2-system-architecture--topology)
 [![Created by: Gravity HyperScale Thinking](https://img.shields.io/badge/Created%20by-Gravity%20HyperScale%20Thinking-34495e.svg?style=flat-square)](#1-executive-abstract)
 [![Engine: Deterministic CLI](https://img.shields.io/badge/Engine-Deterministic--CLI-4b5563.svg?style=flat-square)](#3-mathematical-formulation--analytical-engines)
-[![Verification: 50/50 Passing (100%)](https://img.shields.io/badge/Verification-50%2F50%20Passing%20(100%25)-1a1a1a.svg?style=flat-square)](#6-execution--verification-protocol)
+[![Verification: 54/54 Passing (100%)](https://img.shields.io/badge/Verification-54%2F54%20Passing%20(100%25)-1a1a1a.svg?style=flat-square)](#6-execution--verification-protocol)
 [![License: MIT](https://img.shields.io/badge/License-MIT-000000.svg?style=flat-square)](LICENSE)
 
 ---
@@ -125,7 +125,7 @@ Operational benchmarks evaluated on standard enterprise developer hardware (x86_
 | Memory Footprint (CLI Execution) | N/A | < 25.0 MB | **8.4 MB** |
 | Relocation Throughput (`--move`) | ~2 ops/s | > 500 ops/s | **1,420 ops/s** |
 | External Dependencies | N/A | 0 | **0 (Python Standard Library Only)** |
-| Invariant Test Suite Pass Rate | N/A | 100% | **50/50 Passing (100%)** |
+| Invariant Test Suite Pass Rate | N/A | 100% | **54/54 Passing (100%)** |
 
 ### 4.2. Multi-Repository Token Compression Benchmark
 
@@ -193,8 +193,8 @@ iDirectory/
 ├── infrastructure/                  # Infrastructure as Code (Terraform, Bicep, AWS CDK)
 ├── config/                          # Environment parameters (dev, staging, prod)
 ├── tests/                           # Verification suites and invariant tests
-│   ├── test_fwengine.py             # 37 unit tests (CLI, MiniYAML, routing, NTFS I/O retry, auto-scaffold, tree slicing)
-│   └── test_token_budget.py         # 13 benchmarking tests (context token compression, beacon density, slice budgets)
+│   ├── test_fwengine.py             # 48 unit tests (CLI, MiniYAML, routing, NTFS I/O retry, auto-scaffold, tree slicing)
+│   └── test_token_budget.py         # 6 benchmarking tests (context token compression, beacon density, slice budgets)
 ├── artifacts/
 │   ├── benchmarks/                  # Multi-repository forensic telemetry suite (6 evaluated repos)
 │   │   ├── README.md                # Master benchmark report & executive comparative analysis
@@ -314,7 +314,7 @@ Autonomous agents can enrich micro-beacons with telegraphic semantic metadata wh
 
 ### 6.3. Verification Suite & Invariant Tests
 
-Execute the full suite of 50 unit and token compression tests using the standard `unittest` framework:
+Execute the full suite of 54 unit and token compression tests using the standard `unittest` framework:
 
 ```bash
 python -m unittest discover tests

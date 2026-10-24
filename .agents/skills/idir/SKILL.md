@@ -5,9 +5,9 @@ description: >-
   Permite inicializar la estructura (init), auditar/mover archivos (route), auto-scaffold de beacons (audit --fix), subgrafos (map --slice) y enriquecimiento (enrich).
 ---
 
-# Skill: /idir (Gobernanza y Context Engineering de iDirectory v3.2)
+# Skill: /idir (Gobernanza y Context Engineering de iDirectory v3.3)
 
-Esta habilidad proporciona el flujo para consultar, auditar, inicializar y clasificar elementos dentro de la estructura **iDirectory v3.2** gobernada por [`FWengine.py`](./FWengine.py).
+Esta habilidad proporciona el flujo para consultar, auditar, inicializar y clasificar elementos dentro de la estructura **iDirectory v3.3** gobernada por [`FWengine.py`](./FWengine.py).
 
 ---
 
