@@ -1,0 +1,11 @@
+version: 1.0
+directory: src
+role: namespace
+purpose: Contenedor de subdominios canónicos de src/.
+relevance: high
+crawl: true
+read_priority: p1
+seed_reference: optional
+tier1_preload: false
+token_density: sparse
+instructions: Sin lógica propia. Leer el beacon del subdirectorio objetivo.

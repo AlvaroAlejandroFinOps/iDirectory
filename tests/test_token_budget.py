@@ -24,6 +24,9 @@ from FWengine import (
     compute_context_budget,
     init_project,
     FOLDER_METADATA,
+    iter_beacon_files,
+    generate_sliced_tree,
+    format_sliced_tree,
 )
 
 
@@ -79,6 +82,24 @@ class TestTokenBudgetBenchmark(unittest.TestCase):
         compact_tokens = estimate_tokens(compact_str)
         print(f"  - Compact Prompt Injection: ~{compact_tokens} tokens")
         self.assertLessEqual(compact_tokens, 250, "El formato compacto para prompts debe ser menor a 250 tokens.")
+
+    def test_beacon_token_density_threshold(self):
+        """Ningún .context.yaml del repositorio debe superar ~150 tokens (600 chars)."""
+        beacons = iter_beacon_files(self.project_path)
+        self.assertGreater(len(beacons), 10)
+        for beacon in beacons:
+            tokens = estimate_tokens(beacon.read_text(encoding="utf-8"))
+            self.assertLessEqual(tokens, 150, f"Beacon inflado: {beacon}")
+
+    def test_tree_slicing_token_budget(self):
+        """El subgrafo focalizado debe consumir < 150 tokens y ahorrar > 70% vs tree.json completo."""
+        full_tokens = estimate_tokens((self.project_path / ".context" / "tree.json").read_text(encoding="utf-8"))
+        for target in ("src/core", "src", "docs"):
+            sliced = format_sliced_tree(generate_sliced_tree(self.project_path, target))
+            slice_tokens = estimate_tokens(sliced)
+            print(f"\n[BENCHMARK] Slice '{target}': ~{slice_tokens} tokens (full tree ~{full_tokens})")
+            self.assertLess(slice_tokens, 150)
+            self.assertLess(slice_tokens, full_tokens * 0.3)
 
 
 class TestTopologicalScalingStress(unittest.TestCase):

@@ -12,6 +12,7 @@ Para maximizar la eficiencia de tokens y prevenir la dispersión atencional (*At
 Aplica a: resolución de bugs, edición de código puntual, refactor modular, creación de tests y tareas acotadas.
 1. **Paso 0 (Regla Activa):** Este documento (`AGENTS.md`) define los invariantes y contratos del proyecto.
 2. **Paso 1 (Radar Topológico Satelital):** Lee [`.context/tree.json`](./.context/tree.json). En menos de 500 tokens (o ~150 tokens con `python FWengine.py context --compact`) obtendrás el mapa satelital completo, roles y directivas de poda sin consumir miles de tokens listando directorios recursivamente.
+   - **Variante focalizada (recomendada si la tarea está confinada a un subdominio):** `python FWengine.py map --slice <dir>` (< 150 tokens) sustituye la lectura completa de `tree.json`.
 3. **Paso 2 (Semaforización Local / Herencia Jerárquica):** Antes de operar en un directorio objetivo (p. ej., `src/core/`), lee su microarchivo local `.context.yaml`. Si no existe físicamente, resuelve sus directivas por **herencia recursiva** del directorio padre más cercano.
 4. **Paso 3 (Ejecución):** Modifica o genera código directamente.
 
@@ -41,6 +42,7 @@ Aplica a: auditorías integrales de madurez, reconstrucción estructural de mód
 1. **Herencia Jerárquica de Poda:** Si un directorio ancestro declara `crawl: false` (como `data/raw`, `data/processed`, `logs/`, `artifacts/plans/archive/`), **ningún subdirectorio hijo podrá ser explorado o volcado al contexto**. La poda es estricta e inviolable.
 2. **Contrato de Sincronización al Cierre:** Si durante una tarea el agente crea nuevos directorios o muta la topología física, **DEBE** ejecutar:
    ```powershell
+   python FWengine.py audit --fix
    python FWengine.py beacon --sync
    python FWengine.py map --sync
    ```
@@ -81,6 +83,14 @@ Los agentes pueden interactuar con la gobernanza del proyecto mediante terminal 
 5. **Telemetría de Contexto y Token Budget:**
    ```powershell
    python FWengine.py context --budget
+   ```
+6. **Subgrafo Focalizado (< 150 tokens):**
+   ```powershell
+   python FWengine.py map --slice <directorio>
+   ```
+7. **Auto-Remediación y Sincronización:**
+   ```powershell
+   python FWengine.py audit --fix
    ```
 
 ---

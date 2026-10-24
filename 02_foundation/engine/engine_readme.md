@@ -1,12 +1,15 @@
-# IDIRECTORY - iDirectory Architecture v3.1
+# IDIRECTORY - iDirectory Architecture v3.2
 
 Framework modular gobernado por **Gravity HyperScale Thinking** con Context Engineering nativo.
 
 > **Protocolo de Ingesta para Agentes (Two-Tier Bootloader):**
 > 1. Lee `AGENTS.md` (o `GEMINI.md` / `CLAUDE.md`).
-> 2. Lee `.context/tree.json` (Mapa Topológico Satelital < 500 tokens / ~150 tokens compactos).
-> 3. **Tier 1 (Atómico):** Lee el `.context.yaml` objetivo (o herencia del padre) y ejecuta. (NO cargar seed; `tier1_preload: false`).
+> 2. **Radar Topológico:** Lee `.context/tree.json` (< 500 tokens / ~150 tokens compactos).
+>    - *Variante focalizada:* Si la tarea está acotada a un subdominio, usa `python FWengine.py map --slice <dir>` (< 150 tokens) para obtener un subgrafo inmediato.
+> 3. **Tier 1 (Atómico):** Lee el `.context.yaml` objetivo (o herencia ascendente) y ejecuta. (NO cargar seed; `tier1_preload: false`).
 > 4. **Tier 2 (Arquitectura):** Carga `01_seed/seed-idirectory-master.md` solo ante disparadores explícitos (/seedMaster, /metrics, /ultraThinking).
+> 5. **Contrato de Cierre:** Tras crear carpetas o alterar la topología, ejecuta:
+>    `python FWengine.py audit --fix && python FWengine.py beacon --sync && python FWengine.py map --sync`
 
 ## Manifiesto de Directorios y Roles
 

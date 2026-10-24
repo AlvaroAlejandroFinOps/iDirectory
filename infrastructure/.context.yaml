@@ -1,0 +1,11 @@
+version: 1.0
+directory: infrastructure
+role: domain_extension
+purpose: Dominio no canónico infrastructure (auto scaffold).
+relevance: high
+crawl: true
+read_priority: p1
+seed_reference: optional
+tier1_preload: false
+token_density: sparse
+instructions: Extensión de dominio. Enriquecer con /idir enrich.

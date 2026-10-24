@@ -1,0 +1,11 @@
+version: 1.0
+directory: docs
+role: namespace
+purpose: Contenedor de subdominios canónicos de docs/.
+relevance: medium
+crawl: true
+read_priority: p2
+seed_reference: optional
+tier1_preload: false
+token_density: sparse
+instructions: Sin lógica propia. Leer el beacon del subdirectorio objetivo.

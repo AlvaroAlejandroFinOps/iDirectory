@@ -33,6 +33,13 @@ from FWengine import (
     inspect_python_header,
     route_file,
     check_satellite_freshness,
+    safe_io_retry,
+    safe_rename_casing,
+    discover_unbeaconed_directories,
+    scaffold_beacon_for_dir,
+    generate_sliced_tree,
+    format_sliced_tree,
+    SLICE_CHAR_BUDGET,
 )
 
 
@@ -457,6 +464,168 @@ class TestSatelliteFreshness(unittest.TestCase):
         status = check_satellite_freshness(self.test_path)
         self.assertFalse(status["fresh"])
         self.assertTrue(status["drift_detected"])
+
+
+class TestNTFSIOResilience(unittest.TestCase):
+    """Verifies safe_io_retry exponential backoff and atomic casing rename on Windows NTFS."""
+
+    def setUp(self):
+        self.test_dir = tempfile.mkdtemp(prefix="idir_resilience_test_")
+        self.test_path = Path(self.test_dir)
+        init_project(str(self.test_path))
+
+    def tearDown(self):
+        if self.test_path.exists():
+            shutil.rmtree(self.test_path, ignore_errors=True)
+
+    def test_safe_io_retry_recovers_transient_error(self):
+        calls = {"n": 0}
+
+        def flaky():
+            calls["n"] += 1
+            if calls["n"] < 3:
+                raise PermissionError(13, "locked by indexer")
+            return "ok"
+
+        result = safe_io_retry(flaky, initial_delay_ms=1.0)
+        self.assertEqual(result, "ok")
+        self.assertEqual(calls["n"], 3)
+
+    def test_safe_io_retry_does_not_retry_logical_errors(self):
+        calls = {"n": 0}
+
+        def missing():
+            calls["n"] += 1
+            raise FileNotFoundError("missing file")
+
+        with self.assertRaises(FileNotFoundError):
+            safe_io_retry(missing, initial_delay_ms=1.0)
+        self.assertEqual(calls["n"], 1)
+
+    def test_safe_io_retry_exhausts_and_raises(self):
+        calls = {"n": 0}
+
+        def always_locked():
+            calls["n"] += 1
+            raise PermissionError(13, "persistently locked")
+
+        with self.assertRaises(PermissionError):
+            safe_io_retry(always_locked, max_attempts=4, initial_delay_ms=1.0)
+        self.assertEqual(calls["n"], 4)
+
+    def test_no_tmp_residue_after_casing_rename(self):
+        f = self.test_path / "UpperJob.py"
+        f.write_text("from pyspark.sql import functions as F\n", encoding="utf-8")
+        route_file(str(f), base_path=str(self.test_path), move=True)
+        residues = list((self.test_path / "src" / "cloud_jobs").glob(".tmp_*"))
+        self.assertEqual(residues, [])
+
+
+class TestAutoScaffoldAndRemediation(unittest.TestCase):
+    """Verifies beacon auto-discovery, hierarchy scaffolding, and audit --fix auto-remediation."""
+
+    def setUp(self):
+        self.test_dir = tempfile.mkdtemp(prefix="idir_scaffold_test_")
+        self.test_path = Path(self.test_dir)
+        init_project(str(self.test_path))
+
+    def tearDown(self):
+        if self.test_path.exists():
+            shutil.rmtree(self.test_path, ignore_errors=True)
+
+    def test_init_leaves_no_orphans(self):
+        self.assertEqual(discover_unbeaconed_directories(self.test_path), [])
+        self.assertTrue((self.test_path / "src" / ".context.yaml").exists())
+        loaded = MiniYAML.load((self.test_path / "src" / ".context.yaml").read_text(encoding="utf-8"))
+        self.assertEqual(loaded["role"], "namespace")
+        self.assertFalse(loaded["tier1_preload"])
+
+    def test_auto_discovery_scaffolds_unbeaconed_folder(self):
+        new_dir = self.test_path / "src" / "core" / "temp_domain"
+        os.mkdir(new_dir)
+        orphans = [p.resolve() for p in discover_unbeaconed_directories(self.test_path)]
+        self.assertIn(new_dir.resolve(), orphans)
+        sync_beacons(self.test_path)
+        beacon = new_dir / ".context.yaml"
+        self.assertTrue(beacon.exists())
+        loaded = MiniYAML.load(beacon.read_text(encoding="utf-8"))
+        self.assertEqual(loaded["role"], "shared_backend")
+        self.assertEqual(loaded["directory"], "src/core/temp_domain")
+        self.assertFalse(loaded["tier1_preload"])
+
+    def test_discovery_respects_crawl_false_and_hidden(self):
+        (self.test_path / "data" / "raw" / "incoming").mkdir(parents=True)
+        (self.test_path / ".hidden_tool").mkdir()
+        (self.test_path / "src" / "__pycache__").mkdir()
+        orphans = [p.resolve() for p in discover_unbeaconed_directories(self.test_path)]
+        self.assertNotIn((self.test_path / "data" / "raw" / "incoming").resolve(), orphans)
+        self.assertNotIn((self.test_path / ".hidden_tool").resolve(), orphans)
+        self.assertNotIn((self.test_path / "src" / "__pycache__").resolve(), orphans)
+
+    def test_scaffold_never_overwrites_existing_beacon(self):
+        beacon = self.test_path / "src" / "core" / ".context.yaml"
+        beacon.write_text("role: custom\n# USER_NOTE: manual\n", encoding="utf-8")
+        self.assertIsNone(scaffold_beacon_for_dir(beacon.parent, self.test_path))
+        self.assertIn("USER_NOTE", beacon.read_text(encoding="utf-8"))
+
+    def test_route_file_creates_beacon_on_new_target(self):
+        shutil.rmtree(self.test_path / "src" / "dashboards")
+        dash = self.test_path / "kpi_board.py"
+        dash.write_text("import streamlit as st\n", encoding="utf-8")
+        dest = route_file(str(dash), base_path=str(self.test_path), move=True)
+        self.assertTrue(dest.exists())
+        beacon = self.test_path / "src" / "dashboards" / ".context.yaml"
+        self.assertTrue(beacon.exists())
+        self.assertEqual(MiniYAML.load(beacon.read_text(encoding="utf-8"))["role"], "bi_viz")
+
+    def test_audit_fix_flag_resolves_missing_beacons(self):
+        (self.test_path / "infrastructure").mkdir()
+        (self.test_path / "01_seed" / ".context.yaml").unlink()
+        self.assertFalse(audit_repository(self.test_path))
+        self.assertTrue(audit_repository(self.test_path, fix=True))
+        self.assertTrue((self.test_path / "infrastructure" / ".context.yaml").exists())
+        self.assertTrue((self.test_path / "01_seed" / ".context.yaml").exists())
+        self.assertTrue(audit_repository(self.test_path))
+
+
+class TestTreeSlicing(unittest.TestCase):
+    """Verifies focused subtree generation (map --slice), dependency traversal, and budget pruning."""
+
+    def setUp(self):
+        self.test_dir = tempfile.mkdtemp(prefix="idir_slice_test_")
+        self.test_path = Path(self.test_dir)
+        init_project(str(self.test_path))
+
+    def tearDown(self):
+        if self.test_path.exists():
+            shutil.rmtree(self.test_path, ignore_errors=True)
+
+    def test_tree_slicing_structure_and_dependencies(self):
+        core_beacon = self.test_path / "src" / "core" / ".context.yaml"
+        with open(core_beacon, "a", encoding="utf-8") as fh:
+            fh.write('imports_from:\n  - "schemas"\n')
+        (self.test_path / "src" / "core" / "auth").mkdir()
+        sliced = generate_sliced_tree(self.test_path, "src/core")
+        nodes = sliced["nodes"]
+        self.assertTrue(sliced["sliced"])
+        self.assertEqual(sliced["focus_node"], "src/core")
+        self.assertEqual(nodes["src/core"]["edge"], "focus")
+        self.assertEqual(nodes["src"]["edge"], "parent")
+        self.assertEqual(nodes["src/core/auth"]["edge"], "child")
+        self.assertEqual(nodes["schemas"]["edge"], "dep")
+        for key in nodes:
+            self.assertNotIn("\\", key)
+        self.assertLessEqual(len(format_sliced_tree(sliced)), SLICE_CHAR_BUDGET)
+
+    def test_slice_pruned_branch_has_no_children(self):
+        (self.test_path / "data" / "raw" / "batch").mkdir(parents=True)
+        sliced = generate_sliced_tree(self.test_path, "data/raw")
+        self.assertTrue(sliced["nodes"]["data/raw"].get("pruned"))
+        self.assertFalse(any(n["edge"] == "child" for n in sliced["nodes"].values()))
+
+    def test_slice_blocks_traversal(self):
+        with self.assertRaises(PermissionError):
+            generate_sliced_tree(self.test_path, "../outside")
 
 
 if __name__ == "__main__":

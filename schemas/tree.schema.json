@@ -2,18 +2,11 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "../schemas/tree.schema.json",
   "title": "iDirectory Topological Satellite Schema",
-  "description": "Formal JSON Schema Draft-07 validating .context/tree.json in iDirectory v3.1.",
+  "description": "Formal JSON Schema Draft-07 validating .context/tree.json in iDirectory v3.2 (full satellite or focused slice).",
   "type": "object",
-  "required": [
-    "$schema",
-    "version",
-    "project",
-    "architecture",
-    "updated_at",
-    "timestamp",
-    "bootloader",
-    "nodes"
-  ],
+  "if": { "properties": { "sliced": { "const": true } }, "required": ["sliced"] },
+  "then": { "required": ["project", "sliced", "focus_node", "nodes"] },
+  "else": { "required": ["$schema", "version", "project", "architecture", "updated_at", "timestamp", "bootloader", "nodes"] },
   "properties": {
     "$schema": {
       "type": "string",
@@ -34,6 +27,20 @@
     },
     "timestamp": {
       "type": "number"
+    },
+    "sliced": {
+      "type": "boolean"
+    },
+    "focus_node": {
+      "type": "string",
+      "pattern": "^[^\\\\]+$"
+    },
+    "sliced_at": {
+      "type": "integer"
+    },
+    "truncated": {
+      "type": "integer",
+      "minimum": 1
     },
     "bootloader": {
       "type": "object",
@@ -56,7 +63,7 @@
       "type": "object",
       "additionalProperties": {
         "type": "object",
-        "required": ["role", "prio", "crawl", "seed_ref"],
+        "required": ["role", "prio", "crawl"],
         "properties": {
           "role": { "type": "string" },
           "prio": {
@@ -72,6 +79,13 @@
           "key_files": {
             "type": "array",
             "items": { "type": "string" }
+          },
+          "edge": {
+            "type": "string",
+            "enum": ["focus", "parent", "child", "dep"]
+          },
+          "pruned": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false

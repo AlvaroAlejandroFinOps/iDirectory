@@ -4,10 +4,10 @@
 **Language:** [English](README.md) | [Español](README_ES.md)
 
 [![Runtime: Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-1a1a1a.svg?style=flat-square)](https://www.python.org/)
-[![Architecture: iDirectory v3.0](https://img.shields.io/badge/Architecture-iDirectory%20v3.0-2b2b2b.svg?style=flat-square)](#2-system-architecture--topology)
+[![Architecture: iDirectory v3.2](https://img.shields.io/badge/Architecture-iDirectory%20v3.2-2b2b2b.svg?style=flat-square)](#2-system-architecture--topology)
 [![Created by: Gravity HyperScale Thinking](https://img.shields.io/badge/Created%20by-Gravity%20HyperScale%20Thinking-34495e.svg?style=flat-square)](#1-executive-abstract)
 [![Engine: Deterministic CLI](https://img.shields.io/badge/Engine-Deterministic--CLI-4b5563.svg?style=flat-square)](#3-mathematical-formulation--analytical-engines)
-[![Verification: 100% Passing](https://img.shields.io/badge/Verification-100%25%20Passing-1a1a1a.svg?style=flat-square)](#6-execution--verification-protocol)
+[![Verification: 50/50 Passing (100%)](https://img.shields.io/badge/Verification-50%2F50%20Passing%20(100%25)-1a1a1a.svg?style=flat-square)](#6-execution--verification-protocol)
 [![License: MIT](https://img.shields.io/badge/License-MIT-000000.svg?style=flat-square)](LICENSE)
 
 ---
@@ -16,7 +16,7 @@
 
 **iDirectory**, engineered and originated by **Gravity HyperScale Thinking**, resolves structural decay, architectural fragmentation, and context window exhaustion across modern multi-cloud data engineering platforms, enterprise AI research repositories, and autonomous agent ecosystems. Contemporary enterprise stacks operating across Google Cloud Platform, Amazon Web Services, Microsoft Azure, and Microsoft Fabric frequently suffer from heterogeneous filesystem structures, uncontrolled local data accumulation, and ambiguous asset placement. In autonomous coding agents (including Google Gemini/Antigravity, Anthropic Claude Code, OpenAI/Codex, Cursor, and Windsurf), unguided directory crawling consumes hundreds of millions of tokens on dead branches and compiled dependencies, triggering attention degradation and catastrophic hallucinations.
 
-To eliminate this vulnerability, **iDirectory v3.0** introduces a deterministic, zero-dependency scaffolding and Context Engineering framework governed by `FWengine.py`. By coupling an extension-and-nominal pattern heuristic matrix with a topological satellite radar (`.context/tree.json`) and local micro-beacons (`.context.yaml`), the system establishes canonical workspace organization, isolates local Medallion storage tiers (Bronze, Silver, Gold), and provides instant spatial orientation to autonomous agents. Empirical evaluations across production codebases demonstrate context token reductions between **82.28% and 99.99%**, enabling sub-second navigational decisions without blind recursive directory exploration.
+To eliminate this vulnerability, **iDirectory v3.2** introduces a deterministic, zero-dependency scaffolding and Context Engineering framework governed by `FWengine.py`. By coupling an extension-and-nominal pattern heuristic matrix with a topological satellite radar (`.context/tree.json`), dynamic topological subgraphs (`map --slice <dir>`, consuming `< 150 tokens`), automatic beacon scaffolding (`audit --fix`), resilient NTFS atomic I/O retry mechanisms (`safe_io_retry`), and local micro-beacons (`.context.yaml`), the system establishes canonical workspace organization, isolates local Medallion storage tiers (Bronze, Silver, Gold), and provides instant spatial orientation to autonomous agents. Empirical evaluations across production codebases demonstrate context token reductions between **82.28% and 99.99%**, enabling sub-second navigational decisions without blind recursive directory exploration.
 
 ---
 
@@ -125,7 +125,7 @@ Operational benchmarks evaluated on standard enterprise developer hardware (x86_
 | Memory Footprint (CLI Execution) | N/A | < 25.0 MB | **8.4 MB** |
 | Relocation Throughput (`--move`) | ~2 ops/s | > 500 ops/s | **1,420 ops/s** |
 | External Dependencies | N/A | 0 | **0 (Python Standard Library Only)** |
-| Invariant Test Suite Pass Rate | N/A | 100% | **20/20 Passing (100%)** |
+| Invariant Test Suite Pass Rate | N/A | 100% | **50/50 Passing (100%)** |
 
 ### 4.2. Multi-Repository Token Compression Benchmark
 
@@ -186,12 +186,15 @@ iDirectory/
 │   ├── raw/                         # Bronze storage tier (pure immutable landing)
 │   ├── processed/                   # Silver/Gold storage tier (cleaned & modeled data)
 │   └── sandbox/                     # Unrestricted data science exploration zone
-├── schemas/                         # Formal schema contracts (Avro, JSON Schema, SQL DDL)
+├── schemas/                         # Formal schema contracts (Draft-07 JSON Schemas, Avro, SQL DDL)
+│   ├── .context.yaml
+│   ├── tree.schema.json             # Formal contract for full and sliced topological maps
+│   └── beacon.schema.json           # Formal contract for .context.yaml micro-beacons
 ├── infrastructure/                  # Infrastructure as Code (Terraform, Bicep, AWS CDK)
 ├── config/                          # Environment parameters (dev, staging, prod)
 ├── tests/                           # Verification suites and invariant tests
-│   ├── test_fwengine.py             # 16 unit tests for CLI, MiniYAML, routing, and lowercase checks
-│   └── test_token_budget.py         # 4 benchmarking tests for context token compression validation
+│   ├── test_fwengine.py             # 37 unit tests (CLI, MiniYAML, routing, NTFS I/O retry, auto-scaffold, tree slicing)
+│   └── test_token_budget.py         # 13 benchmarking tests (context token compression, beacon density, slice budgets)
 ├── artifacts/
 │   ├── benchmarks/                  # Multi-repository forensic telemetry suite (6 evaluated repos)
 │   │   ├── README.md                # Master benchmark report & executive comparative analysis
@@ -270,16 +273,48 @@ python FWengine.py route "path/to/unclassified_script.py"
 python FWengine.py route "path/to/unclassified_script.py" --move
 ```
 
-#### Structural Governance Audit
-Verifies naming invariants, detects uppercase directory violations, and confirms beacon completeness:
+#### Structural Governance Audit & Auto-Remediation
+Verifies naming invariants, detects uppercase directory violations, verifies beacon coverage, and auto-provisions missing beacons when `--fix` is passed:
 
 ```bash
+# Audit governance compliance
 python FWengine.py audit
+
+# Auto-remediate missing beacons and sync satellite
+python FWengine.py audit --fix
 ```
+
+#### Focused Topological Subgraphs (Tree Slicing)
+Emits a localized, high-density JSON subgraph containing the target directory, parent, immediate children, and declared dependencies, reducing context injection to `< 150 tokens` (>90% compression compared to full satellite map):
+
+```bash
+# Generate focused topological slice (default radius=1)
+python FWengine.py map --slice src/core
+
+# Expand radius to include secondary neighbors
+python FWengine.py map --slice src/core --radius 2
+```
+
+#### Closing Synchronization Contract
+Whenever agents mutate physical directory topology or create files, the closing contract must be executed:
+
+```bash
+python FWengine.py audit --fix
+python FWengine.py beacon --sync
+python FWengine.py map --sync
+```
+
+#### Agentic Semantic Enrichment Protocol (`/idir enrich`)
+Autonomous agents can enrich micro-beacons with telegraphic semantic metadata while strictly respecting token budgets:
+- **`purpose`**: Single crisp sentence explaining the directory responsibility (<= 15 words).
+- **`instructions`**: Specific constraints and anti-patterns for agents (<= 30 words).
+- **`key_files`**: List critical files with 1-line export hints (`filename.py (exports: ClassA, func_b)`).
+- **`imports_from` & `exported_to`**: Flat list of directory relationships.
+- **Token Density Budget**: Entire `.context.yaml` must not exceed 600 characters (~150 tokens).
 
 ### 6.3. Verification Suite & Invariant Tests
 
-Execute the full suite of unit and token compression tests using the standard `unittest` framework:
+Execute the full suite of 50 unit and token compression tests using the standard `unittest` framework:
 
 ```bash
 python -m unittest discover tests
@@ -307,7 +342,7 @@ python -m unittest discover tests
 ### BibTeX Citation
 
 ```bibtex
-@software{idirectory_v3_2026,
+@software{idirectory_v3_2_2026,
   author = {Gravity HyperScale Thinking},
   title = {iDirectory: Multi-Cloud Governance & Context Engineering Scaffolding Engine},
   year = {2026},

@@ -10,13 +10,14 @@ Para optimizar el uso de tokens y evitar la degradación de contexto (*Context D
 1. **Tier 1 (Operación Quirúrgica / Ejecución Atómica - Predeterminado):**
    - Secuencia: `AGENTS.md` -> `.context/tree.json` -> `.context.yaml` objetivo (o herencia ascendente) -> Ejecución.
    - El satélite `.context/tree.json` consume `< 500 tokens` (`python FWengine.py context --compact` consume `~150 tokens`).
+   - **Variante focalizada:** Si la tarea está confinada a un subdominio, usa `python FWengine.py map --slice <dir>` (< 150 tokens) en lugar de `tree.json` completo.
    - `01_seed/` posee `crawl: true` pero **`tier1_preload: false`**; queda **prohibido precargar la semilla** en este nivel para no quemar tokens de forma innecesaria.
 2. **Tier 2 (Planificación Arquitectónica / Auditoría Mayor):**
    - Ingesta profunda del seed activada **únicamente** ante disparadores explícitos:
      - *Disparador 1 (Usuario):* `/seedMaster`, `/metrics`, `/ultraThinking`, `/plan` o rediseño integral.
      - *Disparador 2 (Beacon):* Directiva `seed_reference: required` en `.context.yaml`.
      - *Disparador 3 (Agente):* Duda no resuelta sobre contratos o dependencias no declaradas (lectura puntual).
-3. **Contrato de Cierre:** Si creas o reestructuras directorios, ejecuta `beacon --sync` y `map --sync`.
+3. **Contrato de Cierre:** Si creas o reestructuras directorios, ejecuta `audit --fix`, `beacon --sync` y `map --sync`.
 
 ---
 
@@ -28,23 +29,31 @@ Utiliza la habilidad `/idir` para interactuar con [`FWengine.py`](./FWengine.py)
    ```powershell
    python FWengine.py audit
    ```
-2. **Ruteo de Archivo:**
+2. **Auto-Remediación:**
+   ```powershell
+   python FWengine.py audit --fix
+   ```
+3. **Subgrafo Focalizado:**
+   ```powershell
+   python FWengine.py map --slice <dir>
+   ```
+4. **Ruteo de Archivo:**
    ```powershell
    python FWengine.py route "<ruta_del_archivo>"
    ```
-3. **Reubicación Física:**
+5. **Reubicación Física:**
    ```powershell
    python FWengine.py route "<ruta_del_archivo>" --move
    ```
-4. **Reubicación con Sobrescritura Permitida:**
+6. **Reubicación con Sobrescritura Permitida:**
    ```powershell
    python FWengine.py route "<ruta_del_archivo>" --move --overwrite
    ```
-5. **Sincronización de Beacons:**
+7. **Sincronización de Beacons:**
    ```powershell
    python FWengine.py beacon --sync
    ```
-6. **Presupuesto de Tokens:**
+8. **Presupuesto de Tokens:**
    ```powershell
    python FWengine.py context --budget
    ```
