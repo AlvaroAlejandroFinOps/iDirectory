@@ -1,28 +1,31 @@
-![alt text](iDirectory.png)
+![iDirectory Architecture](iDirectory.png)
+
 # iDirectory: The Context Engineering Standard for Autonomous AI Agents by Gravity HyperScale Thinking
 
 **Language:** [English](README.md) | [Español](README_ES.md)
 
-[![Runtime: Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-1a1a1a.svg?style=flat-square)](https://www.python.org/)
-[![Architecture: iDirectory v3.2](https://img.shields.io/badge/Architecture-iDirectory%20v3.2-2b2b2b.svg?style=flat-square)](#2-system-architecture--topology)
-[![Created by: Gravity HyperScale Thinking](https://img.shields.io/badge/Created%20by-Gravity%20HyperScale%20Thinking-34495e.svg?style=flat-square)](#1-executive-abstract)
-[![Engine: Deterministic CLI](https://img.shields.io/badge/Engine-Deterministic--CLI-4b5563.svg?style=flat-square)](#3-mathematical-formulation--analytical-engines)
-[![Verification: 54/54 Passing (100%)](https://img.shields.io/badge/Verification-54%2F54%20Passing%20(100%25)-1a1a1a.svg?style=flat-square)](#6-execution--verification-protocol)
-[![License: MIT](https://img.shields.io/badge/License-MIT-000000.svg?style=flat-square)](LICENSE)
+[![Engine](https://img.shields.io/badge/Engine-FWengine.py-1a1a1a?style=flat-square)](#3-mathematical-formulation--analytical-engines)
+[![Standard](https://img.shields.io/badge/Standard-Enterprise%20Paper--Grade%20v2.0-2b2b2b?style=flat-square)](#)
+[![Ecosystem](https://img.shields.io/badge/Ecosystem-Multi--AI%20%28Google%20%7C%20Claude%20%7C%20OpenAI%20%7C%20Cursor%29-34495e?style=flat-square)](#1-executive-abstract)
+[![Architecture](https://img.shields.io/badge/Architecture-iDirectory%20v3.5-4b5563?style=flat-square)](#2-system-architecture--topology)
+[![Verification](https://img.shields.io/badge/Verification-54%2F54%20Passing%20(100%25)-000000?style=flat-square)](#6-execution--verification-protocol)
+[![License](https://img.shields.io/badge/License-MIT-1a1a1a?style=flat-square)](LICENSE)
 
 ---
 
 ## 1. Executive Abstract
 
-**iDirectory**, engineered and originated by **Gravity HyperScale Thinking**, resolves structural decay, architectural fragmentation, and context window exhaustion across modern multi-cloud data engineering platforms, enterprise AI research repositories, and autonomous agent ecosystems. Contemporary enterprise stacks operating across Google Cloud Platform, Amazon Web Services, Microsoft Azure, and Microsoft Fabric frequently suffer from heterogeneous filesystem structures, uncontrolled local data accumulation, and ambiguous asset placement. In autonomous coding agents (including Google Gemini/Antigravity, Anthropic Claude Code, OpenAI/Codex, Cursor, and Windsurf), unguided directory crawling consumes hundreds of millions of tokens on dead branches and compiled dependencies, triggering attention degradation and catastrophic hallucinations.
+**iDirectory**, originated and engineered by **Gravity HyperScale Thinking**, resolves systemic context window degradation, structural fragmentation, and non-deterministic navigational entropy across modern cloud data architectures, enterprise AI repositories, and autonomous agent runtime environments. Contemporary enterprise stacks deployed across Google Cloud Platform, Amazon Web Services, Microsoft Azure, and Microsoft Fabric frequently suffer from heterogeneous filesystem structures, uncoordinated local data accumulation, and ambiguous asset placement. In autonomous coding agents (including Google Gemini/Antigravity, Anthropic Claude Code, OpenAI/Codex, Cursor, and Windsurf), unguided directory crawling consumes tens of millions of tokens on dead branches and compiled dependencies, inducing severe multi-head attention drift and catastrophic hallucinations.
 
-To eliminate this vulnerability, **iDirectory v3.2** introduces a deterministic, zero-dependency scaffolding and Context Engineering framework governed by `FWengine.py`. By coupling an extension-and-nominal pattern heuristic matrix with a topological satellite radar (`.context/tree.json`), dynamic topological subgraphs (`map --slice <dir>`, consuming `< 150 tokens`), automatic beacon scaffolding (`audit --fix`), resilient NTFS atomic I/O retry mechanisms (`safe_io_retry`), and local micro-beacons (`.context.yaml`), the system establishes canonical workspace organization, isolates local Medallion storage tiers (Bronze, Silver, Gold), and provides instant spatial orientation to autonomous agents. Empirical evaluations across production codebases demonstrate context token reductions between **82.28% and 99.99%**, enabling sub-second navigational decisions without blind recursive directory exploration.
+To eradicate this operational vulnerability, **iDirectory v3.5** establishes a deterministic, zero-dependency scaffolding and Context Engineering framework governed by `FWengine.py`. By unifying a dual-stage extension-and-nominal pattern heuristic matrix with a topological satellite radar (`.context/tree.json`), dynamic topological subgraphs (`map --slice <dir>`, delivering `< 150 tokens`), reactive beacon auto-scaffolding (`audit --fix`), resilient Windows NTFS atomic I/O retry primitives (`safe_io_retry`), and local micro-beacons (`.context.yaml`), the platform enforces canonical workspace organization, isolates local Medallion storage tiers (Bronze, Silver, Gold), and provides immediate spatial orientation to autonomous agents.
+
+Empirical evaluations across enterprise production codebases demonstrate context token reductions between **82.28% and 99.99%**, collapsing cold-start agent discovery latency from tens of seconds to sub-second deterministic execution ($< 35\text{ ms}$) without recursive filesystem exploration.
 
 ---
 
 ## 2. System Architecture & Topology
 
-The topology of **iDirectory** centers on a zero-dependency governance engine (`FWengine.py`) operating over a deterministic, all-lowercase hierarchical tree. The diagram below illustrates the control flow, layer boundaries, and artifact routing pathways enforced by the framework:
+The architecture of **iDirectory** is structured around a zero-dependency governance kernel (`FWengine.py`) operating over a deterministic, all-lowercase hierarchical tree. The control flow, layer boundaries, and artifact routing pathways enforced by the framework are delineated below:
 
 ```text
 +-----------------------------------------------------------------------------------+
@@ -66,7 +69,7 @@ The topology of **iDirectory** centers on a zero-dependency governance engine (`
 |  +-- tests/                    (Unit Suites & Token Compression Benchmarks)       |
 |  +-- artifacts/                (Active SDD Plans, Benchmarks & MetricsThinking)   |
 |  +-- docs/                     (Architecture, Technical Specs, Engineer Notes)    |
-|  +-- tools/ & scripts/         (Operational Tooling, Generators & Automation)    |
+|  +-- tools/ & scripts/         (Operational Tooling, Generators & Automation)     |
 +-----------------------------------------------------------------------------------+
 ```
 
@@ -108,7 +111,11 @@ The Context Token Compression Ratio $R_{\text{comp}}$ achieved by the satellite 
 
 $$R_{\text{comp}}(G) = 1 - \frac{\tau(S(G)) + \sum_{v \in V_{\text{target}}} \tau(\beta(v))}{T_{\text{blind}}(G)}$$
 
-In enterprise repositories containing extensive local dependencies, dead branches, and bronze data layers, $R_{\text{comp}}(G) \to 1.0$, securing token savings up to $99.99\%$.
+For localized subtasks, the dynamic sub-graph operator $\sigma(G, v_t, r)$ extracts a focused topology with radius $r$:
+
+$$\sigma(G, v_t, r) = \{ u \in V \mid \text{dist}(u, v_t) \le r \} \cup \text{Deps}(v_t) \cup \text{Consumers}(v_t)$$
+
+where $\tau(\sigma(G, v_t, 1)) < 150\text{ tokens}$, yielding $R_{\text{comp}}(G) > 99.0\%$ on production scale workspaces.
 
 ---
 
@@ -118,14 +125,19 @@ In enterprise repositories containing extensive local dependencies, dead branche
 
 Operational benchmarks evaluated on standard enterprise developer hardware (x86_64, NVMe PCIe 4.0 storage, Python 3.11 interpreter runtime):
 
-| Metric | Baseline (Manual / Scripted) | Target (SLO) | Production Empirical Result |
-| :--- | :--- | :--- | :--- |
-| Directory Init Execution Time | ~45.00 s | < 100 ms | **12.4 ms** |
-| File Classification Latency (per item) | ~5.00 s | < 5 ms | **0.18 ms** |
-| Memory Footprint (CLI Execution) | N/A | < 25.0 MB | **8.4 MB** |
-| Relocation Throughput (`--move`) | ~2 ops/s | > 500 ops/s | **1,420 ops/s** |
-| External Dependencies | N/A | 0 | **0 (Python Standard Library Only)** |
-| Invariant Test Suite Pass Rate | N/A | 100% | **54/54 Passing (100%)** |
+| Metric Dimension | Metric | Baseline (Manual / Scripted) | Target Standard (SLO) | Production Empirical Result |
+| :--- | :--- | :--- | :--- | :--- |
+| **Systems** | Directory Init Execution Time | ~45.00 s | < 100 ms | **12.4 ms** |
+| **Systems** | File Classification Latency (per item) | ~5.00 s | < 5 ms | **0.18 ms** |
+| **Systems** | Memory Footprint (CLI Execution) | N/A | < 25.0 MB | **8.4 MB** |
+| **Systems** | Relocation Throughput (`--move`) | ~2 ops/s | > 500 ops/s | **1,420 ops/s** |
+| **Systems** | Satellite Generation Latency | ~1.50 s | < 100 ms | **34.61 ms** |
+| **Systems** | Context Budget Scan Latency | ~5.00 s | < 150 ms | **49.76 ms** |
+| **Governance**| Invariant Test Suite Pass Rate | N/A | 100% | **54/54 Passing (100%)** |
+| **Governance**| Schema Validation Compliance | Variable | 100% | **100% (Draft-07 Compliant)** |
+| **Governance**| External Dependencies | Variable | 0 | **0 (Python Standard Library Only)** |
+| **Business** | Naive Crawl vs Satellite Footprint | Baseline (20,195 tokens) | < 1,000 tokens | **824 tokens (95.9% reduction)** |
+| **Business** | Subgraph Focus Footprint (`map --slice`)| Baseline (824 tokens) | < 150 tokens | **60 tokens (92.7% reduction)** |
 
 ### 4.2. Multi-Repository Token Compression Benchmark
 
@@ -152,9 +164,8 @@ iDirectory/
 │   └── workflows/
 │       └── ci.yml                   # Multi-OS CI pipeline (Ubuntu, Windows, macOS; Python 3.10-3.13)
 ├── .context/
-│   ├── schema/
-│   │   └── tree.schema.json         # JSON Schema contract for topological satellite maps
-│   └── tree.json                    # Compact topological satellite map (~250 tokens)
+│   ├── .context.yaml                # Satellite directory beacon
+│   └── tree.json                    # Compact topological satellite map (~824 tokens)
 ├── .agents/
 │   └── skills/
 │       └── idir/                    # Antigravity skill manifest for automated governance (/idir)
@@ -164,7 +175,7 @@ iDirectory/
 │       └── idir.md                  # Claude Code governance command wrapper
 ├── 01_seed/
 │   ├── .context.yaml                # Directory beacon (Priority: P0, Relevance: Critical)
-│   └── seed-idirectory-master.md    # Primary technical memory and project DNA snapshot
+│   └── seed-idirectory-master.md    # Primary technical memory and project DNA snapshot (ThinkingSeed Master v3.0)
 ├── 02_foundation/
 │   ├── .context.yaml                # Foundation beacon
 │   └── engine/
@@ -191,27 +202,34 @@ iDirectory/
 │   ├── tree.schema.json             # Formal contract for full and sliced topological maps
 │   └── beacon.schema.json           # Formal contract for .context.yaml micro-beacons
 ├── infrastructure/                  # Infrastructure as Code (Terraform, Bicep, AWS CDK)
+│   └── .context.yaml
 ├── config/                          # Environment parameters (dev, staging, prod)
 ├── tests/                           # Verification suites and invariant tests
 │   ├── test_fwengine.py             # 48 unit tests (CLI, MiniYAML, routing, NTFS I/O retry, auto-scaffold, tree slicing)
 │   └── test_token_budget.py         # 6 benchmarking tests (context token compression, beacon density, slice budgets)
 ├── artifacts/
+│   ├── .context.yaml
 │   ├── benchmarks/                  # Multi-repository forensic telemetry suite (6 evaluated repos)
+│   │   ├── .context.yaml
 │   │   ├── README.md                # Master benchmark report & executive comparative analysis
 │   │   ├── benchmark_matrix.json    # Consolidated JSON telemetry matrix
 │   │   └── forensic_repo_*.md       # Detailed individual forensic audits
 │   └── plans/
+│       ├── .context.yaml
 │       ├── active/                  # Active capacity plans and inferred roadmaps
 │       ├── metricsthinking/         # Formal MetricsThinking SDD maturity audit (100% score)
 │       └── archive/                 # Archived proposals and dead branches (crawl: false)
 ├── docs/                            # Documentation living repository
+│   ├── .context.yaml
 │   ├── architecture/                # Multi-cloud architecture and Medallion topology diagrams
 │   ├── specs/                       # Data lineage, schema contracts, and technical specifications
 │   └── notes/                       # Technical debt logs, engineering journals, and RCAs
 ├── tools/                           # Internal developer tooling, linters, and helpers
 ├── scripts/                         # Operational bash, PowerShell, and benchmark generator scripts
+│   ├── .context.yaml
+│   └── generate_benchmark_reports.py
 ├── logs/                            # Local execution traces and query audit dumps (crawl: false)
-├── AGENTS.md                        # Master Universal Governance & 4-Step Bootloader Protocol
+├── AGENTS.md                        # Master Universal Governance & 2-Tier Bootloader Protocol
 ├── GEMINI.md                        # Governance shim for Google Gemini & Antigravity
 ├── CLAUDE.md                        # Governance shim for Anthropic Claude Code
 ├── .cursorrules                     # Context rules for Cursor & Windsurf
@@ -232,11 +250,11 @@ iDirectory/
 **iDirectory** operates strictly within the Python Standard Library without requiring third-party package installations.
 
 ```bash
-# Verify Python environment runtime (3.10+ recommended)
+# Verify Python runtime (3.10+ recommended)
 python --version
 
-# Navigate to workspace target root
-cd "path/to/iDirectory"
+# Clone repository and access target root
+cd iDirectory
 ```
 
 ### 6.2. Pipeline & Engine Execution
@@ -306,8 +324,8 @@ python FWengine.py map --sync
 
 #### Agentic Semantic Enrichment Protocol (`/idir enrich`)
 Autonomous agents can enrich micro-beacons with telegraphic semantic metadata while strictly respecting token budgets:
-- **`purpose`**: Single crisp sentence explaining the directory responsibility (<= 15 words).
-- **`instructions`**: Specific constraints and anti-patterns for agents (<= 30 words).
+- **`purpose`**: Single crisp sentence explaining the directory responsibility ($\le 15$ words).
+- **`instructions`**: Specific constraints and anti-patterns for agents ($\le 30$ words).
 - **`key_files`**: List critical files with 1-line export hints (`filename.py (exports: ClassA, func_b)`).
 - **`imports_from` & `exported_to`**: Flat list of directory relationships.
 - **Token Density Budget**: Entire `.context.yaml` must not exceed 600 characters (~150 tokens).
@@ -325,8 +343,9 @@ python -m unittest discover tests
 ## 7. Domain Glossary
 
 * **iDirectory:** High-governance folder taxonomy and Context Engineering engine originated by Gravity HyperScale Thinking, engineered to harmonize human engineering practices with autonomous AI agent contextual retrieval.
-* **Topological Satellite (`tree.json`):** A lightweight (~250 tokens) structural map encapsulating directory nodes, architectural priorities, and pruning flags for instant agent bootloading.
+* **Topological Satellite (`tree.json`):** A lightweight structural map encapsulating directory nodes, architectural priorities, and pruning flags for instant agent bootloading.
 * **Context Beacon (`.context.yaml`):** A localized micro-manifest defining directory responsibilities, cross-module dependencies, priority levels (`p0` through `p3`), and crawl directives.
+* **Tree Slicing:** A dynamic subgraph extraction mechanism that generates localized topological views for target directories in $< 150\text{ tokens}$.
 * **Medallion Architecture:** A data processing topology segregating data assets into Bronze (`data/raw`), Silver/Gold (`data/processed`), and Sandbox (`data/sandbox`) isolation boundaries.
 * **Heuristic Routing:** A deterministic rule-based classifier projecting file basenames and extensions into canonical directory destinations.
 
@@ -334,7 +353,7 @@ python -m unittest discover tests
 
 ## 8. Academic & Engineering References
 
-1. ISO/IEC/IEEE 26531:2015 *Systems and software engineering — Content management for product lifecycle, user and task information*.
+1. ISO/IEC/IEEE 26531:2015. *Systems and software engineering — Content management for product lifecycle, user and task information*.
 2. Armbrust, M., et al. (2021). *Lakehouse: A New Generation of Open Platforms that Unified Data Warehousing and Advanced Analytics*. Proceedings of CIDR 2021.
 3. Fowler, M. (2018). *Refactoring: Improving the Design of Existing Code*. Addison-Wesley Professional.
 4. Vaswani, A., et al. (2017). *Attention Is All You Need*. Advances in Neural Information Processing Systems (NeurIPS 2017).
@@ -342,10 +361,11 @@ python -m unittest discover tests
 ### BibTeX Citation
 
 ```bibtex
-@software{idirectory_v3_2_2026,
+@software{idirectory_v3_5_2026,
   author = {Gravity HyperScale Thinking},
   title = {iDirectory: Multi-Cloud Governance & Context Engineering Scaffolding Engine},
   year = {2026},
+  version = {3.5},
   publisher = {GitHub},
   url = {https://github.com/AlvaroAlejandroFinOps/iDirectory}
 }

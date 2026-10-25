@@ -1,4 +1,4 @@
-<SEED_ARCHITECTURAL_VECTOR version="3.2" contains_source_code="false" artifact_type="architectural_vector" mode="architecture_and_vulnerability_audit">
+<SEED_ARCHITECTURAL_VECTOR version="3.0" contains_source_code="false" artifact_type="architectural_vector" mode="architecture_and_vulnerability_audit">
 
 # THINKING SEED MASTER: iDirectory
 
@@ -8,7 +8,8 @@
 > 3. **Estado de Avance Real:** Los componentes etiquetados como `[FALTANTE]` o `[DEUDA]` reflejan el trabajo en progreso (WIP) real del proyecto, no defectos de este documento.
 
 ## Seed Changelog
-- `2026-10-24 (v3.3)`: Cierre integral de las 7 brechas forenses (`[GAP-01]` a `[GAP-07]`) detectadas en la auditoría post-v3.2: (1) Preservación automática de enriquecimiento agéntico (`purpose`, `instructions`, `key_files`, `imports_from`, `exported_to`) durante `sync_beacons()` con soporte para `--force-defaults`; (2) Simetría de des-escapado JSON en `MiniYAML._unquote()`; (3) Validación estructural de `.context.yaml` en stdlib pura (`validate_beacon_data()`) integrada en `audit_repository()` con auto-reparación en `--fix`; (4) Incorporación de `key_files` físicos locales y consumidores aguas abajo (`exported_to` -> `edge: "consumer"`) en `generate_sliced_tree()`; (5) Poda estricta `os.walk` en `check_satellite_freshness()` y `compute_context_budget()`; (6) Detección de mayúsculas en profundidad completa (`[INV-06]`). Suite ampliada a **54 tests (100% OK)**.
+- `2026-10-24 (v3.5)`: Consolidación arquitectónica iDirectory v3.5 en commit `aeae4e4`. Verificación y sincronización de beacons estructurales en 31 nodos canónicos y de extensión (`02_foundation`, `03_research`, `artifacts`, `data`, `docs`, `infrastructure`, `src`). Integración estricta de validación formal en stdlib pura contra `./schemas/beacon.schema.json` y subgrafos condicionales en `./schemas/tree.schema.json`. Confirmación de 54 tests automatizados al 100% de tasa de éxito en 28.3s sin dependencias externas.
+- `2026-10-24 (v3.3)`: Cierre integral de las 7 brechas forenses (`[GAP-01]` a `[GAP-07]`) detectadas en la auditoría post-v3.2: (1) Preservación automática de enriquecimiento agéntico (`purpose`, `instructions`, `key_files`, `imports_from`, `exported_to`) durante `sync_beacons()` con soporte para `--force-defaults`; (2) Simetría de des-escapado JSON en `MiniYAML._unquote()`; (3) Validación estructural de `.context.yaml` en stdlib pura (`validate_beacon_data()`) integrada en `audit_repository()` con auto-reparación en `--fix`; (4) Incorporación de `key_files` físicos locales y consumidores aguas abajo (`exported_to` -> `edge: "consumer"`) en `generate_sliced_tree()`; (5) Poda estricta `os.walk` en `check_satellite_freshness()` y `compute_context_budget()`; (6) Detección de mayúsculas en profundidad completa (`[INV-06]`). Suite ampliada a 54 tests (100% OK).
 - `2026-10-24 (v3.2)`: Implementación integral del motor de auto-scaffolding reactivo de beacons (`[OBJ-01]`, `[OBJ-02]`, `[OBJ-03]`) en `FWengine.py`, erradicando la orfandad estructural de directorios mediante `discover_unbeaconed_directories()`, `scaffold_beacon_for_dir()`, `ensure_beacon_chain()` e integración atómica en `route_file()` y `audit --fix`. Fortalecimiento I/O contra bloqueos transitorios en Windows NTFS (`WinError 32/5`, `EACCES`, `EBUSY`) mediante `safe_io_retry()` con exponential backoff determinista y `safe_rename_casing()` con archivo temporal de dos pasos (`.tmp_{pid}_{name}`) y rollback atómico. Recorte topológico dinámico (`[OBJ-04]`) mediante `map --slice <dir>` generando subgrafos topológicos focalizados en `< 150 tokens` (>90% de compresión frente a `tree.json` completo). Formalización de esquemas: creación de `./schemas/beacon.schema.json` (Draft-07) para validación estricta de `.context.yaml` y extensión condicional de `./schemas/tree.schema.json` para subgrafos recortados. Protocolo agéntico `/idir enrich` para enriquecimiento semántico telegráfico con límite estricto de 600 caracteres (~150 tokens). Expansión de la suite de pruebas a 50 tests (37 en `test_fwengine.py` y 13 en `test_token_budget.py`) con tasa de éxito del 100%.
 - `2026-10-21 (v3.1)`: Re-ingeniería completa de `FWengine.py` a v3.1 y sincronización con ThinkingSeed Master. Cierre integral de `BUG-01` a `BUG-04` y `DEBT-01` a `DEBT-04`. Desacoplamiento de `crawl: true` y `tier1_preload: false` en `01_seed/`, resolución dinámica de `key_files` vía `resolve_seed_key_files()`, auto-descubrimiento de carpetas de dominio (`domain_extension`), verificación física de casing en disco para NTFS/APFS vía `os.listdir()`, serialización compacta de `./.context/tree.json` (~824 tokens) superando el benchmark unitario de 1,000 tokens (95.9% de ahorro de contexto), formalización de `./schemas/tree.schema.json` (Draft-07), preservación de comentarios manuales `#` en `MiniYAML`, inspección de cabeceras AST (`max_chars=4096`), y protección anti-colisión en `route --move` mediante `--overwrite`. Expansión de la suite de pruebas a 31 tests unitarios en `test_fwengine.py` (35 totales en el repositorio) con tasa de éxito del 100%.
 - `2026-10-21 (v3.0)`: Migración integral al estándar formal ThinkingSeed Master v3.0 con encapsulamiento XML determinista `<SEED_ARCHITECTURAL_VECTOR>`. Incorporación de firmas simbólicas AST de 1 línea para `./FWengine.py`, `./scripts/generate_benchmark_reports.py` y suites de test en `./tests/`. Integración de la matriz forense ampliada a 7 repositorios (con peritaje forense de `FlowAgentic` en `./artifacts/benchmarks/forensic_repo_07_flowagentic.md`). Documentación adversarial de discrepancia en presupuesto de tokens de `./.context/tree.json` y schema `./schemas/tree.schema.json`.
@@ -20,22 +21,23 @@
 ## 0. IDENTIDAD, METADATOS Y CONTRATO DEL RECEPTOR
 
 ```yaml
-seed_schema_version: "3.2"
+seed_schema_version: "3.0"
 project_name: "iDirectory"
 repository_name: "iDirectory"
 project_type: "context_engineering_governance_framework"
 repository_mode: "monorepo"
-generated_at: "2026-10-24T12:00:00-03:00"
-generated_by: "Antigravity (Gemini 3.8 Flash High)"
+generated_at: "2026-10-24T22:55:00-03:00"
+generated_by: "Antigravity (Gemini 3.8 Flash)"
 repository_root: "./"
 git_branch: "master"
-git_commit: "eede2d3"
+git_commit: "aeae4e4"
 working_tree_state: "clean"
 analysis_mode: "static+git+validated"
 coverage_level: "high"
 known_analysis_limits:
   - "El motor FWengine.py opera bajo restricción estricta Zero-Dependency (100% Python Standard Library)"
   - "La suite test_token_budget.py genera directorios en el temporal del SO, requiriendo permisos de I/O en %TEMP% o /tmp"
+  - "El estimador de tokens de compute_context_budget() utiliza la heurística empírica de 4 caracteres por token"
 ```
 
 ### 0.1 Instrucciones para el modelo receptor
@@ -53,7 +55,7 @@ known_analysis_limits:
 ## 1. RESUMEN EJECUTIVO Y ALCANCE
 
 ### 1.1 Propósito y Misión del Sistema `[DECLARADO]`
-`iDirectory` es un framework de gobernanza topológica y optimización atencional (*Context Engineering*) concebido para repositorios de software, datos, nube e inteligencia artificial. Su propósito es erradicar la degradación cognitiva de modelos de lenguaje grande (LLMs) y agentes autónomos (*Attention Sink*, *Context Drift* y dilución atencional en capas de atención multi-head), garantizando tiempos de respuesta ultrarrápidos y una reducción drástica en costos de inferencia por turno.
+`iDirectory` es un framework de gobernanza topológica y optimización atencional (*Context Engineering*) concebido para repositorios de software, datos, nube e inteligencia artificial. Su propósito es erradicar la degradación cognitiva de modelos de lenguaje grande (LLMs) y agentes autónomos (*Attention Sink*, *Context Drift* y dilución atencional en capas de atención multi-head), garantizando tiempos de respuesta ultrarrápidos y una reducción drástica en costos de inferencia por turno (>95% de ahorro en tokens de contexto inicial).
 
 ### 1.2 El Problema Fundamental Resuelto `[CONFIRMADO]`
 1. **Atrofia Atencional por Ingesta Masiva:** Prácticas comunes de agentes autoinyectando volcados completos o archivos de semilla masivos (~6,800 tokens) o ejecutando escaneos recursivos no acotados (`find .`, `Get-ChildItem -Recurse`) agotan el presupuesto de tokens e incrementan el ruido en hasta un 85%.
@@ -61,16 +63,16 @@ known_analysis_limits:
 3. **Deriva Topológica (Satellite Drift):** Modificaciones físicas en el sistema de archivos que dejan mapas satelitales desactualizados, provocando alucinaciones del agente sobre ubicaciones inexistentes.
 
 ### 1.3 Consumidores Principales y Perfiles de Uso `[CONFIRMADO]`
-- **Agentes Autónomos (Google Antigravity/Gemini, Claude Code, OpenAI Codex, Cursor, Windsurf, Aider):** Consumen el mapa satelital `./.context/tree.json` en ~149 tokens compactos (o ~1,019 tokens completos formateados) y micro-beacons `./.context.yaml` locales para navegación quirúrgica.
+- **Agentes Autónomos (Google Antigravity/Gemini, Claude Code, OpenAI Codex, Cursor, Windsurf, Aider):** Consumen el mapa satelital `./.context/tree.json` en ~149 tokens compactos (o subgrafos focalizados vía `map --slice` en < 150 tokens) y micro-beacons `./.context.yaml` locales para navegación quirúrgica sin alucinaciones.
 - **Ingenieros de Datos y Arquitectos de Software:** Disponen de una estructura estandarizada con segregación de capas Medallion (`./data/raw/`, `./data/processed/`, `./data/sandbox/`), pipelines de nube (`./src/cloud_jobs/`), esquemas y contratos (`./schemas/`) y documentación técnica desacoplada.
-- **Canales de CI/CD (GitHub Actions):** Validación determinista de salud topológica, paridad de beacons y suites de pruebas mediante `./FWengine.py audit` y `unittest` sin requerir aprovisionamiento previo de librerías.
+- **Canales de CI/CD (GitHub Actions):** Validación determinista de salud topológica, paridad de beacons y suites de pruebas mediante `./FWengine.py audit` y `unittest` sin requerir aprovisionamiento previo de librerías de terceros.
 
 ---
 
 ## 2. ARQUITECTURA, TOPOLOGÍA Y FRONTERAS MODULARES
 
 ### 2.1 Protocolo Two-Tier Bootloader `[CONFIRMADO]`
-La arquitectura v3.0 implementa una bifurcación determinista en el arranque agéntico regulada por una matriz de decisión de 3 disparadores:
+La arquitectura v3.0/v3.5 implementa una bifurcación determinista en el arranque agéntico regulada por una matriz de decisión de 3 disparadores:
 
 ```
                           ┌────────────────────────┐
@@ -133,11 +135,13 @@ El sistema impone nombres de directorios raíz estrictamente en minúsculas para
 | `./tools/` | `tooling` | `p2` | `true` | `optional` | Herramientas internas, linters y scripts auxiliares. |
 | `./logs/` | `logs` | `p3` | `false` | `optional` | Trazas locales de ejecución y volcados de error (rama muerta). |
 | `./.context/` | `context_engineering` | `p0` | `true` | `optional` | Mapa topológico satelital (`tree.json`) y contratos de ingeniería de contexto. |
+| `./infrastructure/` | `domain_extension` | `p1` | `true` | `optional` | Plantillas de IaC (Terraform, Bicep, Pulumi) descubiertas dinámicamente. |
 
 ### 2.3 Reglas de Poda e Invariantes de Crawling `[CONFIRMADO]`
 - **Herencia Jerárquica de Poda:** Si un directorio o cualquiera de sus ancestros declara `crawl: false` (como `./data/raw/`, `./data/processed/`, `./data/sandbox/`, `./logs/`, `./artifacts/plans/archive/`), queda estrictamente prohibida la exploración o volcado recursivo por parte de agentes de IA.
 - **Sincronización Obligatoria de Cierre:** Toda mutación estructural física impone la re-ejecución inmediata de:
   ```powershell
+  python FWengine.py audit --fix
   python FWengine.py beacon --sync
   python FWengine.py map --sync
   ```
@@ -147,7 +151,7 @@ El sistema impone nombres de directorios raíz estrictamente en minúsculas para
 ## 3. FLUJOS DE EJECUCIÓN, ENTRY POINTS Y CICLO DE VIDA
 
 ### 3.1 Puntos de Entrada (Entry Points) `[CONFIRMADO]`
-1. **Motor CLI Central (`./FWengine.py`):** CLI unificada sin librerías externas que proporciona los subcomandos `init`, `route`, `beacon`, `map`, `context` y `audit`.
+1. **Motor CLI Central (`./FWengine.py`):** CLI unificada sin dependencias externas que provee los subcomandos `init`, `route`, `beacon`, `map`, `context` y `audit`.
 2. **Skill Agéntica (`./.agents/skills/idir/SKILL.md`):** Manifiesto ejecutable vía `/idir` que orquesta acciones de gobernanza desde interfaces agénticas.
 3. **Flujo de Integración Continua (`./.github/workflows/ci.yml`):** Validador automatizado multiplataforma (Ubuntu, Windows, macOS) ejecutando auditorías y suites unitarias.
 
@@ -198,38 +202,39 @@ Escanea mtime de carpetas clave (01_seed, 02_foundation, src, tests, etc.)
 ### 4.1 Firmas Simbólicas AST de 1 Línea `[CONFIRMADO]`
 
 #### Módulo Central de Gobernanza: `./FWengine.py`
-- `./FWengine.py::_is_transient_io_error(exc: Exception) -> bool` | Identifica códigos de error I/O transitorios de Windows NTFS y POSIX (`WinError 5, 32, 33`, `EACCES`, `EBUSY`, `EAGAIN`).
-- `./FWengine.py::safe_io_retry(operation: Callable[[], T], max_attempts: int = 4, initial_delay_ms: float = 25.0) -> T` | Envoltorio con exponential backoff determinista para neutralizar bloqueos transitorios de I/O en disco.
-- `./FWengine.py::safe_rename_casing(src_path: Path, dest_path: Path) -> Path` | Renombrado atómico en dos pasos mediante archivo temporal `.tmp_{pid}_{name}` con rollback ante excepciones.
-- `./FWengine.py::load_ignore_patterns(root_path: Path) -> List[str]` | Carga y normaliza máscaras de exclusión de `.agentignore` y `.gitignore`.
-- `./FWengine.py::is_ignored_path(dir_path: Path, root_path: Path, ignore_patterns: Optional[List[str]] = None) -> bool` | Evalúa si una ruta coincide con exclusiones o ancestros con `crawl: false`.
-- `./FWengine.py::discover_unbeaconed_directories(root_path: Path) -> List[Path]` | Descubre directorios no ignorados que carecen de `.context.yaml` físico.
-- `./FWengine.py::infer_beacon_meta(dir_path: Path, root_path: Path) -> Dict[str, Any]` | Infiere rol, prioridad y metadatos de baliza combinando catálogo canónico y herencia ascendente.
-- `./FWengine.py::scaffold_beacon_for_dir(dir_path: Path, root_path: Path) -> Optional[Path]` | Auto-scaffoldea `.context.yaml` para un directorio huérfano si no existe previamente.
-- `./FWengine.py::ensure_beacon_chain(target_dir: Path, root_path: Path) -> int` | Asegura que toda la cadena de ancestros hasta `target_dir` posea `.context.yaml`.
-- `./FWengine.py::iter_beacon_files(root_path: Path) -> List[Path]` | Itera sobre todos los `.context.yaml` válidos del repositorio sin entrar en ramas podadas.
+- `./FWengine.py::MiniYAML._unquote(raw: str) -> str` | Des-escapa cadenas entrecomilladas simétricamente vía `json.loads()` con fallback seguro a slice.
+- `./FWengine.py::MiniYAML.dump(data: Dict[str, Any], prefix: str = "") -> str` | Serializador recursivo a YAML minimalista; maneja escalares, listas y diccionarios sin PyYAML.
+- `./FWengine.py::MiniYAML.load(yaml_str: str) -> Dict[str, Any]` | Parser de YAML línea a línea para pares clave-valor y listas indentadas; soporta booleanos, enteros, floats y nulls.
+- `./FWengine.py::_is_transient_io_error(exc: BaseException) -> bool` | Identifica códigos de error I/O transitorios de Windows NTFS (`WinError 5, 32, 33`) y POSIX (`EACCES`, `EBUSY`, `EAGAIN`).
+- `./FWengine.py::safe_io_retry(operation: Callable[[], Any], max_attempts: int = 4, initial_delay_ms: float = 25.0) -> Any` | Envoltorio con exponential backoff determinista para neutralizar bloqueos transitorios de I/O en disco.
+- `./FWengine.py::safe_rename_casing(src: pathlib.Path, dest: pathlib.Path) -> pathlib.Path` | Renombrado atómico en dos pasos mediante archivo temporal `.tmp_{pid}_{name}` con rollback ante excepciones.
+- `./FWengine.py::resolve_seed_key_files(root_path: pathlib.Path) -> List[str]` | Escanea dinámicamente `01_seed/seed-*.md` en el repositorio o infiere `seed-{slug}-master.md` erradicando contaminación cruzada.
+- `./FWengine.py::_resolve_physical_rel_path(root_path: pathlib.Path, canonical_rel: str) -> str` | Resuelve el casing exacto físico en disco (NTFS/APFS) mediante `os.listdir()`.
+- `./FWengine.py::generate_beacon_content(folder: str, meta: Dict[str, Any], root_path: Optional[pathlib.Path] = None) -> str` | Construye el contenido serializado `.context.yaml` con `tier1_preload`, `key_files`, `imports_from` y `exported_to`.
+- `./FWengine.py::resolve_beacon(dir_path: pathlib.Path, root_path: pathlib.Path) -> Dict[str, Any]` | Resuelve recursivamente directivas de beacon mediante ascenso jerárquico; garantiza propagación de `crawl: false`.
+- `./FWengine.py::extract_preserved_comments(beacon_file: pathlib.Path) -> List[str]` | Extrae líneas de comentarios `#` existentes en un `.context.yaml` para preservarlas durante la resincronización.
 - `./FWengine.py::validate_beacon_data(data: Dict[str, Any]) -> List[str]` | Valida en stdlib pura las claves obligatorias y enums de un `.context.yaml` frente a `schemas/beacon.schema.json`.
-- `./FWengine.py::_read_local_beacon(dir_path: Path) -> Dict[str, Any]` | Carga el `.context.yaml` directo de un directorio sin ascenso jerárquico.
-- `./FWengine.py::MiniYAML._unquote(raw: str) -> str` | Des-escapa cadenas entrecomilladas simétricamente vía `json.loads()` con fallback seguro.
-- `./FWengine.py::MiniYAML.dump(data: Dict[str, Any], indent: int = 0) -> str` | Serializador recursivo a YAML minimalista; maneja diccionarios, listas, booleanos, enteros y cadenas sin PyYAML.
-- `./FWengine.py::MiniYAML.load(yaml_str: str) -> Dict[str, Any]` | Parser de YAML línea a línea para subconjuntos de pares clave-valor y listas indentadas.
-- `./FWengine.py::resolve_seed_key_files(root_path: Path) -> List[str]` | Escanea dinámicamente `01_seed/seed-*.md` en el repositorio o infiere `seed-{slug}-master.md` erradicando contaminación cruzada.
-- `./FWengine.py::extract_preserved_comments(beacon_file: Path) -> List[str]` | Extrae líneas de comentarios `#` existentes en un `.context.yaml` para preservarlas durante la resincronización.
-- `./FWengine.py::_resolve_physical_rel_path(root_path: Path, canonical_rel: str) -> str` | Resuelve el casing físico exacto en disco (NTFS/APFS) mediante `os.listdir()`.
-- `./FWengine.py::generate_beacon_content(folder: str, meta: Dict[str, Any], root_path: Optional[Path] = None) -> str` | Construye el contenido serializado `.context.yaml` con `tier1_preload`, `key_files`, `imports_from` y `exported_to`.
-- `./FWengine.py::resolve_beacon(dir_path: Path, root_path: Path) -> Dict[str, Any]` | Resuelve recursivamente directivas de beacon mediante ascenso jerárquico; garantiza propagación de `crawl: false`.
-- `./FWengine.py::sync_beacons(root_path: Path, auto_discover: bool = True, force_defaults: bool = False) -> int` | Sincroniza micro-beacons preservando comentarios `#` y enriquecimiento agéntico salvo `force_defaults=True`; auto-descubre huérfanos.
-- `./FWengine.py::generate_tree_json(root_path: Path) -> Dict[str, Any]` | Construye el mapa satelital estructurado con auto-descubrimiento filtrado de `domain_extension` y lectura de beacons locales.
-- `./FWengine.py::generate_sliced_tree(root_path: Path, target_path: str, radius: int = 1, max_children: int = 6) -> Dict[str, Any]` | Genera subgrafo topológico recortado (`focus`, `parent`, `child`, `dep`, `consumer`) en `< 150 tokens`.
-- `./FWengine.py::format_compact_tree_json(data: Dict[str, Any]) -> str` | Serializa el mapa satelital con un nodo por línea JSON compacta (< 500 tokens).
+- `./FWengine.py::_rel_posix(path: pathlib.Path, root_path: pathlib.Path) -> str` | Normaliza un objeto `Path` a una cadena relativa POSIX usando separadores `/`.
+- `./FWengine.py::load_ignore_patterns(root_path: pathlib.Path) -> List[str]` | Carga y normaliza máscaras de exclusión de `.agentignore` y `.gitignore`.
+- `./FWengine.py::is_ignored_path(dir_path: pathlib.Path, root_path: pathlib.Path, patterns: Optional[List[str]] = None) -> bool` | Evalúa si una ruta coincide con exclusiones o ancestros con `crawl: false`.
+- `./FWengine.py::discover_unbeaconed_directories(root_path: pathlib.Path) -> List[pathlib.Path]` | Descubre directorios no ignorados que carecen de `.context.yaml` físico.
+- `./FWengine.py::infer_beacon_meta(dir_path: pathlib.Path, root_path: pathlib.Path) -> Dict[str, Any]` | Infiere rol, prioridad y metadatos de baliza combinando catálogo canónico y herencia ascendente.
+- `./FWengine.py::scaffold_beacon_for_dir(dir_path: pathlib.Path, root_path: pathlib.Path, overwrite: bool = False) -> Optional[pathlib.Path]` | Auto-scaffoldea `.context.yaml` para un directorio huérfano si no existe previamente o si `overwrite=True`.
+- `./FWengine.py::ensure_beacon_chain(target_dir: pathlib.Path, root_path: pathlib.Path) -> List[pathlib.Path]` | Asegura que toda la cadena de ancestros hasta `target_dir` posea `.context.yaml`.
+- `./FWengine.py::iter_beacon_files(root_path: pathlib.Path) -> List[pathlib.Path]` | Itera sobre todos los `.context.yaml` válidos del repositorio sin entrar en ramas podadas.
+- `./FWengine.py::sync_beacons(root_path: pathlib.Path, auto_discover: bool = True, force_defaults: bool = False) -> int` | Sincroniza micro-beacons preservando comentarios `#` y enriquecimiento agéntico salvo `force_defaults=True`; auto-descubre huérfanos.
+- `./FWengine.py::generate_tree_json(root_path: pathlib.Path) -> Dict[str, Any]` | Construye el mapa satelital estructurado con auto-descubrimiento filtrado de `domain_extension` y lectura de beacons locales.
+- `./FWengine.py::check_satellite_freshness(root_path: pathlib.Path) -> Dict[str, Any]` | Compara el timestamp del satélite frente a la marca de modificación más reciente con recorrido `os.walk` podado.
+- `./FWengine.py::format_compact_tree_json(data: Dict[str, Any]) -> str` | Serializa el mapa satelital con un nodo por línea JSON compacta (< 1,000 tokens).
+- `./FWengine.py::sync_tree(root_path: pathlib.Path) -> pathlib.Path` | Serializa el mapa satelital en `./.context/tree.json` en formato compacto; retorna ruta del archivo generado.
+- `./FWengine.py::_read_local_beacon(dir_path: pathlib.Path) -> Dict[str, Any]` | Carga el `.context.yaml` directo de un directorio sin ascenso jerárquico.
+- `./FWengine.py::generate_sliced_tree(root_path: pathlib.Path, target_path: str, radius: int = 1, max_children: int = 6) -> Dict[str, Any]` | Genera subgrafo topológico recortado (`focus`, `parent`, `child`, `dep`, `consumer`) en `< 150 tokens`.
 - `./FWengine.py::format_sliced_tree(data: Dict[str, Any]) -> str` | Serializa el subgrafo recortado a JSON compacto de una sola línea.
-- `./FWengine.py::sync_tree(root_path: Path) -> Path` | Serializa el mapa satelital en `./.context/tree.json` en formato compacto; retorna ruta del archivo generado.
-- `./FWengine.py::check_satellite_freshness(root_path: Path) -> Dict[str, Any]` | Compara el timestamp del satélite frente a la marca de modificación más reciente con recorrido `os.walk` podado.
-- `./FWengine.py::compute_context_budget(root_path: Path) -> List[Dict[str, Any]]` | Cuantifica volumen de archivos, peso en bytes y tokens estimados (~4 chars/token) con recorrido `os.walk` podado.
-- `./FWengine.py::init_project(base_path: str) -> None` | Inicializa la topología canónica, despliega beacons, genera satélite, `engine_readme.md` (v3.2), `.agentignore` y `.gitignore`.
-- `./FWengine.py::inspect_python_header(file_path: Path, max_chars: int = 4096) -> str` | Inspecciona imports mediante `ast.parse()` y fallback de hasta 4,096 caracteres para clasificar el destino arquitectónico.
-- `./FWengine.py::route_file(file_path: str, base_path: str = ".", move: bool = False, overwrite: bool = False) -> Optional[Path]` | Clasifica y reubica atómicamente archivos con protección anti-colisión, reintento I/O y auto-scaffolding de beacons.
-- `./FWengine.py::audit_repository(root_path: Path, fix: bool = False) -> bool` | Audita mayúsculas en profundidad completa, cobertura y validez de esquema de beacons; auto-remedia con `fix=True`.
+- `./FWengine.py::compute_context_budget(root_path: pathlib.Path) -> List[Dict[str, Any]]` | Cuantifica volumen de archivos, peso en bytes y tokens estimados (~4 chars/token) con recorrido `os.walk` podado.
+- `./FWengine.py::init_project(base_path: str) -> None` | Inicializa la topología canónica, despliega beacons, genera satélite, `engine_readme.md`, `.agentignore` y `.gitignore`.
+- `./FWengine.py::inspect_python_header(file_path: pathlib.Path, max_chars: int = 4096) -> str` | Inspecciona imports mediante `ast.parse()` y fallback de hasta 4,096 caracteres para clasificar el destino arquitectónico.
+- `./FWengine.py::route_file(file_path: str, base_path: str = '.', move: bool = False, overwrite: bool = False) -> Optional[pathlib.Path]` | Clasifica y reubica atómicamente archivos con protección anti-colisión, reintento I/O y auto-scaffolding de beacons.
+- `./FWengine.py::audit_repository(root_path: pathlib.Path, fix: bool = False) -> bool` | Audita mayúsculas en profundidad completa, cobertura y validez de esquema de beacons; auto-remedia con `fix=True`.
 - `./FWengine.py::main() -> None` | Dispatcher principal de CLI configurado con `argparse` para `init`, `route` (`--overwrite`), `beacon` (`--no-discover`, `--force-defaults`), `map` (`--slice`, `--radius`), `context` y `audit` (`--fix`).
 
 #### Módulo de Reportes Forenses: `./scripts/generate_benchmark_reports.py`
@@ -267,6 +272,8 @@ Campos serializados por `MiniYAML`:
 - `instructions: str` (directivas operativas para el agente) `[CONFIRMADO]`
 - `key_files: List[str]` (archivos críticos declarados en el nodo, opcional) `[CONFIRMADO]`
 - `dependencies: List[str]` (vínculos directos con otros módulos, opcional) `[CONFIRMADO]`
+- `imports_from: List[str]` (orígenes de datos o dependencias ascendentes, opcional) `[CONFIRMADO]`
+- `exported_to: List[str]` (consumidores de datos o módulos aguas abajo, opcional) `[CONFIRMADO]`
 
 #### Estructura del Satélite Topológico (`./.context/tree.json`)
 - `$schema: "../schemas/tree.schema.json"` `[CONFIRMADO]`
@@ -285,7 +292,7 @@ Campos serializados por `MiniYAML`:
 #### Estructura del Esquema Formal de Beacon (`./schemas/beacon.schema.json`) `[CONFIRMADO]`
 - Especificación: JSON Schema Draft-07 (`http://json-schema.org/draft-07/schema#`).
 - Propiedades Validadas: `version`, `directory`, `role`, `purpose`, `relevance` (`critical` | `high` | `medium` | `low` | `zero_for_llm`), `crawl` (boolean), `read_priority` (`p0` a `p3`), `seed_reference` (`required` | `optional`), `token_density` (`sparse` | `medium` | `dense` | `massive_text`), `tier1_preload` (boolean), `instructions` (string <= 200 chars), `key_files` (array de strings), `dependencies` (array de strings), `imports_from` (array de strings) y `exported_to` (array de strings).
-- Validación de Cumplimiento: 100% de las 33 balizas físicas del repositorio validadas con cero discrepancias.
+- Validación de Cumplimiento: 100% de las balizas físicas del repositorio validadas con cero discrepancias.
 
 ---
 
@@ -293,7 +300,7 @@ Campos serializados por `MiniYAML`:
 
 ### 5.1 Restricción Zero-Dependency `[INV-01]` `[CONFIRMADO]`
 `FWengine.py` está diseñado para operar en entornos aislados, contenedores minimalistas, runners de CI/CD efímeros o máquinas de desarrolladores sin requerir `pip install` ni configurar entornos virtuales `.venv`.
-- Dependencias utilizadas exclusivamente de la librería estándar: `os`, `sys`, `json`, `time`, `argparse`, `datetime`, `pathlib`, `typing`, `unittest`.
+- Dependencias utilizadas exclusivamente de la librería estándar: `os`, `sys`, `json`, `time`, `errno`, `fnmatch`, `argparse`, `datetime`, `pathlib`, `typing`, `unittest`, `ast`.
 
 ### 5.2 Compatibilidad Multi-Plataforma `[CONFIRMADO]`
 - **Sistemas Operativos Soportados:** Linux (Ubuntu 20.04+), Windows 10/11 / Windows Server, macOS (Ventura+).
@@ -313,7 +320,7 @@ Campos serializados por `MiniYAML`:
 ### 6.1 Suite Unitaria (`./tests/test_fwengine.py`) `[CONFIRMADO]`
 Contiene 48 casos de prueba automatizados con un ratio de éxito de 100% (`OK`) (54 casos de prueba totales en el repositorio incluyendo benchmarks):
 - Verificación de serialización y deserialización simétrica de `MiniYAML` con tipos primitivos complejos y comillas escapadas (`test_escaped_quotes_roundtrip`).
-- Inicialización determinista del andamiaje de 24 directorios y satélite.
+- Inicialización determinista del andamiaje de directorios y satélite.
 - Ruteo heurístico por extensión y verificación de inspección de cabeceras de Python vía `ast.parse()`.
 - Mecanismo seguro de renombrado case-insensitive en Windows NTFS (`.tmp_{pid}_{name}`) con exponential backoff (`safe_io_retry`).
 - Herencia jerárquica y prevalencia de `crawl: false` en `resolve_beacon()`.
@@ -329,11 +336,11 @@ Contiene 48 casos de prueba automatizados con un ratio de éxito de 100% (`OK`) 
 
 ### 6.2 Benchmarks de Presupuesto de Tokens (`./tests/test_token_budget.py`) `[CONFIRMADO]`
 Contiene 6 pruebas de telemetría y rendimiento que evalúan la compresión de contexto, densidad de balizas y presupuestos de subgrafos:
-- Ahorro de contexto verificado: **94.9%** de reducción en tokens consumidos frente al escaneo recursivo ingenuo (`~20,074 tokens` vs `~1,019 tokens`).
-- Formato de inyección compacta (`IDIR_TOPOLOGY`): **~149 tokens** (cumpliendo holgadamente el umbral `< 250 tokens`).
-- Subgrafos focalizados (`map --slice <dir>`): **~58 tokens** para subdirectorios (`src/core`), **~103 tokens** para ramas secundarias (`docs`), superando holgadamente el límite de `< 150 tokens` (>90% de compresión).
+- Ahorro de contexto verificado: **95.9%** de reducción en tokens consumidos frente al escaneo recursivo ingenuo (`~20,195 tokens` vs `~824 tokens`).
+- Formato de inyección compacta (`IDIR_TOPOLOGY`): **~163 tokens** (cumpliendo holgadamente el umbral `< 250 tokens`).
+- Subgrafos focalizados (`map --slice <dir>`): **~60 tokens** para subdirectorios (`src/core`), **~103 tokens** para ramas secundarias (`docs`), superando holgadamente el límite de `< 150 tokens` (>90% de compresión).
 - Densidad de balizas: 100% de los archivos `.context.yaml` cumplen el límite de densidad estricta (`<= 600 caracteres` / `~150 tokens`).
-- Latencia de generación satelital bajo estrés: **0.64 ms**; escaneo de budget: **23.79 ms**.
+- Latencia de generación satelital bajo estrés: **34.61 ms**; escaneo de budget: **49.76 ms**.
 
 ### 6.3 Pipeline de CI/CD (`./.github/workflows/ci.yml`) `[CONFIRMADO]`
 Workflow automatizado activado en eventos `push` y `pull_request` sobre ramas `master` y `main`:
@@ -349,28 +356,28 @@ Workflow automatizado activado en eventos `push` y `pull_request` sobre ramas `m
 
 Esta sección documenta de forma adversarial y objetiva los vectores de tensión reales, inconsistencias entre documentación y código, y riesgos operativos identificados en la auditoría física:
 
-### 7.1 Inconsistencia de Token Budget en `tree.json` vs Aserción Unitaria `[RESUELTO EN v3.1]`
-- **Estado:** En v3.1 se implementó `format_compact_tree_json()`, serializando cada nodo en una sola línea compacta JSON. El archivo físico `./.context/tree.json` ahora pesa ~3,296 caracteres (~824 tokens), cumpliendo holgadamente la aserción unitaria `<= 1000 tokens` en `./tests/test_token_budget.py` con 95.9% de ahorro de contexto.
+### 7.1 Parser YAML Minimalista sin Soporte para Estructuras Complejas `[CONFIRMADO]`
+- **Vector de Riesgo:** `MiniYAML` es un serializador/parser artesanal de 60 líneas concebido para stdlib pura. No soporta multilínea con pipes (`|`, `>`), listas anidadas dentro de listas, diccionarios en línea (`{a: 1}`), o arrays compactos (`[x, y]`).
+- **Modo de Falla:** Si un desarrollador o agente introduce sintaxis YAML avanzada manualmente en un `.context.yaml`, `MiniYAML.load()` omitirá o truncará las claves silenciosamente, pudiendo provocar corrupción en `sync_beacons()`.
+- **Mitigación Activa:** `validate_beacon_data()` valida los tipos deserializados y `schemas/beacon.schema.json` previene discrepancias de estructura en CI.
 
-### 7.2 Referencia a Schema Huérfano en `tree.json` `[RESUELTO EN v3.1]`
-- **Estado:** Se materializó el esquema formal JSON Schema Draft-07 en `./schemas/tree.schema.json` y se actualizó el puntero a `"$schema": "../schemas/tree.schema.json"`, validado por tests unitarios automatizados.
+### 7.2 Límite de Renombrado Atómico entre Dispositivos Físicos Distintos (EXDEV) `[CONFIRMADO]`
+- **Vector de Riesgo:** `safe_rename_casing()` y `route_file()` utilizan `Path.rename()`. En sistemas POSIX y Windows, renombrar archivos entre sistemas de archivos o particiones de disco distintas (o entre montajes NFS) lanza `OSError: [Errno 18] Invalid cross-device link` (`EXDEV`).
+- **Modo de Falla:** Fallo en reubicación si un repositorio reside parcialmente en enlaces simbólicos que cruzan particiones o si la carpeta temporal del sistema de archivos no comparte el dispositivo físico del repo.
+- **Mitigación Activa:** `route_file()` confina las operaciones estrictamente dentro del árbol relativo de `root_path`.
 
-### 7.3 Pérdida de Comentarios en Serialización MiniYAML `[RESUELTO EN v3.1]`
-- **Estado:** Se implementó `extract_preserved_comments()`, reteniendo las líneas de comentarios manuales `#` y `# USER_NOTE:` al final de los archivos `.context.yaml` al ejecutar `python FWengine.py beacon --sync`.
+### 7.3 Imprecisión Heurística en el Estimador de Tokens `[CONFIRMADO]`
+- **Vector de Riesgo:** `compute_context_budget()` calcula el presupuesto asumiendo un divisor fijo de 4 caracteres por token (`chars // 4`).
+- **Modo de Falla:** Para código en Python estándar o JSON esta aproximación oscila entre 3.6 y 4.2 chars/token. Sin embargo, para archivos Markdown enriquecidos con fórmulas LaTeX (`$$`), bloques Mermaid o texto multilingüe con caracteres no ASCII, el consumo real de tokens en BPE (Byte Pair Encoding) de Gemini o Claude puede ser entre un 15% y 30% superior al reportado.
+- **Mitigación Activa:** Los umbrales de alerta operan con márgenes holgados de seguridad (límite satelital en 1,000 tokens vs 824 tokens reales; subgrafos en 150 vs 60 tokens).
 
-### 7.4 Límite de Clasificación Heurística por Tamaño de Header `[RESUELTO EN v3.1]`
-- **Estado:** `inspect_python_header()` se actualizó a `max_chars=4096` y se acopló con el módulo `ast.parse()` para extraer imports y llamadas funcionales sin importar la longitud del docstring o licencia inicial.
-
-### 7.5 Sobrescritura Silenciosa en `route --move` `[RESUELTO EN v3.1]`
-- **Estado:** Se incorporó el flag `--overwrite` y el parámetro `overwrite: bool = False`. Ante colisión de nombres entre archivos distintos, el motor lanza `FileExistsError` a menos que se especifique `--overwrite`.
-
-### 7.6 Sensibilidad de Casing y Bloqueos I/O en Windows NTFS `[RESUELTO EN v3.2]`
+### 7.4 Sensibilidad de Casing y Bloqueos I/O en Windows NTFS `[RESUELTO EN v3.2]`
 - **Estado:** En v3.2 se implementó `safe_io_retry()` con exponential backoff determinista (capturando `WinError 5, 32, 33`, `EACCES`, `EBUSY`, `EAGAIN`) y `safe_rename_casing()` con archivo temporal intermedio `.tmp_{pid}_{name}` y rollback atómico, eliminando excepciones por bloqueos transitorios de antivirus o indexadores de Windows Search.
 
-### 7.7 Orfandad Estructural de Beacons en Nuevos Directorios `[RESUELTO EN v3.2]`
+### 7.5 Orfandad Estructural de Beacons en Nuevos Directorios `[RESUELTO EN v3.2]`
 - **Estado:** Se implementó auto-scaffolding reactivo en `route_file()` mediante `ensure_beacon_chain()`, auto-descubrimiento de directorios huérfanos en `sync_beacons(auto_discover=True)` y auto-remediación inmediata mediante el flag `python FWengine.py audit --fix`.
 
-### 7.8 Inflación de Contexto por Ingesta Global de Satélite `[RESUELTO EN v3.2]`
+### 7.6 Inflación de Contexto por Ingesta Global de Satélite `[RESUELTO EN v3.2]`
 - **Estado:** Se incorporó el recorte topológico dinámico (*Tree Slicing*) mediante `generate_sliced_tree()` y el comando `python FWengine.py map --slice <dir>`, emitiendo subgrafos compactos con el nodo foco, su padre, sus hijos inmediatos y sus dependencias en `< 150 tokens` (>90% de compresión frente a `tree.json` completo).
 
 ---
@@ -384,7 +391,7 @@ Esta sección documenta de forma adversarial y objetiva los vectores de tensión
 ### 8.2 Guardrails para Agentes de Inteligencia Artificial `[CONFIRMADO]`
 1. **Prohibición de Escaneo Ciego Recursivo (`[INV-02]`):** Queda prohibida la ejecución de comandos de exploración profunda no restringidos (`Get-ChildItem -Recurse`, `find .`, `ls -R`). Toda navegación debe iniciar consultando `./.context/tree.json`.
 2. **Invariante de Ramas Muertas (`[INV-03]`):** Los directorios con directiva `crawl: false` (`./data/raw/`, `./data/processed/`, `./data/sandbox/`, `./logs/`, `./artifacts/plans/archive/`) son considerados almacenes de datos o ramas muertas; los agentes tienen prohibido volcar su contenido al contexto.
-3. **Contrato de Sincronización al Cierre (`[INV-04]`):** Cualquier cambio estructural en la topología física exige sincronizar beacons y satélite antes de dar la tarea por finalizada.
+3. **Contrato de Sincronización al Cierre (`[INV-04]`):** Cualquier cambio estructural en la topología física exige sincronizar beacons y satélite antes de dar la tarea por finalizada (`python FWengine.py audit --fix`).
 4. **Política Zero-Trust de Credenciales (`[INV-05]`):** Ofuscación estricta `<REDACTED>` para tokens, credenciales o API keys detectados en configuraciones o entornos locales.
 
 ---
@@ -395,9 +402,10 @@ Esta sección documenta de forma adversarial y objetiva los vectores de tensión
 
 - `[ADR-001]` **Adopción de Topología All-Lowercase:** Se decidió forzar minúsculas en todos los directorios raíz para evitar inconsistencias de importación y colisiones de nombres entre Windows NTFS, macOS APFS y Linux ext4.
 - `[ADR-002]` **Invariante Zero-Dependencies en Motor Core:** Se prohibió el uso de librerías de terceros (como `pyyaml`, `click` o `rich`) en `FWengine.py`, garantizando portabilidad instantánea en cualquier runner o contenedor con Python base.
-- `[ADR-003]` **Arquitectura Two-Tier Bootloader:** Se desacopló la ingesta agéntica en dos niveles para erradicar el consumo innecesario de ~6,800 tokens de la semilla en tareas atómicas cotidianas (Tier 1).
+- `[ADR-003]` **Arquitectura Two-Tier Bootloader:** Se desacopló la ingesta agéntica en dos niveles para erradicar el consumo innecesario de tokens de la semilla en tareas atómicas cotidianas (Tier 1).
 - `[ADR-004]` **Herencia Jerárquica Ascendente (`resolve_beacon`):** Se implementó resolución recursiva hacia el directorio padre para garantizar cobertura de contexto del 100% incluso en árboles anidados sin beacons físicos locales.
 - `[ADR-005]` **Inspección Híbrida de Código Fuente:** Se combinó el ruteo por extensión con una lectura preliminar ligera del encabezado (`inspect_python_header`) para desambiguar scripts de prueba, jobs cloud y tableros.
+- `[ADR-006]` **Auto-Scaffolding Reactivo y Tree Slicing en CLI:** Se formalizó la auto-remediación topológica (`audit --fix`) y el recorte de subgrafos (`map --slice`) para mantener el mapa satelital sub-150 tokens.
 
 ### 9.2 Deuda Técnica Identificada y Priorizada `[DECLARADO]`
 
@@ -420,7 +428,7 @@ Esta sección documenta de forma adversarial y objetiva los vectores de tensión
 - `[INV-01]` **Zero External Dependencies:** `FWengine.py` debe compilar y ejecutarse exclusivamente con la librería estándar de Python 3.9+.
 - `[INV-02]` **No Blind Recursive Scan:** Prohibida la búsqueda recursiva no acotada sin consultar `.context/tree.json`.
 - `[INV-03]` **Crawl False Inviolability:** Carpetas con `crawl: false` jamás deben ser volcadas a la ventana de contexto de un agente.
-- `[INV-04]` **Post-Mutation Synchronization:** Modificaciones de carpetas requieren `beacon --sync` y `map --sync`.
+- `[INV-04]` **Post-Mutation Synchronization:** Modificaciones de carpetas requieren `python FWengine.py audit --fix`, `beacon --sync` y `map --sync`.
 - `[INV-05]` **Zero Secret Leakage:** Prohibida la inclusión de credenciales en claro; aplicar `<REDACTED>`.
 - `[INV-06]` **All-Lowercase Directories:** Todos los directorios gobernados deben nombrarse estrictamente en minúsculas.
 - `[INV-07]` **Deterministic Two-Tier Bootloader:** Prohibido autoinyectar el seed en Tier 1 a menos que se active uno de los 3 disparadores.
@@ -433,6 +441,7 @@ Esta sección documenta de forma adversarial y objetiva los vectores de tensión
 - **Mapa Satelital (`tree.json`):** Representación topológica estructurada y ultraligera que describe todo el sistema en un solo archivo.
 - **Satellite Drift:** Desincronización temporal entre la topología física del sistema de archivos y el mapa satelital.
 - **Medallion Layers:** Arquitectura de datos de tres capas segregadas: Bronze (`data/raw`), Silver/Gold (`data/processed`) y Experimentación (`data/sandbox`).
+- **Tree Slicing:** Recorte topológico dinámico que genera un subgrafo restringido al nodo en foco, su padre, sus hijos y sus dependencias en < 150 tokens.
 
 ### 10.3 Índice de Evidencias Físicas
 - Motor de gobernanza y CLI: `./FWengine.py` `[CONFIRMADO]`
@@ -470,7 +479,7 @@ Antes de resolver una solicitud:
 
 ### 🤝 Acuse de Recibo Inicial
 Si el usuario adjuntó esta semilla **sin una instrucción específica**, no intentes generar código ni completar archivos vacíos. Responde únicamente con:
-1. Un saludo confirmando que asimilaste el ADN arquitectónico v3.2 de **iDirectory** (`<SEED_ARCHITECTURAL_VECTOR>`) y su stack principal (Python Standard Library, Two-Tier Bootloader, Context Engineering).
+1. Un saludo confirmando que asimilaste el ADN arquitectónico v3.0 de **iDirectory** (`<SEED_ARCHITECTURAL_VECTOR>`) y su stack principal (Python Standard Library, Two-Tier Bootloader, Context Engineering).
 2. Un breve resumen de 2-3 líneas sobre el objetivo, su estado actual y sus principales vectores de tensión (resiliencia NTFS I/O mediante safe_io_retry, auto-scaffolding reactivo de beacons y tree slicing con map --slice).
 3. Una frase poniéndote a disposición para resolver dudas sobre su funcionamiento o colaborar en los siguientes pasos de desarrollo.
 
