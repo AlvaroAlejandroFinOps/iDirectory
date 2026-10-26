@@ -1,8 +1,8 @@
-# Cursor & Windsurf Rules for iDirectory Context Engineering
-# Always adhere to the Two-Tier Bootloader defined in AGENTS.md:
-# Tier 1 (Atomic): AGENTS.md -> .context/tree.json -> target .context.yaml (Do NOT load 01_seed)
-# Tier 2 (Architecture): Triggered only on /seedMaster, /metrics or explicit architectural design
-# Honor crawl: false on dead branches (data/raw, data/processed, logs, artifacts/plans/archive)
-# Subfolders inherit directives recursively from parent beacons.
-# Use `python FWengine.py route "<file>" --move` to place files canonically.
-
+# Cursor & Windsurf Rules for iDirectory v4.0 Context Engineering
+# Canonical policy: ./config/context_policy.json | Contract: ./AGENTS.md
+# Tier 1A (Known-path atomic): run `python FWengine.py context --pack <dir> --tier 1a` or `map --slice <dir>` (Do NOT preload 01_seed).
+# Tier 1B (Multi-file / scoped /plan): run `python FWengine.py context --compact` + `map --slice <dir>` + `seed --section <id>`.
+# Tier 2 (Global architecture): full `./01_seed/seed-idirectory-master.md` only on `/seedMaster`, `/metrics`, or cross-domain redesign.
+# Strictly honor `crawl: false` on dead branches (`data/raw`, `data/processed`, `data/sandbox`, `logs`, `artifacts/plans/archive`).
+# Use `python FWengine.py route "<file>" --move` to place files canonically (all-lowercase).
+# After any directory or topology mutation, run `python FWengine.py reconcile`.

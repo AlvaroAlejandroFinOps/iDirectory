@@ -1,0 +1,57 @@
+{
+  "version": "4.0.0",
+  "project": "iDirectory",
+  "architecture": "Gravity HyperScale Thinking — Adaptive Context Engineering",
+  "profiles": {
+    "tier_1a": {
+      "name": "Atomic Known-Path Execution",
+      "entry_command": "python FWengine.py context --pack <target_dir> --tier 1a",
+      "fallback": "python FWengine.py map --slice <target_dir>",
+      "seed_policy": "forbidden_unless_contract_collision",
+      "target_token_budget": 220
+    },
+    "tier_1b": {
+      "name": "Scoped Multi-File / Scoped Plan (Default for /plan)",
+      "entry_command": "python FWengine.py context --compact",
+      "secondary": ["python FWengine.py map --slice <dir>", "python FWengine.py seed --section <id>"],
+      "seed_policy": "sectional_only",
+      "target_token_budget": 800
+    },
+    "tier_2": {
+      "name": "Global Architecture / Forensic Audit",
+      "entry_command": "Read .context/tree.json + 01_seed/seed-idirectory-master.md",
+      "triggers": ["/seedMaster", "/metrics", "/ultraThinking", "cross_domain_redesign"],
+      "seed_policy": "full_ingest",
+      "target_token_budget": 16000
+    }
+  },
+  "budgets": {
+    "compact_radar_max_tokens": 250,
+    "slice_max_chars": 600,
+    "slice_max_tokens": 150,
+    "beacon_max_chars": 600,
+    "beacon_max_tokens": 150,
+    "checkpoint_max_tokens": 300,
+    "satellite_max_tokens": 1000
+  },
+  "closure_contract": {
+    "primary_command": "python FWengine.py reconcile",
+    "verify_command": "python FWengine.py reconcile --check"
+  },
+  "precedence_order": [
+    "1. Executable code (FWengine.py) & formal JSON schemas (schemas/*.schema.json)",
+    "2. Canonical policy (config/context_policy.json)",
+    "3. Verified satellite (.context/tree.json) & local beacons (.context.yaml)",
+    "4. Active attentional checkpoint (.context/checkpoint.json)",
+    "5. Architectural DNA (01_seed/seed-idirectory-master.md)",
+    "6. Active plans with status=approved|executing (artifacts/plans/active/)"
+  ],
+  "supported_adapters": [
+    "AGENTS.md",
+    "GEMINI.md",
+    "CLAUDE.md",
+    ".cursorrules",
+    ".github/copilot-instructions.md",
+    ".agents/skills/idir/SKILL.md"
+  ]
+}

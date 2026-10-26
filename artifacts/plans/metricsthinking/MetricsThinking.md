@@ -1,5 +1,15 @@
-# METRICSTHINKING™: Auditoría Forense y Madurez del Proyecto
+---
+plan_id: metricsthinking-audit-2026-09-25
+status: superseded
+executable: false
+target_version: "3.0"
+created_at: "2026-09-25"
+updated_at: "2026-10-26"
+superseded_by: "iDirectory v4.0 Forensic Suite (68 tests)"
+---
+# METRICSTHINKING™: Auditoría Forense y Madurez del Proyecto (Snapshot Histórico Septiembre 2026)
 
+> **[AVISO DE GOBERNANZA v4.0]:** Este reporte constituye un registro histórico del commit `4461915` (`2026-09-25`, 20 pruebas). No debe precargarse como P0 en sesiones operativas normales (`read_priority: p2`, `seed_reference: optional`). Para telemetría en vivo, ejecute `python FWengine.py context --budget` y `python FWengine.py reconcile --check`.
 > **Motor Evaluador:** MetricsThinking™ v1.0.0-ENTERPRISE (Taxonomía Adaptada a Skills Agénticas)  
 > **Proyecto Auditado:** `iDirectory` (Framework de Gobernanza, Ruteo y Context Engineering para Flujos Agénticos)  
 > **Ubicación:** `D:\0001 HyperScale Thinking\PROYECTOS CLOUD\iContext\iDirectory`  

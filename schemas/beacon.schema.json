@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "../schemas/beacon.schema.json",
   "title": "iDirectory Context Beacon Schema",
-  "description": "Validates local .context.yaml micro-beacons (iDirectory v3.2). Budget: <= 600 chars (~150 tokens).",
+  "description": "Validates local .context.yaml micro-beacons (iDirectory v4.0). Budget: <= 600 chars (~150 tokens).",
   "type": "object",
   "required": [
     "version",
@@ -26,6 +26,7 @@
     "read_priority": { "type": "string", "enum": ["p0", "p1", "p2", "p3"] },
     "seed_reference": { "type": "string", "enum": ["required", "optional"] },
     "tier1_preload": { "type": "boolean" },
+    "inherited": { "type": "boolean" },
     "token_density": { "type": "string", "enum": ["sparse", "medium", "dense", "massive_text", "massive_binary"] },
     "instructions": { "type": "string", "maxLength": 240 },
     "key_files": {

@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "../schemas/plan_metadata.schema.json",
+  "title": "iDirectory Executable Plan Lifecycle Metadata Schema",
+  "description": "Validates frontmatter metadata in artifacts/plans/ documents to prevent zombie plan reactivation.",
+  "type": "object",
+  "required": [
+    "status",
+    "executable"
+  ],
+  "properties": {
+    "plan_id": { "type": "string" },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "approved", "executing", "paused", "completed", "superseded", "archived"]
+    },
+    "executable": { "type": "boolean" },
+    "target_version": { "type": "string" },
+    "created_at": { "type": "string" },
+    "updated_at": { "type": "string" },
+    "supersedes": { "type": "string" },
+    "superseded_by": { "type": "string" },
+    "current_phase": { "type": "string" }
+  },
+  "additionalProperties": true
+}

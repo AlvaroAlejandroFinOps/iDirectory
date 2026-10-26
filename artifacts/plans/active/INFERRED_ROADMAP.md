@@ -1,5 +1,15 @@
-# INFERRED OPERATIONAL ROADMAP: IDIRECTORY
+---
+plan_id: inferred-roadmap-v1-snapshot
+status: completed
+executable: false
+target_version: "3.0"
+created_at: "2026-09-25"
+updated_at: "2026-10-26"
+superseded_by: "iDirectory v4.0 Architecture"
+---
+# INFERRED OPERATIONAL ROADMAP: IDIRECTORY (HISTORICAL SNAPSHOT v3.0)
 
+> **[NOTA DE VIGENCIA v4.0]:** Este documento corresponde a la foto histórica de madurez del `2026-09-25` (`executable: false`). La arquitectura vigente es **iDirectory v4.0** gobernada por `./config/context_policy.json` y `./FWengine.py`.
 > **Framework de Gobernanza:** MetricsThinking™ v1.0.0-ENTERPRISE (Taxonomía Adaptada a Skills Agénticas)  
 > **Estado Consolidado:** `100.0% / 100.0%` — **Excelencia Operativa / Producción (90.0% - 100.0%)**  
 > **Cuello de Botella Activo:** `Ninguno. Todos los módulos canónicos se encuentran al 100%.`  

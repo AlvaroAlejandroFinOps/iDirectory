@@ -27,6 +27,10 @@ from FWengine import (
     iter_beacon_files,
     generate_sliced_tree,
     format_sliced_tree,
+    build_context_pack,
+    estimate_tokens_v4,
+    is_ignored_path,
+    load_ignore_patterns,
 )
 
 
@@ -100,6 +104,43 @@ class TestTokenBudgetBenchmark(unittest.TestCase):
             print(f"\n[BENCHMARK] Slice '{target}': ~{slice_tokens} tokens (full tree ~{full_tokens})")
             self.assertLess(slice_tokens, 150)
             self.assertLess(slice_tokens, full_tokens * 0.3)
+
+    def test_three_baseline_token_benchmark(self):
+        """[Opt-7] Compares iDirectory v4.0 orientation against Naive Unfiltered and Modern Ignore-Aware baselines."""
+        patterns = load_ignore_patterns(self.project_path)
+        naive_lines = []
+        modern_lines = []
+
+        for root, dirs, files in os.walk(self.project_path):
+            cur = Path(root)
+            dirs[:] = [d for d in dirs if d != ".git"]
+            for f in files:
+                rel_p = (cur / f).relative_to(self.project_path).as_posix()
+                line = f"{rel_p} ({os.path.getsize(cur / f)}b)"
+                naive_lines.append(line)
+                if not is_ignored_path(cur, self.project_path, patterns) and not f.startswith("."):
+                    modern_lines.append(line)
+
+        naive_tokens = estimate_tokens("\n".join(naive_lines))
+        modern_tokens = estimate_tokens("\n".join(modern_lines))
+        tier1a_pack_str = json.dumps(
+            build_context_pack(self.project_path, "src/core", tier="1a"),
+            ensure_ascii=False,
+            separators=(",", ":"),
+        )
+        tier1a_tokens = estimate_tokens(tier1a_pack_str)
+
+        print(f"\n[TRI-BASELINE] Naive={naive_tokens}t | ModernIgnore={modern_tokens}t | Tier1A_Pack={tier1a_tokens}t")
+        self.assertLess(tier1a_tokens, 220)
+        self.assertLess(tier1a_tokens, modern_tokens * 0.35)
+        self.assertLess(tier1a_tokens, naive_tokens * 0.05)
+
+    def test_multimodal_token_estimator_excludes_binaries(self):
+        """[Opt-1] estimate_tokens_v4 must return 0 for binary extensions like .png or .parquet."""
+        png_path = self.project_path / "iDirectory.png"
+        if png_path.exists():
+            self.assertEqual(estimate_tokens_v4(png_path), 0)
+        self.assertGreater(estimate_tokens_v4("$$E = mc^2$$ ```mermaid\ngraph TD\n```"), 5)
 
 
 class TestTopologicalScalingStress(unittest.TestCase):

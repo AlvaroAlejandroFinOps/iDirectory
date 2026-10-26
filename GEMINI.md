@@ -1,61 +1,64 @@
-# Reglas del Proyecto y Gobernanza Antigravity / Gemini
+# Reglas del Proyecto y Gobernanza Antigravity / Gemini (iDirectory v4.0)
 
-Este repositorio utiliza el sistema de gobernanza y ruteo inteligente **iDirectory v3.1** (Context Engineering), creado por **Gravity HyperScale Thinking**.
+Este repositorio utiliza el sistema de gobernanza y ruteo inteligente **iDirectory v4.0** (Adaptive Context Engineering), creado por **Gravity HyperScale Thinking**. Política canónica en [`./config/context_policy.json`](./config/context_policy.json).
 
 ---
 
-## 🚀 REGLA MAESTRA OBLIGATORIA (TWO-TIER BOOTLOADER)
-Para optimizar el uso de tokens y evitar la degradación de contexto (*Context Drift* y dispersión en cabezales de atención), los agentes de Gemini/Antigravity **DEBEN** seguir el protocolo de dos niveles definido en [`AGENTS.md`](./AGENTS.md):
+## 🚀 REGLA MAESTRA OBLIGATORIA (BOOTLOADER ADAPTATIVO v4.0)
+Para optimizar la precisión contextual y evitar la degradación de contexto (*Context Drift*), los agentes de Gemini/Antigravity **DEBEN** seguir los tres perfiles definidos en [`./AGENTS.md`](./AGENTS.md):
 
-1. **Tier 1 (Operación Quirúrgica / Ejecución Atómica - Predeterminado):**
-   - Secuencia: `AGENTS.md` -> `.context/tree.json` -> `.context.yaml` objetivo (o herencia ascendente) -> Ejecución.
-   - El satélite `.context/tree.json` consume `< 500 tokens` (`python FWengine.py context --compact` consume `~150 tokens`).
-   - **Variante focalizada:** Si la tarea está confinada a un subdominio, usa `python FWengine.py map --slice <dir>` (< 150 tokens) en lugar de `tree.json` completo.
-   - `01_seed/` posee `crawl: true` pero **`tier1_preload: false`**; queda **prohibido precargar la semilla** en este nivel para no quemar tokens de forma innecesaria.
-2. **Tier 2 (Planificación Arquitectónica / Auditoría Mayor):**
-   - Ingesta profunda del seed activada **únicamente** ante disparadores explícitos:
-     - *Disparador 1 (Usuario):* `/seedMaster`, `/metrics`, `/ultraThinking`, `/plan` o rediseño integral.
-     - *Disparador 2 (Beacon):* Directiva `seed_reference: required` en `.context.yaml`.
-     - *Disparador 3 (Agente):* Duda no resuelta sobre contratos o dependencias no declaradas (lectura puntual).
-3. **Contrato de Cierre:** Si creas o reestructuras directorios, ejecuta `audit --fix`, `beacon --sync` y `map --sync`.
+1. **Tier 1A (Ejecución Atómica con Ruta Conocida - Predeterminado):**
+   - Ejecuta `python FWengine.py context --pack <dir> --tier 1a` (< 220 tokens) o `python FWengine.py map --slice <dir>` (< 150 tokens).
+   - `01_seed/` posee **`tier1_preload: false`**; queda **prohibido precargar la semilla completa** en este nivel.
+2. **Tier 1B (Multiarchivo o `/plan` Acotado):**
+   - Usa `python FWengine.py context --compact` (~165 tokens) + `map --slice <dir>` en los módulos afectados.
+   - Si requieres consultar el ADN arquitectónico, usa `python FWengine.py seed --toc` y `python FWengine.py seed --section <id>` en lugar de volcar el seed entero.
+3. **Tier 2 (Planificación Arquitectónica Global / Auditoría Mayor):**
+   - Ingesta profunda del seed activada **únicamente** ante rediseño transversal multi-dominio, `/seedMaster`, `/metrics`, `/ultraThinking`, o `seed_reference: required` en el beacon objetivo.
+4. **Contrato de Cierre Unificado:** Si creas o reestructuras directorios o beacons, ejecuta un único comando idempotente:
+   ```powershell
+   python FWengine.py reconcile
+   ```
 
 ---
 
 ## ⚡ Comando Rápido / Slash Work: `/idir`
 
-Utiliza la habilidad `/idir` para interactuar con [`FWengine.py`](./FWengine.py):
+Utiliza la habilidad `/idir` para interactuar con [`./FWengine.py`](./FWengine.py):
 
-1. **Auditoría:**
+1. **Reconciliación y Cierre Unificado (Recomendado):**
    ```powershell
-   python FWengine.py audit
+   python FWengine.py reconcile
    ```
-2. **Auto-Remediación:**
+2. **Paquete de Contexto Tier 1A (< 220 tokens):**
    ```powershell
-   python FWengine.py audit --fix
+   python FWengine.py context --pack <dir> --tier 1a
    ```
-3. **Subgrafo Focalizado:**
+3. **Subgrafo Focalizado (< 150 tokens):**
    ```powershell
    python FWengine.py map --slice <dir>
    ```
-4. **Ruteo de Archivo:**
+4. **Consulta Seccional de Seed Maestro:**
    ```powershell
-   python FWengine.py route "<ruta_del_archivo>"
+   python FWengine.py seed --toc
+   python FWengine.py seed --section <id>
    ```
-5. **Reubicación Física:**
+5. **Checkpoints de Continuidad Atencional:**
+   ```powershell
+   python FWengine.py checkpoint --show
+   python FWengine.py checkpoint --set --plan-id "<id>" --phase "P1" --next "<accion>"
+   ```
+6. **Ruteo y Reubicación Física Canónica:**
    ```powershell
    python FWengine.py route "<ruta_del_archivo>" --move
    ```
-6. **Reubicación con Sobrescritura Permitida:**
-   ```powershell
-   python FWengine.py route "<ruta_del_archivo>" --move --overwrite
-   ```
-7. **Sincronización de Beacons:**
-   ```powershell
-   python FWengine.py beacon --sync
-   ```
-8. **Presupuesto de Tokens:**
+7. **Presupuesto de Tokens y Radar Compacto:**
    ```powershell
    python FWengine.py context --budget
+   python FWengine.py context --compact
    ```
-
-
+8. **Auditoría y Auto-Remediación:**
+   ```powershell
+   python FWengine.py audit
+   python FWengine.py audit --fix
+   ```

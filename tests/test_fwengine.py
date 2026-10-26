@@ -40,6 +40,13 @@ from FWengine import (
     generate_sliced_tree,
     format_sliced_tree,
     validate_beacon_data,
+    validate_tree_data,
+    build_context_pack,
+    get_seed_sections,
+    extract_seed_section,
+    manage_checkpoint,
+    reconcile_repository,
+    estimate_tokens_v4,
     SLICE_CHAR_BUDGET,
 )
 
@@ -217,11 +224,13 @@ class TestLifecycleAndIdempotence(unittest.TestCase):
         self.assertTrue(tree_path.exists())
 
         tree_data = json.loads(tree_path.read_text(encoding="utf-8"))
-        self.assertEqual(tree_data["version"], "3.0")
+        self.assertEqual(tree_data["version"], "4.0")
+        self.assertEqual(len(tree_data["topology_hash"]), 64)
         self.assertTrue(len(tree_data["project"]) > 0)
         self.assertIn("bootloader", tree_data)
         self.assertIn("nodes", tree_data)
         self.assertIn("01_seed", tree_data["nodes"])
+        self.assertEqual(validate_tree_data(tree_data), [])
 
     def test_audit_repository_pass_and_fail(self):
         init_project(str(self.test_path))
@@ -670,6 +679,154 @@ class TestTreeSlicing(unittest.TestCase):
     def test_slice_blocks_traversal(self):
         with self.assertRaises(PermissionError):
             generate_sliced_tree(self.test_path, "../outside")
+
+
+class TestV4AdversarialAndContinuity(unittest.TestCase):
+    """Adversarial test suite for iDirectory v4.0 fixes (V-01..V-07) and new capabilities (Opt-1..Opt-7)."""
+
+    def setUp(self):
+        self.test_dir = tempfile.mkdtemp(prefix="idir_v4_test_")
+        self.test_path = Path(self.test_dir)
+        init_project(str(self.test_path))
+
+    def tearDown(self):
+        if self.test_path.exists():
+            shutil.rmtree(self.test_path, ignore_errors=True)
+
+    def test_compute_budget_never_walks_crawl_false(self):
+        """[V-01] Placing a heavy file in data/raw must produce 0 tokens in default compute_context_budget."""
+        heavy = self.test_path / "data" / "raw" / "dump.txt"
+        heavy.write_text("X" * 40000, encoding="utf-8")
+        budget = {item["directory"]: item for item in compute_context_budget(self.test_path)}
+        self.assertIn("data/raw", budget)
+        self.assertEqual(budget["data/raw"]["est_tokens"], 0)
+        self.assertEqual(budget["data/raw"]["files"], 0)
+        self.assertTrue(budget["data/raw"]["pruned"])
+
+    def test_freshness_detects_beacon_and_artifacts_mutation(self):
+        """[V-02] Modifying src/core/.context.yaml or artifacts/plans/active/ must trigger satellite drift."""
+        sync_tree(self.test_path)
+        self.assertTrue(check_satellite_freshness(self.test_path)["fresh"])
+
+        # 1. Mutate local beacon (without changing mtime into the future, testing SHA-256 topology_hash)
+        beacon = self.test_path / "src" / "core" / ".context.yaml"
+        beacon.write_text(beacon.read_text(encoding="utf-8") + "# mutated comment\n", encoding="utf-8")
+        status_beacon = check_satellite_freshness(self.test_path)
+        self.assertFalse(status_beacon["fresh"])
+        self.assertFalse(status_beacon["topology_hash_match"])
+
+        # Resync and test artifacts/plans/active mutation
+        sync_tree(self.test_path)
+        self.assertTrue(check_satellite_freshness(self.test_path)["fresh"])
+        new_plan = self.test_path / "artifacts" / "plans" / "active" / "new_sprint.md"
+        new_plan.write_text("# Sprint Plan\n", encoding="utf-8")
+        self.assertFalse(check_satellite_freshness(self.test_path)["fresh"])
+
+    def test_audit_fails_on_missing_canonical_directory(self):
+        """[V-03] Deleting src/core/ must make audit_repository fail, and audit --fix must restore it."""
+        shutil.rmtree(self.test_path / "src" / "core")
+        self.assertFalse(audit_repository(self.test_path, fix=False))
+        self.assertTrue(audit_repository(self.test_path, fix=True))
+        self.assertTrue((self.test_path / "src" / "core").is_dir())
+        self.assertTrue((self.test_path / "src" / "core" / ".context.yaml").is_file())
+
+    def test_audit_fails_on_stale_satellite(self):
+        """[V-03] Mutating governed files without syncing tree.json must fail strict audit."""
+        (self.test_path / "src" / "core" / "extra.py").write_text("x = 1\n", encoding="utf-8")
+        self.assertFalse(audit_repository(self.test_path, fix=False))
+        self.assertTrue(audit_repository(self.test_path, fix=True))
+        self.assertTrue(audit_repository(self.test_path, fix=False))
+
+    def test_slice_hard_budget_with_massive_dependencies(self):
+        """[V-05] A beacon with excessive imports_from and key_files must stay <= SLICE_CHAR_BUDGET and set budget_exceeded."""
+        deps = []
+        for i in range(12):
+            d = self.test_path / "src" / f"dep_module_long_name_{i:02d}"
+            d.mkdir(parents=True, exist_ok=True)
+            scaffold_beacon_for_dir(d, self.test_path)
+            deps.append(f"src/dep_module_long_name_{i:02d}")
+        kfiles = [f"very_long_module_name_{i:02d}.py: execute_complex_pipeline(arg1, arg2) -> Dict" for i in range(10)]
+        core_beacon = self.test_path / "src" / "core" / ".context.yaml"
+        loaded = MiniYAML.load(core_beacon.read_text(encoding="utf-8"))
+        loaded["imports_from"] = deps
+        loaded["key_files"] = kfiles
+        core_beacon.write_text(MiniYAML.dump(loaded) + "\n", encoding="utf-8")
+
+        sliced = generate_sliced_tree(self.test_path, "src/core")
+        serialized = format_sliced_tree(sliced)
+        self.assertLessEqual(len(serialized), SLICE_CHAR_BUDGET)
+        self.assertTrue(sliced.get("budget_exceeded"))
+
+    def test_validate_beacon_strict_additional_properties_and_lengths(self):
+        """[V-06] validate_beacon_data must reject unknown keys, oversized strings, and backslashes in lists."""
+        beacon = self.test_path / "src" / "core" / ".context.yaml"
+        data = MiniYAML.load(beacon.read_text(encoding="utf-8"))
+        data[" rogue_key "] = "not_allowed"
+        data["purpose"] = "P" * 250
+        data["imports_from"] = ["src\\bad_slash"]
+        errors = validate_beacon_data(data)
+        self.assertGreaterEqual(len(errors), 3)
+
+    def test_reconcile_command_idempotency(self):
+        """[Opt-4] reconcile_repository must heal orphans, sync tree_hash, and leave repo clean."""
+        (self.test_path / "src" / "core" / "sub_feature").mkdir(parents=True)
+        self.assertTrue(reconcile_repository(self.test_path, check_only=False))
+        self.assertTrue(reconcile_repository(self.test_path, check_only=True))
+
+    def test_context_pack_tier1a_budget(self):
+        """[Opt-2] build_context_pack must return slice + beacon + verified files under 220 tokens."""
+        (self.test_path / "src" / "core" / "service.py").write_text("def run(): return True\n", encoding="utf-8")
+        reconcile_repository(self.test_path)
+        pack = build_context_pack(self.test_path, "src/core", tier="1a")
+        serialized = json.dumps(pack, ensure_ascii=False, separators=(",", ":"))
+        self.assertEqual(pack["focus"], "src/core")
+        self.assertIn("service.py(~", ",".join(pack["files"]))
+        self.assertLessEqual(estimate_tokens_v4(serialized), 220)
+
+    def test_seed_sectional_toc_and_extraction(self):
+        """[Opt-3] get_seed_sections and extract_seed_section must extract targeted sections without full dump."""
+        sections = get_seed_sections(PROJECT_ROOT)
+        self.assertGreater(len(sections), 5)
+        sec4 = extract_seed_section(PROJECT_ROOT, "4.1")
+        self.assertIn("SEED SECTION", sec4)
+        self.assertIn("FWengine.py", sec4)
+        self.assertLess(estimate_tokens_v4(sec4), 3500)
+
+    def test_checkpoint_lifecycle(self):
+        """[Opt-5] manage_checkpoint must create, update, integrate with context pack, and clear checkpoint.json."""
+        cp = manage_checkpoint(
+            self.test_path,
+            action="set",
+            plan_id="plan-v4",
+            status="executing",
+            phase="P2",
+            next_action="Run unit tests",
+            completed_step="P0 done",
+        )
+        self.assertEqual(cp["plan_id"], "plan-v4")
+        self.assertIn("P0 done", cp["completed_steps"])
+        pack = build_context_pack(self.test_path, "src/core", tier="1a")
+        self.assertEqual(pack["checkpoint"]["phase"], "P2")
+        cleared = manage_checkpoint(self.test_path, action="clear")
+        self.assertTrue(cleared["cleared"])
+
+    def test_adapter_portability_no_local_paths(self):
+        """[V-07] None of the repository's agent adapters may contain non-portable 'file:///' URIs."""
+        for adapter in ("AGENTS.md", "GEMINI.md", "CLAUDE.md", ".cursorrules", ".github/copilot-instructions.md"):
+            ap = PROJECT_ROOT / adapter
+            self.assertTrue(ap.is_file(), f"El adaptador {adapter} debe existir.")
+            content = ap.read_text(encoding="utf-8")
+            self.assertNotIn("file:///", content.lower(), f"Ruta local detectada en {adapter}")
+
+    def test_active_plans_reject_superseded_status(self):
+        """[Opt-6] A plan in artifacts/plans/active/ with status: superseded must fail audit and be archived on --fix."""
+        bad_plan = self.test_path / "artifacts" / "plans" / "active" / "old_plan.md"
+        bad_plan.write_text("---\nstatus: superseded\nexecutable: false\n---\n# Old\n", encoding="utf-8")
+        sync_tree(self.test_path)
+        self.assertFalse(audit_repository(self.test_path, fix=False))
+        self.assertTrue(audit_repository(self.test_path, fix=True))
+        self.assertFalse(bad_plan.exists())
+        self.assertTrue((self.test_path / "artifacts" / "plans" / "archive" / "old_plan.md").exists())
 
 
 if __name__ == "__main__":

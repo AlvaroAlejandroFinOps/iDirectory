@@ -1,107 +1,85 @@
 ---
 name: idir
 description: >-
-  Ejecuta la gobernanza, Context Engineering y ruteo inteligente de archivos en la arquitectura iDirectory invocando FWengine.py.
-  Permite inicializar la estructura (init), auditar/mover archivos (route), auto-scaffold de beacons (audit --fix), subgrafos (map --slice) y enriquecimiento (enrich).
+  Ejecuta la gobernanza, Context Engineering y ruteo inteligente de archivos en la arquitectura iDirectory v4.0 invocando FWengine.py.
+  Permite reconciliación unificada (reconcile), paquetes de contexto (context --pack), consulta seccional de seed (seed --toc/--section), checkpoints de sesión (checkpoint), subgrafos (map --slice), ruteo (route) y enriquecimiento (enrich).
 ---
 
-# Skill: /idir (Gobernanza y Context Engineering de iDirectory v3.3)
+# Skill: /idir (Gobernanza y Context Engineering de iDirectory v4.0)
 
-Esta habilidad proporciona el flujo para consultar, auditar, inicializar y clasificar elementos dentro de la estructura **iDirectory v3.3** gobernada por [`FWengine.py`](./FWengine.py).
+Esta habilidad proporciona el flujo para consultar, auditar, reconciliar y clasificar elementos dentro de la estructura **iDirectory v4.0** gobernada por [`./FWengine.py`](./FWengine.py) y [`./config/context_policy.json`](./config/context_policy.json).
 
 ---
 
 ## 1. Modos de Uso
 
-### A. Inicializar / Sincronizar Estructura (`init`)
-Inicializa la estructura modular de directorios, satélite `.context/tree.json`, beacons `.context.yaml` y `.agentignore`.
+### A. Reconciliación y Cierre Unificado (`reconcile`)
+Sincroniza beacons, actualiza el mapa satelital `.context/tree.json` (con `topology_hash` SHA-256) y ejecuta la auditoría de gobernanza en un solo paso idempotente.
 
 ```powershell
-python FWengine.py init [ruta]
+python FWengine.py reconcile
+python FWengine.py reconcile --check
 ```
 
-### B. Auditar / Clasificar Archivo (`route` sugerencia)
-Analiza la extensión y patrones del nombre de un archivo para indicar en qué subdirectorio canónico debe residir.
+### B. Paquete de Contexto Unificado Tier 1A (`context --pack`)
+Compila en una sola respuesta (< 220 tokens) el subgrafo recortado (`slice`), el beacon efectivo resuelto por herencia, los `key_files` con estimación de tokens y el estado del checkpoint activo.
 
 ```powershell
-python FWengine.py route "<ruta_al_archivo>"
+python FWengine.py context --pack src/core --tier 1a
 ```
 
-### C. Mover Archivo Físicamente (`route --move`)
-Reubica de forma automatizada un archivo a su subdirectorio óptimo. Por defecto, protege contra colisiones destructivas si el destino ya existe (`FileExistsError`).
-
-```powershell
-python FWengine.py route "<ruta_al_archivo>" --move
-```
-
-Para permitir el reemplazo explícito en colisiones:
-```powershell
-python FWengine.py route "<ruta_al_archivo>" --move --overwrite
-```
-
-### D. Sincronizar Context Beacons (`beacon --sync`)
-Genera o actualiza los microarchivos `.context.yaml` en cada carpeta raíz preservando comentarios manuales del usuario.
-
-```powershell
-python FWengine.py beacon --sync
-```
-
-### E. Telemetría de Tokens (`context --budget` / `context --compact`)
-Calcula el tamaño y tokens estimados por directorio para prevenir sobrecarga de contexto, o emite el resumen ultracompacto para prompts (`~150 tokens`).
-
-```powershell
-python FWengine.py context --budget
-python FWengine.py context --compact
-```
-
-### F. Auditoría con Auto-Remediación (`audit --fix`)
-Detecta directorios sin `.context.yaml` (respetando `.agentignore` y `crawl: false`), los aprovisiona sin sobrescribir beacons existentes y regenera `tree.json`.
-
-```powershell
-python FWengine.py audit --fix
-```
-
-### G. Subgrafo Focalizado (`map --slice`)
-Emite en < 150 tokens el nodo objetivo, su padre, hijos inmediatos y dependencias (`imports_from`). Úsalo en Tier 1 en lugar del `tree.json` completo cuando la tarea está confinada a un subdominio.
+### C. Subgrafo Focalizado (`map --slice`)
+Emite en < 150 tokens el nodo objetivo, su padre, hijos inmediatos y dependencias (`imports_from` / `exported_to`).
 
 ```powershell
 python FWengine.py map --slice src/core
 python FWengine.py map --slice src --radius 2
 ```
 
+### D. Consulta Seccional del Seed Maestro (`seed --toc` / `seed --section`)
+Evita cargar los ~13,500 tokens de `01_seed/` en Tier 1B o ante dudas puntuales de contrato.
+
+```powershell
+python FWengine.py seed --toc
+python FWengine.py seed --section 4
+```
+
+### E. Continuidad Atencional en Sesiones Largas (`checkpoint`)
+Gestiona el estado de planes multi-fase en `.context/checkpoint.json` (< 300 tokens).
+
+```powershell
+python FWengine.py checkpoint --show
+python FWengine.py checkpoint --set --plan-id "reingenieria-v4" --phase "P2" --next "Ejecutar suite unittest"
+python FWengine.py checkpoint --clear
+```
+
+### F. Clasificar y Mover Archivos (`route` / `route --move`)
+Analiza la extensión, cabeceras AST y patrones del nombre de un archivo para ubicarlo en su directorio canónico en minúsculas.
+
+```powershell
+python FWengine.py route "<ruta_al_archivo>"
+python FWengine.py route "<ruta_al_archivo>" --move
+python FWengine.py route "<ruta_al_archivo>" --move --overwrite
+```
+
+### G. Telemetría de Tokens (`context --budget` / `context --compact`)
+Desglosa los tokens activos (`crawl: true`), el plano de control raíz y el overhead del Bootloader, o emite el radar compacto (`~165 tokens`).
+
+```powershell
+python FWengine.py context --budget
+python FWengine.py context --compact
+```
+
 ### H. Enriquecimiento Semántico (`/idir enrich <dir>`)
-Protocolo agéntico (no es un subcomando de FWengine.py):
-1. Ejecuta `python FWengine.py map --slice <dir>`. Si el nodo tiene `crawl: false`, **aborta**.
+Protocolo agéntico:
+1. Ejecuta `python FWengine.py context --pack <dir> --tier 1a`. Si el nodo tiene `crawl: false`, **aborta**.
 2. Lee solo las interfaces públicas del módulo (firmas, `__all__`, exports). Prohibido leer `data/`, `.env` o secretos.
-3. Edita `<dir>/.context.yaml`: `purpose` + `instructions` ≤ 80 palabras en total; `key_files` como `"archivo.py: fn(a) -> b"` (≤ 160 chars por ítem, ≤ 6 ítems); `imports_from` / `exported_to` como listas planas de rutas relativas con `/`.
-4. No anides diccionarios (MiniYAML no los parsea). No borres líneas `#`.
-5. Ejecuta `python FWengine.py audit`; corrige cualquier `[WARN] Beacon inflado` (> 600 chars).
+3. Edita `<dir>/.context.yaml`: `purpose` ≤ 200 chars, `instructions` ≤ 240 chars; `key_files` como `"archivo.py: fn(a) -> b"` (≤ 160 chars por ítem); `imports_from` / `exported_to` como listas planas con `/`.
+4. Ejecuta `python FWengine.py reconcile` para validar el esquema y actualizar `topology_hash`.
 
 ---
 
-## 2. Matriz de Gobernanza Rápida (All-Lowercase)
+## 2. Instrucciones de Ejecución para el Agente
 
-| Tipo / Extensión | Subdirectorio de Destino | Descripción / Rol |
-| :--- | :--- | :--- |
-| `.ipynb` | `03_research/notebooks/` | Notebooks interactivos y EDA |
-| `.py`, `.sql` (pipeline/job) | `src/cloud_jobs/` | PySpark, SQL y scripts de ETL |
-| `.py`, `.sql` (tests/specs) | `tests/` | Pruebas unitarias y de calidad |
-| `.prompt` | `03_research/prompts/` | System prompts y plantillas LLM |
-| `.pbix`, `.pbip` | `src/dashboards/` | Tableros BI y visualización |
-| `.yaml`, `.yml` | `config/` | Configuración y variables |
-| `.json`, `.avsc` | `schemas/` | Contratos de datos y esquemas |
-| `.tf` | `infrastructure/` | IaC (Terraform) |
-| `.csv` | `data/raw/` | Zona Bronze local (crawl: false) |
-| `.parquet`, `.delta` | `data/processed/` | Zona Silver/Gold local (crawl: false) |
-| `.md`, `.txt`, `.pdf` (planes) | `artifacts/plans/` | `active/` vigentes, `metricsthinking/` evaluaciones, `archive/` descartados |
-| `.md`, `.txt`, `.pdf` (doc) | `docs/` | `specs/`, `notes/`, `architecture/` |
-| *Carpetas de dominio no canónicas* | Raíz descubierta (p. ej. `crates/`) | Auto-descubiertas como `role: domain_extension` en `tree.json` |
-
----
-
-## 3. Instrucciones de Ejecución para el Agente
-
-1. Cuando el usuario invoque el comando `/idir` o solicite clasificar/mover archivos, ejecuta la acción invocando `FWengine.py` mediante el tool `run_command`.
-2. Si el usuario pasa un argumento de archivo, ejecuta `route "<archivo>"`. Si incluye la intención de mover o reubicar, añade `--move` (y `--overwrite` si solicitó sobrescribir).
-3. Reporta siempre al usuario la sugerencia o el resultado del movimiento del archivo.
-4. **Regla obligatoria de creación de carpetas:** tras crear o mover cualquier directorio, ejecuta `python FWengine.py audit --fix` (equivale a `beacon --sync` + `map --sync` para huérfanos). Ninguna tarea se da por terminada con directorios sin beacon.
+1. Cuando el usuario invoque `/idir`, ejecuta la acción correspondiente invocando `FWengine.py`.
+2. **Regla obligatoria de cierre:** tras crear o mover cualquier directorio o modificar beacons, ejecuta `python FWengine.py reconcile`.
