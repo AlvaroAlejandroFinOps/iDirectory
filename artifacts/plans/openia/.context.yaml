@@ -1,0 +1,13 @@
+version: 1.0
+directory: artifacts/plans/openia
+role: openai_advisory_plans
+purpose: Auditorías y planes de mejora de iDirectory elaborados desde agentes OpenAI.
+relevance: high
+crawl: true
+read_priority: p1
+seed_reference: optional
+tier1_preload: false
+token_density: medium
+instructions: Consultar sólo para evolución de iDirectory; validar fecha, commit y vigencia antes de ejecutar recomendaciones.
+key_files:
+  - "sugerencias_gptsol_5.6high.md: auditoría de contexto, tokens y navegación agéntica"
