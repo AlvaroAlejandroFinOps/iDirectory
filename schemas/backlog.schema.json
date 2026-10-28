@@ -1,0 +1,68 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "../schemas/backlog.schema.json",
+  "title": "iDirectory Intent Backlog Queue Schema",
+  "description": "Formal JSON Schema Draft-07 validating artifacts/plans/backlog/queue.json in iDirectory v4.1.",
+  "type": "object",
+  "required": [
+    "version",
+    "items"
+  ],
+  "properties": {
+    "version": {
+      "type": "string"
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "target_nodes",
+          "tier_estimate",
+          "intent",
+          "status",
+          "acceptance_test"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^BKL-[0-9]{3,}$"
+          },
+          "target_nodes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[^\\\\]+$"
+            }
+          },
+          "tier_estimate": {
+            "type": "string",
+            "enum": [
+              "1a",
+              "1b",
+              "2"
+            ]
+          },
+          "intent": {
+            "type": "string",
+            "maxLength": 160
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "queued",
+              "promoted",
+              "done"
+            ]
+          },
+          "acceptance_test": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

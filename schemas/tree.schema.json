@@ -122,6 +122,9 @@
           },
           "pruned": {
             "type": "boolean"
+          },
+          "node_hash": {
+            "type": "string"
           }
         },
         "additionalProperties": false

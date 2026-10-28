@@ -1,11 +1,11 @@
 ---
-plan_id: inferred-roadmap-v1-snapshot
+plan_id: "inferred-roadmap-v1-snapshot"
 status: completed
 executable: false
-target_version: "3.0"
+target_version: 3.0
 created_at: "2026-09-25"
 updated_at: "2026-10-26"
-superseded_by: "iDirectory v4.0 Architecture"
+superseded_by: iDirectory v4.0 Architecture
 ---
 # INFERRED OPERATIONAL ROADMAP: IDIRECTORY (HISTORICAL SNAPSHOT v3.0)
 

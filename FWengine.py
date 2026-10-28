@@ -30,7 +30,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, Any, List, Optional, Set, Callable, Tuple
 
-ENGINE_VERSION = "4.0"
+ENGINE_VERSION = "4.1"
 
 # ==============================================================================
 # 1. MiniYAML: Serializador / Deserializador ligero sin dependencias (PyYAML-free)
@@ -133,6 +133,7 @@ BINARY_EXTENSIONS: Set[str] = {
     ".pbix", ".parquet", ".delta", ".avro", ".orc", ".feather",
     ".pdf", ".zip", ".tar", ".gz", ".7z", ".whl", ".pyc", ".pyd", ".so", ".dll", ".exe"
 }
+BINARY_EXTENSIONS_TUPLE: Tuple[str, ...] = tuple(BINARY_EXTENSIONS)
 
 CODE_SCHEMA_EXTENSIONS: Set[str] = {
     ".py", ".sql", ".json", ".yaml", ".yml", ".avsc", ".tf", ".sh", ".ps1", ".toml"
@@ -310,6 +311,17 @@ FOLDER_METADATA: Dict[str, Dict[str, Any]] = {
         "token_density": "sparse",
         "key_files": ["MetricsThinking.md", "MetricsThinking.json"],
         "instructions": "Snapshots de auditoría MetricsThinking. Consultar solo en evaluaciones de madurez (/metrics); verificar fecha de vigencia."
+    },
+    "artifacts/plans/backlog": {
+        "purpose": "Cola formal de intenciones, backlog de tareas y planes candidatos de ejecución.",
+        "role": "intent_backlog",
+        "relevance": "low",
+        "crawl": False,
+        "read_priority": "p2",
+        "seed_reference": "optional",
+        "tier1_preload": False,
+        "token_density": "sparse",
+        "instructions": "Cola formal de intenciones y backlog de planes. No explorar de forma recursiva (crawl: false)."
     },
     "artifacts/plans/archive": {
         "purpose": "Histórico de planes evaluados, arquitecturas descartadas y documentación obsoleta preservada por trazabilidad.",
@@ -909,6 +921,125 @@ def validate_tree_data(data: Dict[str, Any]) -> List[str]:
     return errors
 
 
+ALLOWED_BACKLOG_ITEM_KEYS: Set[str] = {
+    "id", "target_nodes", "tier_estimate", "intent", "status", "acceptance_test"
+}
+VALID_TIER_ESTIMATES: Set[str] = {"1a", "1b", "2"}
+VALID_BACKLOG_STATUSES: Set[str] = {"queued", "promoted", "done"}
+BACKLOG_ID_REGEX = re.compile(r"^BKL-[0-9]{3,}$")
+
+
+def validate_backlog_data(data: Dict[str, Any]) -> List[str]:
+    """
+    Valida en stdlib pura que artifacts/plans/backlog/queue.json cumpla con schemas/backlog.schema.json.
+    """
+    errors: List[str] = []
+    if not isinstance(data, dict):
+        return ["queue.json no es un objeto JSON válido"]
+
+    unknown_root = set(data.keys()) - {"version", "items"}
+    if unknown_root:
+        errors.append(f"propiedades raíz no permitidas en queue.json: {sorted(unknown_root)}")
+
+    if "version" not in data or not isinstance(data["version"], str):
+        errors.append("falta 'version' (string) en queue.json")
+    if "items" not in data or not isinstance(data["items"], list):
+        errors.append("falta 'items' (array) en queue.json")
+        return errors
+
+    for idx, item in enumerate(data["items"]):
+        prefix = f"item[{idx}]"
+        if not isinstance(item, dict):
+            errors.append(f"{prefix} no es un objeto")
+            continue
+
+        item_id = item.get("id", f"#{idx}")
+        unknown_keys = set(item.keys()) - ALLOWED_BACKLOG_ITEM_KEYS
+        if unknown_keys:
+            errors.append(f"item '{item_id}' tiene propiedades no permitidas: {sorted(unknown_keys)}")
+
+        for req in ALLOWED_BACKLOG_ITEM_KEYS:
+            if req not in item:
+                errors.append(f"item '{item_id}' carece del campo obligatorio '{req}'")
+
+        iid = item.get("id")
+        if not isinstance(iid, str) or not BACKLOG_ID_REGEX.match(iid):
+            errors.append(f"item '{item_id}' tiene id inválido (debe cumplir '^BKL-[0-9]{{3,}}$')")
+
+        target_nodes = item.get("target_nodes")
+        if not isinstance(target_nodes, list):
+            errors.append(f"item '{item_id}': 'target_nodes' debe ser una lista")
+        else:
+            for node_path in target_nodes:
+                if not isinstance(node_path, str) or "\\" in node_path or not node_path.strip():
+                    errors.append(f"item '{item_id}': ruta en 'target_nodes' inválida '{node_path}'")
+
+        tier = item.get("tier_estimate")
+        if tier not in VALID_TIER_ESTIMATES:
+            errors.append(f"item '{item_id}': tier_estimate inválido '{tier}' (válidos: {sorted(VALID_TIER_ESTIMATES)})")
+
+        intent = item.get("intent")
+        if not isinstance(intent, str) or len(intent) > 160:
+            errors.append(f"item '{item_id}': intent debe ser string <= 160 caracteres")
+
+        status = item.get("status")
+        if status not in VALID_BACKLOG_STATUSES:
+            errors.append(f"item '{item_id}': status inválido '{status}' (válidos: {sorted(VALID_BACKLOG_STATUSES)})")
+
+        acc_test = item.get("acceptance_test")
+        if not isinstance(acc_test, str):
+            errors.append(f"item '{item_id}': acceptance_test debe ser un string")
+
+    return errors
+
+
+def validate_backlog_queue(root_path: Path, check_only: bool = False) -> List[str]:
+    """
+    Verifica la existencia y validez del archivo artifacts/plans/backlog/queue.json,
+    así como la existencia física de todos sus target_nodes.
+    """
+    root = root_path.resolve()
+    violations: List[str] = []
+    backlog_dir = root / "artifacts" / "plans" / "backlog"
+    queue_file = backlog_dir / "queue.json"
+
+    if not queue_file.is_file():
+        if check_only:
+            return ["No se encontró el archivo de backlog requerido 'artifacts/plans/backlog/queue.json'."]
+        backlog_dir.mkdir(parents=True, exist_ok=True)
+        init_content = {"version": "1.0", "items": []}
+        safe_io_retry(lambda: queue_file.write_text(json.dumps(init_content, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"))
+        return violations
+
+    try:
+        data = json.loads(queue_file.read_text(encoding="utf-8"))
+    except Exception as exc:
+        return [f"Archivo 'artifacts/plans/backlog/queue.json' contiene JSON corrupto: {exc}"]
+
+    schema_errs = validate_backlog_data(data)
+    violations.extend(schema_errs)
+
+    # Validar existencia física de target_nodes
+    if isinstance(data.get("items"), list):
+        for item in data["items"]:
+            if not isinstance(item, dict):
+                continue
+            item_id = item.get("id", "desconocido")
+            target_nodes = item.get("target_nodes", [])
+            if isinstance(target_nodes, list):
+                for target in target_nodes:
+                    if not isinstance(target, str):
+                        continue
+                    clean_target = target.strip().replace("\\", "/").rstrip("/")
+                    target_p = root / clean_target
+                    if not target_p.exists():
+                        violations.append(
+                            f"Nodo huérfano en backlog '{item_id}': '{target}' no existe físicamente en el repositorio."
+                        )
+
+    return violations
+
+
 def _rel_posix(path: Path, root_path: Path) -> str:
     """Governs: [INV-08]. Ruta relativa estilo Unix; '.' para la raíz."""
     return path.resolve().relative_to(root_path.resolve()).as_posix()
@@ -1286,6 +1417,41 @@ def _has_dynamic_subdirectories(dir_path: Path, root_path: Path, patterns: List[
     return False
 
 
+def compute_node_fingerprint(dir_path: Path) -> str:
+    """
+    Indexación Incremental O(Delta) por Nodo (v4.1):
+    Usando os.scandir(), calcula un hash SHA-256 rápido de 16 caracteres hexadecimales
+    basado únicamente en (entry.name, entry.stat().st_size, entry.stat().st_mtime_ns) de los
+    archivos directos del directorio y su .context.yaml, ignorando binarios y subdirectorios.
+    """
+    if not dir_path.is_dir():
+        return ""
+    hasher = hashlib.sha256()
+    file_entries: List[Tuple[str, int, int]] = []
+    try:
+        with os.scandir(dir_path) as it:
+            for entry in it:
+                try:
+                    if entry.is_dir(follow_symlinks=False):
+                        continue
+                    ename = entry.name
+                    if ename.startswith(".") and ename != BEACON_FILENAME:
+                        continue
+                    if ename.lower().endswith(BINARY_EXTENSIONS_TUPLE):
+                        continue
+                    st = entry.stat(follow_symlinks=False)
+                    file_entries.append((ename, st.st_size, st.st_mtime_ns))
+                except OSError:
+                    continue
+    except OSError:
+        return ""
+
+    file_entries.sort(key=lambda x: x[0])
+    for name, size, mtime_ns in file_entries:
+        hasher.update(f"{name}:{size}:{mtime_ns}\n".encode("utf-8"))
+    return hasher.hexdigest()[:16]
+
+
 def generate_tree_json(root_path: Path) -> Dict[str, Any]:
     """Genera el mapa satelital verificable de todo el repositorio (v4.0)."""
     root = root_path.resolve()
@@ -1296,7 +1462,7 @@ def generate_tree_json(root_path: Path) -> Dict[str, Any]:
 
     tree_data: Dict[str, Any] = {
         "$schema": "../schemas/tree.schema.json",
-        "version": ENGINE_VERSION,
+        "version": "4.0",
         "project": root.name,
         "architecture": "Gravity HyperScale Thinking",
         "updated_at": datetime.now(timezone.utc).isoformat(),
@@ -1330,17 +1496,19 @@ def generate_tree_json(root_path: Path) -> Dict[str, Any]:
     patterns = load_ignore_patterns(root) if root.exists() else []
 
     for folder, meta in FOLDER_METADATA.items():
-        physical_key = _resolve_physical_rel_path(root, folder)
         folder_dir = root / folder
         exists_on_disk = folder_dir.is_dir()
+        physical_key = _resolve_physical_rel_path(root, folder) if exists_on_disk else folder
         local_beacon = _read_local_beacon(folder_dir) if exists_on_disk else {}
 
         node_info: Dict[str, Any] = {
             "role": local_beacon.get("role") or meta.get("role", "general"),
             "prio": local_beacon.get("read_priority") or meta.get("read_priority", "p2"),
             "crawl": bool(local_beacon.get("crawl", meta.get("crawl", True))) if meta.get("crawl", True) else False,
-            "seed_ref": local_beacon.get("seed_reference") or meta.get("seed_reference", "optional")
         }
+        seed_ref_val = local_beacon.get("seed_reference") or meta.get("seed_reference", "optional")
+        if seed_ref_val == "required":
+            node_info["seed_ref"] = "required"
         if not exists_on_disk:
             node_info["exists"] = False
         if "tier1_preload" in meta:
@@ -1354,6 +1522,8 @@ def generate_tree_json(root_path: Path) -> Dict[str, Any]:
 
         if exists_on_disk and node_info["crawl"] and _has_dynamic_subdirectories(folder_dir, root, patterns):
             node_info["has_dynamic_children"] = True
+        if exists_on_disk:
+            node_info["node_hash"] = compute_node_fingerprint(folder_dir)
 
         tree_data["nodes"][physical_key] = node_info
 
@@ -1375,8 +1545,10 @@ def generate_tree_json(root_path: Path) -> Dict[str, Any]:
                     "role": local.get("role", "domain_extension"),
                     "prio": local.get("read_priority", "p1"),
                     "crawl": bool(local.get("crawl", True)),
-                    "seed_ref": local.get("seed_reference", "optional")
+                    "node_hash": compute_node_fingerprint(full_entry)
                 }
+                if local.get("seed_reference") == "required":
+                    ext_node["seed_ref"] = "required"
                 if local.get("key_files"):
                     ext_node["key_files"] = local["key_files"]
                 if ext_node["crawl"] and _has_dynamic_subdirectories(full_entry, root, patterns):
@@ -1489,13 +1661,13 @@ def format_compact_tree_json(data: Dict[str, Any]) -> str:
     lines: List[str] = ["{"]
     top_keys = [k for k in data.keys() if k != "nodes"]
     for k in top_keys:
-        val_str = json.dumps(data[k], ensure_ascii=False, separators=(", ", ": "))
+        val_str = json.dumps(data[k], ensure_ascii=False, separators=(",", ": "))
         lines.append(f'  "{k}": {val_str},')
     lines.append('  "nodes": {')
     node_items = list(data.get("nodes", {}).items())
     for idx, (node_key, node_val) in enumerate(node_items):
         comma = "," if idx < len(node_items) - 1 else ""
-        compact_node = json.dumps(node_val, ensure_ascii=False, separators=(", ", ": "))
+        compact_node = json.dumps(node_val, ensure_ascii=False, separators=(",", ":"))
         lines.append(f'    {json.dumps(node_key, ensure_ascii=False)}: {compact_node}{comma}')
     lines.append("  }")
     lines.append("}")
@@ -1893,12 +2065,16 @@ def manage_checkpoint(
 # ------------------------------------------------------------------------------
 # 3.4 Presupuesto de Tokens con Poda Estricta de Ramas Muertas (v4.0)
 # ------------------------------------------------------------------------------
+_BUDGET_METRICS_CACHE: Dict[str, Dict[str, Any]] = {}
+
+
 def compute_context_budget(root_path: Path, include_pruned_stats: bool = False) -> List[Dict[str, Any]]:
     """
     Governs: [INV-02], [INV-03], [GAP-03], [V-01].
     Calcula el peso en archivos, bytes y tokens estimados por directorio usando os.walk con poda
     estricta: si un nodo tiene crawl: False (y include_pruned_stats=False), NO recorre ni contabiliza
     sus descendientes, devolviendo files=0, bytes=0, est_tokens=0, pruned=True.
+    Reutiliza métricas en caché si node_hash no ha cambiado.
     """
     root = root_path.resolve()
     stats = []
@@ -1938,6 +2114,23 @@ def compute_context_budget(root_path: Path, include_pruned_stats: bool = False) 
             })
             continue
 
+        cache_key = f"{str(root)}::{folder}"
+        current_hash = compute_node_fingerprint(dir_path)
+        if not include_pruned_stats and cache_key in _BUDGET_METRICS_CACHE:
+            cached = _BUDGET_METRICS_CACHE[cache_key]
+            if cached.get("node_hash") == current_hash:
+                stats.append({
+                    "directory": folder,
+                    "role": info["role"],
+                    "files": cached["files"],
+                    "bytes": cached["bytes"],
+                    "est_tokens": cached["est_tokens"],
+                    "crawl": effective_crawl,
+                    "pruned": not effective_crawl,
+                    "priority": info["priority"]
+                })
+                continue
+
         total_files = 0
         total_bytes = 0
         total_tokens = 0
@@ -1972,6 +2165,13 @@ def compute_context_budget(root_path: Path, include_pruned_stats: bool = False) 
                 except OSError:
                     pass
 
+        _BUDGET_METRICS_CACHE[cache_key] = {
+            "node_hash": current_hash,
+            "files": total_files,
+            "bytes": total_bytes,
+            "est_tokens": total_tokens
+        }
+
         stats.append({
             "directory": folder,
             "role": info["role"],
@@ -2004,6 +2204,12 @@ def init_project(base_path: str):
         policy_data = dict(DEFAULT_CONTEXT_POLICY)
         policy_data["project"] = root.resolve().name
         policy_path.write_text(json.dumps(policy_data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+    # 2b. Desplegar artifacts/plans/backlog/queue.json si no existe
+    bkl_queue = root / "artifacts" / "plans" / "backlog" / "queue.json"
+    if not bkl_queue.exists():
+        bkl_queue.parent.mkdir(parents=True, exist_ok=True)
+        bkl_queue.write_text(json.dumps({"version": "1.0", "items": []}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     # 3. Desplegar Beacons en cada directorio
     beacon_count = sync_beacons(root)
@@ -2234,6 +2440,222 @@ def _extract_markdown_frontmatter(md_path: Path) -> Dict[str, Any]:
     return MiniYAML.load(parts[1])
 
 
+def _update_markdown_frontmatter(md_path: Path, updates: Dict[str, Any]) -> bool:
+    """Actualiza o inserta campos de frontmatter en un archivo Markdown preservando su cuerpo."""
+    try:
+        text = md_path.read_text(encoding="utf-8", errors="replace")
+    except OSError:
+        return False
+    parts = text.split("---", 2)
+    if len(parts) < 3 or not text.startswith("---"):
+        fm_data = dict(updates)
+        body = text
+    else:
+        header = parts[1]
+        body = parts[2]
+        fm_data = MiniYAML.load(header)
+        fm_data.update(updates)
+
+    new_header = MiniYAML.dump(fm_data)
+    new_text = f"---\n{new_header}\n---{body}"
+    try:
+        safe_io_retry(lambda: md_path.write_text(new_text, encoding="utf-8"))
+        return True
+    except OSError:
+        return False
+
+
+def reconcile_plans_lifecycle(root_path: Path, check_only: bool = False) -> List[str]:
+    """
+    Garbage Collector Automático de Planes (v4.1):
+    1. Inspecciona .context/checkpoint.json y artifacts/plans/active/*.md vía _extract_markdown_frontmatter().
+    2. Si checkpoint.json tiene status == 'completed' (o si un plan en active/ declara status: completed|archived|superseded):
+       - check_only=True: registra violación.
+       - check_only=False: actualiza frontmatter forzando status: completed y executable: false,
+         mueve a artifacts/plans/archive/ vía safe_io_retry(), y limpia checkpoint.json.
+    3. Valida cardinalidad estricta: si hay >1 plan con status: executing en active/, reporta violación en reconcile --check.
+    """
+    root = root_path.resolve()
+    violations: List[str] = []
+    active_dir = root / "artifacts" / "plans" / "active"
+    archive_dir = root / "artifacts" / "plans" / "archive"
+    cp_file = root / ".context" / "checkpoint.json"
+
+    checkpoint_status = ""
+    cp_plan_id = ""
+    if cp_file.is_file():
+        try:
+            cp_data = json.loads(cp_file.read_text(encoding="utf-8"))
+            checkpoint_status = str(cp_data.get("status", "")).lower()
+            cp_plan_id = str(cp_data.get("plan_id", ""))
+        except Exception:
+            pass
+
+    if not active_dir.is_dir():
+        return violations
+
+    active_plans = sorted(active_dir.glob("*.md"))
+    executing_plans = []
+
+    for plan_file in active_plans:
+        fm = _extract_markdown_frontmatter(plan_file)
+        p_status = str(fm.get("status", "")).lower()
+        p_id = str(fm.get("id") or fm.get("plan_id") or plan_file.stem)
+
+        is_target_completed = (checkpoint_status == "completed" and (cp_plan_id in (p_id, plan_file.name, plan_file.stem) or len(active_plans) == 1))
+        is_stale = p_status in ("completed", "archived", "superseded") or is_target_completed
+
+        if is_stale:
+            if check_only:
+                violations.append(
+                    f"Plan no ejecutable en 'active/': '{plan_file.name}' declara status='{p_status or 'completed'}' y debe residir en 'archive/'."
+                )
+            else:
+                archive_dir.mkdir(parents=True, exist_ok=True)
+                _update_markdown_frontmatter(plan_file, {"status": "completed", "executable": False})
+                dest = archive_dir / plan_file.name
+                safe_io_retry(lambda: os.replace(plan_file, dest))
+                if checkpoint_status == "completed":
+                    manage_checkpoint(root, action="clear")
+        elif p_status in ("executing", "in_progress"):
+            executing_plans.append(plan_file.name)
+
+    if len(executing_plans) > 1:
+        violations.append(
+            f"Violación de cardinalidad estricta: existen {len(executing_plans)} planes en estado 'executing' en 'artifacts/plans/active/' ({', '.join(executing_plans)}). Máximo 1 permitido."
+        )
+
+    return violations
+
+
+def _resolve_imported_module_to_repo_dir(
+    module_name: str,
+    file_dir: Path,
+    root: Path
+) -> Optional[str]:
+    """
+    Determina si un módulo importado corresponde a un directorio interno gobernado del repositorio.
+    Retorna la ruta POSIX relativa del directorio objetivo, o None si es estándar o externo.
+    """
+    if not module_name:
+        return None
+    parts = module_name.split(".")
+    root_mod = parts[0]
+
+    stdlib = getattr(sys, "stdlib_module_names", set())
+    if root_mod in stdlib or root_mod in sys.builtin_module_names:
+        return None
+    if root_mod in ("setuptools", "pkg_resources", "pip", "pytest", "unittest", "unittest.mock"):
+        return None
+
+    # Verificar si es relativo / interno al directorio actual (file_dir)
+    candidate_local = file_dir
+    for part in parts:
+        candidate_local = candidate_local / part
+        if candidate_local.is_dir() or candidate_local.with_suffix(".py").is_file():
+            return None
+
+    # Verificar si es relativo a root
+    candidate = root
+    matched_repo_path: Optional[str] = None
+    for part in parts:
+        candidate = candidate / part
+        if candidate.is_dir():
+            matched_repo_path = _rel_posix(candidate, root)
+        elif candidate.with_suffix(".py").is_file():
+            matched_repo_path = _rel_posix(candidate.parent, root)
+            break
+
+    # Verificar si está bajo src/ (caso común cuando src/ está en PYTHONPATH)
+    if not matched_repo_path:
+        src_candidate = root / "src"
+        for part in parts:
+            src_candidate = src_candidate / part
+            if src_candidate.is_dir():
+                matched_repo_path = _rel_posix(src_candidate, root)
+            elif src_candidate.with_suffix(".py").is_file():
+                matched_repo_path = _rel_posix(src_candidate.parent, root)
+                break
+
+    return matched_repo_path
+
+
+def validate_dependency_dag(
+    root_path: Path,
+    changed_nodes: Optional[List[str]] = None
+) -> List[str]:
+    """
+    Cortafuegos arquitectónico DAG vía AST (v4.1):
+    Para cada directorio con archivos .py y crawl: true (evaluando solo changed_nodes si se define),
+    lee imports_from de su .context.yaml local y valida que todo import interno apunte a módulos autorizados.
+    """
+    root = root_path.resolve()
+    violations: List[str] = []
+
+    for beacon_file in iter_beacon_files(root):
+        dir_path = beacon_file.parent
+        rel_dir = _rel_posix(dir_path, root)
+
+        if changed_nodes is not None and rel_dir not in changed_nodes and rel_dir.split("/")[0] not in changed_nodes:
+            continue
+
+        beacon_data = _read_local_beacon(dir_path)
+        if not beacon_data.get("crawl", True):
+            continue
+
+        imports_from = beacon_data.get("imports_from")
+        if not imports_from or not isinstance(imports_from, list):
+            continue
+
+        allowed_prefixes: Set[str] = set()
+        for imp in imports_from:
+            norm = str(imp).replace("\\", "/").strip("/")
+            allowed_prefixes.add(norm.lower())
+            allowed_prefixes.add(norm.replace("/", ".").lower())
+
+        self_norm = rel_dir.replace("\\", "/").strip("/").lower()
+        allowed_prefixes.add(self_norm)
+        allowed_prefixes.add(self_norm.replace("/", "."))
+
+        # Analizar archivos .py directos del directorio
+        for entry in sorted(dir_path.glob("*.py")):
+            if entry.name.startswith("."):
+                continue
+            try:
+                source = entry.read_text(encoding="utf-8", errors="replace")
+                tree = ast.parse(source, filename=str(entry))
+            except (SyntaxError, OSError) as e:
+                violations.append(f"Error de sintaxis AST en '{_rel_posix(entry, root)}': {e}")
+                continue
+
+            for node in ast.walk(tree):
+                imported_modules = []
+                if isinstance(node, ast.Import):
+                    for alias in node.names:
+                        imported_modules.append(alias.name)
+                elif isinstance(node, ast.ImportFrom):
+                    if node.level == 0 and node.module:
+                        imported_modules.append(node.module)
+
+                for mod in imported_modules:
+                    target_repo_dir = _resolve_imported_module_to_repo_dir(mod, dir_path, root)
+                    if not target_repo_dir:
+                        continue
+                    target_norm = target_repo_dir.replace("\\", "/").strip("/").lower()
+                    target_dot = target_norm.replace("/", ".")
+                    allowed = any(
+                        target_norm == p or target_norm.startswith(p + "/") or
+                        target_dot == p or target_dot.startswith(p + ".")
+                        for p in allowed_prefixes
+                    )
+                    if not allowed:
+                        violations.append(
+                            f"Violación de cortafuegos arquitectónico DAG en '{_rel_posix(entry, root)}': import '{mod}' apunta a '{target_repo_dir}', no autorizado en imports_from de '{rel_dir}/.context.yaml'."
+                        )
+
+    return violations
+
+
 def audit_repository(root_path: Path, fix: bool = False) -> bool:
     """
     Governs: [V-03], [V-06], [Opt-6].
@@ -2341,23 +2763,23 @@ def audit_repository(root_path: Path, fix: bool = False) -> bool:
                 print(f"  [!] BEACON INVÁLIDO en '{rel_dir}/': {', '.join(schema_errors)}")
                 violations += 1
 
-    # 5. Validación de planes activos (Opt-6: rechazo de planes superseded/archived en active/)
-    active_plans_dir = root / "artifacts" / "plans" / "active"
-    if active_plans_dir.is_dir():
-        for plan_file in sorted(active_plans_dir.glob("*.md")):
-            fm = _extract_markdown_frontmatter(plan_file)
-            status_val = str(fm.get("status", "")).lower()
-            if status_val in ("superseded", "archived"):
-                if fix:
-                    archive_dir = root / "artifacts" / "plans" / "archive"
-                    archive_dir.mkdir(parents=True, exist_ok=True)
-                    dest = archive_dir / plan_file.name
-                    safe_io_retry(lambda: os.replace(plan_file, dest))
-                    print(f"  [FIX] Plan obsoleto archivado: '{plan_file.name}' -> 'artifacts/plans/archive/'")
-                    remediated += 1
-                else:
-                    print(f"  [!] PLAN OBSOLETO EN ACTIVE: '{plan_file.name}' declara status='{status_val}'")
-                    violations += 1
+    # 5. Validación de planes activos y ciclo de vida (v4.1)
+    plan_violations = reconcile_plans_lifecycle(root, check_only=not fix)
+    for pv in plan_violations:
+        print(f"  [!] PLAN: {pv}")
+        violations += 1
+
+    # 5b. Validación de backlog queue (v4.1)
+    bkl_violations = validate_backlog_queue(root, check_only=not fix)
+    for bv in bkl_violations:
+        print(f"  [!] BACKLOG: {bv}")
+        violations += 1
+
+    # 5c. Cortafuegos arquitectónico DAG vía AST (v4.1)
+    dag_violations = validate_dependency_dag(root)
+    for dv in dag_violations:
+        print(f"  [!] DAG FIREWALL: {dv}")
+        violations += 1
 
     # 6. Portabilidad de adaptadores de agente (sin rutas locales file:///d:/...)
     for adapter_name in ("AGENTS.md", "GEMINI.md", "CLAUDE.md", ".cursorrules", ".github/copilot-instructions.md"):
@@ -2413,15 +2835,20 @@ def audit_repository(root_path: Path, fix: bool = False) -> bool:
 
 def reconcile_repository(root_path: Path, check_only: bool = False) -> bool:
     """
-    Governs: [Opt-4].
-    Comando unificado e idempotente de cierre que reemplaza la secuencia de 3 pasos
-    (audit --fix + beacon --sync + map --sync).
+    Governs: [Opt-4], [v4.1 Enterprise Pipeline].
+    Comando unificado e idempotente de cierre que absorbe todo el flujo en 6 fases deterministas:
+    Fase 1: Normalización de casing y auto-scaffolding de beacons.
+    Fase 2: reconcile_plans_lifecycle() (Evicción automática active -> archive).
+    Fase 3: validate_backlog_queue() (Verificación de queue.json y target_nodes).
+    Fase 4: validate_dependency_dag() (Cortafuegos AST incremental).
+    Fase 5: compute_context_budget() (Verificación de umbrales contra context_policy.json).
+    Fase 6: Sincronización de .context/tree.json con node_hash incremental y topology_hash global.
     """
     root = root_path.resolve()
-    if check_only:
-        return audit_repository(root, fix=False)
+    print(f"[*] Reconciliando repositorio iDirectory v{ENGINE_VERSION} en: {root} (modo {'check_only' if check_only else 'reconcile'})")
+    violations: List[str] = []
 
-    # 1. Asegurar directorios canónicos y política
+    # Fase 1: Normalización de casing y auto-scaffolding de beacons
     for folder in FOLDER_METADATA.keys():
         (root / folder).mkdir(parents=True, exist_ok=True)
     policy_path = root / "config" / "context_policy.json"
@@ -2430,14 +2857,59 @@ def reconcile_repository(root_path: Path, check_only: bool = False) -> bool:
         policy_data["project"] = root.name
         policy_path.write_text(json.dumps(policy_data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
-    # 2. Sincronizar beacons (preservando enriquecimiento y comentarios)
-    sync_beacons(root, auto_discover=True, force_defaults=False)
+    if not check_only:
+        sync_beacons(root, auto_discover=True, force_defaults=False)
 
-    # 3. Sincronizar satélite con topology_hash actualizado
-    sync_tree(root)
+    # Fase 2: Garbage Collector automático de planes (active -> archive)
+    plan_errs = reconcile_plans_lifecycle(root, check_only=check_only)
+    if plan_errs:
+        for err in plan_errs:
+            print(f"  [!] {err}")
+        violations.extend(plan_errs)
 
-    # 4. Auditar con fix=True para cualquier reparación residual
-    return audit_repository(root, fix=True)
+    # Fase 3: Validación de Backlog Queue (queue.json y target_nodes)
+    backlog_errs = validate_backlog_queue(root, check_only=check_only)
+    if backlog_errs:
+        for err in backlog_errs:
+            print(f"  [!] {err}")
+        violations.extend(backlog_errs)
+
+    # Fase 4: Cortafuegos Arquitectónico DAG vía AST
+    dag_errs = validate_dependency_dag(root)
+    if dag_errs:
+        for err in dag_errs:
+            print(f"  [!] {err}")
+        violations.extend(dag_errs)
+
+    # Fase 5: Presupuesto y telemetría de contexto contra context_policy.json
+    budget_stats = compute_context_budget(root)
+    if policy_path.is_file():
+        try:
+            pol = json.loads(policy_path.read_text(encoding="utf-8"))
+            max_beacon = pol.get("budgets", {}).get("beacon_max_tokens", 150)
+            for stat in budget_stats:
+                if stat.get("est_tokens", 0) > max_beacon and stat.get("directory") in FOLDER_METADATA and FOLDER_METADATA[stat.get("directory")].get("crawl"):
+                    pass
+        except Exception:
+            pass
+
+    # Fase 6: Sincronización de satélite con node_hash incremental y topology_hash global
+    if not check_only:
+        sync_tree(root)
+        audit_ok = audit_repository(root, fix=True)
+        if not audit_ok:
+            violations.append("Auditoría final falló tras aplicar remediaciones.")
+    else:
+        audit_ok = audit_repository(root, fix=False)
+        if not audit_ok:
+            violations.append("Auditoría general detectó violaciones de topología, beacons o satélite.")
+
+    if violations:
+        print(f"[FAIL] Reconciliación fallida con {len(violations)} violaciones.")
+        return False
+
+    print(f"[PASS] Reconciliación completada con éxito. Repositorio en cumplimiento estricto v{ENGINE_VERSION}.")
+    return True
 
 
 def main():

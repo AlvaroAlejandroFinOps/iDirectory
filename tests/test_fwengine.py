@@ -47,6 +47,11 @@ from FWengine import (
     manage_checkpoint,
     reconcile_repository,
     estimate_tokens_v4,
+    compute_node_fingerprint,
+    reconcile_plans_lifecycle,
+    validate_backlog_queue,
+    validate_dependency_dag,
+    validate_backlog_data,
     SLICE_CHAR_BUDGET,
 )
 
@@ -827,6 +832,142 @@ class TestV4AdversarialAndContinuity(unittest.TestCase):
         self.assertTrue(audit_repository(self.test_path, fix=True))
         self.assertFalse(bad_plan.exists())
         self.assertTrue((self.test_path / "artifacts" / "plans" / "archive" / "old_plan.md").exists())
+
+
+class TestV41EnterpriseAndIncremental(unittest.TestCase):
+    """
+    Test suite for iDirectory v4.1 Enterprise Context Governance and Incremental Merkle Engine.
+    Verifies automatic plan garbage collection, backlog queue schema & orphan detection,
+    AST dependency firewall, and node_hash incremental caching.
+    """
+
+    def setUp(self):
+        self.test_dir = tempfile.mkdtemp(prefix="idir_v41_test_")
+        self.test_path = Path(self.test_dir)
+        init_project(str(self.test_path))
+
+    def tearDown(self):
+        shutil.rmtree(self.test_dir, ignore_errors=True)
+
+    def test_plan_lifecycle_eviction_on_checkpoint_completion(self):
+        """[1] Automatic plan eviction from active/ to archive/ upon checkpoint completion."""
+        active_plan = self.test_path / "artifacts" / "plans" / "active" / "plan_release.md"
+        active_plan.write_text(
+            "---\nid: plan_release\nstatus: executing\nexecutable: true\n---\n# Release Plan v4.1\n",
+            encoding="utf-8"
+        )
+        manage_checkpoint(self.test_path, action="set", plan_id="plan_release", status="completed")
+
+        self.assertTrue(reconcile_repository(self.test_path, check_only=False))
+
+        self.assertFalse(active_plan.exists(), "Plan completado no debe residir en active/")
+        archive_plan = self.test_path / "artifacts" / "plans" / "archive" / "plan_release.md"
+        self.assertTrue(archive_plan.exists(), "Plan completado debe haber sido movido a archive/")
+
+        archived_text = archive_plan.read_text(encoding="utf-8")
+        self.assertIn("status: completed", archived_text)
+        self.assertIn("executable: false", archived_text)
+
+        cp_after = manage_checkpoint(self.test_path, action="show")
+        self.assertNotEqual(cp_after.get("status"), "completed")
+
+    def test_reconcile_check_blocks_on_multiple_executing_plans(self):
+        """[2] Reconcile --check blocks when more than 1 plan has status: executing (strict cardinality)."""
+        reconcile_repository(self.test_path, check_only=False)
+
+        plan_a = self.test_path / "artifacts" / "plans" / "active" / "plan_a.md"
+        plan_b = self.test_path / "artifacts" / "plans" / "active" / "plan_b.md"
+        plan_a.write_text("---\nid: A\nstatus: executing\nexecutable: true\n---\n# Plan A\n", encoding="utf-8")
+        plan_b.write_text("---\nid: B\nstatus: executing\nexecutable: true\n---\n# Plan B\n", encoding="utf-8")
+
+        violations = reconcile_plans_lifecycle(self.test_path, check_only=True)
+        self.assertTrue(any("cardinalidad estricta" in v.lower() for v in violations))
+        self.assertFalse(reconcile_repository(self.test_path, check_only=True))
+
+    def test_backlog_queue_detects_orphan_target_nodes(self):
+        """[3] Detects non-existent target nodes in artifacts/plans/backlog/queue.json."""
+        reconcile_repository(self.test_path, check_only=False)
+        queue_file = self.test_path / "artifacts" / "plans" / "backlog" / "queue.json"
+        orphan_payload = {
+            "version": "1.0",
+            "items": [
+                {
+                    "id": "BKL-001",
+                    "target_nodes": ["src/module_inexistente_xyz"],
+                    "tier_estimate": "1a",
+                    "intent": "Implementar módulo huérfano",
+                    "status": "queued",
+                    "acceptance_test": "test_orphan"
+                }
+            ]
+        }
+        queue_file.write_text(json.dumps(orphan_payload, indent=2), encoding="utf-8")
+
+        errs = validate_backlog_queue(self.test_path, check_only=True)
+        self.assertTrue(any("src/module_inexistente_xyz" in e for e in errs))
+        self.assertFalse(reconcile_repository(self.test_path, check_only=True))
+
+    def test_dependency_dag_firewall_blocks_unauthorized_imports(self):
+        """[4] Dependency DAG firewall detects unauthorized cross-module imports via AST analysis."""
+        reconcile_repository(self.test_path, check_only=False)
+        cloud_jobs_beacon = self.test_path / "src" / "cloud_jobs" / ".context.yaml"
+        b_data = MiniYAML.load(cloud_jobs_beacon.read_text(encoding="utf-8"))
+        b_data["imports_from"] = ["src/core"]
+        cloud_jobs_beacon.write_text(MiniYAML.dump(b_data) + "\n", encoding="utf-8")
+
+        unauth_file = self.test_path / "src" / "cloud_jobs" / "rogue_job.py"
+        unauth_file.write_text("from src.dashboards import app\n\ndef run(): app.start()\n", encoding="utf-8")
+
+        dag_errs = validate_dependency_dag(self.test_path)
+        self.assertTrue(len(dag_errs) > 0)
+        self.assertTrue(any("src/dashboards" in e for e in dag_errs))
+        self.assertFalse(reconcile_repository(self.test_path, check_only=True))
+
+    def test_incremental_cache_hit_preserves_node_hash(self):
+        """[5] Unchanged nodes retain identical node_hash without re-indexing."""
+        reconcile_repository(self.test_path, check_only=False)
+        seed_dir = self.test_path / "01_seed"
+        h1 = compute_node_fingerprint(seed_dir)
+        self.assertEqual(len(h1), 16)
+
+        # Mutate src/core only
+        core_file = self.test_path / "src" / "core" / "new_service.py"
+        core_file.write_text("x = 42\n", encoding="utf-8")
+
+        h2 = compute_node_fingerprint(seed_dir)
+        self.assertEqual(h1, h2, "El hash de 01_seed no debe cambiar al mutar src/core")
+
+        h_core = compute_node_fingerprint(self.test_path / "src" / "core")
+        self.assertEqual(len(h_core), 16)
+
+    def test_backlog_queue_initialization_and_schema_validation(self):
+        """[6] Backlog queue is automatically initialized and validates against schema."""
+        fresh_dir = tempfile.mkdtemp(prefix="idir_fresh_bkl_")
+        fresh_path = Path(fresh_dir)
+        try:
+            init_project(str(fresh_path))
+            queue_file = fresh_path / "artifacts" / "plans" / "backlog" / "queue.json"
+            self.assertTrue(queue_file.is_file())
+            content = json.loads(queue_file.read_text(encoding="utf-8"))
+            self.assertEqual(content["version"], "1.0")
+            self.assertEqual(content["items"], [])
+
+            # Insert valid item
+            valid_item = {
+                "id": "BKL-100",
+                "target_nodes": ["src/core"],
+                "tier_estimate": "1b",
+                "intent": "Refactorizar cliente",
+                "status": "queued",
+                "acceptance_test": "test_core_client"
+            }
+            content["items"].append(valid_item)
+            queue_file.write_text(json.dumps(content, indent=2), encoding="utf-8")
+
+            errs = validate_backlog_queue(fresh_path)
+            self.assertEqual(errs, [])
+        finally:
+            shutil.rmtree(fresh_dir, ignore_errors=True)
 
 
 if __name__ == "__main__":

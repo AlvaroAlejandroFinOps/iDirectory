@@ -1,0 +1,11 @@
+version: 1.0
+directory: artifacts/plans/backlog
+role: intent_backlog
+purpose: "Cola formal de intenciones, backlog de tareas y planes candidatos de ejecución."
+relevance: low
+crawl: false
+read_priority: p2
+seed_reference: optional
+tier1_preload: false
+token_density: sparse
+instructions: "Cola formal de intenciones y backlog de planes. No explorar de forma recursiva (crawl: false)."
