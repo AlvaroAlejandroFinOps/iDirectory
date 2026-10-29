@@ -7,8 +7,8 @@
 [![Motor](https://img.shields.io/badge/Motor-FWengine.py-1a1a1a?style=flat-square)](#3-formulación-matemática-y-motores-analíticos)
 [![Estándar](https://img.shields.io/badge/Est%C3%A1ndar-Enterprise%20Paper--Grade%20v2.0-2b2b2b?style=flat-square)](#)
 [![Ecosistema](https://img.shields.io/badge/Ecosistema-Multi--IA%20%28Google%20%7C%20Claude%20%7C%20OpenAI%20%7C%20Cursor%29-34495e?style=flat-square)](#1-resumen-ejecutivo)
-[![Arquitectura](https://img.shields.io/badge/Arquitectura-iDirectory%20v4.0-4b5563?style=flat-square)](#2-arquitectura-y-topología-del-sistema)
-[![Verificación](https://img.shields.io/badge/Verificaci%C3%B3n-68%2F68%20Superadas%20(100%25)-000000?style=flat-square)](#6-protocolo-de-ejecución-y-verificación)
+[![Arquitectura](https://img.shields.io/badge/Arquitectura-iDirectory%20v4.1-4b5563?style=flat-square)](#2-arquitectura-y-topología-del-sistema)
+[![Verificación](https://img.shields.io/badge/Verificaci%C3%B3n-74%2F74%20Superadas%20(100%25)-000000?style=flat-square)](#6-protocolo-de-ejecución-y-verificación)
 [![Licencia](https://img.shields.io/badge/Licencia-MIT-1a1a1a?style=flat-square)](LICENSE)
 
 ---
@@ -17,15 +17,15 @@
 
 **iDirectory**, creado y concebido por **Gravity HyperScale Thinking**, resuelve la degradación cognitiva de la ventana de contexto, la fragmentación arquitectónica y la entropía de navegación no determinista en arquitecturas modernas de datos en la nube, repositorios corporativos de IA y entornos de ejecución de agentes autónomos. Las arquitecturas empresariales contemporáneas desplegadas sobre Google Cloud Platform, Amazon Web Services, Microsoft Azure y Microsoft Fabric frecuentemente experimentan estructuras de archivos heterogéneas, acumulación descoordinada de datos locales y dispersión ambigua de artefactos. En agentes autónomos de codificación (tales como Google Gemini/Antigravity, Anthropic Claude Code, OpenAI/Codex, Cursor, Windsurf y GitHub Copilot), el escaneo no acotado de directorios consume decenas de millones de tokens en ramas muertas y dependencias compiladas, desencadenando una severa dispersión atencional (*Attention Sink*) y alucinaciones catastróficas.
 
-Para erradicar esta vulnerabilidad operacional, **iDirectory v4.0** establece un framework de Ingeniería de Contexto Adaptativa y Plano de Control Determinista gobernado por `FWengine.py`. Al unificar una matriz heurística en dos fases (por extensión y patrones nominales) con un radar topológico satelital (`.context/tree.json`), un fingerprint criptográfico SHA-256 (`topology_hash`), un Bootloader Adaptativo de Dos Niveles y Tres Perfiles (Tier 1A Atómico, Tier 1B Acotado, Tier 2 Global), empaquetado de contexto en una sola llamada (`context --pack <dir> --tier 1a`, consumiendo $< 220\text{ tokens}$), checkpoints de continuidad atencional (`.context/checkpoint.json`, $< 300\text{ tokens}$) y un contrato de cierre de reconciliación idempotente (`reconcile`), la plataforma impone una organización canónica del espacio de trabajo, aísla las capas de almacenamiento local Medallion (Bronze, Silver, Gold) y confiere una orientación espacial instantánea a los agentes autónomos.
+Para erradicar esta vulnerabilidad operacional, **iDirectory v4.1** establece un framework de Ingeniería de Contexto Adaptativa y Plano de Control Determinista gobernado por `FWengine.py`. Al unificar una matriz heurística en dos fases (por extensión y patrones nominales) con un radar topológico satelital (`.context/tree.json`), un fingerprint criptográfico SHA-256 (`topology_hash`), un Bootloader Adaptativo de Dos Niveles y Tres Perfiles (Tier 1A Atómico, Tier 1B Acotado, Tier 2 Global), empaquetado de contexto en una sola llamada (`context --pack <dir> --tier 1a`, consumiendo $< 220\text{ tokens}$), checkpoints de continuidad atencional (`.context/checkpoint.json`, $< 300\text{ tokens}$), reconciliación automática del ciclo de vida de planes (`reconcile_plans_lifecycle`), cola formal de intenciones en backlog (`artifacts/plans/backlog/queue.json`) y un contrato de cierre de reconciliación idempotente (`reconcile`), la plataforma impone una organización canónica del espacio de trabajo, aísla las capas de almacenamiento local Medallion (Bronze, Silver, Gold) y confiere una orientación espacial instantánea a los agentes autónomos.
 
-Las evaluaciones empíricas sobre repositorios de producción demuestran reducciones de tokens de contexto de entre **82.28% y 99.99%**, colapsando la latencia de descubrimiento en frío del agente desde decenas de segundos a una ejecución determinista sub-segundo ($< 80\text{ ms}$) sin requerir exploración recursiva ciega del sistema de archivos, verificado en 68 pruebas automatizadas con una tasa de éxito del 100%.
+Las evaluaciones empíricas sobre repositorios de producción demuestran reducciones de tokens de contexto de entre **82.28% y 99.99%**, colapsando la latencia de descubrimiento en frío del agente desde decenas de segundos a una ejecución determinista sub-segundo ($< 85\text{ ms}$) sin requerir exploración recursiva ciega del sistema de archivos, verificado en 74 pruebas automatizadas con una tasa de éxito del 100%.
 
 ---
 
 ## 2. Arquitectura y Topología del Sistema
 
-La arquitectura de **iDirectory v4.0** se articula en torno a un núcleo de gobernanza sin dependencias externas (`FWengine.py`) que opera sobre una jerarquía determinista completamente en minúsculas (*all-lowercase*) respaldada por contratos formales JSON Schema Draft-07 y un plano de continuidad atencional. A continuación se ilustra el flujo de control, las fronteras entre capas y los circuitos de ruteo de artefactos impuestos por el framework:
+La arquitectura de **iDirectory v4.1** se articula en torno a un núcleo de gobernanza sin dependencias externas (`FWengine.py`) que opera sobre una jerarquía determinista completamente en minúsculas (*all-lowercase*) respaldada por contratos formales JSON Schema Draft-07 y un plano de continuidad atencional. A continuación se ilustra el flujo de control, las fronteras entre capas y los circuitos de ruteo de artefactos impuestos por el framework:
 
 ```text
 +-----------------------------------------------------------------------------------+
@@ -50,6 +50,7 @@ La arquitectura de **iDirectory v4.0** se articula en torno a un núcleo de gobe
 | - Checkpoint Continuidad    |                 | - Reubicación Determinista        |
 | - Context Pack (Tier 1A/1B) |                 | - Validador Invariantes (Minus.)  |
 | - Política (context_policy) |                 | - Verificador Invariante SHA-256  |
+| - Cola de Backlog           |                 | - Verificación Aciclicidad DAG    |
 +-----------------------------+                 +-----------------------------------+
         |                                                 |
         |                                                 |
@@ -64,11 +65,11 @@ La arquitectura de **iDirectory v4.0** se articula en torno a un núcleo de gobe
 |  +-- 03_research/              (Notebooks EDA, Prompts LLM, Experimentos PoC)     |
 |  +-- src/                      (Jobs Cloud, Lógica Core, Gen Datos, Dashboards)   |
 |  +-- data/                     (Almacenamiento Medallion: raw/, processed/, sand) |
-|  +-- schemas/                  (Draft-07: tree, beacon, checkpoint, plan_metadata)|
+|  +-- schemas/                  (Draft-07: tree, beacon, checkpoint, plan, backlog)|
 |  +-- infrastructure/           (IaC: Terraform, Bicep, ARM, AWS CDK)              |
 |  +-- config/                   (Parámetros de Entorno y context_policy.json)      |
-|  +-- tests/                    (68 Suites Unitarias y Benchmarks Tri-Baseline)    |
-|  +-- artifacts/                (Planes SDD Activos, Benchmarks y MetricsThinking) |
+|  +-- tests/                    (74 Suites Unitarias y Benchmarks Tri-Baseline)    |
+|  +-- artifacts/plans/          (active/, backlog/ [podado], archive/ [podado])    |
 |  +-- docs/                     (Arquitectura, Especificaciones, Notas de Ing.)    |
 |  +-- tools/ & scripts/         (Herramientas Operativas, Generadores y Automat.)  |
 +-----------------------------------------------------------------------------------+
@@ -116,7 +117,7 @@ Para tareas atómicas Tier 1A, el operador de empaquetado unificado $\pi(G, v_t)
 
 $$\tau(\pi(G, v_t)) < 220\text{ tokens}$$
 
-produciendo un ahorro empírico de contexto del **95.5%** frente a escaneos recursivos ingenuos ($R_{\text{comp}} > 0.95$).
+produciendo un ahorro empírico de contexto del **95.3%** frente a escaneos recursivos ingenuos ($R_{\text{comp}} > 0.95$).
 
 ---
 
@@ -132,14 +133,14 @@ Benchmarks operacionales evaluados sobre hardware estándar de desarrollo empres
 | **Sistemas** | Latencia de Clasificación por Archivo | ~5.00 s | < 5 ms | **0.18 ms** |
 | **Sistemas** | Huella de Memoria (Ejecución CLI) | N/A | < 25.0 MB | **8.4 MB** |
 | **Sistemas** | Throughput de Reubicación (`--move`) | ~2 ops/s | > 500 ops/s | **1,420 ops/s** |
-| **Sistemas** | Latencia de Generación Satelital | ~1.50 s | < 100 ms | **79.68 ms** |
-| **Sistemas** | Latencia de Escaneo de Budget | ~5.00 s | < 200 ms | **174.00 ms** |
-| **Gobernanza**| Tasa de Éxito de la Suite de Invariantes| N/A | 100% | **68/68 Superadas (100%)** |
+| **Sistemas** | Latencia de Generación Satelital | ~1.50 s | < 100 ms | **82.00 ms** |
+| **Sistemas** | Latencia de Escaneo de Budget | ~5.00 s | < 200 ms | **172.42 ms** |
+| **Gobernanza**| Tasa de Éxito de la Suite de Invariantes| N/A | 100% | **74/74 Superadas (100%)** |
 | **Gobernanza**| Cumplimiento de Validación de Schemas | Variable | 100% | **100% (Conforme Draft-07)** |
 | **Gobernanza**| Dependencias Externas | Variable | 0 | **0 (Librería Estándar de Python Pura)**|
-| **Negocio** | Volcado Ciego vs Huella Satelital | Base (20,297 tokens) | < 1,000 tokens | **908 tokens (95.5% de reducción)** |
-| **Negocio** | Tri-Baseline: Huella Paquete Tier 1A | Ciego: 17,679 tokens | < 220 tokens | **63 tokens (99.6% de reducción)** |
-| **Negocio** | Subgrafo Focalizado (`map --slice`) | Base (908 tokens) | < 150 tokens | **83 tokens (90.9% de reducción)** |
+| **Negocio** | Volcado Ciego vs Huella Satelital | Base (20,336 tokens) | < 1,000 tokens | **955 tokens (95.3% de reducción)** |
+| **Negocio** | Tri-Baseline: Huella Paquete Tier 1A | Ciego: 17,710 tokens | < 220 tokens | **63 tokens (99.6% de reducción)** |
+| **Negocio** | Subgrafo Focalizado (`map --slice`) | Base (955 tokens) | < 150 tokens | **83 tokens (91.3% de reducción)** |
 
 ### 4.2. Benchmark de Compresión de Tokens Multi-Repositorio
 
@@ -168,7 +169,7 @@ iDirectory/
 │       └── ci.yml                   # Pipeline de CI multi-SO (Ubuntu, Windows, macOS; Python 3.10-3.13)
 ├── .context/
 │   ├── .context.yaml                # Baliza del directorio satelital
-│   ├── tree.json                    # Mapa satelital topológico compacto con topology_hash (~908 tokens)
+│   ├── tree.json                    # Mapa satelital topológico compacto con topology_hash (~955 tokens)
 │   └── checkpoint.json              # Estado de sesión activo para continuidad atencional (<300 tokens)
 ├── .agents/
 │   └── skills/
@@ -206,14 +207,15 @@ iDirectory/
 │   ├── tree.schema.json             # Contrato formal para mapas topológicos completos y recortados
 │   ├── beacon.schema.json           # Contrato formal para micro-balizas .context.yaml
 │   ├── checkpoint.schema.json       # Contrato formal para estados de sesión .context/checkpoint.json
-│   └── plan_metadata.schema.json    # Contrato formal para ciclo de vida en artifacts/plans/
+│   ├── plan_metadata.schema.json    # Contrato formal para ciclo de vida en artifacts/plans/
+│   └── backlog.schema.json          # Contrato formal para cola en artifacts/plans/backlog/
 ├── infrastructure/                  # Infraestructura como Código (Terraform, Bicep, AWS CDK)
 │   └── .context.yaml
 ├── config/                          # Configuración y política de ingeniería de contexto
 │   ├── .context.yaml
 │   └── context_policy.json          # Fuente única de política canónica de Context Engineering (v4.0.0)
-├── tests/                           # Suites de verificación y pruebas de invariantes
-│   ├── test_fwengine.py             # 60 tests unitarios (CLI, MiniYAML, ruteo, retry I/O NTFS, continuidad v4)
+├── tests/                           # Verification suites and invariant tests
+│   ├── test_fwengine.py             # 66 tests unitarios (CLI, MiniYAML, ruteo, retry I/O NTFS, v4.1 DAG y backlog)
 │   └── test_token_budget.py         # 8 tests de benchmark (compresión de contexto, Tri-Baseline, budgets)
 ├── artifacts/
 │   ├── .context.yaml
@@ -221,32 +223,33 @@ iDirectory/
 │   │   ├── .context.yaml
 │   │   ├── README.md                # Reporte maestro de benchmarks y análisis comparativo ejecutivo
 │   │   ├── benchmark_matrix.json    # Matriz JSON consolidada de telemetría
-│   │   └── forensic_repo_*.md       # Auditorías forenses individuales detalladas
+│   │   └── forensic_repo_*.md       # Detailed individual forensic audits
 │   └── plans/
 │       ├── .context.yaml
 │       ├── active/                  # Planes de capacidad activos y roadmaps (plan_reingenieria_v4.md)
-│       ├── metricsthinking/         # Auditoría formal de madurez SDD MetricsThinking (puntaje 100%)
+│       ├── backlog/                 # Cola estructurada de intenciones diferidas (queue.json, crawl: false)
+│       ├── metricsthinking/         # Formal MetricsThinking SDD maturity audit (100% score)
 │       └── archive/                 # Propuestas archivadas y ramas muertas (crawl: false)
 ├── docs/                            # Repositorio vivo de documentación
 │   ├── .context.yaml
-│   ├── architecture/                # Diagramas de arquitectura multi-cloud y topología Medallion
+│   ├── architecture/                # Multi-cloud architecture and Medallion topology diagrams
 │   ├── specs/                       # Linaje de datos, contratos de esquema y especificaciones técnicas
 │   └── notes/                       # Registro de deuda técnica, bitácoras de ingeniería y RCAs
-├── tools/                           # Herramientas internas de desarrollo, linters y helpers
-├── scripts/                         # Scripts operacionales en bash, PowerShell y generadores de benchmark
+├── tools/                           # Internal developer tooling, linters, and helpers
+├── scripts/                         # Operational bash, PowerShell, and benchmark generator scripts
 │   ├── .context.yaml
 │   └── generate_benchmark_reports.py
 ├── logs/                            # Trazas locales de ejecución y volcados de auditoría (crawl: false)
-├── AGENTS.md                        # Gobernanza Universal Maestra y Protocolo Bootloader Adaptativo de Dos Niveles
+├── AGENTS.md                        # Master Universal Governance & Adaptive Two-Tier Bootloader Protocol
 ├── GEMINI.md                        # Shim de gobernanza para Google Gemini y Antigravity
 ├── CLAUDE.md                        # Shim de gobernanza para Anthropic Claude Code
-├── .cursorrules                     # Reglas de contexto para Cursor y Windsurf
-├── .agentignore                     # Máscara de exclusión para indexadores de agentes de IA
-├── .gitignore                       # Reglas estándar de exclusión de Git
-├── FWengine.py                      # Motor principal de CLI en Python para gobernanza, balizas, ruteo y continuidad v4
-├── LICENSE                          # Licencia de Código Abierto MIT
-├── README.md                        # Documentación maestra (Inglés)
-└── README_ES.md                     # Documentación maestra (Español)
+├── .cursorrules                     # Context rules for Cursor & Windsurf
+├── .agentignore                     # AI agent indexer exclusion mask
+├── .gitignore                       # Standard git ignore rules
+├── FWengine.py                      # Main Python CLI engine for governance, beacons, routing, and v4.1 DAG
+├── LICENSE                          # MIT Open Source License
+├── README.md                        # Master documentation (English)
+└── README_ES.md                     # Master documentation (Spanish)
 ```
 
 ---
@@ -265,10 +268,10 @@ python --version
 cd iDirectory
 ```
 
-### 6.2. Ejecución de Pipelines y Motor (Interfaz Unificada v4.0)
+### 6.2. Ejecución de Pipelines y Motor (Interfaz Unificada v4.1)
 
 #### 1. Cierre y Reconciliación Unificada e Idempotente
-Comando único determinista que audita nomenclatura de directorios, aprovisiona balizas faltantes, valida esquemas contra Draft-07 y actualiza el satélite con un `topology_hash` verificado:
+Comando único determinista que audita nomenclatura de directorios, aprovisiona balizas faltantes, reconcilia planes, valida la cola de backlog y el DAG de dependencias, valida esquemas contra Draft-07 y actualiza el satélite con un `topology_hash` verificado:
 
 ```bash
 # Ejecutar reconciliación idempotente
@@ -327,7 +330,7 @@ python FWengine.py route "ruta/al/script_sin_clasificar.py" --move
 
 ### 6.3. Suite de Verificación y Pruebas de Invariantes
 
-Ejecutar la suite completa de 68 pruebas unitarias, resiliencia y compresión de tokens utilizando el framework estándar `unittest`:
+Ejecutar la suite completa de 74 pruebas unitarias, resiliencia y compresión de tokens utilizando el framework estándar `unittest`:
 
 ```bash
 python -m unittest discover tests
@@ -338,9 +341,10 @@ python -m unittest discover tests
 ## 7. Glosario de Dominio
 
 * **iDirectory:** Taxonomía de carpetas de alta gobernanza y motor de Adaptive Context Engineering concebido por Gravity HyperScale Thinking, diseñado para armonizar las prácticas de ingeniería humana con la recuperación contextual de agentes de IA autónomos.
-* **Satélite Topológico (`tree.json`):** Mapa estructural ultraligero que encapsula nodos de directorio, prioridades arquitectónicas, banderas de poda y un `topology_hash` SHA-256 para un arranque agéntico instantáneo.
+* **Topological Satellite (`tree.json`):** Mapa estructural ultraligero que encapsula nodos de directorio, prioridades arquitectónicas, banderas de poda y un `topology_hash` SHA-256 para un arranque agéntico instantáneo.
 * **Context Beacon (`.context.yaml`):** Micro-manifiesto localizado que define responsabilidades de directorio, dependencias entre módulos, niveles de prioridad (`p0` a `p3`) y directivas de poda (*crawl*).
-* **Checkpoint de Continuidad Atencional (`checkpoint.json`):** Manifiesto de estado formal que preserva identificadores de plan activo, fases de ejecución, pasos completados y siguientes acciones atómicas en sesiones largas multi-fase.
+* **Attentional Continuity Checkpoint (`checkpoint.json`):** Manifiesto de estado formal que preserva identificadores de plan activo, fases de ejecución, pasos completados y siguientes acciones atómicas en sesiones largas multi-fase.
+* **Cola de Backlog (`queue.json`):** Cola de intenciones estructurada y validada por esquema que almacena tareas diferidas sin saturar el contexto de planes activos.
 * **Context Pack:** Payload JSON precompilado que combina topología del subgrafo local, reglas de baliza resueltas, archivos clave verificados y estado de checkpoint en $< 220\text{ tokens}$.
 * **Tree Slicing:** Mecanismo de extracción dinámica de subgrafos que genera vistas topológicas localizadas para directorios objetivo en $< 150\text{ tokens}$.
 * **Arquitectura Medallion:** Topología de procesamiento de datos que segrega los activos en límites de aislamiento Bronze (`data/raw`), Silver/Gold (`data/processed`) y Sandbox (`data/sandbox`).
@@ -358,11 +362,11 @@ python -m unittest discover tests
 ### Cita BibTeX
 
 ```bibtex
-@software{idirectory_v4_0_2026,
+@software{idirectory_v4_1_2026,
   author = {Gravity HyperScale Thinking},
   title = {iDirectory: Multi-Cloud Governance & Adaptive Context Engineering Engine},
   year = {2026},
-  version = {4.0},
+  version = {4.1},
   publisher = {GitHub},
   url = {https://github.com/AlvaroAlejandroFinOps/iDirectory}
 }

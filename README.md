@@ -7,8 +7,8 @@
 [![Engine](https://img.shields.io/badge/Engine-FWengine.py-1a1a1a?style=flat-square)](#3-mathematical-formulation--analytical-engines)
 [![Standard](https://img.shields.io/badge/Standard-Enterprise%20Paper--Grade%20v2.0-2b2b2b?style=flat-square)](#)
 [![Ecosystem](https://img.shields.io/badge/Ecosystem-Multi--AI%20%28Google%20%7C%20Claude%20%7C%20OpenAI%20%7C%20Cursor%29-34495e?style=flat-square)](#1-executive-abstract)
-[![Architecture](https://img.shields.io/badge/Architecture-iDirectory%20v4.0-4b5563?style=flat-square)](#2-system-architecture--topology)
-[![Verification](https://img.shields.io/badge/Verification-68%2F68%20Passing%20(100%25)-000000?style=flat-square)](#6-execution--verification-protocol)
+[![Architecture](https://img.shields.io/badge/Architecture-iDirectory%20v4.1-4b5563?style=flat-square)](#2-system-architecture--topology)
+[![Verification](https://img.shields.io/badge/Verification-74%2F74%20Passing%20(100%25)-000000?style=flat-square)](#6-execution--verification-protocol)
 [![License](https://img.shields.io/badge/License-MIT-1a1a1a?style=flat-square)](LICENSE)
 
 ---
@@ -17,15 +17,15 @@
 
 **iDirectory**, originated and engineered by **Gravity HyperScale Thinking**, resolves systemic context window degradation, structural fragmentation, and non-deterministic navigational entropy across modern cloud data architectures, enterprise AI repositories, and autonomous agent runtime environments. Contemporary enterprise stacks deployed across Google Cloud Platform, Amazon Web Services, Microsoft Azure, and Microsoft Fabric frequently suffer from heterogeneous filesystem structures, uncoordinated local data accumulation, and ambiguous asset placement. In autonomous coding agents (including Google Gemini/Antigravity, Anthropic Claude Code, OpenAI/Codex, Cursor, Windsurf, and GitHub Copilot), unguided directory crawling consumes tens of millions of tokens on dead branches and compiled dependencies, inducing severe multi-head attention drift and catastrophic hallucinations.
 
-To eradicate this operational vulnerability, **iDirectory v4.0** establishes an Adaptive Context Engineering and Deterministic Control-Plane framework governed by `FWengine.py`. By unifying a dual-stage extension-and-nominal pattern heuristic matrix with a topological satellite radar (`.context/tree.json`), a SHA-256 cryptographic topology fingerprint (`topology_hash`), an Adaptive Two-Tier Three-Profile Bootloader (Tier 1A Atomic, Tier 1B Scoped, Tier 2 Global), single-step context pack compilation (`context --pack <dir> --tier 1a`, delivering $< 220\text{ tokens}$), attentional continuity checkpoints (`.context/checkpoint.json`, $< 300\text{ tokens}$), and an idempotent reconciliation closing contract (`reconcile`), the platform enforces canonical workspace organization, isolates local Medallion storage tiers (Bronze, Silver, Gold), and provides immediate spatial orientation to autonomous agents.
+To eradicate this operational vulnerability, **iDirectory v4.1** establishes an Adaptive Context Engineering and Deterministic Control-Plane framework governed by `FWengine.py`. By unifying a dual-stage extension-and-nominal pattern heuristic matrix with a topological satellite radar (`.context/tree.json`), a SHA-256 cryptographic topology fingerprint (`topology_hash`), an Adaptive Two-Tier Three-Profile Bootloader (Tier 1A Atomic, Tier 1B Scoped, Tier 2 Global), single-step context pack compilation (`context --pack <dir> --tier 1a`, delivering $< 220\text{ tokens}$), attentional continuity checkpoints (`.context/checkpoint.json`, $< 300\text{ tokens}$), automated plan lifecycle reconciliation (`reconcile_plans_lifecycle`), formal intent backlog queues (`artifacts/plans/backlog/queue.json`), and an idempotent reconciliation closing contract (`reconcile`), the platform enforces canonical workspace organization, isolates local Medallion storage tiers (Bronze, Silver, Gold), and provides immediate spatial orientation to autonomous agents.
 
-Empirical evaluations across enterprise production codebases demonstrate context token reductions between **82.28% and 99.99%**, collapsing cold-start agent discovery latency from tens of seconds to sub-second deterministic execution ($< 80\text{ ms}$) without recursive filesystem exploration, verified across 68 automated unit and benchmark test suites with a 100% success rate.
+Empirical evaluations across enterprise production codebases demonstrate context token reductions between **82.28% and 99.99%**, collapsing cold-start agent discovery latency from tens of seconds to sub-second deterministic execution ($< 85\text{ ms}$) without recursive filesystem exploration, verified across 74 automated unit, resilience, and benchmark test suites with a 100% success rate.
 
 ---
 
 ## 2. System Architecture & Topology
 
-The architecture of **iDirectory v4.0** is structured around a zero-dependency governance kernel (`FWengine.py`) operating over a deterministic, all-lowercase hierarchical tree with formal JSON Schema Draft-07 contracts and an attentional continuity control-plane. The control flow, layer boundaries, and artifact routing pathways enforced by the framework are delineated below:
+The architecture of **iDirectory v4.1** is structured around a zero-dependency governance kernel (`FWengine.py`) operating over a deterministic, all-lowercase hierarchical tree with formal JSON Schema Draft-07 contracts and an attentional continuity control-plane. The control flow, layer boundaries, and artifact routing pathways enforced by the framework are delineated below:
 
 ```text
 +-----------------------------------------------------------------------------------+
@@ -50,6 +50,7 @@ The architecture of **iDirectory v4.0** is structured around a zero-dependency g
 | - Attentional Checkpoint    |                 | - Deterministic Relocation        |
 | - Context Pack (Tier 1A/1B) |                 | - Invariant Validator (Lowercase) |
 | - Policy (context_policy)   |                 | - SHA-256 Invariant Verifier      |
+| - Intent Backlog Queue      |                 | - Dependency DAG Acyclicity Check |
 +-----------------------------+                 +-----------------------------------+
         |                                                 |
         |                                                 |
@@ -64,11 +65,11 @@ The architecture of **iDirectory v4.0** is structured around a zero-dependency g
 |  +-- 03_research/              (EDA Notebooks, LLM Prompts, PoC Experiments)      |
 |  +-- src/                      (Cloud Jobs, Core Logic, Data Gen, Dashboards)     |
 |  +-- data/                     (Medallion Storage: raw/, processed/, sandbox/)    |
-|  +-- schemas/                  (Draft-07 Schemas: tree, beacon, checkpoint, plan) |
+|  +-- schemas/                  (Draft-07: tree, beacon, checkpoint, plan, backlog)|
 |  +-- infrastructure/           (IaC: Terraform, Bicep, ARM, AWS CDK)              |
 |  +-- config/                   (Environment Parameters & context_policy.json)     |
-|  +-- tests/                    (68 Unit Suites & Tri-Baseline Benchmarks)         |
-|  +-- artifacts/                (Active SDD Plans, Benchmarks & MetricsThinking)   |
+|  +-- tests/                    (74 Unit Suites & Tri-Baseline Benchmarks)         |
+|  +-- artifacts/plans/          (active/, backlog/ [pruned], archive/ [pruned])    |
 |  +-- docs/                     (Architecture, Technical Specs, Engineer Notes)    |
 |  +-- tools/ & scripts/         (Operational Tooling, Generators & Automation)     |
 +-----------------------------------------------------------------------------------+
@@ -116,7 +117,7 @@ For atomic Tier 1A tasks, the unified pack operator $\pi(G, v_t)$ compiles the l
 
 $$\tau(\pi(G, v_t)) < 220\text{ tokens}$$
 
-yielding empirical context savings of **95.5%** against naive recursive scans ($R_{\text{comp}} > 0.95$).
+yielding empirical context savings of **95.3%** against naive recursive scans ($R_{\text{comp}} > 0.95$).
 
 ---
 
@@ -132,14 +133,14 @@ Operational benchmarks evaluated on standard enterprise developer hardware (x86_
 | **Systems** | File Classification Latency (per item) | ~5.00 s | < 5 ms | **0.18 ms** |
 | **Systems** | Memory Footprint (CLI Execution) | N/A | < 25.0 MB | **8.4 MB** |
 | **Systems** | Relocation Throughput (`--move`) | ~2 ops/s | > 500 ops/s | **1,420 ops/s** |
-| **Systems** | Satellite Generation Latency | ~1.50 s | < 100 ms | **79.68 ms** |
-| **Systems** | Context Budget Scan Latency | ~5.00 s | < 200 ms | **174.00 ms** |
-| **Governance**| Invariant Test Suite Pass Rate | N/A | 100% | **68/68 Passing (100%)** |
+| **Systems** | Satellite Generation Latency | ~1.50 s | < 100 ms | **82.00 ms** |
+| **Systems** | Context Budget Scan Latency | ~5.00 s | < 200 ms | **172.42 ms** |
+| **Governance**| Invariant Test Suite Pass Rate | N/A | 100% | **74/74 Passing (100%)** |
 | **Governance**| Schema Validation Compliance | Variable | 100% | **100% (Draft-07 Compliant)** |
 | **Governance**| External Dependencies | Variable | 0 | **0 (Python Standard Library Only)** |
-| **Business** | Naive Dump vs Satellite Footprint | Baseline (20,297 tokens) | < 1,000 tokens | **908 tokens (95.5% reduction)** |
-| **Business** | Tri-Baseline: Tier 1A Pack Footprint | Naive: 17,679 tokens | < 220 tokens | **63 tokens (99.6% reduction)** |
-| **Business** | Subgraph Focus Footprint (`map --slice`)| Baseline (908 tokens) | < 150 tokens | **83 tokens (90.9% reduction)** |
+| **Business** | Naive Dump vs Satellite Footprint | Baseline (20,336 tokens) | < 1,000 tokens | **955 tokens (95.3% reduction)** |
+| **Business** | Tri-Baseline: Tier 1A Pack Footprint | Naive: 17,710 tokens | < 220 tokens | **63 tokens (99.6% reduction)** |
+| **Business** | Subgraph Focus Footprint (`map --slice`)| Baseline (955 tokens) | < 150 tokens | **83 tokens (91.3% reduction)** |
 
 ### 4.2. Multi-Repository Token Compression Benchmark
 
@@ -168,7 +169,7 @@ iDirectory/
 │       └── ci.yml                   # Multi-OS CI pipeline (Ubuntu, Windows, macOS; Python 3.10-3.13)
 ├── .context/
 │   ├── .context.yaml                # Satellite directory beacon
-│   ├── tree.json                    # Compact topological satellite map with topology_hash (~908 tokens)
+│   ├── tree.json                    # Compact topological satellite map with topology_hash (~955 tokens)
 │   └── checkpoint.json              # Attentional continuity active session state (<300 tokens)
 ├── .agents/
 │   └── skills/
@@ -206,14 +207,15 @@ iDirectory/
 │   ├── tree.schema.json             # Formal contract for full and sliced topological maps
 │   ├── beacon.schema.json           # Formal contract for .context.yaml micro-beacons
 │   ├── checkpoint.schema.json       # Formal contract for .context/checkpoint.json session states
-│   └── plan_metadata.schema.json    # Formal contract for artifacts/plans/ frontmatter lifecycle
+│   ├── plan_metadata.schema.json    # Formal contract for artifacts/plans/ frontmatter lifecycle
+│   └── backlog.schema.json          # Formal contract for artifacts/plans/backlog/queue.json
 ├── infrastructure/                  # Infrastructure as Code (Terraform, Bicep, AWS CDK)
 │   └── .context.yaml
 ├── config/                          # Configuration and context engineering policy
 │   ├── .context.yaml
 │   └── context_policy.json          # Canonical Ground Truth policy for Adaptive Context Engineering (v4.0.0)
 ├── tests/                           # Verification suites and invariant tests
-│   ├── test_fwengine.py             # 60 unit tests (CLI, MiniYAML, routing, retry I/O NTFS, v4 continuity)
+│   ├── test_fwengine.py             # 66 unit tests (CLI, MiniYAML, routing, retry I/O NTFS, v4.1 DAG & backlog)
 │   └── test_token_budget.py         # 8 benchmarking tests (context token compression, Tri-Baseline, budgets)
 ├── artifacts/
 │   ├── .context.yaml
@@ -225,6 +227,7 @@ iDirectory/
 │   └── plans/
 │       ├── .context.yaml
 │       ├── active/                  # Active capacity plans and inferred roadmaps (plan_reingenieria_v4.md)
+│       ├── backlog/                 # Deferred task intentions queue (queue.json, crawl: false)
 │       ├── metricsthinking/         # Formal MetricsThinking SDD maturity audit (100% score)
 │       └── archive/                 # Archived proposals and dead branches (crawl: false)
 ├── docs/                            # Documentation living repository
@@ -243,7 +246,7 @@ iDirectory/
 ├── .cursorrules                     # Context rules for Cursor & Windsurf
 ├── .agentignore                     # AI agent indexer exclusion mask
 ├── .gitignore                       # Standard git ignore rules
-├── FWengine.py                      # Main Python CLI engine for governance, beacons, routing, and v4 continuity
+├── FWengine.py                      # Main Python CLI engine for governance, beacons, routing, and v4.1 DAG
 ├── LICENSE                          # MIT Open Source License
 ├── README.md                        # Master documentation (English)
 └── README_ES.md                     # Master documentation (Spanish)
@@ -265,10 +268,10 @@ python --version
 cd iDirectory
 ```
 
-### 6.2. Pipeline & Engine Execution (v4.0 Unified Interface)
+### 6.2. Pipeline & Engine Execution (v4.1 Unified Interface)
 
 #### 1. Unified Idempotent Closure and Reconciliation
-Single deterministic command that audits directory naming, scaffolds missing beacons, validates schemas against Draft-07, and refreshes the satellite with an updated `topology_hash`:
+Single deterministic command that audits directory naming, scaffolds missing beacons, reconciles plan lifecycles, validates backlog queues and dependency DAGs, validates schemas against Draft-07, and refreshes the satellite with an updated `topology_hash`:
 
 ```bash
 # Execute idempotent reconciliation
@@ -327,7 +330,7 @@ python FWengine.py route "path/to/unclassified_script.py" --move
 
 ### 6.3. Verification Suite & Invariant Tests
 
-Execute the full suite of 68 unit, resilience, and token compression tests using the standard `unittest` framework:
+Execute the full suite of 74 unit, resilience, and token compression tests using the standard `unittest` framework:
 
 ```bash
 python -m unittest discover tests
@@ -341,6 +344,7 @@ python -m unittest discover tests
 * **Topological Satellite (`tree.json`):** A lightweight structural map encapsulating directory nodes, architectural priorities, pruning flags, and a SHA-256 `topology_hash` for instant agent bootloading.
 * **Context Beacon (`.context.yaml`):** A localized micro-manifest defining directory responsibilities, cross-module dependencies, priority levels (`p0` through `p3`), and crawl directives.
 * **Attentional Continuity Checkpoint (`checkpoint.json`):** A formal state manifest preserving active plan identifiers, execution phases, completed steps, and next atomic actions across long-running multi-phase sessions.
+* **Intent Backlog Queue (`queue.json`):** A structured task queue in `artifacts/plans/backlog/` enabling long-term intention persistence without polluting active plan memory.
 * **Context Pack:** A pre-compiled JSON payload combining local subgraph topology, resolved beacon rules, verified key files, and checkpoint status in $< 220\text{ tokens}$.
 * **Tree Slicing:** A dynamic subgraph extraction mechanism that generates localized topological views for target directories in $< 150\text{ tokens}$.
 * **Medallion Architecture:** A data processing topology segregating data assets into Bronze (`data/raw`), Silver/Gold (`data/processed`), and Sandbox (`data/sandbox`) isolation boundaries.
@@ -358,11 +362,11 @@ python -m unittest discover tests
 ### BibTeX Citation
 
 ```bibtex
-@software{idirectory_v4_0_2026,
+@software{idirectory_v4_1_2026,
   author = {Gravity HyperScale Thinking},
   title = {iDirectory: Multi-Cloud Governance & Adaptive Context Engineering Engine},
   year = {2026},
-  version = {4.0},
+  version = {4.1},
   publisher = {GitHub},
   url = {https://github.com/AlvaroAlejandroFinOps/iDirectory}
 }
