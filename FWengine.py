@@ -3341,12 +3341,12 @@ def reconcile_repository(root_path: Path, check_only: bool = False) -> bool:
 
     # Fase 1: Normalización de casing y auto-scaffolding de beacons
     is_pkg_repo = _is_custom_src_package_repo(root)
+    policy_path = root / "config" / "context_policy.json"
     if not check_only:
         for folder in FOLDER_METADATA.keys():
             if is_pkg_repo and folder in OPTIONAL_SKELETON_IF_PACKAGED and not (root / folder).exists():
                 continue
             (root / folder).mkdir(parents=True, exist_ok=True)
-        policy_path = root / "config" / "context_policy.json"
         if not policy_path.exists():
             policy_data = dict(DEFAULT_CONTEXT_POLICY)
             policy_data["project"] = root.name

@@ -2,7 +2,7 @@
   "$schema": "../schemas/icontext_bus.schema.json",
   "protocol_version": "5.0.0",
   "project": "iDirectory",
-  "updated_at": "2026-10-29T01:59:19.144575+00:00",
+  "updated_at": "2026-10-29T02:14:20.087674+00:00",
   "layers": {
     "l0_idirectory": {
       "version": "5.0.0",
@@ -10,7 +10,7 @@
       "contracts_ast_hash": "e24cd3bbc9cd3a9aef4808aea72e3f8c474e6e3a2a5366910db3628cc99c7475",
       "active_nodes_count": 19,
       "pruned_nodes_count": 8,
-      "active_tokens_estimate": 60906,
+      "active_tokens_estimate": 60827,
       "fpai_pruned_paths_count": 0
     },
     "l1_thinkingseed": {
