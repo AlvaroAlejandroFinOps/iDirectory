@@ -1,13 +1,14 @@
-<SEED_ARCHITECTURAL_VECTOR version="3.0" contains_source_code="false" artifact_type="architectural_vector" mode="architecture_and_vulnerability_audit">
+<SEED_ARCHITECTURAL_VECTOR version="5.0" contains_source_code="false" artifact_type="architectural_vector" mode="architecture_and_vulnerability_audit">
 
 # THINKING SEED MASTER: iDirectory
 
 > **[DIRECTIVA DE SISTEMA PARA MODELOS DE IA RECEPTORES — CLAUDE / GPT / GEMINI / AGENTES]:**
-> 1. **Naturaleza del Artefacto:** Este documento es un **Vector Arquitectónico y Memoria Técnica (ThinkingSeed Master v3.0)** con `contains_source_code="false"`. **NO es el repositorio de código fuente completo** ni un volcado truncado. La ausencia de bloques de código de implementación es una **invariante deliberada de ingeniería** para maximizar la densidad semántica y preservar más del 99% de tu ventana de contexto.
+> 1. **Naturaleza del Artefacto:** Este documento es un **Vector Arquitectónico y Memoria Técnica (ThinkingSeed Master v5.0)** con `contains_source_code="false"`. **NO es el repositorio de código fuente completo** ni un volcado truncado. La ausencia de bloques de código de implementación es una **invariante deliberada de ingeniería** para maximizar la densidad semántica y preservar más del 99% de tu ventana de contexto.
 > 2. **Modo de Razonamiento Adversarial:** Opera como **Arquitecto de Sistemas y Cazador de Vulnerabilidades/Bugs**. Utiliza las firmas simbólicas (Sección 4) y la superficie de tensión (Sección 7) para detectar condiciones de carrera, acoplamientos frágiles y casos borde antes de proponer cambios.
 > 3. **Estado de Avance Real:** Los componentes etiquetados como `[FALTANTE]` o `[DEUDA]` reflejan el trabajo en progreso (WIP) real del proyecto, no defectos de este documento.
 
 ## Seed Changelog
+- `2026-10-28 (v5.0)`: Evolución a **iDirectory v5.0 (iContext Federation Protocol v5.0 — Capa L0)**. Implementación de: (1) Índice AST cacheado en `./.context/contracts_ast.json` (`build_ast_contracts_index()`) con firmas de 1 línea y símbolos públicos compartido con `ThinkingSeed`, `MetricsThinking` e `iReadme`; (2) Bus Federado de Estado Cognitivo en `./.context/icontext_bus.json` (`sync_icontext_bus()`) que acopla telemetría L0-L3; (3) Empaquetador de Ecosistema Unificado en < 650 tokens (`build_ecosystem_pack()` / `context --pack-ecosystem`); (4) Composición no destructiva de bloques segmentados en `AGENTS.md` / `GEMINI.md` / `CLAUDE.md` (`upsert_segmented_block()`); (5) Esquemas formales Draft-07 `./schemas/icontext_bus.schema.json` y `./schemas/contracts_ast.schema.json`; (6) Suite expandida a 77 pruebas automatizadas (69 en `test_fwengine.py` + 8 en `test_token_budget.py`) con 100% de éxito.
 - `2026-10-28 (v4.1)`: Consolidación iDirectory v4.1 en commit `fa05e65`. Implementación de: (1) Reconciliación de planes y archivado automático (`reconcile_plans_lifecycle()`) para neutralizar "Zombie Plans"; (2) Formalización del directorio `artifacts/plans/backlog/` (`crawl: false`, `p2`) y esquema Draft-07 en `./schemas/backlog.schema.json` para registro atómico de intenciones (`queue.json`); (3) Verificación de DAG de dependencias inter-módulos (`validate_dependency_dag()`) y resolución inversa de imports cruzados (`_resolve_imported_module_to_repo_dir()`); (4) Cálculo de huella física por nodo (`compute_node_fingerprint()`) e integración reforzada en `reconcile`; (5) Expansión de la suite a 74 pruebas automatizadas (66 en `test_fwengine.py` y 8 en `test_token_budget.py`) con 100% de éxito.
 - `2026-10-26 (v4.0)`: Reingeniería integral iDirectory v4.0 (Adaptive Context & Deterministic Control-Plane). Implementación de: (1) Fingerprint criptográfico determinista SHA-256 (`topology_hash`) en `./.context/tree.json` vía `compute_topology_hash()` inmune a distorsiones de `mtime`; (2) Poda estricta `crawl: false` en `compute_context_budget()` y estimador multimodal `estimate_tokens_v4()` que excluye binarios; (3) Bootloader Adaptativo de Dos Niveles y Tres Perfiles (Tier 1A, Tier 1B, Tier 2) gobernado por `./config/context_policy.json`; (4) Compilador de paquetes de contexto en un solo paso (`context --pack <dir> --tier 1a` < 220 tokens); (5) Navegación seccional del Seed Maestro (`seed --toc` y `seed --section <id>`); (6) Máquina de estados de continuidad atencional en `./.context/checkpoint.json` (`checkpoint --show/--set/--clear`); (7) Comando unificado e idempotente de cierre (`reconcile` y `reconcile --check`); (8) Esquemas formales Draft-07 ampliados (`checkpoint.schema.json`, `plan_metadata.schema.json`, `tree.schema.json` y `beacon.schema.json`).
 - `2026-10-24 (v3.5)`: Consolidación arquitectónica iDirectory v3.5 en commit `aeae4e4`. Verificación y sincronización de beacons estructurales en 31 nodos canónicos y de extensión (`02_foundation`, `03_research`, `artifacts`, `data`, `docs`, `infrastructure`, `src`). Integración estricta de validación formal en stdlib pura contra `./schemas/beacon.schema.json` y subgrafos condicionales en `./schemas/tree.schema.json`.
@@ -23,13 +24,13 @@
 ## 0. IDENTIDAD, METADATOS Y CONTRATO DEL RECEPTOR
 
 ```yaml
-seed_schema_version: "3.0"
+seed_schema_version: "5.0"
 project_name: "iDirectory"
 repository_name: "iDirectory"
 project_type: "context_engineering_governance_framework"
 repository_mode: "monorepo"
-generated_at: "2026-10-28T21:18:00-03:00"
-generated_by: "Antigravity (Gemini 3.8 Flash Low)"
+generated_at: "2026-10-28T22:25:00-03:00"
+generated_by: "Antigravity (iContext Federation Protocol v5.0)"
 repository_root: "./"
 git_branch: "master"
 git_commit: "fa05e65"
@@ -137,17 +138,14 @@ El sistema impone nombres de directorios raíz estrictamente en minúsculas para
 
 ### 2.3 Reglas de Poda e Invariantes de Crawling `[CONFIRMADO]`
 - **Herencia Jerárquica de Poda (`[INV-03]`):** Si un directorio o cualquiera de sus ancestros declara `crawl: false` (como `./data/raw/`, `./data/processed/`, `./data/sandbox/`, `./logs/`, `./artifacts/plans/archive/`, `./artifacts/plans/backlog/`), queda estrictamente prohibida la exploración o volcado recursivo por parte de agentes de IA.
-- **Contrato de Cierre Unificado e Idempotente (`[INV-04]`):** Toda mutación física topológica impone la ejecución de un único comando idempotente de cierre:
-  ```powershell
-  python FWengine.py reconcile
-  ```
+- **Contrato de Cierre Unificado e Idempotente (`[INV-04]`):** Toda mutación física topológica impone la ejecución de un único comando idempotente de cierre: `python FWengine.py reconcile`.
 
 ---
 
 ## 3. FLUJOS DE EJECUCIÓN, ENTRY POINTS Y CICLO DE VIDA
 
 ### 3.1 Puntos de Entrada (Entry Points) `[CONFIRMADO]`
-1. **Motor CLI Central (`./FWengine.py`):** CLI unificada sin librerías externas que proporciona los subcomandos `reconcile`, `context` (`--pack`, `--compact`, `--budget`), `seed` (`--toc`, `--section`), `checkpoint` (`--show`, `--set`, `--clear`), `map` (`--slice`, `--sync`), `beacon` (`--sync`, `--audit`), `route` y `audit` (`--fix`).
+1. **Motor CLI Central (`./FWengine.py`):** CLI unificada sin librerías externas que proporciona los subcomandos `reconcile` (`--check`), `context` (`--pack`, `--pack-ecosystem`, `--bus`, `--tier`, `--compact`, `--budget`), `seed` (`--toc`, `--section`), `checkpoint` (`--show`, `--set`, `--clear`, `--plan-id`, `--status`, `--phase`, `--next`, `--step-done`), `map` (`--slice`, `--radius`, `--include-pruned`, `--sync`, `--check-freshness`), `beacon` (`--sync`, `--audit`, `--resolve`, `--no-discover`, `--force-defaults`), `route` (`--move`, `--base`, `--overwrite`) y `audit` (`--fix`).
 2. **Skill Agéntica (`./.agents/skills/idir/SKILL.md`):** Manifiesto ejecutable vía `/idir` que orquesta acciones de gobernanza desde interfaces agénticas.
 3. **Flujo de Integración Continua (`./.github/workflows/ci.yml`):** Validador automatizado multiplataforma (Ubuntu, Windows, macOS) ejecutando auditorías de esquemas y suites unitarias.
 
@@ -190,12 +188,14 @@ FWengine.py reconcile
 
 ### 4.1 Firmas Simbólicas AST de 1 Línea `[CONFIRMADO]`
 
-#### Módulo Central de Gobernanza: `./FWengine.py` (v4.1)
+#### Módulo Central de Gobernanza: `./FWengine.py` (v5.0)
 - `./FWengine.py::MiniYAML._unquote(raw: str) -> str` | Des-escapa comillas dobles y simples simétricamente mediante `json.loads` con fallback a slice `s[1:-1]`.
 - `./FWengine.py::MiniYAML.dump(data: Dict[str, Any], prefix: str = "") -> str` | Serializador recursivo a YAML ligero; maneja escalares, listas y diccionarios indentados sin librerías externas.
 - `./FWengine.py::MiniYAML.load(yaml_str: str) -> Dict[str, Any]` | Parser de YAML línea a línea para listas y pares clave-valor planos/anidados; soporta booleanos, enteros, floats y nulls.
 - `./FWengine.py::_extract_markdown_frontmatter(md_path: pathlib.Path) -> Dict[str, Any]` | Extrae el bloque YAML frontmatter inicial de un archivo Markdown mediante `MiniYAML.load()`.
+- `./FWengine.py::_format_ast_arg_inline(arg: ast.arg) -> str` | Formatea un argumento AST con su anotación de tipo opcional para firmas simbólicas de 1 línea.
 - `./FWengine.py::_has_dynamic_subdirectories(dir_path: pathlib.Path, root_path: pathlib.Path, patterns: List[str]) -> bool` | Detecta si un directorio gobernado aloja subcarpetas dinámicas que no son ignoradas ni podadas.
+- `./FWengine.py::_is_custom_src_package_repo(root: pathlib.Path) -> bool` | Detecta si el repositorio es un paquete Python empaquetado con `pyproject.toml` y `src/<pkg>` propio.
 - `./FWengine.py::_is_transient_io_error(exc: BaseException) -> bool` | Identifica errores I/O transitorios de Windows NTFS (`WinError 5, 32, 33`) y POSIX (`EACCES`, `EBUSY`, `EAGAIN`).
 - `./FWengine.py::_read_local_beacon(dir_path: pathlib.Path) -> Dict[str, Any]` | Lee directamente el archivo `.context.yaml` en el directorio sin realizar herencia ascendente.
 - `./FWengine.py::_rel_posix(path: pathlib.Path, root_path: pathlib.Path) -> str` | Convierte una ruta de `Path` a cadena relativa normalizada estilo POSIX con separador `/`.
@@ -204,7 +204,9 @@ FWengine.py reconcile
 - `./FWengine.py::_resolve_physical_rel_path(root_path: pathlib.Path, canonical_rel: str) -> str` | Resuelve el casing exacto físico en disco (insensible en NTFS/APFS) comparando componentes de ruta con `os.listdir()`.
 - `./FWengine.py::_update_markdown_frontmatter(md_path: pathlib.Path, updates: Dict[str, Any]) -> bool` | Actualiza atómicamente claves específicas en el frontmatter YAML de un archivo Markdown preservando su cuerpo.
 - `./FWengine.py::audit_repository(root_path: pathlib.Path, fix: bool = False) -> bool` | Audita nombres de directorios (casing minúsculas), presencia y validez de esquema de beacons y frescura satelital; auto-remedia con `fix=True`.
+- `./FWengine.py::build_ast_contracts_index(root_path: pathlib.Path, write_to_disk: bool = True) -> Dict[str, Any]` | Construye y persiste el índice cacheado de contratos AST (`.context/contracts_ast.json`) respetando `crawl: false`.
 - `./FWengine.py::build_context_pack(root_path: pathlib.Path, target_path: str, tier: str = "1a") -> Dict[str, Any]` | Empaqueta subgrafo local, directivas resueltas, `key_files` verificados y estado de checkpoint en un solo objeto (< 220 tokens).
+- `./FWengine.py::build_ecosystem_pack(root_path: pathlib.Path) -> Dict[str, Any]` | Empaqueta las 4 capas del protocolo `iContext Federation v5.0` (L0-L3) en un único payload compacto (< 650 tokens).
 - `./FWengine.py::check_satellite_freshness(root_path: pathlib.Path) -> Dict[str, Any]` | Comprueba si `.context/tree.json` está desfasado verificando `topology_hash` y marcas temporales de directorios clave.
 - `./FWengine.py::compute_context_budget(root_path: pathlib.Path, include_pruned_stats: bool = False) -> List[Dict[str, Any]]` | Escanea directorios no podados estimando archivos, bytes y tokens (~4 caracteres/token) por nodo topológico.
 - `./FWengine.py::compute_node_fingerprint(dir_path: pathlib.Path) -> str` | Calcula un hash determinista SHA-256 para el contenido físico y archivos clave de un directorio.
@@ -221,15 +223,15 @@ FWengine.py reconcile
 - `./FWengine.py::generate_tree_json(root_path: pathlib.Path) -> Dict[str, Any]` | Construye el diccionario estructurado del mapa satelital incorporando nodos canónicos, auto-descubrimiento, `topology_hash` y metadatos de bootloader.
 - `./FWengine.py::get_seed_sections(root_path: pathlib.Path) -> List[Dict[str, Any]]` | Escanea el Seed Maestro y construye el índice estructurado de secciones con rangos de líneas y presupuesto de tokens estimado.
 - `./FWengine.py::infer_beacon_meta(dir_path: pathlib.Path, root_path: pathlib.Path) -> Dict[str, Any]` | Infiere metadatos para un directorio no canónico basándose en el catálogo canónico o en el beacon del padre más cercano.
-- `./FWengine.py::init_project(base_path: str) -> None` | Inicializa la topología canónica completa de iDirectory, desplegando carpetas, beacons, satélite, `.agentignore` y `.gitignore`.
+- `./FWengine.py::init_project(base_path: str) -> None` | Inicializa la topología canónica completa de iDirectory, desplegando carpetas, beacons, satélite, bus federado v5.0, `.agentignore` y `.gitignore`.
 - `./FWengine.py::inspect_python_header(file_path: pathlib.Path, max_chars: int = 4096) -> str` | Inspecciona AST de imports o texto inicial del archivo Python para clasificar su destino de ruteo (`tests`, `cloud_jobs`, `dashboards`, `core`).
 - `./FWengine.py::is_ignored_path(dir_path: pathlib.Path, root_path: pathlib.Path, patterns: Optional[List[str]] = None) -> bool` | Determina si un directorio debe ser ignorado basándose en patrones de exclusión o carpetas ocultas (`.git`, `__pycache__`).
 - `./FWengine.py::iter_beacon_files(root_path: pathlib.Path) -> List[pathlib.Path]` | Retorna lista de todos los archivos `.context.yaml` físicos en el árbol respetando directivas de poda y exclusión.
 - `./FWengine.py::load_ignore_patterns(root_path: pathlib.Path) -> List[str]` | Carga y normaliza máscaras de exclusión de `.agentignore` y `.gitignore`.
-- `./FWengine.py::main() -> None` | Dispatcher principal de CLI configurado con `argparse` para `reconcile`, `context`, `seed`, `checkpoint`, `map`, `beacon`, `route` y `audit`.
+- `./FWengine.py::main() -> None` | Dispatcher principal de CLI configurado con `argparse` para `reconcile`, `context` (`--pack`, `--pack-ecosystem`, `--bus`), `seed`, `checkpoint`, `map`, `beacon`, `route` y `audit`.
 - `./FWengine.py::manage_checkpoint(root_path: pathlib.Path, action: str = "show", plan_id: Optional[str] = None, status: Optional[str] = None, phase: Optional[str] = None, next_action: Optional[str] = None, completed_step: Optional[str] = None) -> Dict[str, Any]` | Gestiona el archivo de continuidad atencional `.context/checkpoint.json` (< 300 tokens) para sesiones largas multi-fase.
 - `./FWengine.py::reconcile_plans_lifecycle(root_path: pathlib.Path, check_only: bool = False) -> List[str]` | Detecta planes en estado `superseded` o `completed` en `artifacts/plans/active/` y los reubica atómicamente a `archive/`.
-- `./FWengine.py::reconcile_repository(root_path: pathlib.Path, check_only: bool = False) -> bool` | Punto de entrada unificado e idempotente de cierre: audita, archiva planes obsoletos, valida backlog y DAG, valida esquemas y actualiza el satélite con `topology_hash`.
+- `./FWengine.py::reconcile_repository(root_path: pathlib.Path, check_only: bool = False) -> bool` | Punto de entrada unificado e idempotente de cierre v5.0: audita, archiva planes obsoletos, valida backlog y DAG, valida esquemas, actualiza `tree.json`, `contracts_ast.json` e `icontext_bus.json`.
 - `./FWengine.py::resolve_beacon(dir_path: pathlib.Path, root_path: pathlib.Path) -> Dict[str, Any]` | Resuelve recursivamente directivas de beacon mediante ascenso jerárquico; garantiza propagación de `crawl: false`.
 - `./FWengine.py::resolve_seed_key_files(root_path: pathlib.Path) -> List[str]` | Localiza dinámicamente archivos `seed-*.md` existentes en `01_seed/` o genera `seed-{project_slug}-master.md` como fallback.
 - `./FWengine.py::route_file(file_path: str, base_path: str = ".", move: bool = False, overwrite: bool = False) -> Optional[pathlib.Path]` | Clasifica y reubica atómicamente archivos con protección anti-colisión, reintento I/O y auto-scaffolding de beacons.
@@ -237,7 +239,9 @@ FWengine.py reconcile
 - `./FWengine.py::safe_rename_casing(src: pathlib.Path, dest: pathlib.Path) -> pathlib.Path` | Renombrado atómico en dos pasos mediante archivo temporal `.tmp_{pid}_{name}` con rollback ante excepciones.
 - `./FWengine.py::scaffold_beacon_for_dir(dir_path: pathlib.Path, root_path: pathlib.Path, overwrite: bool = False) -> Optional[pathlib.Path]` | Auto-scaffoldea `.context.yaml` para un directorio huérfano si no existe previamente o si `overwrite=True`.
 - `./FWengine.py::sync_beacons(root_path: pathlib.Path, auto_discover: bool = True, force_defaults: bool = False) -> int` | Sincroniza micro-beacons preservando comentarios `#` y enriquecimiento agéntico salvo `force_defaults=True`; auto-descubre huérfanos.
+- `./FWengine.py::sync_icontext_bus(root_path: pathlib.Path, l1_updates: Optional[Dict[str, Any]] = None, l2_updates: Optional[Dict[str, Any]] = None, l3_updates: Optional[Dict[str, Any]] = None) -> Dict[str, Any]` | Sincroniza y persiste el Bus Cognitivo Federado `./.context/icontext_bus.json` para las capas L0-L3.
 - `./FWengine.py::sync_tree(root_path: pathlib.Path) -> pathlib.Path` | Serializa el mapa satelital en `./.context/tree.json` en formato compacto con `topology_hash`; retorna ruta del archivo generado.
+- `./FWengine.py::upsert_segmented_block(file_path: pathlib.Path, tool_key: str, block_content: str) -> bool` | Inserta o actualiza no destructivamente un bloque demarcado `<!-- >>> ICONTEXT-V5:<TOOL>:START >>> -->` en `AGENTS.md`, `GEMINI.md` o `CLAUDE.md`.
 - `./FWengine.py::validate_backlog_data(data: Dict[str, Any]) -> List[str]` | Valida la estructura de la cola de backlog frente a `schemas/backlog.schema.json`.
 - `./FWengine.py::validate_backlog_queue(root_path: pathlib.Path, check_only: bool = False) -> List[str]` | Valida la integridad física y esquema de `artifacts/plans/backlog/queue.json`.
 - `./FWengine.py::validate_beacon_data(data: Dict[str, Any]) -> List[str]` | Valida en stdlib pura las claves obligatorias, tipos y enums de un `.context.yaml` frente a `schemas/beacon.schema.json`.
@@ -247,7 +251,7 @@ FWengine.py reconcile
 #### Módulo de Reportes Forenses: `./scripts/generate_benchmark_reports.py`
 - `./scripts/generate_benchmark_reports.py::<module>() -> None` | Ingesta `./artifacts/benchmarks/benchmark_matrix.json` y materializa reportes periciales markdown individuales en `./artifacts/benchmarks/`.
 
-#### Suites de Pruebas Automatizadas: `./tests/` (74 tests totales: 66 en `test_fwengine.py` + 8 en `test_token_budget.py`)
+#### Suites de Pruebas Automatizadas: `./tests/` (77 tests totales: 69 en `test_fwengine.py` + 8 en `test_token_budget.py`)
 - `./tests/test_fwengine.py::TestMiniYAML` (5 tests)
 - `./tests/test_fwengine.py::TestTopologicalManifest` (3 tests)
 - `./tests/test_fwengine.py::TestRoutingMapAndHeuristics` (4 tests)
@@ -262,17 +266,22 @@ FWengine.py reconcile
 - `./tests/test_fwengine.py::TestTreeSlicing` (3 tests)
 - `./tests/test_fwengine.py::TestV4AdversarialAndContinuity` (12 tests)
 - `./tests/test_fwengine.py::TestV41GovernanceAndDependencyDAG` (6 tests)
+- `./tests/test_fwengine.py::TestV5FederationAndEcosystem` (3 tests)
 - `./tests/test_token_budget.py::TestTokenBudgetBenchmark` (5 tests)
 - `./tests/test_token_budget.py::TestTopologicalScalingStress` (3 tests)
 
 ### 4.2 Modelo de Datos y Esquemas Canónicos `[CONFIRMADO]`
 
 #### Política Canónica de Contexto (`./config/context_policy.json`)
-Fuente única de verdad de la política de Context Engineering (versión 4.0.0). Define los perfiles operacionales `tier_1a` (< 220 tokens), `tier_1b` (< 800 tokens) y `tier_2` (< 16,000 tokens), los presupuestos máximos de satélite, baliza y checkpoint, el contrato de cierre (`reconcile`), el orden estricto de precedencia documental (6 niveles) y la lista de adaptadores agénticos soportados.
+Fuente única de verdad de la política de Context Engineering (versión 5.0.0). Define los perfiles operacionales `tier_1a` (< 220 tokens), `tier_1b` (< 800 tokens), `ecosystem_pack` (< 650 tokens) y `tier_2` (< 16,000 tokens), el protocolo federado `iContext Federation Protocol v5.0` (capas L0-L3), los presupuestos máximos de satélite, baliza y checkpoint, el contrato de cierre (`reconcile`), el orden estricto de precedencia documental (6 niveles) y la lista de adaptadores agénticos soportados.
+
+#### Estructura del Bus Cognitivo Federado (`./.context/icontext_bus.json`) y Contratos AST (`./.context/contracts_ast.json`)
+- `./.context/icontext_bus.json` validado por `./schemas/icontext_bus.schema.json` (Draft-07): sincroniza el estado vivo de las 4 capas (`l0_idirectory`, `l1_thinkingseed`, `l2_metricsthinking`, `l3_ireadme`).
+- `./.context/contracts_ast.json` validado por `./schemas/contracts_ast.schema.json` (Draft-07): almacena firmas AST de 1 línea, símbolos públicos y flags CLI indexados con `contracts_ast_hash`.
 
 #### Estructura del Satélite Topológico (`./.context/tree.json`)
 - `$schema: "../schemas/tree.schema.json"` `[CONFIRMADO]`
-- `version: "4.0"` `[CONFIRMADO]`
+- `version: "5.0"` `[CONFIRMADO]`
 - `project: "iDirectory"` `[CONFIRMADO]`
 - `architecture: "Gravity HyperScale Thinking"` `[CONFIRMADO]`
 - `updated_at: str` (ISO-8601 UTC timestamp) `[CONFIRMADO]`
@@ -454,6 +463,8 @@ Esta sección documenta de forma adversarial y objetiva los vectores de tensión
 ### 10.3 Índice de Evidencias Físicas
 - Motor de gobernanza y CLI: `./FWengine.py` `[CONFIRMADO]`
 - Satélite topológico principal: `./.context/tree.json` `[CONFIRMADO]`
+- Bus Cognitivo Federado v5.0: `./.context/icontext_bus.json` `[CONFIRMADO]`
+- Índice Cacheado de Contratos AST v5.0: `./.context/contracts_ast.json` `[CONFIRMADO]`
 - Checkpoint de continuidad atencional: `./.context/checkpoint.json` `[CONFIRMADO]`
 - Política canónica de contexto: `./config/context_policy.json` `[CONFIRMADO]`
 - Cola de backlog de intenciones: `./artifacts/plans/backlog/queue.json` `[CONFIRMADO]`
@@ -462,6 +473,8 @@ Esta sección documenta de forma adversarial y objetiva los vectores de tensión
 - Esquema formal de checkpoint: `./schemas/checkpoint.schema.json` `[CONFIRMADO]`
 - Esquema formal de planes: `./schemas/plan_metadata.schema.json` `[CONFIRMADO]`
 - Esquema formal de backlog: `./schemas/backlog.schema.json` `[CONFIRMADO]`
+- Esquema formal del bus federado v5.0: `./schemas/icontext_bus.schema.json` `[CONFIRMADO]`
+- Esquema formal del índice de contratos AST v5.0: `./schemas/contracts_ast.schema.json` `[CONFIRMADO]`
 - Manifiesto de skill agéntica: `./.agents/skills/idir/SKILL.md` `[CONFIRMADO]`
 - Reglas de gobernanza para agentes: `./AGENTS.md` y `./GEMINI.md` `[CONFIRMADO]`
 - Guía operativa del motor: `./02_foundation/engine/engine_readme.md` `[CONFIRMADO]`
@@ -477,7 +490,7 @@ Esta sección documenta de forma adversarial y objetiva los vectores de tensión
 ## 📌 CONTEXT HANDOFF & PROTOCOLO DE ASISTENCIA
 
 > **Mensaje de orientación para el modelo de IA receptor:**
-> "Esto es una semilla de proyecto (**ThinkingSeed Master v3.0**): el vector arquitectónico y ADN del proyecto (`contains_source_code="false"`), no su repositorio completo. Refleja el avance real, los contratos simbólicos y la superficie de tensión del sistema hasta la fecha. Como modelo receptor, tu función es usar esta semilla como memoria técnica para:
+> "Esto es una semilla de proyecto (**ThinkingSeed Master v5.0**): el vector arquitectónico y ADN del proyecto (`contains_source_code="false"`), no su repositorio completo. Refleja el avance real, los contratos simbólicos y la superficie de tensión del sistema hasta la fecha. Como modelo receptor, tu función es usar esta semilla como memoria técnica para:
 > 1. **Responder preguntas** sobre la arquitectura, contratos simbólicos, dependencias y flujos del sistema.
 > 2. **Auditar riesgos y sugerir mejoras** evaluando activamente la Superficie de Tensión (Sección 7) y las áreas marcadas como `[DEUDA]` o `[FALTANTE]`.
 > 3. **Generar código o soluciones compatibles** respetando las rutas relativas (`./`), firmas simbólicas e invariantes definidas aquí, cuando el usuario te lo solicite."
@@ -493,8 +506,8 @@ Antes de resolver una solicitud:
 
 ### 🤝 Acuse de Recibo Inicial
 Si el usuario adjuntó esta semilla **sin una instrucción específica**, no intentes generar código ni completar archivos vacíos. Responde únicamente con:
-1. Un saludo confirmando que asimilaste el ADN arquitectónico v4.1 de **iDirectory** (`<SEED_ARCHITECTURAL_VECTOR>`) y su stack principal (Python Standard Library, Adaptive Context Engineering, Three-Profile Bootloader, Intent Backlog).
-2. Un breve resumen de 2-3 líneas sobre el objetivo, su estado actual y sus principales vectores de tensión (resiliencia NTFS I/O mediante safe_io_retry, paquetes atómicos Tier 1A mediante context --pack, ciclo de vida de planes y reconciliación unificada mediante reconcile).
+1. Un saludo confirmando que asimilaste el ADN arquitectónico v5.0 de **iDirectory** (`<SEED_ARCHITECTURAL_VECTOR>`) y su stack principal (Python Standard Library, Adaptive Context Engineering, iContext Federation Protocol v5.0, Three-Profile Bootloader, Intent Backlog).
+2. Un breve resumen de 2-3 líneas sobre el objetivo, su estado actual y sus principales vectores de tensión (resiliencia NTFS I/O mediante safe_io_retry, paquetes atómicos Tier 1A y Ecosistema v5.0 mediante context --pack / --pack-ecosystem, bus federado icontext_bus.json y reconciliación unificada mediante reconcile).
 3. Una frase poniéndote a disposición para resolver dudas sobre su funcionamiento o colaborar en los siguientes pasos de desarrollo.
 
 </SEED_ARCHITECTURAL_VECTOR>

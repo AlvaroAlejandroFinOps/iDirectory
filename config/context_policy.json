@@ -1,7 +1,18 @@
 {
-  "version": "4.0.0",
+  "version": "5.0.0",
   "project": "iDirectory",
-  "architecture": "Gravity HyperScale Thinking — Adaptive Context Engineering",
+  "architecture": "Gravity HyperScale Thinking — Federated Adaptive Context Engineering v5.0",
+  "federation_protocol": {
+    "version": "5.0.0",
+    "bus_path": ".context/icontext_bus.json",
+    "ast_cache_path": ".context/contracts_ast.json",
+    "layers": {
+      "l0": "iDirectory v5.0 (Topological & Attentional Control Plane)",
+      "l1": "ThinkingSeed v5.0 (Symbolic Architectural DNA Vector)",
+      "l2": "MetricsThinking v5.0 (Forensic & Spectral FPIA Governor)",
+      "l3": "iReadme v5.0 (Institutional Paper-Grade Synthesizer)"
+    }
+  },
   "profiles": {
     "tier_1a": {
       "name": "Atomic Known-Path Execution",
@@ -18,10 +29,10 @@
       "target_token_budget": 800
     },
     "tier_2": {
-      "name": "Global Architecture / Forensic Audit",
-      "entry_command": "Read .context/tree.json + 01_seed/seed-idirectory-master.md",
-      "triggers": ["/seedMaster", "/metrics", "/ultraThinking", "cross_domain_redesign"],
-      "seed_policy": "full_ingest",
+      "name": "Global Architecture / Forensic Audit / Ecosystem Federation",
+      "entry_command": "python FWengine.py context --pack-ecosystem",
+      "triggers": ["/seedMaster", "/metrics", "/readme", "/ultraThinking", "cross_domain_redesign"],
+      "seed_policy": "full_or_ecosystem_bus",
       "target_token_budget": 16000
     }
   },
@@ -32,6 +43,7 @@
     "beacon_max_chars": 600,
     "beacon_max_tokens": 150,
     "checkpoint_max_tokens": 300,
+    "ecosystem_pack_max_tokens": 650,
     "satellite_max_tokens": 1000
   },
   "closure_contract": {
@@ -40,8 +52,8 @@
   },
   "precedence_order": [
     "1. Executable code (FWengine.py) & formal JSON schemas (schemas/*.schema.json)",
-    "2. Canonical policy (config/context_policy.json)",
-    "3. Verified satellite (.context/tree.json) & local beacons (.context.yaml)",
+    "2. Canonical policy (config/context_policy.json) & Federated Bus (.context/icontext_bus.json)",
+    "3. Verified satellite (.context/tree.json), AST cache (.context/contracts_ast.json) & local beacons (.context.yaml)",
     "4. Active attentional checkpoint (.context/checkpoint.json)",
     "5. Architectural DNA (01_seed/seed-idirectory-master.md)",
     "6. Active plans with status=approved|executing (artifacts/plans/active/)"

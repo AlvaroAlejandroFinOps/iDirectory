@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
 """
-iDirectory: Framework de Gobernanza, Ruteo y Context Engineering (v4.0)
+iDirectory: Framework de Gobernanza, Ruteo y Context Engineering (v5.0)
 Creado por Gravity HyperScale Thinking.
 
 Diseñado para sistemas Multi-Cloud (GCP, AWS, Azure, Fabric), IA, Datos y Analítica.
 Implementa:
 - Topología unificada en minúsculas (all-lowercase).
 - Mapa topológico satelital (.context/tree.json) con fingerprint criptográfico SHA-256 (topology_hash).
+- Bus Federado de Interoperabilidad v5.0 (.context/icontext_bus.json) y Caché AST (.context/contracts_ast.json).
 - Semáforos de poda y relevancia de directorio (Context Beacons: .context.yaml).
-- Bootloader Adaptativo de 3 Perfiles (Tier 1A, Tier 1B, Tier 2).
+- Bootloader Adaptativo de 3 Perfiles (Tier 1A, Tier 1B, Tier 2) y Ecosystem Pack (--pack-ecosystem).
 - Compilador de paquetes de contexto en una sola llamada (context --pack <dir>).
 - Consulta seccional quirúrgica del ThinkingSeed Master (seed --toc / --section).
 - Máquina de estados de continuidad atencional (.context/checkpoint.json).
@@ -30,7 +31,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, Any, List, Optional, Set, Callable, Tuple
 
-ENGINE_VERSION = "4.1"
+ENGINE_VERSION = "5.0"
 
 # ==============================================================================
 # 1. MiniYAML: Serializador / Deserializador ligero sin dependencias (PyYAML-free)
@@ -140,9 +141,20 @@ CODE_SCHEMA_EXTENSIONS: Set[str] = {
 }
 
 DEFAULT_CONTEXT_POLICY: Dict[str, Any] = {
-    "version": "4.0.0",
+    "version": "5.0.0",
     "project": "iDirectory",
-    "architecture": "Gravity HyperScale Thinking — Adaptive Context Engineering",
+    "architecture": "Gravity HyperScale Thinking — Federated Adaptive Context Engineering v5.0",
+    "federation_protocol": {
+        "version": "5.0.0",
+        "bus_path": ".context/icontext_bus.json",
+        "ast_cache_path": ".context/contracts_ast.json",
+        "layers": {
+            "l0": "iDirectory v5.0 (Topological & Attentional Control Plane)",
+            "l1": "ThinkingSeed v5.0 (Symbolic Architectural DNA Vector)",
+            "l2": "MetricsThinking v5.0 (Forensic & Spectral FPIA Governor)",
+            "l3": "iReadme v5.0 (Institutional Paper-Grade Synthesizer)"
+        }
+    },
     "profiles": {
         "tier_1a": {
             "name": "Atomic Known-Path Execution",
@@ -159,10 +171,10 @@ DEFAULT_CONTEXT_POLICY: Dict[str, Any] = {
             "target_token_budget": 800
         },
         "tier_2": {
-            "name": "Global Architecture / Forensic Audit",
-            "entry_command": "Read .context/tree.json + 01_seed/seed-idirectory-master.md",
-            "triggers": ["/seedMaster", "/metrics", "/ultraThinking", "cross_domain_redesign"],
-            "seed_policy": "full_ingest",
+            "name": "Global Architecture / Forensic Audit / Ecosystem Federation",
+            "entry_command": "python FWengine.py context --pack-ecosystem",
+            "triggers": ["/seedMaster", "/metrics", "/readme", "/ultraThinking", "cross_domain_redesign"],
+            "seed_policy": "full_or_ecosystem_bus",
             "target_token_budget": 16000
         }
     },
@@ -173,6 +185,7 @@ DEFAULT_CONTEXT_POLICY: Dict[str, Any] = {
         "beacon_max_chars": 600,
         "beacon_max_tokens": 150,
         "checkpoint_max_tokens": 300,
+        "ecosystem_pack_max_tokens": 650,
         "satellite_max_tokens": 1000
     },
     "closure_contract": {
@@ -1282,10 +1295,13 @@ def sync_beacons(root_path: Path, auto_discover: bool = True, force_defaults: bo
     huérfanos no ignorados (sin sobrescribir existentes).
     """
     count = 0
+    is_pkg_repo = _is_custom_src_package_repo(root_path.resolve())
     for folder, meta in FOLDER_METADATA.items():
         if folder == ".context":
             continue
         dir_path = root_path / folder
+        if not dir_path.exists() and is_pkg_repo and folder in OPTIONAL_SKELETON_IF_PACKAGED:
+            continue
         dir_path.mkdir(parents=True, exist_ok=True)
         beacon_file = dir_path / BEACON_FILENAME
         preserved_comments = extract_preserved_comments(beacon_file)
@@ -1452,6 +1468,33 @@ def compute_node_fingerprint(dir_path: Path) -> str:
     return hasher.hexdigest()[:16]
 
 
+OPTIONAL_SKELETON_IF_PACKAGED: Set[str] = {
+    "src/cloud_jobs",
+    "src/core",
+    "src/dashboards",
+    "src/data_generation",
+    "tools",
+    "data/sandbox",
+}
+
+
+def _is_custom_src_package_repo(root: Path) -> bool:
+    """Detecta si el repositorio es un paquete Python con pyproject.toml y src/<pkg> propio."""
+    if not (root / "pyproject.toml").is_file():
+        return False
+    src_dir = root / "src"
+    if not src_dir.is_dir():
+        return False
+    canonical_src = {"cloud_jobs", "core", "dashboards", "data_generation"}
+    try:
+        for entry in os.listdir(src_dir):
+            if not entry.startswith(".") and entry.lower() not in canonical_src and (src_dir / entry).is_dir():
+                return True
+    except OSError:
+        pass
+    return False
+
+
 def generate_tree_json(root_path: Path) -> Dict[str, Any]:
     """Genera el mapa satelital verificable de todo el repositorio (v4.0)."""
     root = root_path.resolve()
@@ -1462,7 +1505,7 @@ def generate_tree_json(root_path: Path) -> Dict[str, Any]:
 
     tree_data: Dict[str, Any] = {
         "$schema": "../schemas/tree.schema.json",
-        "version": "4.0",
+        "version": "5.0",
         "project": root.name,
         "architecture": "Gravity HyperScale Thinking",
         "updated_at": datetime.now(timezone.utc).isoformat(),
@@ -1494,10 +1537,13 @@ def generate_tree_json(root_path: Path) -> Dict[str, Any]:
 
     canonical_top_levels: Set[str] = {k.split("/")[0].lower() for k in FOLDER_METADATA.keys()}
     patterns = load_ignore_patterns(root) if root.exists() else []
+    is_pkg_repo = _is_custom_src_package_repo(root)
 
     for folder, meta in FOLDER_METADATA.items():
         folder_dir = root / folder
         exists_on_disk = folder_dir.is_dir()
+        if not exists_on_disk and is_pkg_repo and folder in OPTIONAL_SKELETON_IF_PACKAGED:
+            continue
         physical_key = _resolve_physical_rel_path(root, folder) if exists_on_disk else folder
         local_beacon = _read_local_beacon(folder_dir) if exists_on_disk else {}
 
@@ -1554,6 +1600,31 @@ def generate_tree_json(root_path: Path) -> Dict[str, Any]:
                 if ext_node["crawl"] and _has_dynamic_subdirectories(full_entry, root, patterns):
                     ext_node["has_dynamic_children"] = True
                 tree_data["nodes"][entry] = ext_node
+
+        # Auto-discover custom packages under src/ when is_pkg_repo is True
+        if is_pkg_repo and (root / "src").is_dir():
+            canonical_src = {"cloud_jobs", "core", "dashboards", "data_generation"}
+            try:
+                src_entries = sorted(os.listdir(root / "src"))
+            except OSError:
+                src_entries = []
+            for sub in src_entries:
+                if sub.startswith(".") or sub.lower() in canonical_src or sub.lower() in IGNORED_DISCOVERY_DIRS:
+                    continue
+                sub_dir = root / "src" / sub
+                if sub_dir.is_dir() and not is_ignored_path(sub_dir, root, patterns):
+                    local = _read_local_beacon(sub_dir)
+                    pkg_node: Dict[str, Any] = {
+                        "role": local.get("role", "shared_backend"),
+                        "prio": local.get("read_priority", "p1"),
+                        "crawl": bool(local.get("crawl", True)),
+                        "node_hash": compute_node_fingerprint(sub_dir),
+                    }
+                    if local.get("key_files"):
+                        pkg_node["key_files"] = local["key_files"]
+                    if pkg_node["crawl"] and _has_dynamic_subdirectories(sub_dir, root, patterns):
+                        pkg_node["has_dynamic_children"] = True
+                    tree_data["nodes"][f"src/{sub}"] = pkg_node
 
     return tree_data
 
@@ -2063,6 +2134,421 @@ def manage_checkpoint(
 
 
 # ------------------------------------------------------------------------------
+# 3.3b Protocolo de Interoperabilidad Federada v5.0 (AST Index, Bus & Ecosystem Pack)
+# ------------------------------------------------------------------------------
+def _format_ast_arg(arg: ast.arg) -> str:
+    if arg.annotation is not None:
+        try:
+            return f"{arg.arg}: {ast.unparse(arg.annotation)}"
+        except Exception:
+            return arg.arg
+    return arg.arg
+
+
+def build_ast_contracts_index(root_path: Path, write_to_disk: bool = True) -> Dict[str, Any]:
+    """
+    Governs: [v5.0 Federation Layer 0].
+    Extrae en una sola pasada (respetando crawl: false e ignorados) todas las funciones públicas,
+    clases, firmas simbólicas AST de 1 línea y flags CLI de los módulos Python del repositorio.
+    Persiste .context/contracts_ast.json para evitar doble/triple escaneo en ThinkingSeed y MetricsThinking.
+    """
+    root = root_path.resolve()
+    patterns = load_ignore_patterns(root) if root.exists() else []
+    beacon_cache: Dict[str, Dict[str, Any]] = {}
+    topo_hash = compute_topology_hash(root)
+
+    ast_file = root / ".context" / "contracts_ast.json"
+    if ast_file.is_file():
+        try:
+            cached = json.loads(ast_file.read_text(encoding="utf-8"))
+            if isinstance(cached, dict) and cached.get("topology_hash") == topo_hash and cached.get("version") == ENGINE_VERSION:
+                return cached
+        except Exception:
+            pass
+
+    public_symbols: List[str] = []
+    cli_flags: List[str] = []
+    signatures_1line: List[str] = []
+    modules_map: Dict[str, Dict[str, Any]] = {}
+
+    for current, dirs, files in os.walk(root):
+        cur = Path(current)
+        kept_dirs: List[str] = []
+        for d in sorted(dirs):
+            if d.startswith(".") or d.lower() in IGNORED_DISCOVERY_DIRS:
+                continue
+            child = cur / d
+            if is_ignored_path(child, root, patterns):
+                continue
+            if not _resolve_beacon_fast(child, root, beacon_cache).get("crawl", True):
+                continue
+            kept_dirs.append(d)
+        dirs[:] = kept_dirs
+
+        for fname in sorted(files):
+            if not fname.endswith(".py") or fname.startswith("."):
+                continue
+            fpath = cur / fname
+            rel_py = _rel_posix(fpath, root)
+            try:
+                source = fpath.read_text(encoding="utf-8", errors="replace")
+                tree = ast.parse(source, filename=str(fpath))
+            except Exception:
+                continue
+
+            mod_symbols: List[str] = []
+            mod_flags: List[str] = []
+            mod_sigs: List[str] = []
+
+            for node in tree.body:
+                if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                    if not node.name.startswith("_"):
+                        if node.name not in public_symbols:
+                            public_symbols.append(node.name)
+                        if node.name not in mod_symbols:
+                            mod_symbols.append(node.name)
+                        args_list = [_format_ast_arg(a) for a in node.args.args if a.arg != "self"]
+                        ret_str = "Any"
+                        if node.returns is not None:
+                            try:
+                                ret_str = ast.unparse(node.returns)
+                            except Exception:
+                                ret_str = "Any"
+                        sig = f"./{rel_py}::{node.name}({', '.join(args_list)}) -> {ret_str}"
+                        mod_sigs.append(sig)
+                        signatures_1line.append(sig)
+                elif isinstance(node, ast.ClassDef):
+                    if not node.name.startswith("_"):
+                        if node.name not in public_symbols:
+                            public_symbols.append(node.name)
+                        if node.name not in mod_symbols:
+                            mod_symbols.append(node.name)
+                        sig = f"./{rel_py}::{node.name}(class)"
+                        mod_sigs.append(sig)
+                        signatures_1line.append(sig)
+
+            for node in ast.walk(tree):
+                if isinstance(node, ast.Call) and isinstance(node.func, ast.Attribute):
+                    if node.func.attr == "add_argument":
+                        for arg in node.args:
+                            if isinstance(arg, ast.Constant) and isinstance(arg.value, str):
+                                if arg.value.startswith("-"):
+                                    if arg.value not in cli_flags:
+                                        cli_flags.append(arg.value)
+                                    if arg.value not in mod_flags:
+                                        mod_flags.append(arg.value)
+
+            if mod_symbols or mod_flags or mod_sigs:
+                modules_map[rel_py] = {
+                    "symbols": mod_symbols,
+                    "cli_flags": mod_flags,
+                    "signatures": mod_sigs,
+                }
+
+    digest_payload = "\n".join(sorted(signatures_1line) + sorted(cli_flags))
+    ast_hash = hashlib.sha256(digest_payload.encode("utf-8")).hexdigest()
+
+    index_data: Dict[str, Any] = {
+        "$schema": "../schemas/contracts_ast.schema.json",
+        "version": ENGINE_VERSION,
+        "project": root.name,
+        "updated_at": datetime.now(timezone.utc).isoformat(),
+        "topology_hash": topo_hash,
+        "contracts_ast_hash": ast_hash,
+        "public_symbols": public_symbols,
+        "cli_flags": cli_flags,
+        "signatures_1line": signatures_1line,
+        "modules": modules_map,
+    }
+
+    if write_to_disk:
+        ctx_dir = root / ".context"
+        ctx_dir.mkdir(parents=True, exist_ok=True)
+        safe_io_retry(
+            lambda: ast_file.write_text(
+                json.dumps(index_data, ensure_ascii=False, indent=2) + "\n",
+                encoding="utf-8",
+            )
+        )
+    return index_data
+
+
+def _count_fpai_pruned_paths(root_path: Path) -> int:
+    """Cuenta cuántas rutas podadas por MetricsThinking FPIA residen en .agentignore."""
+    agentignore = root_path / ".agentignore"
+    if not agentignore.is_file():
+        return 0
+    try:
+        lines = agentignore.read_text(encoding="utf-8", errors="replace").splitlines()
+    except OSError:
+        return 0
+    in_block = False
+    count = 0
+    for line in lines:
+        s = line.strip()
+        if s in ("# >>> FPAI-PRUNE-START", "# >>> METRICSTHINKING AUTO-PRUNE >>>"):
+            in_block = True
+            continue
+        if s in ("# <<< FPAI-PRUNE-END", "# <<< METRICSTHINKING AUTO-PRUNE <<<"):
+            in_block = False
+            continue
+        if in_block and s and not s.startswith("#"):
+            count += 1
+    return count
+
+
+def sync_icontext_bus(
+    root_path: Path,
+    tree_data: Optional[Dict[str, Any]] = None,
+    ast_index: Optional[Dict[str, Any]] = None,
+    write_to_disk: bool = True,
+) -> Dict[str, Any]:
+    """
+    Governs: [v5.0 Federation Bus].
+    Sincroniza el archivo .context/icontext_bus.json que coordina las 4 capas del ecosistema:
+    - l0_idirectory (Topología, AST hash, nodos activos y podados)
+    - l1_thinkingseed (Estado de 01_seed/, seed_hash, versión y cobertura AST)
+    - l2_metricsthinking (Score consolidado, FPIA PF_spectral, cuello de botella y seguridad)
+    - l3_ireadme (Paridad dual README.md / README_ES.md y cero fugas de ruta)
+    """
+    root = root_path.resolve()
+    tree = tree_data or generate_tree_json(root)
+    topo_hash = str(tree.get("topology_hash") or compute_topology_hash(root))
+    ast_data = ast_index or build_ast_contracts_index(root, write_to_disk=write_to_disk)
+    ast_hash = str(ast_data.get("contracts_ast_hash", ""))
+
+    nodes = tree.get("nodes", {})
+    active_nodes = sum(1 for v in nodes.values() if isinstance(v, dict) and v.get("crawl", True))
+    pruned_nodes = sum(1 for v in nodes.values() if isinstance(v, dict) and not v.get("crawl", True))
+    budget_stats = compute_context_budget(root)
+    active_tokens = sum(int(s.get("est_tokens", 0)) for s in budget_stats if s.get("crawl", True))
+
+    bus_file = root / ".context" / "icontext_bus.json"
+    existing_layers: Dict[str, Any] = {}
+    if bus_file.is_file():
+        try:
+            loaded_bus = json.loads(bus_file.read_text(encoding="utf-8"))
+            if isinstance(loaded_bus, dict) and isinstance(loaded_bus.get("layers"), dict):
+                existing_layers = loaded_bus["layers"]
+        except Exception:
+            existing_layers = {}
+
+    # Capa 0: iDirectory v5.0
+    l0_data: Dict[str, Any] = {
+        "version": f"{ENGINE_VERSION}.0",
+        "topology_hash": topo_hash,
+        "contracts_ast_hash": ast_hash,
+        "active_nodes_count": active_nodes,
+        "pruned_nodes_count": pruned_nodes,
+        "active_tokens_estimate": active_tokens,
+        "fpai_pruned_paths_count": _count_fpai_pruned_paths(root),
+    }
+
+    # Capa 1: ThinkingSeed v5.0
+    seed_files = resolve_seed_key_files(root)
+    primary_seed_rel = f"01_seed/{seed_files[0]}"
+    seed_path = root / primary_seed_rel
+    l1_prev = existing_layers.get("l1_thinkingseed", {}) if isinstance(existing_layers.get("l1_thinkingseed"), dict) else {}
+    if seed_path.is_file():
+        try:
+            seed_text = seed_path.read_text(encoding="utf-8", errors="replace")
+            seed_hash = hashlib.sha256(seed_text.encode("utf-8")).hexdigest()
+            ver_match = re.search(r'<SEED_ARCHITECTURAL_VECTOR[^>]*version="([^"]+)"', seed_text)
+            if not ver_match:
+                ver_match = re.search(r'seed_schema_version:\s*"?([0-9.]+)"?', seed_text)
+            seed_ver = ver_match.group(1) if ver_match else "3.0"
+            all_contracts = list(ast_data.get("public_symbols", [])) + list(ast_data.get("cli_flags", []))
+            if all_contracts:
+                matched_c = sum(1 for c in all_contracts if c in seed_text)
+                ast_cov = round((matched_c / len(all_contracts)) * 100.0, 2)
+            else:
+                ast_cov = 100.0
+            l1_data: Dict[str, Any] = {
+                "present": True,
+                "version": seed_ver,
+                "seed_path": primary_seed_rel,
+                "seed_hash": seed_hash,
+                "synced_with_topology_hash": topo_hash,
+                "ast_coverage_pct": ast_cov,
+                "gates_passed": l1_prev.get("gates_passed", "6/6" if ast_cov >= 90.0 else "pending"),
+            }
+        except OSError:
+            l1_data = {"present": False, "version": "none"}
+    else:
+        l1_data = {"present": False, "version": "none"}
+
+    # Capa 2: MetricsThinking v5.0
+    mt_candidates = [
+        root / "artifacts" / "plans" / "metricsthinking" / "MetricsThinking.json",
+        root / "artifacts" / "MetricsThinking.json",
+    ]
+    mt_file = next((p for p in mt_candidates if p.is_file()), None)
+    if mt_file is not None:
+        try:
+            mt_json = json.loads(mt_file.read_text(encoding="utf-8", errors="replace"))
+            fpai = mt_json.get("fpai_spectral") or {}
+            sec = mt_json.get("security_report") or {}
+            score_val = mt_json.get("consolidated_score")
+            if score_val is None:
+                score_val = mt_json.get("score_total", 100.0)
+            l2_data: Dict[str, Any] = {
+                "present": True,
+                "version": str(mt_json.get("engine_version") or mt_json.get("version") or "5.0.0"),
+                "report_path": _rel_posix(mt_file, root),
+                "consolidated_score": float(score_val) if score_val is not None else 100.0,
+                "maturity_band": str(mt_json.get("maturity_band", "OPERATIONAL_EXCELLENCE")),
+                "active_bottleneck": str(mt_json.get("active_bottleneck", "NONE")),
+                "fpai_pf_spectral": float(fpai.get("power_factor_spectral", 1.0)),
+                "fpai_s_spectral": float(fpai.get("s_spectral", 0.0)),
+                "security_gate": 1.0 if int(sec.get("pii_matches_count", 0)) == 0 else 0.0,
+                "synced_with_seed_hash": l1_data.get("seed_hash", ""),
+            }
+        except Exception:
+            l2_data = {"present": False, "version": "none"}
+    else:
+        l2_data = {"present": False, "version": "none"}
+
+    # Capa 3: iReadme v5.0
+    readme_en = root / "README.md"
+    readme_es = root / "README_ES.md"
+    if readme_en.is_file() and readme_es.is_file():
+        try:
+            en_txt = readme_en.read_text(encoding="utf-8", errors="replace")
+            es_txt = readme_es.read_text(encoding="utf-8", errors="replace")
+            has_dual_header = ("README_ES.md" in en_txt) and ("README.md" in es_txt)
+            leak_re = re.compile(r"([A-Za-z]:[/\\][A-Za-z0-9_.-]+|file:///[A-Za-z]:|/home/[A-Za-z0-9_.-]+)")
+            leaks = len(leak_re.findall(en_txt)) + len(leak_re.findall(es_txt))
+            phi = 1.0 if (has_dual_header and leaks == 0) else 0.5
+            std_ver = "Enterprise Paper-Grade v5.0" if "5.0" in en_txt else "Enterprise Paper-Grade v2.0"
+            l3_data: Dict[str, Any] = {
+                "present": True,
+                "version": "5.0.0" if "5.0" in en_txt else "2.0.0",
+                "standard": std_ver,
+                "parity_score_phi": phi,
+                "path_leakage_rate": 0.0 if leaks == 0 else round(leaks / 100.0, 4),
+                "synced_with_topology_hash": topo_hash,
+            }
+        except OSError:
+            l3_data = {"present": False, "version": "none"}
+    elif readme_en.is_file():
+        l3_data = {
+            "present": True,
+            "version": "partial",
+            "standard": "Single-Language README",
+            "parity_score_phi": 0.5,
+            "path_leakage_rate": 0.0,
+            "synced_with_topology_hash": topo_hash,
+        }
+    else:
+        l3_data = {"present": False, "version": "none"}
+
+    bus_payload: Dict[str, Any] = {
+        "$schema": "../schemas/icontext_bus.schema.json",
+        "protocol_version": f"{ENGINE_VERSION}.0",
+        "project": root.name,
+        "updated_at": datetime.now(timezone.utc).isoformat(),
+        "layers": {
+            "l0_idirectory": l0_data,
+            "l1_thinkingseed": l1_data,
+            "l2_metricsthinking": l2_data,
+            "l3_ireadme": l3_data,
+        },
+    }
+
+    if write_to_disk:
+        ctx_dir = root / ".context"
+        ctx_dir.mkdir(parents=True, exist_ok=True)
+        safe_io_retry(
+            lambda: bus_file.write_text(
+                json.dumps(bus_payload, ensure_ascii=False, indent=2) + "\n",
+                encoding="utf-8",
+            )
+        )
+    return bus_payload
+
+
+def build_ecosystem_pack(root_path: Path) -> Dict[str, Any]:
+    """
+    Governs: [v5.0 Tri-Artifact Ecosystem Pack].
+    Compila en una sola llamada (< 650 tokens) el estado federado de las 4 herramientas
+    (iDirectory + ThinkingSeed + MetricsThinking + iReadme) para evitar escaneos redundantes.
+    """
+    root = root_path.resolve()
+    tree = generate_tree_json(root)
+    ast_index = build_ast_contracts_index(root, write_to_disk=False)
+    bus = sync_icontext_bus(root, tree_data=tree, ast_index=ast_index, write_to_disk=False)
+
+    active_topology = [
+        f"{k}:{v['role']}({v['prio']})"
+        for k, v in tree.get("nodes", {}).items()
+        if isinstance(v, dict) and v.get("crawl", True)
+    ]
+    pack: Dict[str, Any] = {
+        "icontext_ecosystem_pack": f"{ENGINE_VERSION}.0",
+        "project": root.name,
+        "topology_hash": tree.get("topology_hash", "")[:16],
+        "contracts_ast_hash": ast_index.get("contracts_ast_hash", "")[:16],
+        "active_topology": active_topology,
+        "ast_summary": {
+            "modules_count": len(ast_index.get("modules", {})),
+            "public_symbols_count": len(ast_index.get("public_symbols", [])),
+            "cli_flags_count": len(ast_index.get("cli_flags", [])),
+            "sample_signatures": ast_index.get("signatures_1line", [])[:12],
+        },
+        "federation_layers": bus.get("layers", {}),
+    }
+
+    cp_file = root / ".context" / "checkpoint.json"
+    if cp_file.is_file():
+        try:
+            cp_data = json.loads(cp_file.read_text(encoding="utf-8"))
+            if cp_data.get("status") in ("executing", "approved", "paused"):
+                pack["checkpoint"] = {
+                    "plan_id": cp_data.get("plan_id"),
+                    "phase": cp_data.get("current_phase"),
+                    "next": cp_data.get("next_action", "")[:80],
+                }
+        except Exception:
+            pass
+    return pack
+
+
+def upsert_segmented_block(file_path: Path, tool_key: str, block_content: str) -> bool:
+    """
+    Governs: [v5.0 Non-Destructive Rule Composition — Resolves FAIL-01].
+    Inserta o actualiza de forma idempotente un bloque delimitado por herramienta
+    (<!-- >>> ICONTEXT-V5:<TOOL>:START >>> --> ... <!-- <<< ICONTEXT-V5:<TOOL>:END >>> -->)
+    sin sobrescribir el contenido existente de otras herramientas o del usuario.
+    """
+    key_upper = tool_key.strip().upper()
+    start_marker = f"<!-- >>> ICONTEXT-V5:{key_upper}:START >>> -->"
+    end_marker = f"<!-- <<< ICONTEXT-V5:{key_upper}:END >>> -->"
+    wrapped = f"{start_marker}\n{block_content.strip()}\n{end_marker}"
+
+    existing = ""
+    if file_path.is_file():
+        try:
+            existing = file_path.read_text(encoding="utf-8", errors="replace")
+        except OSError:
+            existing = ""
+
+    if start_marker in existing and end_marker in existing:
+        pattern = re.compile(
+            re.escape(start_marker) + r".*?" + re.escape(end_marker),
+            re.DOTALL,
+        )
+        updated = pattern.sub(lambda _m: wrapped, existing)
+    elif existing.strip():
+        updated = existing.rstrip() + "\n\n" + wrapped + "\n"
+    else:
+        updated = wrapped + "\n"
+
+    file_path.parent.mkdir(parents=True, exist_ok=True)
+    safe_io_retry(lambda: file_path.write_text(updated, encoding="utf-8"))
+    return True
+
+
+# ------------------------------------------------------------------------------
 # 3.4 Presupuesto de Tokens con Poda Estricta de Ramas Muertas (v4.0)
 # ------------------------------------------------------------------------------
 _BUDGET_METRICS_CACHE: Dict[str, Dict[str, Any]] = {}
@@ -2267,9 +2753,11 @@ def init_project(base_path: str):
             f.write("data/sandbox/\n")
         print("  [+] .gitignore desplegado.")
 
-    # 7. Sincronizar satélite al final para que topology_hash capture todos los archivos creados
+    # 7. Sincronizar satélite, índice AST y bus federado v5.0 al final
     tree_path = sync_tree(root)
-    print(f"  [+] Satélite topológico desplegado: {tree_path.relative_to(root)}")
+    ast_idx = build_ast_contracts_index(root, write_to_disk=True)
+    sync_icontext_bus(root, ast_index=ast_idx, write_to_disk=True)
+    print(f"  [+] Satélite topológico y Bus Federado v{ENGINE_VERSION} desplegados: {tree_path.relative_to(root)}")
     print(f"[+] Estructura iDirectory v{ENGINE_VERSION} inicializada con éxito.")
 
 
@@ -2697,9 +3185,12 @@ def audit_repository(root_path: Path, fix: bool = False) -> bool:
 
     # 2. Directorios canónicos ausentes y Beacons ausentes en nodos canónicos (Fix V-03)
     reported: Set[str] = set()
+    is_pkg_repo = _is_custom_src_package_repo(root)
     for folder, meta in FOLDER_METADATA.items():
         folder_dir = root / folder
         if not folder_dir.exists():
+            if is_pkg_repo and folder in OPTIONAL_SKELETON_IF_PACKAGED:
+                continue
             reported.add(folder.lower())
             if fix:
                 folder_dir.mkdir(parents=True, exist_ok=True)
@@ -2849,15 +3340,17 @@ def reconcile_repository(root_path: Path, check_only: bool = False) -> bool:
     violations: List[str] = []
 
     # Fase 1: Normalización de casing y auto-scaffolding de beacons
-    for folder in FOLDER_METADATA.keys():
-        (root / folder).mkdir(parents=True, exist_ok=True)
-    policy_path = root / "config" / "context_policy.json"
-    if not policy_path.exists():
-        policy_data = dict(DEFAULT_CONTEXT_POLICY)
-        policy_data["project"] = root.name
-        policy_path.write_text(json.dumps(policy_data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-
+    is_pkg_repo = _is_custom_src_package_repo(root)
     if not check_only:
+        for folder in FOLDER_METADATA.keys():
+            if is_pkg_repo and folder in OPTIONAL_SKELETON_IF_PACKAGED and not (root / folder).exists():
+                continue
+            (root / folder).mkdir(parents=True, exist_ok=True)
+        policy_path = root / "config" / "context_policy.json"
+        if not policy_path.exists():
+            policy_data = dict(DEFAULT_CONTEXT_POLICY)
+            policy_data["project"] = root.name
+            policy_path.write_text(json.dumps(policy_data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         sync_beacons(root, auto_discover=True, force_defaults=False)
 
     # Fase 2: Garbage Collector automático de planes (active -> archive)
@@ -2893,9 +3386,11 @@ def reconcile_repository(root_path: Path, check_only: bool = False) -> bool:
         except Exception:
             pass
 
-    # Fase 6: Sincronización de satélite con node_hash incremental y topology_hash global
+    # Fase 6: Sincronización de satélite con node_hash incremental, AST index y bus federado v5.0
     if not check_only:
         sync_tree(root)
+        ast_idx = build_ast_contracts_index(root, write_to_disk=True)
+        sync_icontext_bus(root, ast_index=ast_idx, write_to_disk=True)
         audit_ok = audit_repository(root, fix=True)
         if not audit_ok:
             violations.append("Auditoría final falló tras aplicar remediaciones.")
@@ -2955,6 +3450,8 @@ def main():
     context_parser.add_argument("--include-pruned", action="store_true", help="En --budget, escanea también el volumen físico de ramas podadas (crawl:false)")
     context_parser.add_argument("--compact", action="store_true", help="Emite string compacto para inyección en prompts")
     context_parser.add_argument("--pack", metavar="DIR", help="Emite paquete de contexto unificado (slice + beacon + key_files + checkpoint)")
+    context_parser.add_argument("--pack-ecosystem", action="store_true", help="Emite paquete federado v5.0 de las 4 capas (<650 tokens)")
+    context_parser.add_argument("--bus", action="store_true", help="Sincroniza y emite el bus federado .context/icontext_bus.json")
     context_parser.add_argument("--tier", default="1a", choices=["1a", "1b", "2"], help="Perfil de bootloader para --pack")
     context_parser.add_argument("--check-freshness", action="store_true", help="Comprueba si tree.json sufre drift respecto al filesystem")
 
@@ -3027,6 +3524,12 @@ def main():
                 print(f"[!] DRIFT DETECTADO: El mapa satelital está desactualizado respecto a '{freshness['latest_path']}'.")
                 print("    Acción recomendada: Ejecute 'python FWengine.py reconcile'.")
                 sys.exit(1)
+        elif getattr(args, "pack_ecosystem", False):
+            epack = build_ecosystem_pack(root)
+            print(json.dumps(epack, ensure_ascii=False, separators=(",", ":")))
+        elif getattr(args, "bus", False):
+            bus = sync_icontext_bus(root, write_to_disk=True)
+            print(json.dumps(bus, ensure_ascii=False, indent=2))
         elif getattr(args, "pack", None):
             pack = build_context_pack(root, args.pack, tier=getattr(args, "tier", "1a"))
             print(json.dumps(pack, ensure_ascii=False, separators=(",", ":")))

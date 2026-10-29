@@ -1,13 +1,13 @@
-# AGENTS.md: Universal AI Coding Agent Governance & Context Engineering
+# AGENTS.md: Universal AI Coding Agent Governance & Context Engineering (v5.0)
 
-Este repositorio está gobernado por la arquitectura **iDirectory v4.0** (creada por **Gravity HyperScale Thinking**), diseñada específicamente para maximizar la precisión contextual, garantizar continuidad atencional y prevenir la degradación de la ventana de contexto (*Context Engineering*) en modelos de lenguaje (LLMs) y agentes autónomos (Google Gemini/Antigravity, Anthropic Claude Code, OpenAI Codex, Cursor, Windsurf, GitHub Copilot, Aider).
+Este repositorio está gobernado por la arquitectura **iDirectory v5.0** y el protocolo **iContext Federation v5.0** (creados por **Gravity HyperScale Thinking**), diseñados específicamente para maximizar la precisión contextual, garantizar continuidad atencional y prevenir la degradación de la ventana de contexto (*Context Engineering*) en modelos de lenguaje (LLMs) y agentes autónomos (Google Gemini/Antigravity, Anthropic Claude Code, OpenAI Codex, Cursor, Windsurf, GitHub Copilot, Aider).
 
-> **Fuente Única de Política (`v4.0.0`):** [`./config/context_policy.json`](./config/context_policy.json)  
-> **Orden de Precedencia Documental:** `1. Código ejecutable (FWengine.py) y Schemas (schemas/) -> 2. config/context_policy.json -> 3. Satélite (.context/tree.json) y Beacons (.context.yaml) -> 4. Checkpoint activo (.context/checkpoint.json) -> 5. Seed Maestro (01_seed/) -> 6. Planes activos vigentes (status: approved|executing)`.
+> **Fuente Única de Política (`v5.0.0`):** [`./config/context_policy.json`](./config/context_policy.json)  
+> **Orden de Precedencia Documental:** `1. Código ejecutable (FWengine.py) y Schemas (schemas/) -> 2. config/context_policy.json -> 3. Satélite (.context/tree.json), Bus Federado (.context/icontext_bus.json) y Beacons (.context.yaml) -> 4. Checkpoint activo (.context/checkpoint.json) -> 5. Seed Maestro (01_seed/) -> 6. Planes activos vigentes (status: approved|executing)`.
 
 ---
 
-## 🚀 BOOTLOADER ADAPTATIVO DE DOS NIVELES Y TRES PERFILES (v4.0)
+## 🚀 BOOTLOADER ADAPTATIVO DE DOS NIVELES Y TRES PERFILES (v5.0)
 
 Para maximizar la precisión contextual y evitar la dispersión atencional (*Attention Sink / Context Drift*), los agentes de IA **DEBEN** seleccionar el perfil mínimo suficiente según el alcance y riesgo de la tarea (no por el nombre lexical del comando):
 
@@ -53,16 +53,18 @@ Aplica a: rediseño integral multi-dominio, cambios en invariantes fundamentales
 
 ---
 
-## 🛠️ Herramienta CLI de Gobernanza: `FWengine.py` v4.0 / `/idir`
+## 🛠️ Herramienta CLI de Gobernanza: `FWengine.py` v5.0 / `/idir`
 
-1. **Cierre y Reconciliación Unificada (Idempotente):**
+1. **Cierre y Reconciliación Unificada v5.0 (Idempotente):**
    ```powershell
    python FWengine.py reconcile
    python FWengine.py reconcile --check
    ```
-2. **Paquete de Contexto Unificado Tier 1A (< 220 tokens):**
+2. **Paquete de Contexto Unificado Tier 1A (< 220 tokens) y Ecosistema (< 650 tokens):**
    ```powershell
    python FWengine.py context --pack <directorio> --tier 1a
+   python FWengine.py context --pack-ecosystem
+   python FWengine.py context --bus
    ```
 3. **Subgrafo Focalizado (< 150 tokens):**
    ```powershell

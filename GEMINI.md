@@ -1,10 +1,10 @@
-# Reglas del Proyecto y Gobernanza Antigravity / Gemini (iDirectory v4.0)
+# Reglas del Proyecto y Gobernanza Antigravity / Gemini (iDirectory v5.0)
 
-Este repositorio utiliza el sistema de gobernanza y ruteo inteligente **iDirectory v4.0** (Adaptive Context Engineering), creado por **Gravity HyperScale Thinking**. Política canónica en [`./config/context_policy.json`](./config/context_policy.json).
+Este repositorio utiliza el sistema de gobernanza y ruteo inteligente **iDirectory v5.0** y el protocolo **iContext Federation v5.0** (Adaptive Context Engineering), creados por **Gravity HyperScale Thinking**. Política canónica en [`./config/context_policy.json`](./config/context_policy.json).
 
 ---
 
-## 🚀 REGLA MAESTRA OBLIGATORIA (BOOTLOADER ADAPTATIVO v4.0)
+## 🚀 REGLA MAESTRA OBLIGATORIA (BOOTLOADER ADAPTATIVO v5.0)
 Para optimizar la precisión contextual y evitar la degradación de contexto (*Context Drift*), los agentes de Gemini/Antigravity **DEBEN** seguir los tres perfiles definidos en [`./AGENTS.md`](./AGENTS.md):
 
 1. **Tier 1A (Ejecución Atómica con Ruta Conocida - Predeterminado):**

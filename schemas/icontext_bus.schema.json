@@ -1,0 +1,102 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "../schemas/icontext_bus.schema.json",
+  "title": "iContext v5.0 Federated Interoperability Bus Schema",
+  "description": "Validates .context/icontext_bus.json for cross-tool state handoff across iDirectory, ThinkingSeed, MetricsThinking, and iReadme (v5.0).",
+  "type": "object",
+  "required": [
+    "$schema",
+    "protocol_version",
+    "project",
+    "updated_at",
+    "layers"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "const": "../schemas/icontext_bus.schema.json"
+    },
+    "protocol_version": {
+      "type": "string",
+      "enum": ["5.0", "5.0.0"]
+    },
+    "project": {
+      "type": "string",
+      "minLength": 1
+    },
+    "updated_at": {
+      "type": "string"
+    },
+    "layers": {
+      "type": "object",
+      "required": [
+        "l0_idirectory",
+        "l1_thinkingseed",
+        "l2_metricsthinking",
+        "l3_ireadme"
+      ],
+      "properties": {
+        "l0_idirectory": {
+          "type": "object",
+          "required": ["version", "topology_hash", "contracts_ast_hash", "active_nodes_count", "pruned_nodes_count"],
+          "properties": {
+            "version": { "type": "string" },
+            "topology_hash": { "type": "string" },
+            "contracts_ast_hash": { "type": "string" },
+            "active_nodes_count": { "type": "integer", "minimum": 0 },
+            "pruned_nodes_count": { "type": "integer", "minimum": 0 },
+            "active_tokens_estimate": { "type": "integer", "minimum": 0 },
+            "fpai_pruned_paths_count": { "type": "integer", "minimum": 0 }
+          },
+          "additionalProperties": true
+        },
+        "l1_thinkingseed": {
+          "type": "object",
+          "required": ["present", "version"],
+          "properties": {
+            "present": { "type": "boolean" },
+            "version": { "type": "string" },
+            "seed_path": { "type": "string" },
+            "seed_hash": { "type": "string" },
+            "synced_with_topology_hash": { "type": "string" },
+            "ast_coverage_pct": { "type": "number" },
+            "gates_passed": { "type": "string" }
+          },
+          "additionalProperties": true
+        },
+        "l2_metricsthinking": {
+          "type": "object",
+          "required": ["present", "version"],
+          "properties": {
+            "present": { "type": "boolean" },
+            "version": { "type": "string" },
+            "report_path": { "type": "string" },
+            "consolidated_score": { "type": "number" },
+            "maturity_band": { "type": "string" },
+            "active_bottleneck": { "type": "string" },
+            "fpai_pf_spectral": { "type": "number" },
+            "fpai_s_spectral": { "type": "number" },
+            "security_gate": { "type": "number" }
+          },
+          "additionalProperties": true
+        },
+        "l3_ireadme": {
+          "type": "object",
+          "required": ["present", "version"],
+          "properties": {
+            "present": { "type": "boolean" },
+            "version": { "type": "string" },
+            "standard": { "type": "string" },
+            "parity_score_phi": { "type": "number" },
+            "path_leakage_rate": { "type": "number" },
+            "synced_with_topology_hash": { "type": "string" }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
+

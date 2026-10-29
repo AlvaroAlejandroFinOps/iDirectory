@@ -52,6 +52,10 @@ from FWengine import (
     validate_backlog_queue,
     validate_dependency_dag,
     validate_backlog_data,
+    build_ast_contracts_index,
+    sync_icontext_bus,
+    build_ecosystem_pack,
+    upsert_segmented_block,
     SLICE_CHAR_BUDGET,
 )
 
@@ -229,7 +233,7 @@ class TestLifecycleAndIdempotence(unittest.TestCase):
         self.assertTrue(tree_path.exists())
 
         tree_data = json.loads(tree_path.read_text(encoding="utf-8"))
-        self.assertEqual(tree_data["version"], "4.0")
+        self.assertEqual(tree_data["version"], "5.0")
         self.assertEqual(len(tree_data["topology_hash"]), 64)
         self.assertTrue(len(tree_data["project"]) > 0)
         self.assertIn("bootloader", tree_data)
@@ -968,6 +972,76 @@ class TestV41EnterpriseAndIncremental(unittest.TestCase):
             self.assertEqual(errs, [])
         finally:
             shutil.rmtree(fresh_dir, ignore_errors=True)
+
+
+class TestV5FederationAndEcosystem(unittest.TestCase):
+    """
+    Test suite for iDirectory v5.0 Federated Context Engineering Protocol:
+    - Shared AST symbolic index (.context/contracts_ast.json)
+    - Federated 4-layer bus (.context/icontext_bus.json)
+    - Ecosystem context pack (context --pack-ecosystem < 650 tokens)
+    - Non-destructive segmented control-plane composition (upsert_segmented_block)
+    """
+
+    def setUp(self):
+        self.test_dir = tempfile.mkdtemp(prefix="idir_v50_test_")
+        self.test_path = Path(self.test_dir)
+        init_project(str(self.test_path))
+
+    def tearDown(self):
+        shutil.rmtree(self.test_dir, ignore_errors=True)
+
+    def test_ast_contracts_index_respects_pruning_and_extracts_signatures(self):
+        core_mod = self.test_path / "src" / "core" / "engine_service.py"
+        core_mod.write_text(
+            "def compute_vector(alpha: float, beta: int) -> float:\n    return alpha * beta\n\nclass VectorKernel:\n    pass\n",
+            encoding="utf-8",
+        )
+        # File in pruned directory (crawl: false) must NOT be indexed
+        pruned_mod = self.test_path / "data" / "raw" / "secret_script.py"
+        pruned_mod.write_text("def should_never_appear() -> None:\n    pass\n", encoding="utf-8")
+
+        sync_tree(self.test_path)
+        ast_idx = build_ast_contracts_index(self.test_path, write_to_disk=True)
+        self.assertIn("compute_vector", ast_idx["public_symbols"])
+        self.assertIn("VectorKernel", ast_idx["public_symbols"])
+        self.assertNotIn("should_never_appear", ast_idx["public_symbols"])
+        self.assertTrue((self.test_path / ".context" / "contracts_ast.json").is_file())
+        self.assertEqual(len(ast_idx["contracts_ast_hash"]), 64)
+
+    def test_sync_icontext_bus_and_ecosystem_pack_budget(self):
+        (self.test_path / "src" / "core" / "api.py").write_text("def serve() -> bool:\n    return True\n", encoding="utf-8")
+        reconcile_repository(self.test_path, check_only=False)
+
+        bus_file = self.test_path / ".context" / "icontext_bus.json"
+        self.assertTrue(bus_file.is_file())
+        bus = json.loads(bus_file.read_text(encoding="utf-8"))
+        self.assertEqual(bus["protocol_version"], "5.0.0")
+        self.assertIn("l0_idirectory", bus["layers"])
+        self.assertIn("l1_thinkingseed", bus["layers"])
+        self.assertIn("l2_metricsthinking", bus["layers"])
+        self.assertIn("l3_ireadme", bus["layers"])
+
+        epack = build_ecosystem_pack(self.test_path)
+        serialized = json.dumps(epack, ensure_ascii=False, separators=(",", ":"))
+        self.assertLessEqual(estimate_tokens_v4(serialized), 650)
+        self.assertEqual(epack["icontext_ecosystem_pack"], "5.0.0")
+
+    def test_upsert_segmented_block_non_destructive_composition(self):
+        agents_md = self.test_path / "AGENTS.md"
+        agents_md.write_text("# User Custom Header\nKeep this rule intact.\n", encoding="utf-8")
+
+        upsert_segmented_block(agents_md, "IDIRECTORY", "## iDirectory v5.0 Rules\nBootloader Tier 1A.")
+        upsert_segmented_block(agents_md, "THINKINGSEED", "## ThinkingSeed v5.0 Rules\nZero Source Code.")
+        # Update iDirectory block idempotently
+        upsert_segmented_block(agents_md, "IDIRECTORY", "## iDirectory v5.0 Rules\nBootloader Tier 1A + Ecosystem Pack.")
+
+        final_text = agents_md.read_text(encoding="utf-8")
+        self.assertIn("# User Custom Header", final_text)
+        self.assertIn("Bootloader Tier 1A + Ecosystem Pack.", final_text)
+        self.assertIn("Zero Source Code.", final_text)
+        self.assertEqual(final_text.count("ICONTEXT-V5:IDIRECTORY:START"), 1)
+        self.assertEqual(final_text.count("ICONTEXT-V5:THINKINGSEED:START"), 1)
 
 
 if __name__ == "__main__":

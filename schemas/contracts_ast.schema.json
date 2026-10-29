@@ -1,0 +1,75 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "../schemas/contracts_ast.schema.json",
+  "title": "iContext v5.0 Shared Symbolic AST Contracts Index Schema",
+  "description": "Validates .context/contracts_ast.json containing 1-line typed AST signatures, public symbols, and CLI flags for zero-double-scan reuse across iDirectory, ThinkingSeed, MetricsThinking, and iReadme.",
+  "type": "object",
+  "required": [
+    "$schema",
+    "version",
+    "project",
+    "topology_hash",
+    "contracts_ast_hash",
+    "public_symbols",
+    "cli_flags",
+    "modules"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "const": "../schemas/contracts_ast.schema.json"
+    },
+    "version": {
+      "type": "string",
+      "enum": ["5.0", "5.0.0"]
+    },
+    "project": {
+      "type": "string"
+    },
+    "updated_at": {
+      "type": "string"
+    },
+    "topology_hash": {
+      "type": "string"
+    },
+    "contracts_ast_hash": {
+      "type": "string"
+    },
+    "public_symbols": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "cli_flags": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "signatures_1line": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "modules": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["symbols", "signatures"],
+        "properties": {
+          "symbols": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "cli_flags": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "signatures": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": false
+}
+
