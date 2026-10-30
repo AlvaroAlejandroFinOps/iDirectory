@@ -14,11 +14,19 @@ Esta habilidad proporciona el flujo para consultar, auditar, reconciliar y clasi
 ## 1. Modos de Uso
 
 ### A. Reconciliación y Cierre Unificado (`reconcile`)
-Sincroniza beacons, genera el índice compartido de contratos AST (`.context/contracts_ast.json`), actualiza el bus de federación de 4 capas (`.context/icontext_bus.json`), actualiza el mapa satelital `.context/tree.json` (con `topology_hash` SHA-256) y ejecuta la auditoría de gobernanza en un solo paso idempotente.
+Sincroniza beacons, genera el índice compartido de contratos AST (`.context/contracts_ast.json`), auto-repara directorios con mayúsculas en Windows NTFS, actualiza el bus de federación de 4 capas (`.context/icontext_bus.json`), actualiza el mapa satelital `.context/tree.json` (con `topology_hash` SHA-256) y ejecuta la auditoría de gobernanza en un solo paso idempotente.
 
 ```powershell
 python FWengine.py reconcile
 python FWengine.py reconcile --check
+```
+
+### A.1. Sincronización Maestra 1-Click de Toda la Federación (`/idir sync` o `icontext.py sync`)
+Cuando el usuario o el agente necesite actualizar, reparar y sincronizar de un solo golpe los 4 repositorios federados (`iDirectory`, `ThinkingSeed`, `MetricsThinking`, `iReadme`):
+
+```powershell
+python "d:\0001 HyperScale Thinking\PROYECTOS CLOUD\iContext\icontext.py" sync
+python "d:\0001 HyperScale Thinking\PROYECTOS CLOUD\iContext\icontext.py" status
 ```
 
 ### B. Paquete de Contexto Unificado Tier 1A (`context --pack`)

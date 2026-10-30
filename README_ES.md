@@ -4,10 +4,14 @@
 
 **Idioma:** [English](README.md) | [Español](README_ES.md)
 
-[![Motor](https://img.shields.io/badge/Motor-FWengine.py-1a1a1a?style=flat-square)](#3-formulación-matemática-y-motores-analíticos)
-[![Estándar](https://img.shields.io/badge/Est%C3%A1ndar-Enterprise%20Paper--Grade%20v2.0-2b2b2b?style=flat-square)](#)
+[![Estándar](https://img.shields.io/badge/Est%C3%A1ndar-Enterprise%20Paper--Grade%20v5.0-2b2b2b?style=flat-square)](#)
 [![Ecosistema](https://img.shields.io/badge/Ecosistema-Multi--IA%20%28Google%20%7C%20Claude%20%7C%20OpenAI%20%7C%20Cursor%29-34495e?style=flat-square)](#1-resumen-ejecutivo)
-[![Arquitectura](https://img.shields.io/badge/Arquitectura-iDirectory%20v4.1-4b5563?style=flat-square)](#2-arquitectura-y-topología-del-sistema)
+[![iContext Federation](https://img.shields.io/badge/iContext-Federated%20v5.0-1a1a1a?style=flat-square)](#)
+[![iDirectory L0](https://img.shields.io/badge/L0-iDirectory%20v5.0-2b2b2b?style=flat-square)](#)
+[![ThinkingSeed L1](https://img.shields.io/badge/L1-ThinkingSeed%20v5.0-34495e?style=flat-square)](#)
+[![MetricsThinking L2](https://img.shields.io/badge/L2-MetricsThinking%20v5.0-4b5563?style=flat-square)](#)
+[![iReadme L3](https://img.shields.io/badge/L3-iReadme%20v5.0-000000?style=flat-square)](#)
+[![Motor](https://img.shields.io/badge/Motor-FWengine.py-1a1a1a?style=flat-square)](#3-formulación-matemática-y-motores-analíticos)
 [![Verificación](https://img.shields.io/badge/Verificaci%C3%B3n-74%2F74%20Superadas%20(100%25)-000000?style=flat-square)](#6-protocolo-de-ejecución-y-verificación)
 [![Licencia](https://img.shields.io/badge/Licencia-MIT-1a1a1a?style=flat-square)](LICENSE)
 
@@ -74,6 +78,19 @@ La arquitectura de **iDirectory v4.1** se articula en torno a un núcleo de gobe
 |  +-- tools/ & scripts/         (Herramientas Operativas, Generadores y Automat.)  |
 +-----------------------------------------------------------------------------------+
 ```
+
+### Gobernanza Federada & Context Engineering iContext v5.0
+
+Este proyecto implementa formalmente el protocolo **iContext Federation Protocol v5.0**, incorporando **4 de los 4 proyectos canónicos** (iDirectory, ThinkingSeed, MetricsThinking y iReadme) de gobernanza agéntica y optimización atencional creados por Gravity HyperScale Thinking:
+
+| Capa | Componente | Función Principal en este Repositorio | Estado |
+| :--- | :--- | :--- | :--- |
+| `L0` | **iDirectory (L0)** — Plano de Control Topológico & Context Engineering Adaptativo | Gobierna la topología canónica all-lowercase, balizas semánticas (.context.yaml), satélite criptográfico (.context/tree.json), presupuestos de tokens y aislamiento mediante cápsulas para subagentes (<450 tokens). | `ACTIVE (v5.0)` |
+| `L1` | **ThinkingSeed (L1)** — Vector de ADN Arquitectónico Simbólico & Memoria Zero-Code | Preserva la memoria técnica y contratos simbólicos AST sin fuga de código fuente (Zero Source Code), auditado bajo validación estricta de 6 Gates deterministas. | `ACTIVE (v5.0)` |
+| `L2` | **MetricsThinking (L2)** — Auditoría Forense Tecnológica & Gobernanza Espectral FPIA | Calcula madurez por Ground Truth en 10 módulos canónicos, deriva semántica AST, eficiencia espectral FPIA (S_spectral, PF_spectral) y escaneo de seguridad Zero-Trust. | `ACTIVE (v5.0)` |
+| `L3` | **iReadme (L3)** — Sintetizador Institucional de Documentación Dual Paper-Grade | Sincroniza documentación dual inglés/español bajo el estándar Enterprise Paper-Grade, garantizando paridad estructural phi = 1.0, formulación formal en KaTeX y cero fugas de ruta local. | `ACTIVE (v5.0)` |
+
+La interoperabilidad entre estas herramientas se orquesta de manera no-bloqueante a través del **Bus Cognitivo Federado** (`./.context/icontext_bus.json`), garantizando continuidad atencional, cero deriva satelital y protección estricta contra alucinaciones en agentes autónomos.
 
 ---
 

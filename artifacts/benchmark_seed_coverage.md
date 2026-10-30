@@ -12,9 +12,9 @@
 | Dimensión de Métrica | Repositorio Completo | Seed Híbrido (`/seed`) | Seed Master (`/seedMaster`) |
 |---|:---:|:---:|:---:|
 | **Volumen de Archivos** | **86 archivos** | 0 archivo Markdown | 1 archivo Markdown |
-| **Líneas de Código / Texto** | **12,322 líneas** | 0 líneas | 513 líneas |
-| **Peso Físico** | **2.34 MB** | 0.0 KB | 60.7 KB |
-| **Tokens Estimados** | **~614,406 tokens** | **~0 tokens** | **~9,599 tokens** |
+| **Líneas de Código / Texto** | **12,367 líneas** | 0 líneas | 513 líneas |
+| **Peso Físico** | **2.35 MB** | 0.0 KB | 60.7 KB |
+| **Tokens Estimados** | **~615,004 tokens** | **~0 tokens** | **~9,599 tokens** |
 | **Ahorro de Contexto (Tokens)** | 0% (Base) | **0.00% de ahorro** | **98.44% de ahorro** |
 | **Factor de Compresión** | 1x | **N/A** | **64x más ligero** |
 | **ÍNDICE DE COBERTURA DE ADN** | 100% (Código crudo) | **0.0% (ADN Esencial)** | **97.6% (ADN Exhaustivo)** |
@@ -61,6 +61,6 @@
 ---
 
 ## 5. CONCLUSIÓN Y VEREDICTO DE AUDITORÍA
-1. **Eficacia Demostrada:** El repositorio `iDirectory` con **86 archivos (2.34 MB)** queda representado en su vector arquitectónico v3.0 en **60.7 KB** (98.44% de ahorro de tokens).
+1. **Eficacia Demostrada:** El repositorio `iDirectory` con **86 archivos (2.35 MB)** queda representado en su vector arquitectónico v3.0 en **60.7 KB** (98.44% de ahorro de tokens).
 2. **Cobertura Semántica AST:** Se verificaron mediante `ast.parse()` **75/75 (100.0%)** contratos públicos y flags CLI documentados como firmas simbólicas de 1 línea.
 3. **Cumplimiento de Gates v3.0:** Estado global de los 6 validadores deterministas: **PASS (6/6 GATES OK)**.

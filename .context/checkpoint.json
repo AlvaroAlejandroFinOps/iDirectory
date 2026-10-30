@@ -1,0 +1,17 @@
+{
+  "version": "5.0",
+  "plan_id": "baseline",
+  "status": "draft",
+  "current_phase": "P0",
+  "completed_steps": [],
+  "next_action": "Audit and plan verification",
+  "verified_evidence": [],
+  "active_invariants": [
+    "INV-01",
+    "INV-02",
+    "INV-03",
+    "INV-06",
+    "INV-08"
+  ],
+  "updated_at": "2026-10-29T17:44:42.122006+00:00"
+}

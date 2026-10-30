@@ -2,7 +2,7 @@
   "$schema": "../schemas/icontext_bus.schema.json",
   "protocol_version": "5.0.0",
   "project": "iDirectory",
-  "updated_at": "2026-10-29T02:14:20.087674+00:00",
+  "updated_at": "2026-10-29T20:35:27.474238+00:00",
   "layers": {
     "l0_idirectory": {
       "version": "5.0.0",
@@ -10,17 +10,21 @@
       "contracts_ast_hash": "e24cd3bbc9cd3a9aef4808aea72e3f8c474e6e3a2a5366910db3628cc99c7475",
       "active_nodes_count": 19,
       "pruned_nodes_count": 8,
-      "active_tokens_estimate": 60827,
+      "active_tokens_estimate": 61990,
       "fpai_pruned_paths_count": 0
     },
     "l1_thinkingseed": {
       "present": true,
-      "version": "5.0",
+      "version": "5.0.0",
       "seed_path": "01_seed/seed-idirectory-master.md",
       "seed_hash": "04683df3299cdb8409a4d45b409ca3d87428e03c45cc94191a034a1dbc72cdbb",
       "synced_with_topology_hash": "588cab510a567f6182cb3917bd69064035893445b3f3edd08285007c9fc8eae7",
-      "ast_coverage_pct": 98.92,
-      "gates_passed": "pending"
+      "ast_coverage_pct": 100.0,
+      "gates_passed": "6/6",
+      "seed_version": "5.0",
+      "untracked_public_symbols": [],
+      "freshness_status": "SYNCED",
+      "last_validated_at": "2026-10-29T20:35:22.969093+00:00"
     },
     "l2_metricsthinking": {
       "present": true,
