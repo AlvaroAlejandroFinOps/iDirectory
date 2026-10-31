@@ -2,7 +2,7 @@
   "$schema": "../schemas/icontext_bus.schema.json",
   "protocol_version": "5.0.0",
   "project": "iDirectory",
-  "updated_at": "2026-10-29T20:35:27.474238+00:00",
+  "updated_at": "2026-10-31T17:56:05.454072+00:00",
   "layers": {
     "l0_idirectory": {
       "version": "5.0.0",
@@ -24,7 +24,7 @@
       "seed_version": "5.0",
       "untracked_public_symbols": [],
       "freshness_status": "SYNCED",
-      "last_validated_at": "2026-10-29T20:35:22.969093+00:00"
+      "last_validated_at": "2026-10-31T17:55:58.407527+00:00"
     },
     "l2_metricsthinking": {
       "present": true,

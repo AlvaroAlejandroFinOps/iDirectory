@@ -3650,6 +3650,7 @@ def main():
     # reconcile
     reconcile_parser = subparsers.add_parser("reconcile", help="Cierre unificado e idempotente (sincroniza beacons, satélite y audita)")
     reconcile_parser.add_argument("--check", action="store_true", help="Verifica en modo lectura sin modificar archivos")
+    reconcile_parser.add_argument("--base", "--target", dest="base", default=".", help="Directorio base a reconciliar")
 
     args = parser.parse_args()
     root = Path(getattr(args, "base", getattr(args, "path", ".")))

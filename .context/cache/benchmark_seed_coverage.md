@@ -12,9 +12,9 @@
 | Dimensión de Métrica | Repositorio Completo | Seed Híbrido (`/seed`) | Seed Master (`/seedMaster`) |
 |---|:---:|:---:|:---:|
 | **Volumen de Archivos** | **88 archivos** | 0 archivo Markdown | 1 archivo Markdown |
-| **Líneas de Código / Texto** | **12,630 líneas** | 0 líneas | 513 líneas |
+| **Líneas de Código / Texto** | **12,631 líneas** | 0 líneas | 513 líneas |
 | **Peso Físico** | **2.36 MB** | 0.0 KB | 60.7 KB |
-| **Tokens Estimados** | **~618,959 tokens** | **~0 tokens** | **~9,599 tokens** |
+| **Tokens Estimados** | **~618,989 tokens** | **~0 tokens** | **~9,599 tokens** |
 | **Ahorro de Contexto (Tokens)** | 0% (Base) | **0.00% de ahorro** | **98.45% de ahorro** |
 | **Factor de Compresión** | 1x | **N/A** | **64x más ligero** |
 | **ÍNDICE DE COBERTURA DE ADN** | 100% (Código crudo) | **0.0% (ADN Esencial)** | **97.6% (ADN Exhaustivo)** |
