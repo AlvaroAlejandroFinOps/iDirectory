@@ -1,216 +1,282 @@
----
-plan_id: metricsthinking-audit-2026-09-25
-status: superseded
-executable: false
-target_version: "3.0"
-created_at: "2026-09-25"
-updated_at: "2026-10-26"
-superseded_by: "iDirectory v4.0 Forensic Suite (68 tests)"
----
-# METRICSTHINKING™: Auditoría Forense y Madurez del Proyecto (Snapshot Histórico Septiembre 2026)
+# METRICSTHINKING™: Auditoría Forense y Madurez del Proyecto
 
-> **[AVISO DE GOBERNANZA v4.0]:** Este reporte constituye un registro histórico del commit `4461915` (`2026-09-25`, 20 pruebas). No debe precargarse como P0 en sesiones operativas normales (`read_priority: p2`, `seed_reference: optional`). Para telemetría en vivo, ejecute `python FWengine.py context --budget` y `python FWengine.py reconcile --check`.
-> **Motor Evaluador:** MetricsThinking™ v1.0.0-ENTERPRISE (Taxonomía Adaptada a Skills Agénticas)  
-> **Proyecto Auditado:** `iDirectory` (Framework de Gobernanza, Ruteo y Context Engineering para Flujos Agénticos)  
-> **Ubicación:** `D:\0001 HyperScale Thinking\PROYECTOS CLOUD\iContext\iDirectory`  
-> **Fecha de Auditoría:** `2026-09-25 13:45:00`  
-> **Auditor Responsable:** `Lead Solutions Architect & MetricsThinking™ Universal Auditor`  
-> **Perfil Aplicado:** `agentic-skill` (Skill para Flujos Agénticos y Context Engineering)  
-> **Git Commit / Branch:** `4461915` / `master`  
-> **Score Consolidado:** **`100.00% / 100.0%`**  
-> **Banda de Madurez:** **Excelencia Operativa / Producción (90.0% - 100.0%)**
+> **Motor Evaluador:** MetricsThinking™ v6.0 Universal  
+> **Proyecto Auditado:** `iDirectory`  
+> **Ubicación:** `./`  
+> **Fecha de Auditoría:** `2026-10-31 20:02:27`  
+> **Auditor Responsable:** `MetricsThinking™ Universal Auditor`  
+> **Perfil Aplicado:** `default` (`software-engineering`)  
+> **Modo de Inspección:** `source_code`  
+> **ThinkingSeed:** `Detectado (v6.0)`  
+> **Git Commit / Branch:** `0ea360e` / `master`  
+> **Score Consolidado:** **`73.5% / 100.0%`**  
+> **Banda de Madurez:** **Construcción Activa / Madurez Media (50.0% - 74.9%)**
 
 ---
 
 ## 1. RESUMEN EJECUTIVO Y GROUND TRUTH
 
-MetricsThinking™ ha completado la auditoría forense estricta basada en evidencias físicas verificables en el repositorio tras la ejecución completa del **Plan de Remediación Técnica Priorizado**.
+MetricsThinking™ ha completado la auditoría forense estricta basada en evidencias físicas verificables en el repositorio.
 
-- **Nota Global Consolidada ($Score_{Total}$):** **`100.00%`**
-- **Criterios Cumplidos:** **`30 / 30`** (100.0%)
-- **Cuello de Botella Inmediato:** **`Ninguno. Todos los módulos canónicos se encuentran al 100%.`**
-- **Arquitectura Nuclear:** Zero-Dependency pura verificada sobre Python Standard Library (`pathlib`, `json`, `argparse`, `sys`, `os`, `unittest`).
-- **Aseguramiento de Calidad:** Suite automatizada completa con 20 pruebas unitarias y de estrés/benchmark ejecutadas exitosamente en ~1.2s.
-- **Eficiencia de Context Engineering:** Reducción empírica de tokens verificada en un **`96.1%`** (~766 tokens de satélite vs. ~19,886 tokens en escaneo recursivo ingenuo).
-- **Gobernanza iDirectory (.context.yaml):** `Activa` (24 microarchivos sincronizados + satélite `.context/tree.json` con `PASS` en auditoría).
-- **Automatización CI/CD:** Pipeline de integración continua desplegado en [`.github/workflows/ci.yml`](file:///d:/0001%20HyperScale%20Thinking/PROYECTOS%20CLOUD/iContext/iDirectory/.github/workflows/ci.yml) con matriz multi-OS y multi-versión de Python.
+- **Nota Global Consolidada ($Score_{Total}$):** **`73.50%`**
+- **Arquetipo de Dominio:** **`software-engineering`** (Modo: `source_code`)
+- **Criterios Cumplidos:** **`28 / 36`** (77.8%)
+- **Cuello de Botella Inmediato:** **`M03: Gobernanza y Cumplimiento (66.7% completado)`**
+- **Archivos Físicos Escaneados:** **`83`**
+- **Memoria Técnica (Seed):** `Presente`
+- **Gobernanza iDirectory (.context.yaml):** `Activa`
+
+### Primitivas Universales de Evidencia
+
+| Primitiva | Archivos Clasificados | Rutas de Muestra |
+|:---|:---:|:---|
+| **Config** | `36` | `.agentignore`, `.cursorrules`, `pyproject.toml` |
+| **Spec** | `25` | `.agentignore`, `.cursorrules`, `AGENTS.md` |
+| **Pipeline** | `1` | `.github/workflows/ci.yml` |
+| **Verification** | `14` | `artifacts/benchmark_seed_coverage.md`, `artifacts/benchmarks/.context.yaml`, `artifacts/benchmarks/README.md` |
+| **Implementation** | `15` | `.agents/skills/idir/SKILL.md`, `01_seed/seed-idirectory-master.md`, `02_foundation/.context.yaml` |
+
 
 ---
 
 ## 2. DASHBOARD EJECUTIVO DE MADUREZ POR MÓDULOS CANÓNICOS
 
-| ID | Nombre del Módulo Adaptado al Dominio | Peso ($W_i$) | Criterios Cumplidos | % Cumplimiento | Contribución ($S_i$) | Estado |
+| ID | Nombre del Módulo | Peso ($W_i$) | Criterios Cumplidos | % Cumplimiento | Contribución ($S_i$) | Estado |
 |:---|:---|:---:|:---:|:---:|:---:|:---:|
-| **M01** | Descubrimiento y Especificación de Skill Agéntica | **5%** | `3 / 3` | **100.0%** | **5.00%** | 🟢 Completo |
-| **M02** | Arquitectura de Contexto, Contratos y Esquemas | **10%** | `4 / 4` | **100.0%** | **10.00%** | 🟢 Completo |
-| **M03** | Gobernanza de Contexto, Seguridad y Token Budget | **5%** | `3 / 3` | **100.0%** | **5.00%** | 🟢 Completo |
-| **M04** | Entorno de Ejecución y Zero-Dependency Tooling | **5%** | `3 / 3` | **100.0%** | **5.00%** | 🟢 Completo |
-| **M05** | Motor Nuclear de la Skill (Workflow Engine) | **25%** | `4 / 4` | **100.0%** | **25.00%** | 🟢 Completo |
-| **M06** | Integración Multi-Proveedor e Interoperabilidad | **15%** | `3 / 3` | **100.0%** | **15.00%** | 🟢 Completo |
-| **M07** | Aseguramiento de Calidad y Robustez de Flujos | **10%** | `3 / 3` | **100.0%** | **10.00%** | 🟢 Completo |
-| **M08** | Experiencia del Agente / Interfaz Humano-Agente | **10%** | `3 / 3` | **100.0%** | **10.00%** | 🟢 Completo |
-| **M09** | Distribución, Empaquetado y Automatización CI/CD | **10%** | `2 / 2` | **100.0%** | **10.00%** | 🟢 Completo |
-| **M10** | Memoria Técnica, Documentación y Extensibilidad | **5%** | `3 / 3` | **100.0%** | **5.00%** | 🟢 Completo |
-| **TOTAL** | **Ciclo de Vida Completo (SDD para Skills Agénticas)** | **100%** | `30 / 30` | — | **`100.00%`** | **OPERATIONAL_EXCELLENCE** |
+| **M01** | Descubrimiento y Alcance | **5%** | `3 / 3` | **100.0%** | **5.00%** | 🟢 Done |
+| **M02** | Arquitectura y Diseño Técnico | **10%** | `4 / 4` | **100.0%** | **10.00%** | 🟢 Done |
+| **M03** | Gobernanza y Cumplimiento | **5%** | `2 / 3` | **66.7%** | **3.33%** | 🔵 Active |
+| **M04** | Aprovisionamiento y Readiness | **5%** | `3 / 3` | **100.0%** | **5.00%** | 🟢 Done |
+| **M05** | Construcción Núcleo (Core Engine) | **25%** | `2 / 4` | **50.0%** | **12.50%** | 🔵 Active |
+| **M06** | Integración e Interoperabilidad | **15%** | `4 / 5` | **80.0%** | **12.00%** | 🔵 Active |
+| **M07** | Aseguramiento de Calidad (QA & Stress) | **10%** | `2 / 3` | **66.7%** | **6.67%** | 🔵 Active |
+| **M08** | Validación y Aceptación Organizacional | **10%** | `2 / 5` | **40.0%** | **4.00%** | 🔵 Active |
+| **M09** | Despliegue y Automatización (CI/CD) | **10%** | `2 / 2` | **100.0%** | **10.00%** | 🟢 Done |
+| **M10** | Cierre, Extensibilidad y Documentación | **5%** | `4 / 4` | **100.0%** | **5.00%** | 🟢 Done |
+| **TOTAL** | **Ciclo de Vida Completo (SOFTWARE-ENGINEERING)** | **100%** | `28 / 36` | — | **`73.50%`** | **CONSTRUCTION** |
 
 ---
 
-## 3. ROADMAP DE MADUREZ Y ESTADO DE FASES (MERMAID HORIZONTAL LR)
+## 3. ROADMAP VISUAL DE MADUREZ (MERMAID LR OPTIMIZADO)
+
+Visualización de alta legibilidad en IDE con flujo horizontal continuo y codificación semántica de colores:
 
 ```mermaid
 flowchart LR
-    M01["<b>M01: Skill Spec & Scope</b><br/>100.0% | Completo"]
-    M02["<b>M02: Context Architecture</b><br/>100.0% | Completo"]
-    M03["<b>M03: Token Budget Gov</b><br/>100.0% | Completo"]
-    M04["<b>M04: Zero-Dep Readiness</b><br/>100.0% | Completo"]
-    M05["<b>M05: Workflow Engine Core</b><br/>100.0% | Completo"]
-    M06["<b>M06: Multi-Agent Shims</b><br/>100.0% | Completo"]
-    M07["<b>M07: QA & Token Benchmarks</b><br/>100.0% | Completo"]
-    M08["<b>M08: Agent UX & CLI Tools</b><br/>100.0% | Completo"]
-    M09["<b>M09: CI/CD & Distribution</b><br/>100.0% | Completo"]
-    M10["<b>M10: Seed & High-Eng Docs</b><br/>100.0% | Completo"]
+    M01["<b>M01: Descubrimiento y Alcance</b><br/>100.0% | Done"]
+    M02["<b>M02: Arquitectura y Diseño Técnico</b><br/>100.0% | Done"]
+    M03["<b>M03: Gobernanza y Cumplimiento</b><br/>66.7% | Active"]
+    M04["<b>M04: Aprovisionamiento y Readiness</b><br/>100.0% | Done"]
+    M05["<b>M05: Construcción Núcleo (Core Engine)</b><br/>50.0% | Active"]
+    M06["<b>M06: Integración e Interoperabilidad</b><br/>80.0% | Active"]
+    M07["<b>M07: Aseguramiento de Calidad (QA & Stress)</b><br/>66.7% | Active"]
+    M08["<b>M08: Validación y Aceptación Organizacional</b><br/>40.0% | Active"]
+    M09["<b>M09: Despliegue y Automatización (CI/CD)</b><br/>100.0% | Done"]
+    M10["<b>M10: Cierre, Extensibilidad y Documentación</b><br/>100.0% | Done"]
 
-    SUMMARY["<b>RESUMEN EJECUTIVO</b><br/>Score: 100.00% | Producción<br/>Cuello Activo: Ninguno (100%)"]
+    M01 --> M02
+    M02 --> M03
+    M03 --> M04
+    M04 --> M05
+    M05 --> M06
+    M06 --> M07
+    M07 --> M08
+    M08 --> M09
+    M09 --> M10
 
-    M01 --> M02 --> M03 --> M04 --> M05 --> M06 --> M07 --> M08 --> M09 --> M10 ==> SUMMARY
+    SUMMARY["<b>RESUMEN EJECUTIVO</b><br/>Score: 73.5% | CONSTRUCTION<br/>Cuello de Botella: M03: Gobernanza y Cumplimiento"]
+    M10 ==> SUMMARY
 
+    %% Estilos semánticos
     classDef done fill:#1E4620,stroke:#2ECC71,stroke-width:2px,color:#FFFFFF;
     classDef active fill:#0D47A1,stroke:#2196F3,stroke-width:3px,color:#FFFFFF;
+    classDef backlog fill:#2C3E50,stroke:#7F8C8D,stroke-width:1px,stroke-dasharray: 4 4,color:#BDC3C7;
+    classDef blocked fill:#641E16,stroke:#E74C3C,stroke-width:2px,color:#FFFFFF;
     classDef summary fill:#1A252F,stroke:#F39C12,stroke-width:2px,color:#F1C40F;
 
-    class M01,M02,M03,M04,M05,M06,M07,M08,M09,M10 done;
+    class M01 done;
+    class M02 done;
+    class M03 active;
+    class M04 done;
+    class M05 active;
+    class M06 active;
+    class M07 active;
+    class M08 active;
+    class M09 done;
+    class M10 done;
     class SUMMARY summary;
 ```
+
+**Leyenda Semántica:** `🟢 Verde (#1E4620 / #2ECC71)` = Done (100%) | `🔵 Azul (#0D47A1 / #2196F3)` = Active (1-99%) | `⚪ Gris (#2C3E50 / #7F8C8D)` = Backlog (0%) | `🔴 Rojo (#641E16 / #E74C3C)` = Blocked
 
 ---
 
 ## 4. DESGLOSE FORENSE DE EVIDENCIAS POR MÓDULO
 
-### M01: Descubrimiento y Especificación de Skill Agéntica — 🟢 COMPLETO (100.0%)
+### M01: Descubrimiento y Alcance — 🟢 DONE (100.0%)
 **Peso Relativo:** 5% | **Contribución Ponderada:** 5.00%
 
 | Criterio | Nombre | Estado | Evidencia Física Detectada |
 |:---|:---|:---:|:---|
-| `M01-C01` | Especificación Formal de Skill (`SKILL.md`) | ✅ `[CUMPLIDO]` | [`.agents/skills/idir/SKILL.md`](file:///d:/0001%20HyperScale%20Thinking/PROYECTOS%20CLOUD/iContext/iDirectory/.agents/skills/idir/SKILL.md) — Manifiesto de skill con frontmatter YAML (`name: idir`, `description`), objetivos claros y comandos operacionales. |
-| `M01-C02` | Guardrails y Límites Operativos Agénticos | ✅ `[CUMPLIDO]` | [`AGENTS.md`](file:///d:/0001%20HyperScale%20Thinking/PROYECTOS%20CLOUD/iContext/iDirectory/AGENTS.md) — Declaración explícita de acciones prohibidas (*"PROHIBIDO EL ESCANEO CIEGO RECURSIVO"*) y directivas de poda de ramas muertas (`crawl: false`). |
-| `M01-C03` | Casos de Uso y Compatibilidad Agéntica | ✅ `[CUMPLIDO]` | [`01_seed/seed-idirectory-master.md`](file:///d:/0001%20HyperScale%20Thinking/PROYECTOS%20CLOUD/iContext/iDirectory/01_seed/seed-idirectory-master.md) — Sección 1.3 define formalmente los sistemas consumidores: Google Antigravity/Gemini, Claude Code, Cursor, Windsurf, Aider. |
+| `M01-C01` | Problem Statement Formalizado | ✅ `[CUMPLIDO]` | **`01_seed/seed-idirectory-master.md`** — Problem statement formalizado en '01_seed/seed-idirectory-master.md'. |
+| `M01-C02` | Límites y Scope Declarados | ✅ `[CUMPLIDO]` | **`01_seed/seed-idirectory-master.md`** — Límites de alcance y fronteras del sistema identificados en '01_seed/seed-idirectory-master.md'. |
+| `M01-C03` | Casos de Uso Formales | ✅ `[CUMPLIDO]` | **`01_seed/seed-idirectory-master.md`** — Perfiles de uso y casos definidos en '01_seed/seed-idirectory-master.md'. |
 
----
-
-### M02: Arquitectura de Contexto, Contratos y Esquemas — 🟢 COMPLETO (100.0%)
+### M02: Arquitectura y Diseño Técnico — 🟢 DONE (100.0%)
 **Peso Relativo:** 10% | **Contribución Ponderada:** 10.00%
 
 | Criterio | Nombre | Estado | Evidencia Física Detectada |
 |:---|:---|:---:|:---|
-| `M02-C01` | Modelos Canónicos y Contratos de Invocación | ✅ `[CUMPLIDO]` | [`FWengine.py`](file:///d:/0001%20HyperScale%20Thinking/PROYECTOS%20CLOUD/iContext/iDirectory/FWengine.py) — Contrato canónico `FOLDER_METADATA` y `ROUTING_MAP` para normalización all-lowercase y subcomandos tipados. |
-| `M02-C02` | Reglas de Gobernanza Agéntica Unificadas (ADRs) | ✅ `[CUMPLIDO]` | [`AGENTS.md`](file:///d:/0001%20HyperScale%20Thinking/PROYECTOS%20CLOUD/iContext/iDirectory/AGENTS.md) y [`GEMINI.md`](file:///d:/0001%20HyperScale%20Thinking/PROYECTOS%20CLOUD/iContext/iDirectory/GEMINI.md) — Protocolo Bootloader de 4 pasos como contrato arquitectónico universal e inviolable. |
-| `M02-C03` | Esquemas Formales de Contexto | ✅ `[CUMPLIDO]` | [`.context/tree.json`](file:///d:/0001%20HyperScale%20Thinking/PROYECTOS%20CLOUD/iContext/iDirectory/.context/tree.json) y [`schemas/`](file:///d:/0001%20HyperScale%20Thinking/PROYECTOS%20CLOUD/iContext/iDirectory/schemas/) — Esquema JSON Schema referenciado (`tree.schema.json`) y microcontratos `.context.yaml` validados. |
-| `M02-C04` | Topología Satelital y Grafo de Contexto | ✅ `[CUMPLIDO]` | [`.context/tree.json`](file:///d:/0001%20HyperScale%20Thinking/PROYECTOS%20CLOUD/iContext/iDirectory/.context/tree.json) — Grafo satelital ultraligero (~250 tokens) que encapsula roles, prioridades y directivas de poda de todo el sistema. |
+| `M02-C01` | AST / Modelos Canónicos Desacoplados | ✅ `[CUMPLIDO]` | **`schemas/backlog.schema.json`** — Modelos declarativos estructurados en esquemas (9 esquemas, e.g. 'schemas/backlog.schema.json'). |
+| `M02-C02` | ADRs Documentados | ✅ `[CUMPLIDO]` | **`01_seed/seed-idirectory-master.md`** — Registro formal de decisiones arquitectónicas (ADRs) documentado en '01_seed/seed-idirectory-master.md'. |
+| `M02-C03` | Contratos JSON Schema Validados | ✅ `[CUMPLIDO]` | **`schemas/backlog.schema.json`** — Contratos formales de datos / esquemas presentes (9 esquemas, e.g. 'schemas/backlog.schema.json'). |
+| `M02-C04` | Topología y Grafos Formales | ✅ `[CUMPLIDO]` | **`schemas/tree.schema.json`** — Modelado topológico o de grafos presente en 'schemas/tree.schema.json'. |
 
----
+### M03: Gobernanza y Cumplimiento — 🔵 ACTIVE (66.7%)
+**Peso Relativo:** 5% | **Contribución Ponderada:** 3.33%
 
-### M03: Gobernanza de Contexto, Seguridad y Token Budget — 🟢 COMPLETO (100.0%)
+| Criterio | Nombre | Estado | Evidencia Física Detectada |
+|:---|:---|:---:|:---|
+| `M03-C01` | Detección y Marcado de PII | ✅ `[CUMPLIDO]` | **`01_seed/seed-idirectory-master.md`** — Políticas de privacidad y clasificación PII documentadas en '01_seed/seed-idirectory-master.md'. |
+| `M03-C02` | Reglas de Calidad Formales (cQS) | ❌ `[FALTANTE]` | No se encontraron reglas cuantitativas de calidad formal (cQS). |
+| `M03-C03` | Validación Estricta de Esquemas / Context | ✅ `[CUMPLIDO]` | **`01_seed/.context.yaml`** — Gobernanza contextual iDirectory activa con 30 archivos de contexto (.context.yaml). |
+
+### M04: Aprovisionamiento y Readiness — 🟢 DONE (100.0%)
 **Peso Relativo:** 5% | **Contribución Ponderada:** 5.00%
 
 | Criterio | Nombre | Estado | Evidencia Física Detectada |
 |:---|:---|:---:|:---|
-| `M03-C01` | Políticas de Privacidad y Poda de Datos Masivos | ✅ `[CUMPLIDO]` | [`.agentignore`](file:///d:/0001%20HyperScale%20Thinking/PROYECTOS%20CLOUD/iContext/iDirectory/.agentignore) — Máscara de exclusión para indexadores de IA que aísla `data/raw`, `data/processed`, `logs/` y binarios pesados. |
-| `M03-C02` | Telemetría y Control Cuantitativo de Token Budget (cQS) | ✅ `[CUMPLIDO]` | [`FWengine.py`](file:///d:/0001%20HyperScale%20Thinking/PROYECTOS%20CLOUD/iContext/iDirectory/FWengine.py) — Algoritmo `compute_context_budget` y densidad tipada (`token_density`) por carpeta para control presupuestario de tokens. |
-| `M03-C03` | Validación Estricta de Beacons y Coherencia Topológica | ✅ `[CUMPLIDO]` | [`FWengine.py`](file:///d:/0001%20HyperScale%20Thinking/PROYECTOS%20CLOUD/iContext/iDirectory/FWengine.py) — Comando `python FWengine.py beacon --audit` que comprueba la presencia e integridad de los 24 beacons activos. |
+| `M04-C01` | Entorno Reproducible | ✅ `[CUMPLIDO]` | **`pyproject.toml`** — Manifiesto de empaquetado y entorno reproducible verificado en 'pyproject.toml'. |
+| `M04-C02` | Dependencias Versionadas | ✅ `[CUMPLIDO]` | **`pyproject.toml`** — Especificación estricta de versiones de dependencias verificada en 'pyproject.toml'. |
+| `M04-C03` | Fixture Enterprise Disponible | ✅ `[CUMPLIDO]` | **`src/data_generation/.context.yaml`** — Fixtures y datos de prueba disponibles (1 archivos, e.g. 'src/data_generation/.context.yaml'). |
 
----
+### M05: Construcción Núcleo (Core Engine) — 🔵 ACTIVE (50.0%)
+**Peso Relativo:** 25% | **Contribución Ponderada:** 12.50%
 
-### M04: Entorno de Ejecución y Zero-Dependency Tooling — 🟢 COMPLETO (100.0%)
+| Criterio | Nombre | Estado | Evidencia Física Detectada |
+|:---|:---|:---:|:---|
+| `M05-C01` | Parsers Funcionales | ✅ `[CUMPLIDO]` | **`.agents/skills/idir/SKILL.md`** — Módulos de procesamiento e implementación activos (15 archivos, e.g. '.agents/skills/idir/SKILL.md'). |
+| `M05-C02` | Inferencia Operativa de Roles | ✅ `[CUMPLIDO]` | **`src/core/context_runtime.py`** — Motor nuclear de procesamiento y lógica operativa verificado en 'src/core/context_runtime.py'. |
+| `M05-C03` | Resolución de Relaciones y Ciclos | ❌ `[FALTANTE]` | No se encontró componente de resolución de relaciones o dependencias. |
+| `M05-C04` | Generador Canónico de Métricas / Lógica | ❌ `[FALTANTE]` | No se detectó generador de métricas ni sintetizador canónico. |
+
+### M06: Integración e Interoperabilidad — 🔵 ACTIVE (80.0%)
+**Peso Relativo:** 15% | **Contribución Ponderada:** 12.00%
+
+| Criterio | Nombre | Estado | Evidencia Física Detectada |
+|:---|:---|:---:|:---|
+| `M06-C01` | Emisores de Dialecto Nativo | ❌ `[FALTANTE]` | No se encontraron emisores nativos de plataforma o destino. |
+| `M06-C02` | Escritura Atómica y Safe-Encoding | ✅ `[CUMPLIDO]` | **`src/core/context_runtime.py`** — Manejo seguro de codificación UTF-8 / serialización protegida en 'src/core/context_runtime.py'. |
+| `M06-C03` | Exportación Multi-Formato | ✅ `[CUMPLIDO]` | Soporte de representación multi-formato verificado en el repositorio (.json, .md, .png, .py, .toml). |
+| `M06-C04` | Resiliencia de Sistemas y Mitigación de SPOF | ✅ `[CUMPLIDO]` | Grafo de dependencias evaluado: 8 módulos analizados, acoplamiento estable. |
+| `M06-C05` | Patrones de Tolerancia a Fallos y Fallback | ✅ `[CUMPLIDO]` | Patrones de tolerancia a fallos verificados: {'timeout': 3, 'retry': 25, 'circuit_breaker': 0, 'fallback': 3} (cobertura=100.0%). |
+
+### M07: Aseguramiento de Calidad (QA & Stress) — 🔵 ACTIVE (66.7%)
+**Peso Relativo:** 10% | **Contribución Ponderada:** 6.67%
+
+| Criterio | Nombre | Estado | Evidencia Física Detectada |
+|:---|:---|:---:|:---|
+| `M07-C01` | Cobertura y Tasa de Éxito de Pruebas | ✅ `[CUMPLIDO]` | **`tests/test_fwengine.py`** — Suite de pruebas presente (2 archivos de prueba en tests/, e.g. 'tests/test_fwengine.py'). |
+| `M07-C02` | Golden Regression Tests Validados | ❌ `[FALTANTE]` | No se encontraron pruebas de regresión con archivos Golden/Snapshots. |
+| `M07-C03` | Suites de Estrés / Benchmark Masivo | ✅ `[CUMPLIDO]` | **`scripts/generate_benchmark_reports.py`** — Suites de estrés o benchmarks masivos verificados en 'scripts/generate_benchmark_reports.py'. |
+
+### M08: Validación y Aceptación Organizacional — 🔵 ACTIVE (40.0%)
+**Peso Relativo:** 10% | **Contribución Ponderada:** 4.00%
+
+| Criterio | Nombre | Estado | Evidencia Física Detectada |
+|:---|:---|:---:|:---|
+| `M08-C01` | Proyecciones por Rol (Persona Lenses) | ❌ `[FALTANTE]` | No se encontraron proyecciones adaptadas por rol organizativo. |
+| `M08-C02` | Leadership Cockpit / Tableros Ejecutivos | ❌ `[FALTANTE]` | No se encontró cockpit ejecutivo ni módulos de dashboards en src/dashboards/. |
+| `M08-C03` | CLI de Diagnóstico y Exploración | ❌ `[FALTANTE]` | No se detectó interfaz CLI ni punto de entrada interactivo en consola. |
+| `M08-C04` | Seguridad Zero-Tolerance contra Secretos y Credenciales | ✅ `[CUMPLIDO]` | **`.agentignore`** — Zero-Tolerance verificado: Ninguna credencial ni clave activa expuesta en el repositorio. |
+| `M08-C05` | Control de Entropía de Shannon e Inyecciones de Prompt | ✅ `[CUMPLIDO]` | Superficie de seguridad verificada: Max H=4.06 <= 4.5, inyecciones=0, ataque=10.0. |
+
+### M09: Despliegue y Automatización (CI/CD) — 🟢 DONE (100.0%)
+**Peso Relativo:** 10% | **Contribución Ponderada:** 10.00%
+
+| Criterio | Nombre | Estado | Evidencia Física Detectada |
+|:---|:---|:---:|:---|
+| `M09-C01` | Pipeline CI/CD Automatizado | ✅ `[CUMPLIDO]` | **`.github/workflows/ci.yml`** — Pipeline de integración continua automatizado verificado en '.github/workflows/ci.yml'. |
+| `M09-C02` | Empaquetado y Distribución Estandarizada | ✅ `[CUMPLIDO]` | **`pyproject.toml`** — Configuración de empaquetado estándar/entry points verificada en 'pyproject.toml'. |
+
+### M10: Cierre, Extensibilidad y Documentación — 🟢 DONE (100.0%)
 **Peso Relativo:** 5% | **Contribución Ponderada:** 5.00%
 
 | Criterio | Nombre | Estado | Evidencia Física Detectada |
 |:---|:---|:---:|:---|
-| `M04-C01` | Entorno Reproducible / Zero-External Dependencies | ✅ `[CUMPLIDO]` | [`FWengine.py`](file:///d:/0001%20HyperScale%20Thinking/PROYECTOS%20CLOUD/iContext/iDirectory/FWengine.py) — Arquitectura "Zero-Dependency" pura construida sobre la librería estándar de Python (`pathlib`, `json`, `argparse`, `sys`, `os`, `unittest`). Cero riesgos de incompatibilidad o rotura de paquetes. |
-| `M04-C02` | Compatibilidad de Runtime y Plataformas | ✅ `[CUMPLIDO]` | [`01_seed/seed-idirectory-master.md`](file:///d:/0001%20HyperScale%20Thinking/PROYECTOS%20CLOUD/iContext/iDirectory/01_seed/seed-idirectory-master.md) — Sección 5.3 documenta soporte universal para Python 3.10+ en Windows, Linux y macOS. |
-| `M04-C03` | Fixtures y Escenarios de Validación Agéntica | ✅ `[CUMPLIDO]` | [`data/processed/`](file:///d:/0001%20HyperScale%20Thinking/PROYECTOS%20CLOUD/iContext/iDirectory/data/processed/) y [`tests/test_fwengine.py`](file:///d:/0001%20HyperScale%20Thinking/PROYECTOS%20CLOUD/iContext/iDirectory/tests/test_fwengine.py) — Entornos temporales aislados (`tempfile.mkdtemp`) para validación determinista de ciclo de vida. |
+| `M10-C01` | Documentación Técnica Exhaustiva (Seed) | ✅ `[CUMPLIDO]` | **`01_seed/seed-idirectory-master.md`** — Memoria técnica formal (ThinkingSeed) identificada en '01_seed/seed-idirectory-master.md'. |
+| `M10-C02` | CLI Help Documentado | ✅ `[CUMPLIDO]` | **`README_ES.md`** — Instrucciones operativas y ayuda de comandos documentadas en 'README_ES.md'. |
+| `M10-C03` | Adaptadores Multicanal / Roadmap | ✅ `[CUMPLIDO]` | **`01_seed/seed-idirectory-master.md`** — Roadmap formal de extensibilidad y capacidades futuras documentado en '01_seed/seed-idirectory-master.md'. |
+| `M10-C04` | Eficiencia Contextual Espectral FPAI | ✅ `[CUMPLIDO]` | **`.agentignore`** — Indicador FPAI estimado (distorsión no medida): PF_spectral=1.000 >= 0.70 (S_spectral=136077, S_linear=136077). |
+
 
 ---
 
-### M05: Motor Nuclear de la Skill (Workflow Engine) — 🟢 COMPLETO (100.0%)
-**Peso Relativo:** 25% | **Contribución Ponderada:** 25.00%
+## 5. PLAN DE REMEDIACIÓN TÉCNICA PRIORIZADO (PATH TO 100%)
 
-| Criterio | Nombre | Estado | Evidencia Física Detectada |
-|:---|:---|:---:|:---|
-| `M05-C01` | Parsers y Manejo Declarativo de Contexto | ✅ `[CUMPLIDO]` | [`FWengine.py`](file:///d:/0001%20HyperScale%20Thinking/PROYECTOS%20CLOUD/iContext/iDirectory/FWengine.py) — `class MiniYAML`: parser y emisor atómico autocontenido para procesar archivos `.context.yaml` sin requerir PyYAML. |
-| `M05-C02` | Motor de Ruteo e Inferencia Heurística | ✅ `[CUMPLIDO]` | [`FWengine.py`](file:///d:/0001%20HyperScale%20Thinking/PROYECTOS%20CLOUD/iContext/iDirectory/FWengine.py) — Función `route_file` con clasificación semántica por extensión y heurística nominal (notebooks, tests, metrics, prompts, specs). |
-| `M05-C03` | Orquestación y Sincronización de Contexto | ✅ `[CUMPLIDO]` | [`FWengine.py`](file:///d:/0001%20HyperScale%20Thinking/PROYECTOS%20CLOUD/iContext/iDirectory/FWengine.py) — Funciones `init_project`, `sync_beacons` y `sync_tree` para orquestar la topología física y satelital. |
-| `M05-C04` | Generador de Telemetría y Presupuesto de Contexto | ✅ `[CUMPLIDO]` | [`FWengine.py`](file:///d:/0001%20HyperScale%20Thinking/PROYECTOS%20CLOUD/iContext/iDirectory/FWengine.py) — Función `compute_context_budget` con cálculo de tokens por carpeta y modo `--compact` para inyección rápida en system prompts. |
+A continuación se prescriben las acciones técnicas prioritarias para desbloquear el avance del proyecto y alcanzar la máxima calificación:
 
----
-
-### M06: Integración Multi-Proveedor e Interoperabilidad — 🟢 COMPLETO (100.0%)
-**Peso Relativo:** 15% | **Contribución Ponderada:** 15.00%
-
-| Criterio | Nombre | Estado | Evidencia Física Detectada |
-|:---|:---|:---:|:---|
-| `M06-C01` | Shims y Adaptadores Multi-Plataforma Agéntica | ✅ `[CUMPLIDO]` | Multi-proveedor activo: [`.agents/skills/idir/SKILL.md`](file:///d:/0001%20HyperScale%20Thinking/PROYECTOS%20CLOUD/iContext/iDirectory/.agents/skills/idir/SKILL.md) (Antigravity), [`.claude/commands/idir.md`](file:///d:/0001%20HyperScale%20Thinking/PROYECTOS%20CLOUD/iContext/iDirectory/.claude/commands/idir.md) y [`CLAUDE.md`](file:///d:/0001%20HyperScale%20Thinking/PROYECTOS%20CLOUD/iContext/iDirectory/CLAUDE.md) (Claude Code), [`.cursorrules`](file:///d:/0001%20HyperScale%20Thinking/PROYECTOS%20CLOUD/iContext/iDirectory/.cursorrules) (Cursor/Windsurf), [`AGENTS.md`](file:///d:/0001%20HyperScale%20Thinking/PROYECTOS%20CLOUD/iContext/iDirectory/AGENTS.md) (Universal). |
-| `M06-C02` | Operaciones de Filesystem Seguras e Idempotentes | ✅ `[CUMPLIDO]` | [`FWengine.py`](file:///d:/0001%20HyperScale%20Thinking/PROYECTOS%20CLOUD/iContext/iDirectory/FWengine.py) — Codificación forzada `UTF-8` pura, creación segura de directorios padres y control de colisiones de mayúsculas en Windows. |
-| `M06-C03` | Exportación Multi-Formato para LLMs | ✅ `[CUMPLIDO]` | Soporte nativo de formatos de salida: JSON satelital (`tree.json`), YAML compacto de beacons (`.context.yaml`), Markdown (`README.md`, `engine_readme.md`) y diagramas Mermaid. |
+| Prioridad | Módulo | Criterio | Acción Requerida | Impacto Potencial | Archivos Sugeridos |
+|:---:|:---:|:---|:---|:---:|:---|
+| **P1** | `M05` | `M05-C03` | Asegurar algoritmos para resolver dependencias o relaciones. | **+6.25%** | `src/` |
+| **P1** | `M05` | `M05-C04` | Implementar generador de código o síntesis de medidas. | **+6.25%** | `src/` |
+| **P1** | `M03` | `M03-C02` | Implementar reglas de calidad de datos o código cQS. | **+1.67%** | `.context.yaml`, `schemas/` |
+| **P2** | `M07` | `M07-C02` | Añadir tests de regresión con archivos golden / snapshots esperados. | **+3.33%** | `tests/` |
+| **P2** | `M06` | `M06-C01` | Crear emisores hacia tecnologías destino en src/core/emitter o similar. | **+3.00%** | `src/` |
+| **P2** | `M08` | `M08-C01` | Implementar proyecciones adaptadas a diferentes perfiles (lenses/personas). | **+2.00%** | `src/`, `dashboards/` |
+| **P2** | `M08` | `M08-C02` | Proveer dashboard o cockpit de resumen ejecutivo. | **+2.00%** | `src/`, `dashboards/` |
+| **P2** | `M08` | `M08-C03` | Exponer comandos CLI de diagnóstico o auditoría. | **+2.00%** | `src/`, `dashboards/` |
 
 ---
 
-### M07: Aseguramiento de Calidad y Robustez de Flujos — 🟢 COMPLETO (100.0%)
-**Peso Relativo:** 10% | **Contribución Ponderada:** 10.00%
+## 6. EFICIENCIA CONTEXTUAL Y VECTOR ESPECTRAL (FPAI ECONOMY)
 
-| Criterio | Nombre | Estado | Evidencia Física Detectada |
-|:---|:---|:---:|:---|
-| `M07-C01` | Auditoría Automatizada de Gobernanza | ✅ `[CUMPLIDO]` | [`FWengine.py`](file:///d:/0001%20HyperScale%20Thinking/PROYECTOS%20CLOUD/iContext/iDirectory/FWengine.py) — Subcomando `audit` que evalúa mayúsculas indebidas, beacons huérfanos e integridad del mapa satelital. |
-| `M07-C02` | Pruebas Unitarias y Regresión Determinista | ✅ `[CUMPLIDO]` | [`tests/test_fwengine.py`](file:///d:/0001%20HyperScale%20Thinking/PROYECTOS%20CLOUD/iContext/iDirectory/tests/test_fwengine.py) — Suite formal con 16 pruebas unitarias (`unittest`) que validan MiniYAML, ruteo determinista, generación satelital e idempotencia al 100%. |
-| `M07-C03` | Benchmarks de Reducción de Tokens / Estrés | ✅ `[CUMPLIDO]` | [`tests/test_token_budget.py`](file:///d:/0001%20HyperScale%20Thinking/PROYECTOS%20CLOUD/iContext/iDirectory/tests/test_token_budget.py) — Suite de benchmarking automatizado que demuestra un **96.1% de ahorro en tokens** frente al escaneo recursivo tradicional y generación sub-milisegundo (0.64ms). |
+Métrica canónica de densidad cognitiva y preservación de potencia activa $P$:
 
----
+| Componente de Potencia | Símbolo | Tokens | Ratio | Estado |
+|:---|:---:|:---:|:---:|:---|
+| **Potencia Activa** (Working Set) | $P$ | `136077` | `100.0%` | 🟢 Preservada |
+| **Potencia Reactiva Inerte** | $Q_{dead}$ | `0` | `0.0%` | ⚪ Inerte |
+| **Potencia Reactiva Redundante** | $Q_{dup}$ | `0` | `0.0%` | 🟡 Duplicada |
+| **Distorsión Estructural** | $D$ | `0` | `0.0%` | 🔴 Conflicto |
+| **Potencia Aparente Espectral** | $S_{spectral}$ | `136077` | — | $\sqrt{P^2 + Q^2 + D^2}$ |
+| **Potencia Aparente Lineal** | $S_{linear}$ | `136077` | — | $P + Q + D$ |
 
-### M08: Experiencia del Agente / Interfaz Humano-Agente — 🟢 COMPLETO (100.0%)
-**Peso Relativo:** 10% | **Contribución Ponderada:** 10.00%
-
-| Criterio | Nombre | Estado | Evidencia Física Detectada |
-|:---|:---|:---:|:---|
-| `M08-C01` | Invocación por Slash Command / Skill Trigger | ✅ `[CUMPLIDO]` | [`.agents/skills/idir/SKILL.md`](file:///d:/0001%20HyperScale%20Thinking/PROYECTOS%20CLOUD/iContext/iDirectory/.agents/skills/idir/SKILL.md) — Integración completa con Slash Command `/idir` y alias `/dir` para activación agéntica interactiva. |
-| `M08-C02` | Cockpit de Telemetría y Dashboards de Contexto | ✅ `[CUMPLIDO]` | [`FWengine.py`](file:///d:/0001%20HyperScale%20Thinking/PROYECTOS%20CLOUD/iContext/iDirectory/FWengine.py) — Subcomando `context --budget` genera la tabla ejecutiva en consola de densidades, roles y presupuestos de tokens. |
-| `M08-C03` | CLI Interactiva de Diagnóstico y Operación | ✅ `[CUMPLIDO]` | [`FWengine.py`](file:///d:/0001%20HyperScale%20Thinking/PROYECTOS%20CLOUD/iContext/iDirectory/FWengine.py) — CLI rica basada en `argparse` con 6 subcomandos (`init`, `route`, `beacon`, `map`, `context`, `audit`) y ayuda integrada. |
+- **Factor de Potencia Espectral ($PF_{spectral}$):** `1.000` *(Meta >= 0.70)*
+- **Factor de Potencia Lineal ($PF_{linear}$):** `1.000`
+- **Ratio de Divergencia Espectral:** `0.0%`
+- **Estado de Calibración:** `DETERMINISTIC` (Ganancia $G=1.00$)
 
 ---
 
-### M09: Distribución, Empaquetado y Automatización CI/CD — 🟢 COMPLETO (100.0%)
-**Peso Relativo:** 10% | **Contribución Ponderada:** 10.00%
+## 7. VECTOR DE SEGURIDAD Y SUPERFICIE DE ATAQUE AGÉNTICA
 
-| Criterio | Nombre | Estado | Evidencia Física Detectada |
-|:---|:---|:---:|:---|
-| `M09-C01` | Empaquetado Canónico de Skill / Portabilidad | ✅ `[CUMPLIDO]` | [`.agents/skills/idir/`](file:///d:/0001%20HyperScale%20Thinking/PROYECTOS%20CLOUD/iContext/iDirectory/.agents/skills/idir/) — Organización canónica de la skill, lista para ser replicada o distribuida en cualquier proyecto gestionado por agentes. |
-| `M09-C02` | Pipeline CI/CD Automatizado y Pre-Commit Hooks | ✅ `[CUMPLIDO]` | [`.github/workflows/ci.yml`](file:///d:/0001%20HyperScale%20Thinking/PROYECTOS%20CLOUD/iContext/iDirectory/.github/workflows/ci.yml) — Workflow de GitHub Actions con matriz multi-OS (Ubuntu, Windows, macOS) y multi-versión (Python 3.10-3.13) que ejecuta auditoría, unit tests y benchmarks en cada push/PR. |
+Auditoría Zero-Tolerance de credenciales expuestas, entropía de Shannon e inyecciones:
 
----
-
-### M10: Memoria Técnica, Documentación y Extensibilidad — 🟢 COMPLETO (100.0%)
-**Peso Relativo:** 5% | **Contribución Ponderada:** 5.00%
-
-| Criterio | Nombre | Estado | Evidencia Física Detectada |
-|:---|:---|:---:|:---|
-| `M10-C01` | Memoria Técnica Exhaustiva (ThinkingSeed Master) | ✅ `[CUMPLIDO]` | [`01_seed/seed-idirectory-master.md`](file:///d:/0001%20HyperScale%20Thinking/PROYECTOS%20CLOUD/iContext/iDirectory/01_seed/seed-idirectory-master.md) — ADN técnico exhaustivo (Ground Truth) de 262 líneas con contratos, invariantes y diagramas de flujo. |
-| `M10-C02` | Documentación Paper-Grade y CLI Help | ✅ `[CUMPLIDO]` | [`README.md`](file:///d:/0001%20HyperScale%20Thinking/PROYECTOS%20CLOUD/iContext/iDirectory/README.md), [`README_ES.md`](file:///d:/0001%20HyperScale%20Thinking/PROYECTOS%20CLOUD/iContext/iDirectory/README_ES.md) y [`02_foundation/engine/engine_readme.md`](file:///d:/0001%20HyperScale%20Thinking/PROYECTOS%20CLOUD/iContext/iDirectory/02_foundation/engine/engine_readme.md) — Documentación formal de alta ingeniería sin jerga informal, más ayuda integrada `--help`. |
-| `M10-C03` | Roadmap de Extensión y Adaptabilidad Futura | ✅ `[CUMPLIDO]` | [`01_seed/seed-idirectory-master.md`](file:///d:/0001%20HyperScale%20Thinking/PROYECTOS%20CLOUD/iContext/iDirectory/01_seed/seed-idirectory-master.md) (Sec. 9) y [`artifacts/plans/active/INFERRED_ROADMAP.md`](file:///d:/0001%20HyperScale%20Thinking/PROYECTOS%20CLOUD/iContext/iDirectory/artifacts/plans/active/INFERRED_ROADMAP.md) — Registro de deuda técnica saldada y roadmap operacional de evolución. |
+| Métrica de Seguridad | Valor Registrado | Umbral de Alerta | Estado |
+|:---|:---:|:---:|:---:|
+| **Índice de Superficie de Ataque** | `10.0 / 100` | `<= 15.0` | 🟢 BAJA |
+| **Entropía de Shannon Máxima ($H$)** | `4.06` bits | `<= 4.50` | 🟢 ÓPTIMA |
+| **Coincidencias PII (Zero-Tolerance)** | `0` | `0` | 🟢 CERO |
+| **Inyecciones de Prompt Detectadas** | `0` | `0` | 🟢 INMUNE |
+| **Pinning de Lockfile (Supply Chain)** | `No` | `Requerido` | 🔴 NO FIJADO |
 
 ---
 
-## 5. ESTADO DE REMEDIACIÓN TÉCNICA (OBJETIVO 100% ALCANZADO)
+## 8. VECTOR DE RESILIENCIA Y ACOPLAMIENTO DE SISTEMAS
 
-Todas las acciones del Plan de Remediación Técnica Priorizado han sido ejecutadas, validadas y probadas físicamente en disco:
+Análisis estático de estabilidad modular $I = \frac{{C_e}}{{C_a + C_e}}$ y puntos únicos de fallo (SPOFs):
 
-| Prioridad | Módulo | Criterio | Acción Ejecutada | Impacto Obtenido | Estado |
-|:---:|:---:|:---|:---|:---:|:---:|
-| **P1** | `M07` | `M07-C02` | **Suite de Pruebas Unitarias:** Implementada en `tests/test_fwengine.py` con 16 pruebas unitarias (`unittest`) cubriendo MiniYAML, idempotencia y ruteo determinista. | **+3.33%** | 🟢 Resuelto |
-| **P1** | `M07` | `M07-C03` | **Benchmark de Tokens y Estrés:** Implementado en `tests/test_token_budget.py` demostrando empíricamente un **96.1% de ahorro de tokens** y generación en 0.64ms. | **+3.33%** | 🟢 Resuelto |
-| **P2** | `M09` | `M09-C02` | **Automatización CI/CD:** Implementado en `.github/workflows/ci.yml` con matriz multi-OS (Ubuntu, Windows, macOS) y multi-versión (Python 3.10-3.13). | **+5.00%** | 🟢 Resuelto |
-
-> **CERTIFICACIÓN METRICSTHINKING™:**  
-> Con una calificación perfecta de **`100.00%`** y 30/30 criterios superados, el repositorio **iDirectory v3.0** alcanza el estado de **Excelencia Operativa / Producción (STAGE 4: ENTREGA Y EXTENSIBILIDAD)**, consolidando su rol como estándar canónico de gobernanza agéntica y Context Engineering.
+- **Módulos Analizados:** `8`
+- **Puntos Únicos de Fallo (SPOFs) Detectados:** `0` (Ninguno)
+- **Cobertura de Patrones de Tolerancia a Fallos:** `100.0%`
+- **Recuento de Patrones Resilientes:**
+  - Timeouts: `3`
+  - Retries / Backoffs: `25`
+  - Circuit Breakers: `0`
+  - Fallbacks: `3`
 
 ---
 
-> *Reporte generado bajo la metodología **MetricsThinking™ Universal Project Auditor**.*  
+> *Reporte generado automáticamente por **MetricsThinking™ Universal Project Auditor**.*  
 > *Disciplina de auditoría: **Ground Truth First** (evidencia física sobre supuestos).*

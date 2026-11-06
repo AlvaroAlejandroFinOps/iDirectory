@@ -1,50 +1,49 @@
 {
   "$schema": "../schemas/icontext_bus.schema.json",
-  "protocol_version": "5.0.0",
-  "project": "iDirectory",
-  "updated_at": "2026-10-31T17:56:05.454072+00:00",
   "layers": {
     "l0_idirectory": {
-      "version": "5.0.0",
-      "topology_hash": "588cab510a567f6182cb3917bd69064035893445b3f3edd08285007c9fc8eae7",
-      "contracts_ast_hash": "e24cd3bbc9cd3a9aef4808aea72e3f8c474e6e3a2a5366910db3628cc99c7475",
-      "active_nodes_count": 19,
-      "pruned_nodes_count": 8,
-      "active_tokens_estimate": 61990,
-      "fpai_pruned_paths_count": 0
+      "contracts_ast_hash": "4ac4c9be4e57d22a3ae8a189cdbadc79d53bb2e6480ed0ee5755570fa3c11765",
+      "inputs_hash": "9dbc74eab9d5ac783effcd2b6be9e71a981b1172ecaacc0c83b0ba65fa40e76f",
+      "present": true,
+      "published_at": "2026-10-31T23:02:35.917692+00:00",
+      "state": "recorded",
+      "version": "6.0.0"
     },
     "l1_thinkingseed": {
+      "artifact_kind": "master",
+      "inputs_hash": "a40b7d931368a34b7801140ddf88393e192c5bd4425e747b38db9937f63aebb2",
+      "output_hash": "3e0b9d8e53d4592510a5b89c1a72dd693f68fa28792f1833739d5dea48f7349d",
       "present": true,
-      "version": "5.0.0",
-      "seed_path": "01_seed/seed-idirectory-master.md",
-      "seed_hash": "04683df3299cdb8409a4d45b409ca3d87428e03c45cc94191a034a1dbc72cdbb",
-      "synced_with_topology_hash": "588cab510a567f6182cb3917bd69064035893445b3f3edd08285007c9fc8eae7",
-      "ast_coverage_pct": 100.0,
-      "gates_passed": "6/6",
-      "seed_version": "5.0",
-      "untracked_public_symbols": [],
-      "freshness_status": "SYNCED",
-      "last_validated_at": "2026-10-31T17:55:58.407527+00:00"
+      "published_at": "2026-10-31T23:02:23.588692+00:00",
+      "state": "validated",
+      "version": "6.0.0"
     },
     "l2_metricsthinking": {
-      "present": true,
-      "version": "5.0.0",
-      "report_path": "artifacts/plans/metricsthinking/MetricsThinking.json",
-      "consolidated_score": 100.0,
-      "maturity_band": "Excelencia Operativa / Producción (90.0% - 100.0%)",
-      "active_bottleneck": "Ninguno. Todos los módulos canónicos se encuentran al 100%.",
+      "consolidated_score": 73.5,
+      "evaluation_hash": "6c84ad4f46aa655669cf10ea3fe6690d30e2269a77331b781b1d49545b3b288d",
       "fpai_pf_spectral": 1.0,
-      "fpai_s_spectral": 0.0,
+      "fpai_s_spectral": 136077.0,
+      "inputs_hash": "9dbc74eab9d5ac783effcd2b6be9e71a981b1172ecaacc0c83b0ba65fa40e76f",
+      "output_hash": "1db75ae36d9959610de74f3fbff7399c5223436a4554b25c3675ed57876a0cbb",
+      "present": true,
+      "published_at": "2026-10-31T23:02:27.733626+00:00",
+      "report_path": "artifacts/plans/metricsthinking/MetricsThinking.json",
       "security_gate": 1.0,
-      "synced_with_seed_hash": "04683df3299cdb8409a4d45b409ca3d87428e03c45cc94191a034a1dbc72cdbb"
+      "security_gate_basis": "pii_scan_only",
+      "state": "validated",
+      "version": "6.0.0"
     },
     "l3_ireadme": {
+      "artifact_kind": "readme",
+      "inputs_hash": "e94f45046f2662d801238ea1c6b57d9d0f1f0a8124c95e14c94db58174abe113",
+      "output_hash": "f948d7a799653d878fe684d7e6a3b67ebd74634b78707fe89490da42479fe0b7",
       "present": true,
-      "version": "5.0.0",
-      "standard": "Enterprise Paper-Grade v5.0",
-      "parity_score_phi": 1.0,
-      "path_leakage_rate": 0.0,
-      "synced_with_topology_hash": "588cab510a567f6182cb3917bd69064035893445b3f3edd08285007c9fc8eae7"
+      "published_at": "2026-10-31T23:02:28.151959+00:00",
+      "state": "validated",
+      "version": "6.0.0"
     }
-  }
+  },
+  "project": "iDirectory",
+  "protocol_version": "6.0.0",
+  "updated_at": "2026-10-31T23:02:35.943751+00:00"
 }

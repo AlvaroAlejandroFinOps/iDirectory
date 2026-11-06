@@ -10,3 +10,8 @@ logs/
 __pycache__/
 .git/
 artifacts/plans/archive/
+
+# >>> ICONTEXT-V6:GENERATED
+docs/specs/*before-v6.md
+tools/icontext_runtime/
+# <<< ICONTEXT-V6:GENERATED

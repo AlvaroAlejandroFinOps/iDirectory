@@ -233,7 +233,7 @@ class TestLifecycleAndIdempotence(unittest.TestCase):
         self.assertTrue(tree_path.exists())
 
         tree_data = json.loads(tree_path.read_text(encoding="utf-8"))
-        self.assertEqual(tree_data["version"], "5.0")
+        self.assertEqual(tree_data["version"], "6.0")
         self.assertEqual(len(tree_data["topology_hash"]), 64)
         self.assertTrue(len(tree_data["project"]) > 0)
         self.assertIn("bootloader", tree_data)
@@ -1016,7 +1016,7 @@ class TestV5FederationAndEcosystem(unittest.TestCase):
         bus_file = self.test_path / ".context" / "icontext_bus.json"
         self.assertTrue(bus_file.is_file())
         bus = json.loads(bus_file.read_text(encoding="utf-8"))
-        self.assertEqual(bus["protocol_version"], "5.0.0")
+        self.assertEqual(bus["protocol_version"], "6.0.0")
         self.assertIn("l0_idirectory", bus["layers"])
         self.assertIn("l1_thinkingseed", bus["layers"])
         self.assertIn("l2_metricsthinking", bus["layers"])
@@ -1025,7 +1025,7 @@ class TestV5FederationAndEcosystem(unittest.TestCase):
         epack = build_ecosystem_pack(self.test_path)
         serialized = json.dumps(epack, ensure_ascii=False, separators=(",", ":"))
         self.assertLessEqual(estimate_tokens_v4(serialized), 650)
-        self.assertEqual(epack["icontext_ecosystem_pack"], "5.0.0")
+        self.assertEqual(epack["icontext_ecosystem_pack"], "6.0.0")
 
     def test_upsert_segmented_block_non_destructive_composition(self):
         agents_md = self.test_path / "AGENTS.md"

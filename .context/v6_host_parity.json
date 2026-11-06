@@ -1,0 +1,7 @@
+{
+  "checkpoint_handoff": "antigravity -> codex passed",
+  "launchers_equal": 6,
+  "scope": "real installed scripts; no independent LLM sessions or inference measurements",
+  "semantic_hybrid_handoff": "antigravity prepare -> current agent authored fixture -> codex complete passed",
+  "version": "6.0.0"
+}

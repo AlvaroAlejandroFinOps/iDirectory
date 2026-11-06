@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "../schemas/beacon.schema.json",
+  "title": "iDirectory Context Beacon Schema",
+  "description": "Validates local .context.yaml micro-beacons (iDirectory v4.0). Budget: <= 600 chars (~150 tokens).",
+  "type": "object",
+  "required": [
+    "version",
+    "directory",
+    "role",
+    "purpose",
+    "relevance",
+    "crawl",
+    "read_priority",
+    "seed_reference",
+    "token_density",
+    "instructions"
+  ],
+  "properties": {
+    "version": { "type": ["string", "number"] },
+    "directory": { "type": "string", "pattern": "^[^\\\\]+$" },
+    "role": { "type": "string", "minLength": 1 },
+    "purpose": { "type": "string", "maxLength": 200 },
+    "relevance": { "type": "string", "enum": ["critical", "high", "medium", "low", "zero_for_llm"] },
+    "crawl": { "type": "boolean" },
+    "read_priority": { "type": "string", "enum": ["p0", "p1", "p2", "p3"] },
+    "seed_reference": { "type": "string", "enum": ["required", "optional"] },
+    "tier1_preload": { "type": "boolean" },
+    "inherited": { "type": "boolean" },
+    "token_density": { "type": "string", "enum": ["sparse", "medium", "dense", "massive_text", "massive_binary"] },
+    "instructions": { "type": "string", "maxLength": 240 },
+    "key_files": {
+      "type": "array",
+      "description": "Nombre de archivo o export de una línea: 'mod.py: fn(a) -> b'.",
+      "items": { "type": "string", "maxLength": 160 }
+    },
+    "imports_from": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^[^\\\\]+$" }
+    },
+    "exported_to": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^[^\\\\]+$" }
+    },
+    "dependencies": {
+      "type": ["array", "object"],
+      "description": "Legado. Preferir imports_from/exported_to (MiniYAML no anida)."
+    }
+  },
+  "additionalProperties": false
+}

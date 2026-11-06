@@ -1,0 +1,8 @@
+{
+  "runtime_version": "6.0.0",
+  "agents": [
+    "antigravity",
+    "codex"
+  ],
+  "semantic_author": "current_agent"
+}

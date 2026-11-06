@@ -1,0 +1,12 @@
+version: 1.0
+directory: config/profiles
+role: configuration
+purpose: Subdominio profiles bajo config/.
+relevance: high
+crawl: true
+read_priority: p1
+seed_reference: optional
+tier1_preload: false
+inherited: true
+token_density: sparse
+instructions: Hereda directivas de config/.

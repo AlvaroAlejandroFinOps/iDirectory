@@ -1,0 +1,15 @@
+{
+  "consolidated_score": 73.5,
+  "evaluation_hash": "6c84ad4f46aa655669cf10ea3fe6690d30e2269a77331b781b1d49545b3b288d",
+  "fpai_pf_spectral": 1.0,
+  "fpai_s_spectral": 136077.0,
+  "inputs_hash": "9dbc74eab9d5ac783effcd2b6be9e71a981b1172ecaacc0c83b0ba65fa40e76f",
+  "output_hash": "1db75ae36d9959610de74f3fbff7399c5223436a4554b25c3675ed57876a0cbb",
+  "present": true,
+  "published_at": "2026-10-31T23:02:27.733626+00:00",
+  "report_path": "artifacts/plans/metricsthinking/MetricsThinking.json",
+  "security_gate": 1.0,
+  "security_gate_basis": "pii_scan_only",
+  "state": "validated",
+  "version": "6.0.0"
+}

@@ -1,0 +1,36 @@
+{
+  "version": "6.0.0",
+  "scenarios": [
+    {
+      "project": "iDirectory",
+      "isolated_runtime": true,
+      "index_pack_hybrid_metrics_readme": "passed",
+      "sibling_checkouts_available": false
+    },
+    {
+      "project": "ThinkingSeed",
+      "isolated_runtime": true,
+      "index_pack_hybrid_metrics_readme": "passed",
+      "sibling_checkouts_available": false
+    },
+    {
+      "project": "MetricsThinking",
+      "isolated_runtime": true,
+      "index_pack_hybrid_metrics_readme": "passed",
+      "sibling_checkouts_available": false
+    },
+    {
+      "project": "iReadme",
+      "isolated_runtime": true,
+      "index_pack_hybrid_metrics_readme": "passed",
+      "sibling_checkouts_available": false
+    },
+    {
+      "project": "ContextControl",
+      "isolated_runtime": true,
+      "index_pack_hybrid_metrics_readme": "passed",
+      "sibling_checkouts_available": false
+    }
+  ],
+  "method": "isolated copies of release manifests; explicit empty ecosystem root; no model inference"
+}

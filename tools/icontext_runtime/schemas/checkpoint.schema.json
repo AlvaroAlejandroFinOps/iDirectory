@@ -1,0 +1,109 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "../schemas/checkpoint.schema.json",
+  "title": "iDirectory Attentional Continuity Checkpoint Schema",
+  "description": "Validates .context/checkpoint.json in iDirectory v5.0 for multi-phase agentic execution continuity (<300 tokens).",
+  "type": "object",
+  "required": [
+    "version",
+    "plan_id",
+    "status",
+    "current_phase",
+    "next_action",
+    "updated_at"
+  ],
+  "properties": {
+    "version": {
+      "type": "string",
+      "enum": [
+        "4.0",
+        "4.1",
+        "5.0",
+        "5.0.0",
+        "6.0",
+        "6.0.0"
+      ]
+    },
+    "plan_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "approved",
+        "executing",
+        "paused",
+        "completed",
+        "superseded",
+        "archived"
+      ]
+    },
+    "current_phase": {
+      "type": "string",
+      "maxLength": 120
+    },
+    "completed_steps": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 160
+      }
+    },
+    "next_action": {
+      "type": "string",
+      "maxLength": 240
+    },
+    "verified_evidence": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 160
+      }
+    },
+    "active_invariants": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 80
+      }
+    },
+    "updated_at": {
+      "type": "string"
+    },
+    "session_id": {
+      "type": "string",
+      "maxLength": 120
+    },
+    "objective": {
+      "type": "string",
+      "maxLength": 240
+    },
+    "constraints": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 160
+      }
+    },
+    "decisions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 160
+      }
+    },
+    "evidence_hash": {
+      "type": "string"
+    },
+    "expires_at": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

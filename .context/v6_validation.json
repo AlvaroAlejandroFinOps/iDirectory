@@ -1,0 +1,645 @@
+{
+  "automated_test_suites": {
+    "ContextControl": 24,
+    "MetricsThinking": 116,
+    "ThinkingSeed": 6,
+    "iDirectory": 77,
+    "iReadme": 15
+  },
+  "automated_tests_passed": 238,
+  "benchmarks": [
+    {
+      "audit_fixture": "governed files in temporary clone; no Git internals",
+      "audit_samples": 3,
+      "baseline_v5": {
+        "context_pack_tokens_common_estimator": 88,
+        "method": "v5 HEAD kernel, Tier 1A root query on same current project; no model inference",
+        "query_p50_ms": 217.2673000022769,
+        "query_p95_ms": 232.83559968695045,
+        "samples": 7,
+        "source_commit": "0ea360e3e5f510d7251eb1c0632afa60a87c4b67",
+        "source_file_sha256": "3d9d6fb8bd3d17e9ac2ec2742e804f8dba63855b5787217e95f5054a3d6c6f94",
+        "version": "5.0"
+      },
+      "bootstrap_rule_characters": {
+        "after": 1671,
+        "before": 11190,
+        "excludes_global_personal_rules": true,
+        "reduction_pct": 85.06702412868633
+      },
+      "context_pack_estimated_tokens": [
+        144,
+        144,
+        144,
+        144,
+        144,
+        144,
+        144
+      ],
+      "full_ast_parses": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "full_audit_p50_ms": 1905.4080001078546,
+      "full_audit_p95_ms": 2229.9044001847506,
+      "full_files_read": [
+        83,
+        83,
+        83,
+        83,
+        83,
+        83,
+        83
+      ],
+      "full_inventory_p50_ms": 184.0697997249663,
+      "full_inventory_p95_ms": 202.21779961138964,
+      "includes_llm_inference": false,
+      "incremental_ast_parses": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "incremental_audit_goal_met": true,
+      "incremental_audit_p50_ms": 166.48529982194304,
+      "incremental_audit_p95_ms": 197.73889984935522,
+      "incremental_audit_reduction_pct": 91.26248552475275,
+      "incremental_files_read": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "incremental_inventory_p50_ms": 139.24220018088818,
+      "incremental_inventory_p95_ms": 168.86309999972582,
+      "process_query_goal_met": true,
+      "process_query_p50_ms": 307.4463000521064,
+      "process_query_p95_ms": 357.7853003516793,
+      "project": "iDirectory",
+      "query_engine_reduction_pct": 97.1476150307944,
+      "query_goal_met": true,
+      "query_p50_ms": 6.197299808263779,
+      "query_p95_ms": 11.992800049483776,
+      "samples": 7,
+      "state": "measured",
+      "token_method": "heuristic, not provider token accounting"
+    },
+    {
+      "audit_fixture": "governed files in temporary clone; no Git internals",
+      "audit_samples": 3,
+      "baseline_v5": {
+        "context_pack_tokens_common_estimator": 88,
+        "method": "v5 HEAD kernel, Tier 1A root query on same current project; no model inference",
+        "query_p50_ms": 211.63420006632805,
+        "query_p95_ms": 254.37780003994703,
+        "samples": 7,
+        "source_commit": "0ea360e3e5f510d7251eb1c0632afa60a87c4b67",
+        "source_file_sha256": "3d9d6fb8bd3d17e9ac2ec2742e804f8dba63855b5787217e95f5054a3d6c6f94",
+        "version": "5.0"
+      },
+      "bootstrap_rule_characters": {
+        "after": 1544,
+        "before": 7885,
+        "excludes_global_personal_rules": true,
+        "reduction_pct": 80.41851616994293
+      },
+      "context_pack_estimated_tokens": [
+        142,
+        142,
+        142,
+        142,
+        142,
+        142,
+        142
+      ],
+      "full_ast_parses": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "full_audit_p50_ms": 1463.870100211352,
+      "full_audit_p95_ms": 1482.1023000404239,
+      "full_files_read": [
+        82,
+        82,
+        82,
+        82,
+        82,
+        82,
+        82
+      ],
+      "full_inventory_p50_ms": 240.3569002635777,
+      "full_inventory_p95_ms": 252.963500097394,
+      "includes_llm_inference": false,
+      "incremental_ast_parses": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "incremental_audit_goal_met": true,
+      "incremental_audit_p50_ms": 175.5919000133872,
+      "incremental_audit_p95_ms": 185.26219995692372,
+      "incremental_audit_reduction_pct": 88.00495344579853,
+      "incremental_files_read": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "incremental_inventory_p50_ms": 186.99559988453984,
+      "incremental_inventory_p95_ms": 201.7732998356223,
+      "process_query_goal_met": true,
+      "process_query_p50_ms": 293.8003996387124,
+      "process_query_p95_ms": 306.29049986600876,
+      "project": "ThinkingSeed",
+      "query_engine_reduction_pct": 96.81237708286602,
+      "query_goal_met": true,
+      "query_p50_ms": 6.746100261807442,
+      "query_p95_ms": 8.10740003362298,
+      "samples": 7,
+      "state": "measured",
+      "token_method": "heuristic, not provider token accounting"
+    },
+    {
+      "audit_fixture": "governed files in temporary clone; no Git internals",
+      "audit_samples": 3,
+      "baseline_v5": {
+        "context_pack_tokens_common_estimator": 88,
+        "method": "v5 HEAD kernel, Tier 1A root query on same current project; no model inference",
+        "query_p50_ms": 231.21580015867949,
+        "query_p95_ms": 248.98240016773343,
+        "samples": 7,
+        "source_commit": "0ea360e3e5f510d7251eb1c0632afa60a87c4b67",
+        "source_file_sha256": "3d9d6fb8bd3d17e9ac2ec2742e804f8dba63855b5787217e95f5054a3d6c6f94",
+        "version": "5.0"
+      },
+      "bootstrap_rule_characters": {
+        "after": 1538,
+        "before": 3415,
+        "excludes_global_personal_rules": true,
+        "reduction_pct": 54.963396778916554
+      },
+      "context_pack_estimated_tokens": [
+        147,
+        147,
+        147,
+        147,
+        147,
+        147,
+        147
+      ],
+      "full_ast_parses": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "full_audit_p50_ms": 3052.833900321275,
+      "full_audit_p95_ms": 3463.813600130379,
+      "full_files_read": [
+        160,
+        160,
+        160,
+        160,
+        160,
+        160,
+        160
+      ],
+      "full_inventory_p50_ms": 325.2520002424717,
+      "full_inventory_p95_ms": 334.09469993785024,
+      "includes_llm_inference": false,
+      "incremental_ast_parses": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "incremental_audit_goal_met": true,
+      "incremental_audit_p50_ms": 264.9846998974681,
+      "incremental_audit_p95_ms": 266.8839995749295,
+      "incremental_audit_reduction_pct": 91.32004201507388,
+      "incremental_files_read": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "incremental_inventory_p50_ms": 239.174900110811,
+      "incremental_inventory_p95_ms": 244.4221000187099,
+      "process_query_goal_met": true,
+      "process_query_p50_ms": 293.1658998131752,
+      "process_query_p95_ms": 336.226100102067,
+      "project": "MetricsThinking",
+      "query_engine_reduction_pct": 97.11992002934755,
+      "query_goal_met": true,
+      "query_p50_ms": 6.659199949353933,
+      "query_p95_ms": 10.587800294160843,
+      "samples": 7,
+      "state": "measured",
+      "token_method": "heuristic, not provider token accounting"
+    },
+    {
+      "audit_fixture": "governed files in temporary clone; no Git internals",
+      "audit_samples": 3,
+      "baseline_v5": {
+        "context_pack_tokens_common_estimator": 88,
+        "method": "v5 HEAD kernel, Tier 1A root query on same current project; no model inference",
+        "query_p50_ms": 218.57660030946136,
+        "query_p95_ms": 262.16519996523857,
+        "samples": 7,
+        "source_commit": "0ea360e3e5f510d7251eb1c0632afa60a87c4b67",
+        "source_file_sha256": "3d9d6fb8bd3d17e9ac2ec2742e804f8dba63855b5787217e95f5054a3d6c6f94",
+        "version": "5.0"
+      },
+      "bootstrap_rule_characters": {
+        "after": 1539,
+        "before": 6252,
+        "excludes_global_personal_rules": true,
+        "reduction_pct": 75.38387715930902
+      },
+      "context_pack_estimated_tokens": [
+        147,
+        147,
+        147,
+        147,
+        147,
+        147,
+        147
+      ],
+      "full_ast_parses": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "full_audit_p50_ms": 1260.749400127679,
+      "full_audit_p95_ms": 1266.4375002495944,
+      "full_files_read": [
+        85,
+        85,
+        85,
+        85,
+        85,
+        85,
+        85
+      ],
+      "full_inventory_p50_ms": 196.20969984680414,
+      "full_inventory_p95_ms": 282.6514998450875,
+      "includes_llm_inference": false,
+      "incremental_ast_parses": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "incremental_audit_goal_met": true,
+      "incremental_audit_p50_ms": 188.07510007172823,
+      "incremental_audit_p95_ms": 193.63499991595745,
+      "incremental_audit_reduction_pct": 85.08227725092064,
+      "incremental_files_read": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "incremental_inventory_p50_ms": 142.43829995393753,
+      "incremental_inventory_p95_ms": 192.91740003973246,
+      "process_query_goal_met": true,
+      "process_query_p50_ms": 310.18099980428815,
+      "process_query_p95_ms": 387.701400090009,
+      "project": "iReadme",
+      "query_engine_reduction_pct": 97.12315977124976,
+      "query_goal_met": true,
+      "query_p50_ms": 6.288099568337202,
+      "query_p95_ms": 8.827600162476301,
+      "samples": 7,
+      "state": "measured",
+      "token_method": "heuristic, not provider token accounting"
+    },
+    {
+      "audit_fixture": "governed files in temporary clone; no Git internals",
+      "audit_samples": 3,
+      "baseline_v5": {
+        "context_pack_tokens_common_estimator": 88,
+        "method": "v5 HEAD kernel, Tier 1A root query on same current project; no model inference",
+        "query_p50_ms": 220.75810004025698,
+        "query_p95_ms": 254.98259998857975,
+        "samples": 7,
+        "source_commit": "0ea360e3e5f510d7251eb1c0632afa60a87c4b67",
+        "source_file_sha256": "3d9d6fb8bd3d17e9ac2ec2742e804f8dba63855b5787217e95f5054a3d6c6f94",
+        "version": "5.0"
+      },
+      "bootstrap_rule_characters": {
+        "after": 1489,
+        "before": 4713,
+        "excludes_global_personal_rules": true,
+        "reduction_pct": 68.4065351156376
+      },
+      "context_pack_estimated_tokens": [
+        154,
+        154,
+        154,
+        154,
+        154,
+        154,
+        154
+      ],
+      "full_ast_parses": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "full_audit_p50_ms": 920.0716000050306,
+      "full_audit_p95_ms": 971.5309999883175,
+      "full_files_read": [
+        59,
+        59,
+        59,
+        59,
+        59,
+        59,
+        59
+      ],
+      "full_inventory_p50_ms": 144.08890018239617,
+      "full_inventory_p95_ms": 171.9420999288559,
+      "includes_llm_inference": false,
+      "incremental_ast_parses": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "incremental_audit_goal_met": true,
+      "incremental_audit_p50_ms": 124.37020009383559,
+      "incremental_audit_p95_ms": 152.0058996975422,
+      "incremental_audit_reduction_pct": 86.48255199995786,
+      "incremental_files_read": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "incremental_inventory_p50_ms": 117.637500166893,
+      "incremental_inventory_p95_ms": 155.27909994125366,
+      "process_query_goal_met": true,
+      "process_query_p50_ms": 320.59070002287626,
+      "process_query_p95_ms": 370.4980998300016,
+      "project": "ContextControl",
+      "query_engine_reduction_pct": 97.28222896485808,
+      "query_goal_met": true,
+      "query_p50_ms": 5.999699700623751,
+      "query_p95_ms": 7.313400041311979,
+      "samples": 7,
+      "state": "measured",
+      "token_method": "heuristic, not provider token accounting"
+    }
+  ],
+  "completed_at": "2026-10-31T22:38:55.048620+00:00",
+  "discovery_documentation": [
+    "https://antigravity.google/docs/skills",
+    "https://learn.chatgpt.com/docs/build-skills"
+  ],
+  "final_checks": [
+    {
+      "audit_full": "valid",
+      "doctor": "passed",
+      "estimated_pack_tokens": {
+        "1a": 144,
+        "1b": 144,
+        "2": 239
+      },
+      "governed_and_state_files_checked": 111,
+      "pending_requests": 0,
+      "project": "iDirectory",
+      "read_only_changed_files": [],
+      "reconcile_check": "passed",
+      "second_sync_changed_files": []
+    },
+    {
+      "audit_full": "valid",
+      "doctor": "passed",
+      "estimated_pack_tokens": {
+        "1a": 142,
+        "1b": 142,
+        "2": 235
+      },
+      "governed_and_state_files_checked": 112,
+      "pending_requests": 0,
+      "project": "ThinkingSeed",
+      "read_only_changed_files": [],
+      "reconcile_check": "passed",
+      "second_sync_changed_files": []
+    },
+    {
+      "audit_full": "valid",
+      "doctor": "passed",
+      "estimated_pack_tokens": {
+        "1a": 147,
+        "1b": 147,
+        "2": 228
+      },
+      "governed_and_state_files_checked": 191,
+      "pending_requests": 0,
+      "project": "MetricsThinking",
+      "read_only_changed_files": [],
+      "reconcile_check": "passed",
+      "second_sync_changed_files": []
+    },
+    {
+      "audit_full": "valid",
+      "doctor": "passed",
+      "estimated_pack_tokens": {
+        "1a": 147,
+        "1b": 147,
+        "2": 244
+      },
+      "governed_and_state_files_checked": 113,
+      "pending_requests": 0,
+      "project": "iReadme",
+      "read_only_changed_files": [],
+      "reconcile_check": "passed",
+      "second_sync_changed_files": []
+    },
+    {
+      "audit_full": "valid",
+      "doctor": "passed",
+      "estimated_pack_tokens": {
+        "1a": 154,
+        "1b": 154,
+        "2": 235
+      },
+      "governed_and_state_files_checked": 88,
+      "pending_requests": 0,
+      "project": "ContextControl",
+      "read_only_changed_files": [],
+      "reconcile_check": "passed",
+      "second_sync_changed_files": []
+    }
+  ],
+  "host_launchers": {
+    "checkpoint_handoff": "antigravity -> codex passed",
+    "launchers_equal": 6,
+    "scope": "real installed scripts; no independent LLM sessions or inference measurements",
+    "semantic_hybrid_handoff": "antigravity prepare -> current agent authored fixture -> codex complete passed",
+    "version": "6.0.0"
+  },
+  "independence": {
+    "method": "isolated copies of release manifests; explicit empty ecosystem root; no model inference",
+    "scenarios": [
+      {
+        "index_pack_hybrid_metrics_readme": "passed",
+        "isolated_runtime": true,
+        "project": "iDirectory",
+        "sibling_checkouts_available": false
+      },
+      {
+        "index_pack_hybrid_metrics_readme": "passed",
+        "isolated_runtime": true,
+        "project": "ThinkingSeed",
+        "sibling_checkouts_available": false
+      },
+      {
+        "index_pack_hybrid_metrics_readme": "passed",
+        "isolated_runtime": true,
+        "project": "MetricsThinking",
+        "sibling_checkouts_available": false
+      },
+      {
+        "index_pack_hybrid_metrics_readme": "passed",
+        "isolated_runtime": true,
+        "project": "iReadme",
+        "sibling_checkouts_available": false
+      },
+      {
+        "index_pack_hybrid_metrics_readme": "passed",
+        "isolated_runtime": true,
+        "project": "ContextControl",
+        "sibling_checkouts_available": false
+      }
+    ],
+    "version": "6.0.0"
+  },
+  "installation": {
+    "errors": [],
+    "installed": {
+      "antigravity": {
+        "icontext": {
+          "hash": "09a67f9f64757ecf121de31e86ae691b587c42f641585abdf4b15c941ffbd4c4",
+          "matches": true
+        },
+        "idir": {
+          "hash": "849d8a5335da037ada0c5753492c639f093d9276f3f4bb67674af08fb7cf9c3a",
+          "matches": true
+        },
+        "metrics": {
+          "hash": "da7800cef6b5487cadf860fa89e4d464b45c5ab7567507ee7b98cd8dbcb844fd",
+          "matches": true
+        },
+        "readme": {
+          "hash": "e11d40cee46254136d44c21a3828913c3c0633a78fa90d27e0bea685475fe694",
+          "matches": true
+        },
+        "seed": {
+          "hash": "e9a03d600103bc9dd24b6670f1deae73bf96c28b32882b48d977ecf62fc0ca05",
+          "matches": true
+        },
+        "seed-master": {
+          "hash": "6058eeb41aae26f889928b0181d3886b7ad728a4172a2c88309f58c301e93e26",
+          "matches": true
+        }
+      },
+      "codex": {
+        "icontext": {
+          "hash": "09a67f9f64757ecf121de31e86ae691b587c42f641585abdf4b15c941ffbd4c4",
+          "matches": true
+        },
+        "idir": {
+          "hash": "849d8a5335da037ada0c5753492c639f093d9276f3f4bb67674af08fb7cf9c3a",
+          "matches": true
+        },
+        "metrics": {
+          "hash": "da7800cef6b5487cadf860fa89e4d464b45c5ab7567507ee7b98cd8dbcb844fd",
+          "matches": true
+        },
+        "readme": {
+          "hash": "e11d40cee46254136d44c21a3828913c3c0633a78fa90d27e0bea685475fe694",
+          "matches": true
+        },
+        "seed": {
+          "hash": "e9a03d600103bc9dd24b6670f1deae73bf96c28b32882b48d977ecf62fc0ca05",
+          "matches": true
+        },
+        "seed-master": {
+          "hash": "6058eeb41aae26f889928b0181d3886b7ad728a4172a2c88309f58c301e93e26",
+          "matches": true
+        }
+      }
+    },
+    "state": "current",
+    "version": "6.0.0"
+  },
+  "measurement_limits": [
+    "Token counts are heuristic estimates, not provider billing.",
+    "Latency excludes LLM inference. v5 comparison uses the Git HEAD 5.0 kernel on the same current projects.",
+    "Installed scripts and handoffs were exercised; independent live agent reasoning, scope drift and task-success rates were not measured.",
+    "FPAI is auxiliary; the PII scan does not certify comprehensive security."
+  ],
+  "pending_update_requests": 0,
+  "persisted_schema_contracts_passed": 30,
+  "repeated_install_writes": 0,
+  "runtime_distributions_identical": 5,
+  "runtime_release_sha256": "bbe747642afd1012f08816fc3e02c2ef1a2751c11fd24de3b9b6ebcd526dd612",
+  "scope": "Technical implementation and engine/installed-launcher validation",
+  "status": "completed",
+  "version": "6.0.0"
+}

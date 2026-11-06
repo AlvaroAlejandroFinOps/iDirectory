@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "toolchain.schema.json",
+  "type": "object",
+  "required": [
+    "runtime_version",
+    "agents",
+    "semantic_author"
+  ],
+  "properties": {
+    "runtime_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "agents": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "antigravity",
+          "codex"
+        ]
+      }
+    },
+    "semantic_author": {
+      "const": "current_agent"
+    }
+  }
+}

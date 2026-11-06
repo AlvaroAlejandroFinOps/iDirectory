@@ -1,0 +1,683 @@
+{
+  "entries": {
+    ".": {
+      "beacon_chain_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "beacon_hash": "29e02afbcbc4a62b3d955593f853063b09bd47dfaac65d45221ae9ff2f1be606",
+      "fingerprint": "c828c8f633088c6f7e5bdf7638492e99ccb42f662085cfc87395d62682b1daf1",
+      "pack": {
+        "crawl": true,
+        "edges": {
+          "01_seed": "child",
+          "02_foundation": "child",
+          "03_research": "child",
+          "artifacts": "child"
+        },
+        "files": [
+          "AGENTS.md(~365t)",
+          "pyproject.toml(~106t)",
+          "FWengine.py(~288t)",
+          "CLAUDE.md(~565t)",
+          "GEMINI.md(~56t)",
+          "LICENSE(~271t)"
+        ],
+        "focus": ".",
+        "idir_pack": "6.0",
+        "instructions": "Directorio con herencia canónica.",
+        "prio": "p2",
+        "role": "general",
+        "seed_ref": "optional",
+        "tier": "1a"
+      }
+    },
+    "01_seed": {
+      "beacon_chain_hash": "e726266e3bc4a9b52954eee1eef7621667093ec3726c86416ea3fe881bd12f94",
+      "beacon_hash": "996d840903829140e283d9ce4bc4177aefc2a00b7bc12d9c125cf3f2d9dd2362",
+      "fingerprint": "fa3625d07e89bc671fc0a057269953160033c211cfa815f8e3ca031795a0a0c2",
+      "pack": {
+        "crawl": true,
+        "edges": {},
+        "files": [
+          "seed-idirectory-master.md(~12639t)"
+        ],
+        "focus": "01_seed",
+        "idir_pack": "6.0",
+        "instructions": "LECTURA CONDICIONAL (Tier 2 / Disparadores de Arquitectura). Prohibido precargar en Tier 1.",
+        "prio": "p0",
+        "role": "dna",
+        "seed_ref": "required",
+        "tier": "1a"
+      }
+    },
+    "02_foundation": {
+      "beacon_chain_hash": "aae0a5f04bbcf36c129d3d8029ddabd3ded307f5639d6e9261353201ca8ab8f6",
+      "beacon_hash": "b84d398580e571158a1fc3d617313645acca4993fde159cfb7da62451b878a40",
+      "fingerprint": "75c51cbd253b550b0644256f2cea61a26a697aca457f2f9fc4e8715e5e02fc1d",
+      "pack": {
+        "crawl": true,
+        "edges": {
+          "02_foundation/engine": "child"
+        },
+        "files": [],
+        "focus": "02_foundation",
+        "idir_pack": "6.0",
+        "instructions": "Sin lógica propia. Leer el beacon del subdirectorio objetivo.",
+        "prio": "p2",
+        "role": "namespace",
+        "seed_ref": "optional",
+        "tier": "1a"
+      }
+    },
+    "02_foundation/engine": {
+      "beacon_chain_hash": "eb04bd52fbc27608b5a23da93e8007a2d7cfca8bba69ae78013c776af297ff20",
+      "beacon_hash": "525cd5a3d61fce6f40bdddf3acc87c26466f4fa368adfefff5a56d0861505229",
+      "fingerprint": "c460c065415db22078e82163be6f36f34dab27ee5c6ee2fbe6dde4bb07b15af8",
+      "pack": {
+        "crawl": true,
+        "edges": {
+          "02_foundation": "parent"
+        },
+        "files": [
+          "engine_readme.md(~1125t)"
+        ],
+        "focus": "02_foundation/engine",
+        "idir_pack": "6.0",
+        "inherited_from": "02_foundation",
+        "instructions": "Contiene los utilitarios de gobernanza y especificación formal de directorios.",
+        "prio": "p1",
+        "role": "core_engine",
+        "seed_ref": "optional",
+        "tier": "1a"
+      }
+    },
+    "03_research": {
+      "beacon_chain_hash": "37d9f5dae99b8da9ed3113712db0a11b93cfe80bd93d2ec2c7dc38bc651513d0",
+      "beacon_hash": "a0885a0b00da1ee6cc6319f14ac6d0f0d0410f42efb0159fe4f5da9ce2171e61",
+      "fingerprint": "c809b7bc95f9632780440b8fbce64f5a2f241cbb0361883ca974b567db62494a",
+      "pack": {
+        "crawl": true,
+        "edges": {
+          "03_research/prompts": "child"
+        },
+        "files": [],
+        "focus": "03_research",
+        "idir_pack": "6.0",
+        "instructions": "Sin lógica propia. Leer el beacon del subdirectorio objetivo.",
+        "prio": "p2",
+        "role": "namespace",
+        "seed_ref": "optional",
+        "tier": "1a"
+      }
+    },
+    "03_research/prompts": {
+      "beacon_chain_hash": "6c204d365340667644adb0dca4e6ffe4908b889ed96a574e21eb27033f9bb31d",
+      "beacon_hash": "d269ea009fcc9d12c4ca4b5c48842c1c39631611f98578d06d3a65477ca3622b",
+      "fingerprint": "e0b841fe095bab641278838f6c243639ab5292b9d1ce622d6b823fc232cb2768",
+      "pack": {
+        "crawl": true,
+        "edges": {
+          "03_research": "parent"
+        },
+        "files": [],
+        "focus": "03_research/prompts",
+        "idir_pack": "6.0",
+        "inherited_from": "03_research",
+        "instructions": "Plantillas de inferencia y configuración de agentes.",
+        "prio": "p1",
+        "role": "prompt_engineering",
+        "seed_ref": "optional",
+        "tier": "1a"
+      }
+    },
+    "artifacts": {
+      "beacon_chain_hash": "b712c56187912ad28dacd707ae67e524e750a5866005351bbbe22f521c0815fd",
+      "beacon_hash": "1c27fb78f03b685610c9fbd91504da3b1fccaf5ac011d9f89fb8c94cc3f69da0",
+      "fingerprint": "dd4b136c8e7c366f4966a849dcbe9128a68d837cf76b1cb2a11780f4424fcf42",
+      "pack": {
+        "crawl": true,
+        "edges": {
+          "artifacts/benchmarks": "child",
+          "artifacts/plans": "child"
+        },
+        "files": [
+          "benchmark_seed_coverage.md(~1007t)"
+        ],
+        "focus": "artifacts",
+        "idir_pack": "6.0",
+        "instructions": "Sin lógica propia. Leer el beacon del subdirectorio objetivo.",
+        "prio": "p2",
+        "role": "namespace",
+        "seed_ref": "optional",
+        "tier": "1a"
+      }
+    },
+    "artifacts/benchmarks": {
+      "beacon_chain_hash": "0cf18853dd49dabd25eb12cb6e8df346019268695240bec652677884a9a0b02f",
+      "beacon_hash": "8fc836fa63cd66ae150a82563e54573a59c75b95859227d23c32ccff11cbd874",
+      "fingerprint": "3001428193fa8ba89c00b51125b27d93e2cd4ef37ab79dca68491a7801e418a1",
+      "pack": {
+        "crawl": true,
+        "edges": {
+          "artifacts": "parent"
+        },
+        "files": [
+          "README.md(~1435t)",
+          "benchmark_matrix.json(~11933t)",
+          "forensic_repo_01_gravity___hyperscale_thinking.md(~1333t)",
+          "forensic_repo_02_gravity___deep_space.md(~1113t)",
+          "forensic_repo_03_ultrathinking.md(~1112t)",
+          "forensic_repo_04_thinkingseed.md(~1357t)"
+        ],
+        "focus": "artifacts/benchmarks",
+        "idir_pack": "6.0",
+        "inherited_from": "artifacts",
+        "instructions": "Hereda directivas de artifacts/. Enriquecer con /idir enrich.",
+        "prio": "p2",
+        "role": "namespace",
+        "seed_ref": "optional",
+        "tier": "1a"
+      }
+    },
+    "artifacts/plans": {
+      "beacon_chain_hash": "fb18840ae8ee15ffde0d43ac1efea6f29106582bf1a9a4700b8fec12d4793a1b",
+      "beacon_hash": "8a8cff52812648899a01af9da32f84f7f3ac49645ba7e729092b8dd2e1881f4a",
+      "fingerprint": "c2a00a6df9c247652f768656f2b3db38d0c5975ff77012471a05869838afbe00",
+      "pack": {
+        "crawl": true,
+        "edges": {
+          "artifacts": "parent",
+          "artifacts/plans/active": "child",
+          "artifacts/plans/metricsthinking": "child",
+          "artifacts/plans/openia": "child"
+        },
+        "files": [],
+        "focus": "artifacts/plans",
+        "idir_pack": "6.0",
+        "inherited_from": "artifacts",
+        "instructions": "Sin lógica propia. Leer el beacon del subdirectorio objetivo.",
+        "prio": "p2",
+        "role": "namespace",
+        "seed_ref": "optional",
+        "tier": "1a"
+      }
+    },
+    "artifacts/plans/active": {
+      "beacon_chain_hash": "dd279d09e43cc951ce084df2699ddb024f66d074ab393684261ae581fd303bd8",
+      "beacon_hash": "4099ccf8eeb2b31acd32ca9fe98dc35988cc70c149825027948b31a8bf8406f4",
+      "fingerprint": "f9de231bbd88c7d3b222320ef806133364b814bbbda99eecb3e7993c34064458",
+      "pack": {
+        "crawl": true,
+        "edges": {
+          "artifacts/plans": "parent"
+        },
+        "files": [
+          "plan_reingenieria_v4.md(~545t)"
+        ],
+        "focus": "artifacts/plans/active",
+        "idir_pack": "6.0",
+        "inherited_from": "artifacts/plans",
+        "instructions": "Planes y decisiones vigentes. Consultar antes de modificar infraestructura o presupuestos.",
+        "prio": "p1",
+        "role": "active_plans",
+        "seed_ref": "optional",
+        "tier": "1a"
+      }
+    },
+    "artifacts/plans/openia": {
+      "beacon_chain_hash": "f5dafb5a41544eee8aa8cc8237028e786ad7310397c05c457db419258fb66346",
+      "beacon_hash": "657ab6156bcab1982842f9c849e72c718281272645036b04bd4ea9bf2c22509c",
+      "fingerprint": "8d7efeb758b6924c05486c341d31aa78ef92338a36da716cd1b6d5b058a23ae5",
+      "pack": {
+        "crawl": true,
+        "edges": {
+          "artifacts/plans": "parent"
+        },
+        "files": [
+          "sugerencias_gptsol_5.6high.md(~5529t)"
+        ],
+        "focus": "artifacts/plans/openia",
+        "idir_pack": "6.0",
+        "inherited_from": "artifacts/plans",
+        "instructions": "Consultar sólo para evolución de iDirectory; validar fecha, commit y vigencia antes de ejecutar recomendaciones.",
+        "prio": "p1",
+        "role": "openai_advisory_plans",
+        "seed_ref": "optional",
+        "tier": "1a"
+      }
+    },
+    "config": {
+      "beacon_chain_hash": "ceabe8ac96ad505fb82d97ea542c4c35d50a4c572bfb507ff2e33e6e3f23bf32",
+      "beacon_hash": "6c2651b95e2d4b9daa0c4c6ed9fc950355fafa09491a7f72fd7351e29a0684e9",
+      "fingerprint": "5e7f5081d2902d3408cd5b318e3c29017baa657158e129b6b3710b7ecb0f296f",
+      "pack": {
+        "crawl": true,
+        "edges": {},
+        "files": [
+          "context_policy.json(~853t)"
+        ],
+        "focus": "config",
+        "idir_pack": "6.0",
+        "instructions": "Variables y parámetros. NUNCA colocar claves secretas en texto plano.",
+        "prio": "p1",
+        "role": "configuration",
+        "seed_ref": "optional",
+        "tier": "1a"
+      }
+    },
+    "data": {
+      "beacon_chain_hash": "45440e7801003151c7696da0304cf58284630c367e7f2f5e6c28a73b30823639",
+      "beacon_hash": "d108fe4debd72eff088f9c8412387d8fef4eed9c296aacd2ce7f5ed27f6c8797",
+      "fingerprint": "95935357b744c8f11ccbb8a23d94e45bdbd3beac9040b6082cc31c65c72ee203",
+      "pack": {
+        "crawl": true,
+        "edges": {},
+        "files": [],
+        "focus": "data",
+        "idir_pack": "6.0",
+        "instructions": "Sin lógica propia. Leer el beacon del subdirectorio objetivo.",
+        "prio": "p2",
+        "role": "namespace",
+        "seed_ref": "optional",
+        "tier": "1a"
+      }
+    },
+    "docs": {
+      "beacon_chain_hash": "6317216f276a6094b4ff7e3c8b984c330768ed6f05a9bda7d4e8c08100c348db",
+      "beacon_hash": "4e29d13909f0f78ed4a7526ed4c6f9064abb3ccd6ee4c8467a4badc3cd3209b4",
+      "fingerprint": "88d5a4077f3148e0bf68583fecb20e3b5066e8461664b4ccc7b769857bb8432b",
+      "pack": {
+        "crawl": true,
+        "edges": {
+          "docs/architecture": "child",
+          "docs/notes": "child",
+          "docs/specs": "child"
+        },
+        "files": [],
+        "focus": "docs",
+        "idir_pack": "6.0",
+        "instructions": "Sin lógica propia. Leer el beacon del subdirectorio objetivo.",
+        "prio": "p2",
+        "role": "namespace",
+        "seed_ref": "optional",
+        "tier": "1a"
+      }
+    },
+    "docs/architecture": {
+      "beacon_chain_hash": "616f5eb96b14d0fc27bea2ab6157774c828cbf28ac8c0e70c759b157c100b181",
+      "beacon_hash": "579ac3a434b5f233b8ab64811f475dcc1275ed6df7c60a959dc7dcd62e8e8d90",
+      "fingerprint": "ecec50a219964eed9d18e401f68d9faf8ea15e7ad3884b4fc68a6537c98655be",
+      "pack": {
+        "crawl": true,
+        "edges": {
+          "docs": "parent"
+        },
+        "files": [
+          "Directorio de carpetas.md(~929t)",
+          "folder_manifest.json(~3057t)",
+          "folder_manifest.yaml(~977t)"
+        ],
+        "focus": "docs/architecture",
+        "idir_pack": "6.0",
+        "inherited_from": "docs",
+        "instructions": "Diagramas y especificaciones de alto nivel de sistemas.",
+        "prio": "p1",
+        "role": "architecture_diagrams",
+        "seed_ref": "optional",
+        "tier": "1a"
+      }
+    },
+    "docs/notes": {
+      "beacon_chain_hash": "8e769560aea5a62afcb49a4fafe7dc902f7f02986513674c34c1797d5983f024",
+      "beacon_hash": "0f908d7156270d3f06214795029bafbef351231876d83e1341f0d353fbb1f704",
+      "fingerprint": "3eff4a6c82bcd8d253230be874c83c9ac98354ce96a49da18e9f1753090886ea",
+      "pack": {
+        "crawl": true,
+        "edges": {
+          "docs": "parent"
+        },
+        "files": [],
+        "focus": "docs/notes",
+        "idir_pack": "6.0",
+        "inherited_from": "docs",
+        "instructions": "Notas de ingeniería y registros de decisiones.",
+        "prio": "p2",
+        "role": "engineers_notes",
+        "seed_ref": "optional",
+        "tier": "1a"
+      }
+    },
+    "docs/specs": {
+      "beacon_chain_hash": "4ff20867668ab6e5924242804fe4cc1e878c0402a169ae0b2338e25a00b95c6a",
+      "beacon_hash": "d399e0fc46ebb7ba355d1446f1807e77fd98f1e6837057a5c0ea09116293f465",
+      "fingerprint": "43da712ef866809db4550511cb79895130487ff6e099d6e876f93e9c2afbce04",
+      "pack": {
+        "crawl": true,
+        "edges": {
+          "docs": "parent"
+        },
+        "files": [
+          "agent-governance-before-v6.md(~2087t)",
+          "governance-gemini-before-v6.md(~744t)",
+          "icontext-v6.md(~1685t)",
+          "skill-idir-before-v6.md(~1389t)"
+        ],
+        "focus": "docs/specs",
+        "idir_pack": "6.0",
+        "inherited_from": "docs",
+        "instructions": "Contratos técnicos de integración.",
+        "prio": "p1",
+        "role": "technical_specs",
+        "seed_ref": "optional",
+        "tier": "1a"
+      }
+    },
+    "infrastructure": {
+      "beacon_chain_hash": "c4a793087d774287ed108554064aae410772fc9632d824423746007b95620e50",
+      "beacon_hash": "18e1b9b9eb095fdb022790a0ea48aed063f8c6be0c633865c19e341f1fa2dfc6",
+      "fingerprint": "e43089bb92a72b09580485e34a582bc9784514305671789bbccaf126d11a774e",
+      "pack": {
+        "crawl": true,
+        "edges": {},
+        "files": [],
+        "focus": "infrastructure",
+        "idir_pack": "6.0",
+        "instructions": "Extensión de dominio. Enriquecer con /idir enrich.",
+        "prio": "p1",
+        "role": "domain_extension",
+        "seed_ref": "optional",
+        "tier": "1a"
+      }
+    },
+    "schemas": {
+      "beacon_chain_hash": "2209a3d179669ada8610d1bc4385ee75a777ed80cbd67678bb80f1ebb7df8009",
+      "beacon_hash": "7de72434b0ffd7567b5faf10cd364ce01e6c776532cf3ef0bee378527d4b07ae",
+      "fingerprint": "c74f8c0e2fc8cb48c1e3a2678b40926664d9f3b2adec54dfea5496e7c860a430",
+      "pack": {
+        "crawl": true,
+        "edges": {},
+        "files": [
+          "backlog.schema.json(~433t)",
+          "beacon.schema.json(~520t)",
+          "checkpoint.schema.json(~614t)",
+          "contracts_ast.schema.json(~895t)",
+          "icontext_bus.schema.json(~1717t)",
+          "inventory.schema.json(~167t)"
+        ],
+        "focus": "schemas",
+        "idir_pack": "6.0",
+        "instructions": "Contratos formales de datos. Consultar antes de emitir transformaciones SQL o PySpark.",
+        "prio": "p1",
+        "role": "data_contracts",
+        "seed_ref": "optional",
+        "tier": "1a"
+      }
+    },
+    "scripts": {
+      "beacon_chain_hash": "bec0aa7880deb21e2f5162064cbba140e70b67f80090b9f2f7246ef5de003210",
+      "beacon_hash": "d236725ac174c56326279ba8de0c15bdd98f853bd2fd5ba329fc73f8ac8a39f1",
+      "fingerprint": "2c89b8ce27fe0cdea5924e530518ea17a100d9440bf495dbe8890de2f5b8ac97",
+      "pack": {
+        "crawl": true,
+        "edges": {},
+        "files": [
+          "generate_benchmark_reports.py(~1548t)"
+        ],
+        "focus": "scripts",
+        "idir_pack": "6.0",
+        "instructions": "Automatización operativa de terminal.",
+        "prio": "p2",
+        "role": "ops_automation",
+        "seed_ref": "optional",
+        "tier": "1a"
+      }
+    },
+    "skills": {
+      "beacon_chain_hash": "33097dd9fd3745aeb07167b4211b971463c2efb044acf918dd613c1738952ce2",
+      "beacon_hash": "30e51476b593c7baad42407b3eb8f70adba2b6a25f3516679bdea069a6671ef0",
+      "fingerprint": "922a6fc30e59998d24472185be611d2060fc78719d8520725e3b35bede43ea2a",
+      "pack": {
+        "crawl": true,
+        "edges": {
+          "skills/v6": "child"
+        },
+        "files": [],
+        "focus": "skills",
+        "idir_pack": "6.0",
+        "instructions": "Extensión de dominio activa. Enriquecer con /idir enrich si añade contratos.",
+        "prio": "p1",
+        "role": "domain_extension",
+        "seed_ref": "optional",
+        "tier": "1a"
+      }
+    },
+    "skills/v6": {
+      "beacon_chain_hash": "79bb34c7f3f43df5ad440f9be3501080322f8bc2a7612bad32a6021ba19d3a14",
+      "beacon_hash": "75a0c31a0f6a7a3cf224c317d118caeb81e447716146322e1f476755902e2fa6",
+      "fingerprint": "d6353047f4799606d724f55d0eaecf0e7b09911bfad7da8a14eb3a881f98007b",
+      "pack": {
+        "crawl": true,
+        "edges": {
+          "skills": "parent",
+          "skills/v6/idir": "child"
+        },
+        "files": [],
+        "focus": "skills/v6",
+        "idir_pack": "6.0",
+        "inherited_from": "skills",
+        "instructions": "Hereda directivas de skills/.",
+        "prio": "p1",
+        "role": "domain_extension",
+        "seed_ref": "optional",
+        "tier": "1a"
+      }
+    },
+    "skills/v6/idir": {
+      "beacon_chain_hash": "c24916bb99cde62afe69e0ffced97802ad75c1e80ffe8d7908512164f3647277",
+      "beacon_hash": "5265cbfc9a25927bf329ddda3fed3c1c5f867ced42a807eeada169d9a4d73b25",
+      "fingerprint": "29009ab265bff9664339cb520d4fb8c43b6c8be53b50b2b3a91a6ed7c5684e36",
+      "pack": {
+        "crawl": true,
+        "edges": {
+          "skills/v6": "parent",
+          "skills/v6/idir/scripts": "child"
+        },
+        "files": [
+          "SKILL.md(~314t)",
+          "bundle.json(~67t)"
+        ],
+        "focus": "skills/v6/idir",
+        "idir_pack": "6.0",
+        "inherited_from": "skills/v6",
+        "instructions": "Hereda directivas de skills/v6/.",
+        "prio": "p1",
+        "role": "domain_extension",
+        "seed_ref": "optional",
+        "tier": "1a"
+      }
+    },
+    "skills/v6/idir/scripts": {
+      "beacon_chain_hash": "11684ce0344a993df83d98ecfb827dd98235b990beeb8dbb5d7bc5110af29eac",
+      "beacon_hash": "e6496207367291c22784031c192b55448de816d71f18ff00d1d95a330a4b1926",
+      "fingerprint": "e91b28859f84f276fc3b97c9fb29f72b47a0cab65b47a29800a1d9335b172398",
+      "pack": {
+        "crawl": true,
+        "edges": {
+          "skills/v6/idir": "parent"
+        },
+        "files": [
+          "run.py(~380t)"
+        ],
+        "focus": "skills/v6/idir/scripts",
+        "idir_pack": "6.0",
+        "inherited_from": "skills/v6/idir",
+        "instructions": "Hereda directivas de skills/v6/idir/.",
+        "prio": "p1",
+        "role": "domain_extension",
+        "seed_ref": "optional",
+        "tier": "1a"
+      }
+    },
+    "src": {
+      "beacon_chain_hash": "98ac1252d59ae427f33430bd2b89584bc0458731919c34b7baba2da1bf3074db",
+      "beacon_hash": "addcfad416dbf2ab0a8c4c70a14e7cac020e7fd5ba4fad95824e18f0a03430f2",
+      "fingerprint": "d3a8c23c78d353ed3614d211ac62713404f75543c85c11f5477b01d3dbec8153",
+      "pack": {
+        "crawl": true,
+        "edges": {
+          "src/cloud_jobs": "child",
+          "src/core": "child",
+          "src/dashboards": "child",
+          "src/data_generation": "child"
+        },
+        "files": [],
+        "focus": "src",
+        "idir_pack": "6.0",
+        "instructions": "Sin lógica propia. Leer el beacon del subdirectorio objetivo.",
+        "prio": "p1",
+        "role": "namespace",
+        "seed_ref": "optional",
+        "tier": "1a"
+      }
+    },
+    "src/cloud_jobs": {
+      "beacon_chain_hash": "18df6df92f5615e66fd81ae517051babf5916235b7ffd24bce186f9385640582",
+      "beacon_hash": "080114eb7b268bb0a43fdd06716b57d9c7e5ab7b7efe1b130a76fc28372c1ffc",
+      "fingerprint": "067e6b03c16bdbb189a57656944e53824e87651760b12cb5d8e89d2bab6cf7b2",
+      "pack": {
+        "crawl": true,
+        "edges": {
+          "src": "parent"
+        },
+        "files": [],
+        "focus": "src/cloud_jobs",
+        "idir_pack": "6.0",
+        "inherited_from": "src",
+        "instructions": "Cargas productivas de datos. Conservar invariantes de arquitectura e idempotencia.",
+        "prio": "p1",
+        "role": "production_pipelines",
+        "seed_ref": "optional",
+        "tier": "1a"
+      }
+    },
+    "src/core": {
+      "beacon_chain_hash": "829405288781fa9f1a809c6c56043c2ec0247b5f9f44d89c27104a8ebb320146",
+      "beacon_hash": "216ca5fb1a473346db22eef1a7dbdc12a2503b316191de44b943c7b932f0044c",
+      "fingerprint": "c7550ff31883ba03dab4d620bdde66b8c8f2433152b476ce190a64c68cbe45f6",
+      "pack": {
+        "crawl": true,
+        "edges": {
+          "src": "parent"
+        },
+        "files": [
+          "context_runtime.py(~5713t)",
+          "fwengine.py(~44799t)"
+        ],
+        "focus": "src/core",
+        "idir_pack": "6.0",
+        "inherited_from": "src",
+        "instructions": "Servicios backend reutilizables por jobs y dashboards.",
+        "prio": "p1",
+        "role": "shared_backend",
+        "seed_ref": "optional",
+        "tier": "1a"
+      }
+    },
+    "src/dashboards": {
+      "beacon_chain_hash": "99ba11908d0ddbc04d89710382bb118ae58376816ffcb558cc304304e211547d",
+      "beacon_hash": "e11d8ac04924a0027fc5cf235deb40a8ba9b69fcf4b80ec0a2f06dfd63cb2ccd",
+      "fingerprint": "128a8aa54e0f21fee440a1c04c2d1256baffd56a9d7a78dc8c809ebc8c6debf7",
+      "pack": {
+        "crawl": true,
+        "edges": {
+          "src": "parent"
+        },
+        "files": [],
+        "focus": "src/dashboards",
+        "idir_pack": "6.0",
+        "inherited_from": "src",
+        "instructions": "Aplicaciones de visualización frontend y consumo analítico.",
+        "prio": "p2",
+        "role": "bi_viz",
+        "seed_ref": "optional",
+        "tier": "1a"
+      }
+    },
+    "src/data_generation": {
+      "beacon_chain_hash": "941293beea813940949a7bb2ffd8815451153d2080375ef14e94725b58b82fc3",
+      "beacon_hash": "9c31c842c29dc16990acf7880e6fa7b502ddfdfb4ff20f7f57ab1195bd593611",
+      "fingerprint": "cb5ca06b9269ae335dda36fb8ff51c17eb2af05b315cf1c3271666a400152ea3",
+      "pack": {
+        "crawl": true,
+        "edges": {
+          "src": "parent"
+        },
+        "files": [],
+        "focus": "src/data_generation",
+        "idir_pack": "6.0",
+        "inherited_from": "src",
+        "instructions": "Generadores de pruebas de carga y benchmarking sintético.",
+        "prio": "p2",
+        "role": "synthetic_data",
+        "seed_ref": "optional",
+        "tier": "1a"
+      }
+    },
+    "tests": {
+      "beacon_chain_hash": "aae40b2cfe5b9735d23cd69fd2a9f23197625aceb5900b25cbb949c9de4f7b2a",
+      "beacon_hash": "7e91a77a62b63ae5520c615174a49a5545610e1dd472efcac76c7e86bcd1079a",
+      "fingerprint": "79bae010253e4e7fdc2f9d47defb3c8288e9a5ec8f59c1c5255585cb07981ba8",
+      "pack": {
+        "crawl": true,
+        "edges": {},
+        "files": [
+          "test_fwengine.py(~13702t)",
+          "test_token_budget.py(~2357t)"
+        ],
+        "focus": "tests",
+        "idir_pack": "6.0",
+        "instructions": "Pruebas de verificación de software y pipelines.",
+        "prio": "p1",
+        "role": "test_suites",
+        "seed_ref": "optional",
+        "tier": "1a"
+      }
+    },
+    "tools": {
+      "beacon_chain_hash": "90bcd7d5452969ee4a591aa285654eab0a5a894156fe801316dd0b82c78222e9",
+      "beacon_hash": "e5fc97b97c72967c1dbe6b05656ee616dc7e6b6cafdce126aba4fb8981dff6e5",
+      "fingerprint": "88be51f8a6deb51b9fa19647ed07347ad91071d2332236205c399bcc84e3549e",
+      "pack": {
+        "crawl": true,
+        "edges": {},
+        "files": [
+          "build_runtime.py(~1778t)"
+        ],
+        "focus": "tools",
+        "idir_pack": "6.0",
+        "instructions": "Herramientas locales del proyecto.",
+        "prio": "p2",
+        "role": "tooling",
+        "seed_ref": "optional",
+        "tier": "1a"
+      }
+    }
+  },
+  "generation": "9dbc74eab9d5ac78",
+  "policy_stamp": [
+    [
+      ".agentignore",
+      322,
+      1793473614756678900
+    ],
+    [
+      ".gitignore",
+      99,
+      1788297196178876900
+    ],
+    [
+      "config/context_policy.json",
+      3072,
+      1793477321772487600
+    ]
+  ],
+  "version": "6.0.0"
+}

@@ -1,0 +1,87 @@
+{
+  "audit_fixture": "governed files in temporary clone; no Git internals",
+  "audit_samples": 3,
+  "baseline_v5": {
+    "context_pack_tokens_common_estimator": 88,
+    "method": "v5 HEAD kernel, Tier 1A root query on same current project; no model inference",
+    "query_p50_ms": 217.2673000022769,
+    "query_p95_ms": 232.83559968695045,
+    "samples": 7,
+    "source_commit": "0ea360e3e5f510d7251eb1c0632afa60a87c4b67",
+    "source_file_sha256": "3d9d6fb8bd3d17e9ac2ec2742e804f8dba63855b5787217e95f5054a3d6c6f94",
+    "version": "5.0"
+  },
+  "bootstrap_rule_characters": {
+    "after": 1671,
+    "before": 11190,
+    "excludes_global_personal_rules": true,
+    "reduction_pct": 85.06702412868633
+  },
+  "context_pack_estimated_tokens": [
+    144,
+    144,
+    144,
+    144,
+    144,
+    144,
+    144
+  ],
+  "full_ast_parses": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "full_audit_p50_ms": 1905.4080001078546,
+  "full_audit_p95_ms": 2229.9044001847506,
+  "full_files_read": [
+    83,
+    83,
+    83,
+    83,
+    83,
+    83,
+    83
+  ],
+  "full_inventory_p50_ms": 184.0697997249663,
+  "full_inventory_p95_ms": 202.21779961138964,
+  "includes_llm_inference": false,
+  "incremental_ast_parses": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "incremental_audit_goal_met": true,
+  "incremental_audit_p50_ms": 166.48529982194304,
+  "incremental_audit_p95_ms": 197.73889984935522,
+  "incremental_audit_reduction_pct": 91.26248552475275,
+  "incremental_files_read": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "incremental_inventory_p50_ms": 139.24220018088818,
+  "incremental_inventory_p95_ms": 168.86309999972582,
+  "process_query_goal_met": true,
+  "process_query_p50_ms": 307.4463000521064,
+  "process_query_p95_ms": 357.7853003516793,
+  "project": "iDirectory",
+  "query_engine_reduction_pct": 97.1476150307944,
+  "query_goal_met": true,
+  "query_p50_ms": 6.197299808263779,
+  "query_p95_ms": 11.992800049483776,
+  "samples": 7,
+  "state": "measured",
+  "token_method": "heuristic, not provider token accounting"
+}

@@ -1,0 +1,8 @@
+{
+  "version": "6.0.0",
+  "name": "icontext",
+  "files": {
+    "SKILL.md": "09a67f9f64757ecf121de31e86ae691b587c42f641585abdf4b15c941ffbd4c4",
+    "scripts/run.py": "354efcdae125b7fc630daa0c9c7d1950574b0f797c19039f4427684405614af6"
+  }
+}

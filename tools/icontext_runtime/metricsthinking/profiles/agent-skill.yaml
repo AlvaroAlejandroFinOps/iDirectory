@@ -1,0 +1,278 @@
+name: agent-skill
+description: Perfil canónico MetricsThinking™ para AI Agent Skills, Context Engineering,
+  Prompt Engineering, paquetes de habilidades agénticas y orquestación multi-asistente.
+version: 3.0.0
+domain_archetype: agent-skill
+inspection_mode: governance_spec
+modules:
+- id: M01
+  name: Definición y Alcance de la Skill
+  weight: 0.05
+  stage_group: Fundamentos
+  criteria:
+  - id: M01-C01
+    name: Skill Frontmatter & Problem Statement
+    rule: check_skill_frontmatter
+    description: Metadatos canónicos de skill (name, description, frontmatter YAML)
+      y declaración del propósito técnico en SKILL.md, README o 01_seed.
+    hint: Definir frontmatter YAML canónico con 'name' y 'description' en SKILL.md
+      o declarar el propósito en README.md.
+  - id: M01-C02
+    name: Límites de Autonomía y Scope del Agente
+    rule: check_scope_defined
+    description: 'Fronteras operacionales del agente: directivas ''In Scope'', ''Out
+      of Scope'' o ''Cuándo Activar'' explícitas.'
+    hint: Declarar cuándo activar la skill y los límites de intervención del asistente
+      en SKILL.md o README.md.
+  - id: M01-C03
+    name: Triggers, Slash Commands & Modos de Uso
+    rule: check_slash_commands_docs
+    description: Definición formal de comandos de activación (e.g. /slash_command,
+      subcomandos, banderas CLI) y modos de interacción.
+    hint: Documentar comandos slash y triggers de activación en SKILL.md o docs.
+- id: M02
+  name: Arquitectura de Contexto e Instrucciones
+  weight: 0.1
+  stage_group: Fundamentos
+  criteria:
+  - id: M02-C01
+    name: Estructura Modular de la Skill
+    rule: check_skill_structure
+    description: Organización física modular (directorio .agents/skills/, skills/,
+      01_seed/, scripts/ o templates/).
+    hint: Estructurar la skill bajo .agents/skills/<nombre>/ o carpetas canónicas
+      01_seed y scripts/.
+  - id: M02-C02
+    name: Instrucciones Multi-Provider / Multi-Agente
+    rule: check_multi_provider_specs
+    description: Manifiestos de compatibilidad para asistentes de IA (AGENTS.md, GEMINI.md,
+      CLAUDE.md, .cursorrules, .windsurfrules).
+    hint: Añadir archivos de instrucción multi-agente (AGENTS.md, GEMINI.md, CLAUDE.md
+      o .cursorrules).
+  - id: M02-C03
+    name: Contratos de Datos y Esquemas de Contexto
+    rule: check_schemas
+    description: Esquemas de validación JSON/YAML Schema o contratos de structured
+      output para artefactos y seeds.
+    hint: Definir esquemas o contratos de salida en schemas/ o plantillas de datos.
+  - id: M02-C04
+    name: Topología de Contexto e iDirectory
+    rule: check_graphs_topology
+    description: Topología de contexto estructurada (.context.yaml, beacons, grafo
+      de dependencias o .context/tree.json).
+    hint: Configurar gobernanza .context.yaml o mapa topológico de dependencias.
+- id: M03
+  name: Gobernanza de Contexto y Guardrails
+  weight: 0.05
+  stage_group: Fundamentos
+  criteria:
+  - id: M03-C01
+    name: Guardrails Operacionales & Anti-Alucinación
+    rule: check_skill_guardrails
+    description: Reglas críticas de inmutabilidad (read-only guardrails), ground truth
+      first y prevención de corrupción de contexto.
+    hint: Establecer guardrails estrictos y directivas de no-alucinación en SKILL.md
+      o AGENTS.md.
+  - id: M03-C02
+    name: Políticas de Privacidad y Manejo de PII
+    rule: check_pii
+    description: Protección contra filtrado de credenciales, tokens de API sensibles,
+      claves privadas o rutas locales indebidas.
+    hint: Documentar políticas de seguridad de credenciales y no-divulgación de datos
+      sensibles.
+  - id: M03-C03
+    name: Validación Estricta de Contexto
+    rule: check_strict_validation
+    description: Gobernanza activa de directorio (.context.yaml) o validación de sintaxis
+      de esquemas.
+    hint: Asegurar presencia de archivos de gobierno de contexto (.context.yaml).
+- id: M04
+  name: Tooling e Instalador Portable
+  weight: 0.05
+  stage_group: Fundamentos
+  criteria:
+  - id: M04-C01
+    name: Script de Instalación Portable
+    rule: check_skill_installer
+    description: Script automatizado para desplegar la skill en asistentes de IA (scripts/install_skills.py
+      o install_skill.py).
+    hint: Proveer script de instalación y distribución en scripts/install_skills.py.
+  - id: M04-C02
+    name: Entorno de Ejecución Reproducible
+    rule: check_reproducible_env
+    description: Configuración reproducible de dependencias mínimas (Python, PyYAML,
+      Jinja2 o empaquetado).
+    hint: Definir pyproject.toml, requirements.txt o dependencias en scripts.
+  - id: M04-C03
+    name: Plantillas Maestras / Golden Fixtures
+    rule: check_master_templates
+    description: Plantillas maestras de prompts o fixtures de contexto (ThinkingSeed
+      Master.md, ThinkingSeed_MasterHybrid.md o templates).
+    hint: Proveer plantillas maestras completas en la raíz, prompts/ o templates/.
+- id: M05
+  name: Motor Central de la Skill y Prompts
+  weight: 0.25
+  stage_group: Construcción
+  criteria:
+  - id: M05-C01
+    name: Plantillas de Prompt Exhaustivas y Completas
+    rule: check_skill_templates_complete
+    description: Cuerpo de instrucciones y directivas de contexto sin placeholders
+      no resueltos ni stubs incompletos.
+    hint: Completar todas las secciones de plantillas de prompts e instrucciones del
+      agente.
+  - id: M05-C02
+    name: Motor de Extracción y Análisis de ADN
+    rule: check_skill_engine
+    description: Scripts de análisis estático, herramientas de extracción, generadores
+      de seeds o parsers de contexto.
+    hint: Implementar lógica de extracción o scripts de soporte en scripts/ o Tools/.
+  - id: M05-C03
+    name: Estructuración y Formateo Canónico
+    rule: check_skill_resolvers
+    description: Módulos de formateo de metadatos, taxonomías, árboles de archivos
+      o serialización limpia.
+    hint: Asegurar formateadores y resolutores de metadatos en el motor.
+  - id: M05-C04
+    name: Generación de Artefactos de Salida
+    rule: check_skill_emitters
+    description: Capacidad de emitir artefactos de contexto de alta fidelidad (Markdown,
+      JSON, diagramas Mermaid o Beacons).
+    hint: Verificar capacidad de emisión de artefactos de contexto y memoria técnica.
+- id: M06
+  name: Interoperabilidad Multi-Agente
+  weight: 0.15
+  stage_group: Construcción
+  criteria:
+  - id: M06-C01
+    name: Compatibilidad Cruzada de Plataformas
+    rule: check_multi_provider_specs
+    description: Soporte documentado o manifiestos para Google Antigravity, Claude
+      Code, Cursor, Copilot y Windsurf.
+    hint: Asegurar compatibilidad cruzada mediante AGENTS.md y configuraciones multi-asistente.
+  - id: M06-C02
+    name: Integración de Herramientas y Scripts
+    rule: check_tools_integration
+    description: Scripts auxiliares, herramientas CLI o utilidades en scripts/ o Tools/.
+    hint: Incluir herramientas operacionales o scripts de utilidad.
+  - id: M06-C03
+    name: Serialización y Manejo Seguro UTF-8
+    rule: check_safe_encoding
+    description: Manejo robusto de codificación UTF-8 y compatibilidad con sistemas
+      Windows/Linux/macOS.
+    hint: Asegurar lectura y escritura UTF-8 segura en scripts y plantillas.
+  - id: M06-C04
+    name: Resiliencia de Sistemas y Mitigación de SPOF
+    rule: check_resilience_coupling_and_spof
+    description: Evaluación del grafo de acoplamiento (Ca/Ce/Instabilidad) y mitigación
+      de SPOFs.
+    hint: Garantizar acoplamiento desacoplado y ausencia de cuellos de botella únicos.
+  - id: M06-C05
+    name: Patrones de Tolerancia a Fallos y Fallback
+    rule: check_resilience_fault_tolerance_patterns
+    description: Verificación de timeouts, retries, circuit breakers o fallback determinista.
+    hint: Implementar fallbacks defensivos y patrones de tolerancia a fallos.
+- id: M07
+  name: Validación de Cobertura y Benchmarking
+  weight: 0.1
+  stage_group: Pruebas
+  criteria:
+  - id: M07-C01
+    name: Scripts de Prueba y Validación Funcional
+    rule: check_skill_tests
+    description: Scripts de prueba automatizados para verificar la skill (scripts/test_seed_coverage.py
+      o tests/).
+    hint: Añadir scripts de prueba o verificación funcional de la skill.
+  - id: M07-C02
+    name: Reporte de Benchmarks y Cobertura
+    rule: check_skill_coverage_benchmarks
+    description: Reportes o métricas de cobertura de contexto y fidelidad (artifacts/benchmark_*.md
+      o reportes de test).
+    hint: Generar reporte de benchmark de cobertura en artifacts/.
+  - id: M07-C03
+    name: Directivas Antifraude y Rigor Técnico
+    rule: check_antifraud_instructions
+    description: Instrucciones de alta precisión técnica, sin lenguaje ambiguo y con
+      verificaciones empíricas.
+    hint: Revisar instrucciones para asegurar rigor técnico y ausencia de ambigüedades.
+- id: M08
+  name: Documentación de Operación y Ejemplos
+  weight: 0.1
+  stage_group: Operaciones
+  criteria:
+  - id: M08-C01
+    name: Guía de Usuario y Documentación Formal
+    rule: check_skill_user_guide
+    description: README.md y README_ES.md con instrucciones claras de uso, instalación
+      y arquitectura.
+    hint: Completar README.md y README_ES.md con guía de usuario y ejemplos de ejecución.
+  - id: M08-C02
+    name: Catálogo de Comandos y Ejemplos de Invocación
+    rule: check_slash_commands_docs
+    description: Ejemplos paso a paso de uso de slash commands y casos prácticos de
+      invocación.
+    hint: Documentar ejemplos de invocación interactiva de la skill.
+  - id: M08-C03
+    name: Diagramas Visuales y Topología
+    rule: check_visual_diagrams
+    description: Diagramas de arquitectura, flujo de trabajo o topología visual (Mermaid,
+      imágenes o esquemas ASCII).
+    hint: Incluir diagramas de arquitectura en la documentación o carpeta Tools/.
+  - id: M08-C04
+    name: Seguridad Zero-Tolerance contra Secretos y Credenciales
+    rule: check_security_zero_secrets
+    description: Zero-Tolerance contra exposición de claves, tokens, API keys o credenciales.
+    hint: Limpiar cualquier credencial o clave expuesta en el repositorio.
+  - id: M08-C05
+    name: Control de Entropía de Shannon e Inyecciones de Prompt
+    rule: check_security_entropy_threshold
+    description: Entropía de Shannon máxima H <= 4.5 e inmunidad ante inyecciones
+      de prompt.
+    hint: Evitar tokens de alta entropía descontrolados e inyecciones de prompt.
+- id: M09
+  name: Automatización, Sincronización y CI/CD
+  weight: 0.1
+  stage_group: Operaciones
+  criteria:
+  - id: M09-C01
+    name: Sincronización Automatizada de Skills
+    rule: check_sync_automation
+    description: Comandos o scripts para sincronizar e instalar la skill global y
+      localmente (install_skills.py --all).
+    hint: Implementar comando de sincronización e instalación multi-entorno.
+  - id: M09-C02
+    name: Empaquetado Limpio y Control de Distribución
+    rule: check_skill_packaging
+    description: Archivos de exclusión de ruido (.agentignore, .gitignore) y licencia
+      formal.
+    hint: Incluir .agentignore, .gitignore y LICENSE para distribución limpia.
+- id: M10
+  name: Memoria Técnica y Roadmap de Extensibilidad
+  weight: 0.05
+  stage_group: Cierre
+  criteria:
+  - id: M10-C01
+    name: Memoria Técnica (ThinkingSeed Propio)
+    rule: check_technical_seed
+    description: Semilla técnica del proyecto (01_seed/seed-*.md) actualizada con
+      el ADN y metadatos de la skill.
+    hint: Generar o actualizar el ThinkingSeed en 01_seed/.
+  - id: M10-C02
+    name: Referencia de Comandos y Ayuda Rápida
+    rule: check_cli_help
+    description: Sección de referencia rápida o cheatsheet de parámetros y modos de
+      operación.
+    hint: Incluir cheatsheet o referencia rápida en la documentación.
+  - id: M10-C03
+    name: Roadmap Operacional y Nuevos Asistentes
+    rule: check_adapters_roadmap
+    description: Plan de extensibilidad activo (INFERRED_ROADMAP.md o sección de roadmap)
+      para soporte de nuevos modelos.
+    hint: Definir roadmap de evolución futura e integración con nuevos modelos de
+      IA.
+  - id: M10-C04
+    name: Eficiencia Contextual Espectral FPAI
+    rule: check_context_spectral_efficiency
+    description: Factor de potencia contextual espectral PF_spectral >= 0.70 con preservación
+      de P.
+    hint: Mantener eficiencia espectral >= 0.70 eliminando tokens muertos o redundantes.

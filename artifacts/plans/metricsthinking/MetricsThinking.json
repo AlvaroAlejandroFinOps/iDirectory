@@ -1,385 +1,660 @@
 {
   "project_name": "iDirectory",
-  "project_path": "D:\\0001 HyperScale Thinking\\PROYECTOS CLOUD\\iContext\\iDirectory",
-  "audit_date": "2026-09-25 13:45:00",
+  "project_path": "./",
+  "audit_date": "2026-10-31 20:02:27",
   "auditor": "MetricsThinking™ Universal Auditor",
-  "profile_used": "agentic-skill",
-  "git_commit": "4461915",
+  "profile_used": "default",
+  "domain_archetype": "software-engineering",
+  "inspection_mode": "source_code",
+  "git_commit": "0ea360e",
   "git_branch": "master",
-  "consolidated_score": 100.0,
-  "maturity_band": "Excelencia Operativa / Producción (90.0% - 100.0%)",
-  "active_bottleneck": "Ninguno. Todos los módulos canónicos se encuentran al 100%.",
-  "stats": {
-    "total_files_scanned": 46,
-    "seeds_detected": 1,
-    "manifests_detected": 0,
-    "context_files_detected": 24,
-    "schemas_detected": 2,
-    "tests_detected": 2,
-    "source_files_detected": 1,
-    "skills_detected": 1,
-    "ci_workflows_detected": 1,
-    "is_git": true
+  "seed_detected": true,
+  "seed_version": "6.0",
+  "evidence_primitives": {
+    "config": {
+      "primitive_type": "config",
+      "file_count": 36,
+      "total_lines": 544,
+      "sample_paths": [
+        ".agentignore",
+        ".cursorrules",
+        "pyproject.toml",
+        ".github/workflows/ci.yml",
+        "01_seed/.context.yaml"
+      ],
+      "verified_valid": true
+    },
+    "spec": {
+      "primitive_type": "spec",
+      "file_count": 25,
+      "total_lines": 1553,
+      "sample_paths": [
+        ".agentignore",
+        ".cursorrules",
+        "AGENTS.md",
+        "CLAUDE.md",
+        "GEMINI.md"
+      ],
+      "verified_valid": true
+    },
+    "pipeline": {
+      "primitive_type": "pipeline",
+      "file_count": 1,
+      "total_lines": 45,
+      "sample_paths": [
+        ".github/workflows/ci.yml"
+      ],
+      "verified_valid": true
+    },
+    "verification": {
+      "primitive_type": "verification",
+      "file_count": 14,
+      "total_lines": 4134,
+      "sample_paths": [
+        "artifacts/benchmark_seed_coverage.md",
+        "artifacts/benchmarks/.context.yaml",
+        "artifacts/benchmarks/README.md",
+        "artifacts/benchmarks/benchmark_matrix.json",
+        "artifacts/benchmarks/forensic_repo_01_gravity___hyperscale_thinking.md"
+      ],
+      "verified_valid": true
+    },
+    "implementation": {
+      "primitive_type": "implementation",
+      "file_count": 15,
+      "total_lines": 4642,
+      "sample_paths": [
+        ".agents/skills/idir/SKILL.md",
+        "01_seed/seed-idirectory-master.md",
+        "02_foundation/.context.yaml",
+        "02_foundation/engine/.context.yaml",
+        "02_foundation/engine/engine_readme.md"
+      ],
+      "verified_valid": true
+    }
   },
   "modules": [
     {
       "module_id": "M01",
-      "name": "Descubrimiento y Especificación de Skill Agéntica",
+      "name": "Descubrimiento y Alcance",
       "weight": 0.05,
       "stage_group": "Fundamentos",
-      "phase_completion_pct": 100.0,
-      "weighted_contribution_pct": 5.0,
-      "status": "done",
       "criteria": [
         {
           "criterion_id": "M01-C01",
-          "name": "Especificación Formal de Skill (SKILL.md)",
+          "name": "Problem Statement Formalizado",
           "fulfilled": true,
-          "evidence_path": ".agents/skills/idir/SKILL.md",
-          "evidence_detail": "Manifiesto de skill con frontmatter YAML (name: idir, description), objetivos claros y comandos operacionales.",
-          "remediation_hint": "Declarar formalmente la especificación de skill en SKILL.md."
+          "evidence_path": "01_seed/seed-idirectory-master.md",
+          "evidence_detail": "Problem statement formalizado en '01_seed/seed-idirectory-master.md'.",
+          "remediation_hint": "Declarar formalmente el Problem Statement en 01_seed o README.md."
         },
         {
           "criterion_id": "M01-C02",
-          "name": "Guardrails y Límites Operativos Agénticos",
+          "name": "Límites y Scope Declarados",
           "fulfilled": true,
-          "evidence_path": "AGENTS.md",
-          "evidence_detail": "Declaración explícita de acciones prohibidas ('PROHIBIDO EL ESCANEO CIEGO RECURSIVO') y directivas de poda de ramas muertas (crawl: false).",
-          "remediation_hint": "Definir guardrails, restricciones y directivas de exclusión de agentes."
+          "evidence_path": "01_seed/seed-idirectory-master.md",
+          "evidence_detail": "Límites de alcance y fronteras del sistema identificados en '01_seed/seed-idirectory-master.md'.",
+          "remediation_hint": "Definir secciones 'In Scope' y 'Out of Scope' explícitas."
         },
         {
           "criterion_id": "M01-C03",
-          "name": "Casos de Uso y Compatibilidad Agéntica",
+          "name": "Casos de Uso Formales",
           "fulfilled": true,
           "evidence_path": "01_seed/seed-idirectory-master.md",
-          "evidence_detail": "Sección 1.3 define formalmente los sistemas consumidores: Google Antigravity/Gemini, Claude Code, Cursor, Windsurf, Aider.",
-          "remediation_hint": "Documentar compatibilidad multi-agente y perfiles de uso."
+          "evidence_detail": "Perfiles de uso y casos definidos en '01_seed/seed-idirectory-master.md'.",
+          "remediation_hint": "Documentar casos de uso o perfiles de consumidores formales."
         }
-      ]
+      ],
+      "phase_completion_pct": 100.0,
+      "weighted_contribution_pct": 5.0,
+      "status": "done"
     },
     {
       "module_id": "M02",
-      "name": "Arquitectura de Contexto, Contratos y Esquemas",
+      "name": "Arquitectura y Diseño Técnico",
       "weight": 0.1,
       "stage_group": "Fundamentos",
-      "phase_completion_pct": 100.0,
-      "weighted_contribution_pct": 10.0,
-      "status": "done",
       "criteria": [
         {
           "criterion_id": "M02-C01",
-          "name": "Modelos Canónicos y Contratos de Invocación",
+          "name": "AST / Modelos Canónicos Desacoplados",
           "fulfilled": true,
-          "evidence_path": "FWengine.py",
-          "evidence_detail": "Contrato canónico FOLDER_METADATA y ROUTING_MAP para normalización all-lowercase y subcomandos tipados.",
-          "remediation_hint": "Crear modelos canónicos de metadatos y contratos de invocación."
+          "evidence_path": "schemas/backlog.schema.json",
+          "evidence_detail": "Modelos declarativos estructurados en esquemas (9 esquemas, e.g. 'schemas/backlog.schema.json').",
+          "remediation_hint": "Crear modelos de datos/AST neutrales en src/metricsthinking/models.py o similar."
         },
         {
           "criterion_id": "M02-C02",
-          "name": "Reglas de Gobernanza Agéntica Unificadas (ADRs)",
+          "name": "ADRs Documentados",
           "fulfilled": true,
-          "evidence_path": "AGENTS.md",
-          "evidence_detail": "Protocolo Bootloader de 4 pasos como contrato arquitectónico universal e inviolable.",
-          "remediation_hint": "Documentar reglas unificadas de gobernanza de agentes (AGENTS.md, etc.)."
+          "evidence_path": "01_seed/seed-idirectory-master.md",
+          "evidence_detail": "Registro formal de decisiones arquitectónicas (ADRs) documentado en '01_seed/seed-idirectory-master.md'.",
+          "remediation_hint": "Registrar ADRs formales en docs/notes o docs/architecture."
         },
         {
           "criterion_id": "M02-C03",
-          "name": "Esquemas Formales de Contexto",
+          "name": "Contratos JSON Schema Validados",
           "fulfilled": true,
-          "evidence_path": ".context/tree.json",
-          "evidence_detail": "Esquema JSON Schema referenciado (tree.schema.json) y microcontratos .context.yaml validados.",
-          "remediation_hint": "Añadir contratos de esquemas JSON Schema en schemas/."
+          "evidence_path": "schemas/backlog.schema.json",
+          "evidence_detail": "Contratos formales de datos / esquemas presentes (9 esquemas, e.g. 'schemas/backlog.schema.json').",
+          "remediation_hint": "Añadir esquemas JSON Schema o Pydantic validados en schemas/."
         },
         {
           "criterion_id": "M02-C04",
-          "name": "Topología Satelital y Grafo de Contexto",
+          "name": "Topología y Grafos Formales",
           "fulfilled": true,
-          "evidence_path": ".context/tree.json",
-          "evidence_detail": "Grafo satelital ultraligero (~250 tokens) que encapsula roles, prioridades y directivas de poda de todo el sistema.",
-          "remediation_hint": "Implementar mapa topológico satelital .context/tree.json."
+          "evidence_path": "schemas/tree.schema.json",
+          "evidence_detail": "Modelado topológico o de grafos presente en 'schemas/tree.schema.json'.",
+          "remediation_hint": "Implementar análisis de dependencias/grafos en core o .context/tree.json."
         }
-      ]
+      ],
+      "phase_completion_pct": 100.0,
+      "weighted_contribution_pct": 10.0,
+      "status": "done"
     },
     {
       "module_id": "M03",
-      "name": "Gobernanza de Contexto, Seguridad y Token Budget",
+      "name": "Gobernanza y Cumplimiento",
       "weight": 0.05,
       "stage_group": "Fundamentos",
-      "phase_completion_pct": 100.0,
-      "weighted_contribution_pct": 5.0,
-      "status": "done",
       "criteria": [
         {
           "criterion_id": "M03-C01",
-          "name": "Políticas de Privacidad y Poda de Datos Masivos",
+          "name": "Detección y Marcado de PII",
           "fulfilled": true,
-          "evidence_path": ".agentignore",
-          "evidence_detail": "Máscara de exclusión para indexadores de IA que aísla data/raw, data/processed, logs/ y binarios pesados.",
-          "remediation_hint": "Desplegar máscara de exclusión de agentes .agentignore."
+          "evidence_path": "01_seed/seed-idirectory-master.md",
+          "evidence_detail": "Políticas de privacidad y clasificación PII documentadas en '01_seed/seed-idirectory-master.md'.",
+          "remediation_hint": "Integrar etiquetado o enmascarado de PII en los modelos de datos."
         },
         {
           "criterion_id": "M03-C02",
-          "name": "Telemetría y Control Cuantitativo de Token Budget (cQS)",
-          "fulfilled": true,
-          "evidence_path": "FWengine.py",
-          "evidence_detail": "Algoritmo compute_context_budget y densidad tipada (token_density) por carpeta para control presupuestario de tokens.",
-          "remediation_hint": "Implementar telemetría cuantitativa de tokens por carpeta."
+          "name": "Reglas de Calidad Formales (cQS)",
+          "fulfilled": false,
+          "evidence_path": null,
+          "evidence_detail": "No se encontraron reglas cuantitativas de calidad formal (cQS).",
+          "remediation_hint": "Implementar reglas de calidad de datos o código cQS."
         },
         {
           "criterion_id": "M03-C03",
-          "name": "Validación Estricta de Beacons y Coherencia Topológica",
+          "name": "Validación Estricta de Esquemas / Context",
           "fulfilled": true,
-          "evidence_path": "FWengine.py",
-          "evidence_detail": "Comando python FWengine.py beacon --audit que comprueba la presencia e integridad de los 24 beacons activos.",
-          "remediation_hint": "Asegurar validación de beacons .context.yaml."
+          "evidence_path": "01_seed/.context.yaml",
+          "evidence_detail": "Gobernanza contextual iDirectory activa con 30 archivos de contexto (.context.yaml).",
+          "remediation_hint": "Asegurar validadores estrictos o gobernanza .context.yaml."
         }
-      ]
+      ],
+      "phase_completion_pct": 66.67,
+      "weighted_contribution_pct": 3.33,
+      "status": "active"
     },
     {
       "module_id": "M04",
-      "name": "Entorno de Ejecución y Zero-Dependency Tooling",
+      "name": "Aprovisionamiento y Readiness",
       "weight": 0.05,
       "stage_group": "Fundamentos",
-      "phase_completion_pct": 100.0,
-      "weighted_contribution_pct": 5.0,
-      "status": "done",
       "criteria": [
         {
           "criterion_id": "M04-C01",
-          "name": "Entorno Reproducible / Zero-External Dependencies",
+          "name": "Entorno Reproducible",
           "fulfilled": true,
-          "evidence_path": "FWengine.py",
-          "evidence_detail": "Arquitectura 'Zero-Dependency' pura sobre la librería estándar de Python (pathlib, json, argparse, sys, os, unittest).",
-          "remediation_hint": "Mantener arquitectura Zero-Dependency o definir manifiesto formal."
+          "evidence_path": "pyproject.toml",
+          "evidence_detail": "Manifiesto de empaquetado y entorno reproducible verificado en 'pyproject.toml'.",
+          "remediation_hint": "Definir pyproject.toml o package.json formal."
         },
         {
           "criterion_id": "M04-C02",
-          "name": "Compatibilidad de Runtime y Plataformas",
+          "name": "Dependencias Versionadas",
           "fulfilled": true,
-          "evidence_path": "01_seed/seed-idirectory-master.md",
-          "evidence_detail": "Sección 5.3 documenta soporte universal para Python 3.10+ en Windows, Linux y macOS.",
-          "remediation_hint": "Especificar versión de Python soportada y compatibilidad multiplataforma."
+          "evidence_path": "pyproject.toml",
+          "evidence_detail": "Especificación estricta de versiones de dependencias verificada en 'pyproject.toml'.",
+          "remediation_hint": "Fijar versiones estrictas en el manifiesto de dependencias."
         },
         {
           "criterion_id": "M04-C03",
-          "name": "Fixtures y Escenarios de Validación Agéntica",
+          "name": "Fixture Enterprise Disponible",
           "fulfilled": true,
-          "evidence_path": "tests/test_fwengine.py",
-          "evidence_detail": "Entornos temporales aislados (tempfile.mkdtemp) para validación determinista de ciclo de vida.",
-          "remediation_hint": "Asegurar fixtures y datos de prueba en el repositorio."
+          "evidence_path": "src/data_generation/.context.yaml",
+          "evidence_detail": "Fixtures y datos de prueba disponibles (1 archivos, e.g. 'src/data_generation/.context.yaml').",
+          "remediation_hint": "Proveer fixtures o esquemas de prueba deterministas en tests/fixtures o data/."
         }
-      ]
+      ],
+      "phase_completion_pct": 100.0,
+      "weighted_contribution_pct": 5.0,
+      "status": "done"
     },
     {
       "module_id": "M05",
-      "name": "Motor Nuclear de la Skill (Workflow Engine)",
+      "name": "Construcción Núcleo (Core Engine)",
       "weight": 0.25,
       "stage_group": "Construcción",
-      "phase_completion_pct": 100.0,
-      "weighted_contribution_pct": 25.0,
-      "status": "done",
       "criteria": [
         {
           "criterion_id": "M05-C01",
-          "name": "Parsers y Manejo Declarativo de Contexto",
+          "name": "Parsers Funcionales",
           "fulfilled": true,
-          "evidence_path": "FWengine.py",
-          "evidence_detail": "class MiniYAML: parser y emisor atómico autocontenido para procesar archivos .context.yaml sin requerir PyYAML.",
-          "remediation_hint": "Implementar parsers declarativos en el motor."
+          "evidence_path": ".agents/skills/idir/SKILL.md",
+          "evidence_detail": "Módulos de procesamiento e implementación activos (15 archivos, e.g. '.agents/skills/idir/SKILL.md').",
+          "remediation_hint": "Implementar parsers para lectura de especificaciones de entrada."
         },
         {
           "criterion_id": "M05-C02",
-          "name": "Motor de Ruteo e Inferencia Heurística",
+          "name": "Inferencia Operativa de Roles",
           "fulfilled": true,
-          "evidence_path": "FWengine.py",
-          "evidence_detail": "Función route_file con clasificación semántica por extensión y heurística nominal.",
-          "remediation_hint": "Desarrollar lógica central de ruteo heurístico."
+          "evidence_path": "src/core/context_runtime.py",
+          "evidence_detail": "Motor nuclear de procesamiento y lógica operativa verificado en 'src/core/context_runtime.py'.",
+          "remediation_hint": "Desarrollar lógica central de inferencia o transformación."
         },
         {
           "criterion_id": "M05-C03",
-          "name": "Orquestación y Sincronización de Contexto",
-          "fulfilled": true,
-          "evidence_path": "FWengine.py",
-          "evidence_detail": "Funciones init_project, sync_beacons y sync_tree para orquestar la topología física y satelital.",
-          "remediation_hint": "Asegurar sincronización de beacons y mapas de contexto."
+          "name": "Resolución de Relaciones y Ciclos",
+          "fulfilled": false,
+          "evidence_path": null,
+          "evidence_detail": "No se encontró componente de resolución de relaciones o dependencias.",
+          "remediation_hint": "Asegurar algoritmos para resolver dependencias o relaciones."
         },
         {
           "criterion_id": "M05-C04",
-          "name": "Generador de Telemetría y Presupuesto de Contexto",
-          "fulfilled": true,
-          "evidence_path": "FWengine.py",
-          "evidence_detail": "Función compute_context_budget con cálculo de tokens por carpeta y modo --compact para inyección rápida en system prompts.",
-          "remediation_hint": "Implementar generador de telemetría de tokens."
+          "name": "Generador Canónico de Métricas / Lógica",
+          "fulfilled": false,
+          "evidence_path": null,
+          "evidence_detail": "No se detectó generador de métricas ni sintetizador canónico.",
+          "remediation_hint": "Implementar generador de código o síntesis de medidas."
         }
-      ]
+      ],
+      "phase_completion_pct": 50.0,
+      "weighted_contribution_pct": 12.5,
+      "status": "active"
     },
     {
       "module_id": "M06",
-      "name": "Integración Multi-Proveedor e Interoperabilidad",
+      "name": "Integración e Interoperabilidad",
       "weight": 0.15,
       "stage_group": "Construcción",
-      "phase_completion_pct": 100.0,
-      "weighted_contribution_pct": 15.0,
-      "status": "done",
       "criteria": [
         {
           "criterion_id": "M06-C01",
-          "name": "Shims y Adaptadores Multi-Plataforma Agéntica",
-          "fulfilled": true,
-          "evidence_path": ".agents/skills/idir/SKILL.md",
-          "evidence_detail": "Multi-proveedor activo: Antigravity/Gemini (.agents/skills/idir/SKILL.md), Claude Code (.claude/commands/idir.md), Cursor/Windsurf (.cursorrules), Universal (AGENTS.md).",
-          "remediation_hint": "Crear shims de integración para múltiples plataformas agénticas."
+          "name": "Emisores de Dialecto Nativo",
+          "fulfilled": false,
+          "evidence_path": null,
+          "evidence_detail": "No se encontraron emisores nativos de plataforma o destino.",
+          "remediation_hint": "Crear emisores hacia tecnologías destino en src/core/emitter o similar."
         },
         {
           "criterion_id": "M06-C02",
-          "name": "Operaciones de Filesystem Seguras e Idempotentes",
+          "name": "Escritura Atómica y Safe-Encoding",
           "fulfilled": true,
-          "evidence_path": "FWengine.py",
-          "evidence_detail": "Codificación forzada UTF-8 pura, creación segura de directorios padres y control de colisiones de mayúsculas en Windows.",
-          "remediation_hint": "Asegurar operaciones seguras y UTF-8 puro en disco."
+          "evidence_path": "src/core/context_runtime.py",
+          "evidence_detail": "Manejo seguro de codificación UTF-8 / serialización protegida en 'src/core/context_runtime.py'.",
+          "remediation_hint": "Usar atomic write y UTF-8 seguro para serializar artefactos."
         },
         {
           "criterion_id": "M06-C03",
-          "name": "Exportación Multi-Formato para LLMs",
+          "name": "Exportación Multi-Formato",
           "fulfilled": true,
-          "evidence_path": ".context/tree.json",
-          "evidence_detail": "Soporte nativo de formatos de salida: JSON satelital, YAML compacto de beacons, Markdown y diagramas Mermaid.",
-          "remediation_hint": "Ofrecer serialización a JSON, YAML y Markdown."
+          "evidence_path": null,
+          "evidence_detail": "Soporte de representación multi-formato verificado en el repositorio (.json, .md, .png, .py, .toml).",
+          "remediation_hint": "Ofrecer serialización a JSON, Markdown o diagramas."
+        },
+        {
+          "criterion_id": "M06-C04",
+          "name": "Resiliencia de Sistemas y Mitigación de SPOF",
+          "fulfilled": true,
+          "evidence_path": null,
+          "evidence_detail": "Grafo de dependencias evaluado: 8 módulos analizados, acoplamiento estable.",
+          "remediation_hint": "Garantizar acoplamiento desacoplado y ausencia de cuellos de botella únicos."
+        },
+        {
+          "criterion_id": "M06-C05",
+          "name": "Patrones de Tolerancia a Fallos y Fallback",
+          "fulfilled": true,
+          "evidence_path": null,
+          "evidence_detail": "Patrones de tolerancia a fallos verificados: {'timeout': 3, 'retry': 25, 'circuit_breaker': 0, 'fallback': 3} (cobertura=100.0%).",
+          "remediation_hint": "Implementar fallbacks defensivos y patrones de tolerancia a fallos."
         }
-      ]
+      ],
+      "phase_completion_pct": 80.0,
+      "weighted_contribution_pct": 12.0,
+      "status": "active"
     },
     {
       "module_id": "M07",
-      "name": "Aseguramiento de Calidad y Robustez de Flujos",
+      "name": "Aseguramiento de Calidad (QA & Stress)",
       "weight": 0.1,
       "stage_group": "Certificación",
-      "phase_completion_pct": 100.0,
-      "weighted_contribution_pct": 10.0,
-      "status": "done",
       "criteria": [
         {
           "criterion_id": "M07-C01",
-          "name": "Auditoría Automatizada de Gobernanza",
+          "name": "Cobertura y Tasa de Éxito de Pruebas",
           "fulfilled": true,
-          "evidence_path": "FWengine.py",
-          "evidence_detail": "Subcomando audit que evalúa mayúsculas indebidas, beacons huérfanos e integridad del mapa satelital.",
-          "remediation_hint": "Implementar rutina de auditoría automatizada."
+          "evidence_path": "tests/test_fwengine.py",
+          "evidence_detail": "Suite de pruebas presente (2 archivos de prueba en tests/, e.g. 'tests/test_fwengine.py').",
+          "remediation_hint": "Desarrollar suite de tests en tests/."
         },
         {
           "criterion_id": "M07-C02",
-          "name": "Pruebas Unitarias y Regresión Determinista",
-          "fulfilled": true,
-          "evidence_path": "tests/test_fwengine.py",
-          "evidence_detail": "Suite formal con 16 pruebas unitarias (unittest) que validan MiniYAML, ruteo determinista, generación satelital e idempotencia al 100%.",
-          "remediation_hint": "Crear suite formal de pruebas unitarias en tests/test_fwengine.py."
+          "name": "Golden Regression Tests Validados",
+          "fulfilled": false,
+          "evidence_path": null,
+          "evidence_detail": "No se encontraron pruebas de regresión con archivos Golden/Snapshots.",
+          "remediation_hint": "Añadir tests de regresión con archivos golden / snapshots esperados."
         },
         {
           "criterion_id": "M07-C03",
-          "name": "Benchmarks de Reducción de Tokens / Estrés",
+          "name": "Suites de Estrés / Benchmark Masivo",
           "fulfilled": true,
-          "evidence_path": "tests/test_token_budget.py",
-          "evidence_detail": "Suite de benchmarking automatizado que demuestra un 96.1% de ahorro en tokens frente al escaneo recursivo tradicional y generación sub-milisegundo (0.64ms).",
-          "remediation_hint": "Implementar pruebas de benchmarking de tokens y estrés en tests/test_token_budget.py."
+          "evidence_path": "scripts/generate_benchmark_reports.py",
+          "evidence_detail": "Suites de estrés o benchmarks masivos verificados en 'scripts/generate_benchmark_reports.py'.",
+          "remediation_hint": "Implementar benchmarks o stress tests en tests/ o scripts/."
         }
-      ]
+      ],
+      "phase_completion_pct": 66.67,
+      "weighted_contribution_pct": 6.67,
+      "status": "active"
     },
     {
       "module_id": "M08",
-      "name": "Experiencia del Agente / Interfaz Humano-Agente",
+      "name": "Validación y Aceptación Organizacional",
       "weight": 0.1,
       "stage_group": "Certificación",
-      "phase_completion_pct": 100.0,
-      "weighted_contribution_pct": 10.0,
-      "status": "done",
       "criteria": [
         {
           "criterion_id": "M08-C01",
-          "name": "Invocación por Slash Command / Skill Trigger",
-          "fulfilled": true,
-          "evidence_path": ".agents/skills/idir/SKILL.md",
-          "evidence_detail": "Integración completa con Slash Command /idir y alias /dir para activación agéntica interactiva.",
-          "remediation_hint": "Configurar Slash Command para activación agéntica."
+          "name": "Proyecciones por Rol (Persona Lenses)",
+          "fulfilled": false,
+          "evidence_path": null,
+          "evidence_detail": "No se encontraron proyecciones adaptadas por rol organizativo.",
+          "remediation_hint": "Implementar proyecciones adaptadas a diferentes perfiles (lenses/personas)."
         },
         {
           "criterion_id": "M08-C02",
-          "name": "Cockpit de Telemetría y Dashboards de Contexto",
-          "fulfilled": true,
-          "evidence_path": "FWengine.py",
-          "evidence_detail": "Subcomando context --budget genera la tabla ejecutiva en consola de densidades, roles y presupuestos de tokens.",
-          "remediation_hint": "Implementar cockpit de telemetría de tokens."
+          "name": "Leadership Cockpit / Tableros Ejecutivos",
+          "fulfilled": false,
+          "evidence_path": null,
+          "evidence_detail": "No se encontró cockpit ejecutivo ni módulos de dashboards en src/dashboards/.",
+          "remediation_hint": "Proveer dashboard o cockpit de resumen ejecutivo."
         },
         {
           "criterion_id": "M08-C03",
-          "name": "CLI Interactiva de Diagnóstico y Operación",
+          "name": "CLI de Diagnóstico y Exploración",
+          "fulfilled": false,
+          "evidence_path": null,
+          "evidence_detail": "No se detectó interfaz CLI ni punto de entrada interactivo en consola.",
+          "remediation_hint": "Exponer comandos CLI de diagnóstico o auditoría."
+        },
+        {
+          "criterion_id": "M08-C04",
+          "name": "Seguridad Zero-Tolerance contra Secretos y Credenciales",
           "fulfilled": true,
-          "evidence_path": "FWengine.py",
-          "evidence_detail": "CLI rica basada en argparse con 6 subcomandos (init, route, beacon, map, context, audit) y ayuda integrada.",
-          "remediation_hint": "Exponer CLI interactiva estructurada con subcomandos."
+          "evidence_path": ".agentignore",
+          "evidence_detail": "Zero-Tolerance verificado: Ninguna credencial ni clave activa expuesta en el repositorio.",
+          "remediation_hint": "Limpiar cualquier credencial o clave expuesta en el repositorio."
+        },
+        {
+          "criterion_id": "M08-C05",
+          "name": "Control de Entropía de Shannon e Inyecciones de Prompt",
+          "fulfilled": true,
+          "evidence_path": null,
+          "evidence_detail": "Superficie de seguridad verificada: Max H=4.06 <= 4.5, inyecciones=0, ataque=10.0.",
+          "remediation_hint": "Evitar tokens de alta entropía descontrolados e inyecciones de prompt."
         }
-      ]
+      ],
+      "phase_completion_pct": 40.0,
+      "weighted_contribution_pct": 4.0,
+      "status": "active"
     },
     {
       "module_id": "M09",
-      "name": "Distribución, Empaquetado y Automatización CI/CD",
+      "name": "Despliegue y Automatización (CI/CD)",
       "weight": 0.1,
       "stage_group": "Certificación",
-      "phase_completion_pct": 100.0,
-      "weighted_contribution_pct": 10.0,
-      "status": "done",
       "criteria": [
         {
           "criterion_id": "M09-C01",
-          "name": "Empaquetado Canónico de Skill / Portabilidad",
+          "name": "Pipeline CI/CD Automatizado",
           "fulfilled": true,
-          "evidence_path": ".agents/skills/idir/",
-          "evidence_detail": "Organización canónica de la skill, lista para ser replicada o distribuida en cualquier proyecto gestionado por agentes.",
-          "remediation_hint": "Estructurar la skill en .agents/skills/."
+          "evidence_path": ".github/workflows/ci.yml",
+          "evidence_detail": "Pipeline de integración continua automatizado verificado en '.github/workflows/ci.yml'.",
+          "remediation_hint": "Configurar workflow de CI en .github/workflows/ci.yml."
         },
         {
           "criterion_id": "M09-C02",
-          "name": "Pipeline CI/CD Automatizado y Pre-Commit Hooks",
+          "name": "Empaquetado y Distribución Estandarizada",
           "fulfilled": true,
-          "evidence_path": ".github/workflows/ci.yml",
-          "evidence_detail": "Workflow de GitHub Actions con matriz multi-OS (Ubuntu, Windows, macOS) y multi-versión (Python 3.10-3.13) que ejecuta auditoría, unit tests y benchmarks en cada push/PR.",
-          "remediation_hint": "Configurar pipeline de CI/CD en .github/workflows/ci.yml o hooks pre-commit."
+          "evidence_path": "pyproject.toml",
+          "evidence_detail": "Configuración de empaquetado estándar/entry points verificada en 'pyproject.toml'.",
+          "remediation_hint": "Configurar empaquetado buildable o .pre-commit-config.yaml."
         }
-      ]
+      ],
+      "phase_completion_pct": 100.0,
+      "weighted_contribution_pct": 10.0,
+      "status": "done"
     },
     {
       "module_id": "M10",
-      "name": "Memoria Técnica, Documentación y Extensibilidad",
+      "name": "Cierre, Extensibilidad y Documentación",
       "weight": 0.05,
       "stage_group": "Entrega",
-      "phase_completion_pct": 100.0,
-      "weighted_contribution_pct": 5.0,
-      "status": "done",
       "criteria": [
         {
           "criterion_id": "M10-C01",
-          "name": "Memoria Técnica Exhaustiva (ThinkingSeed Master)",
+          "name": "Documentación Técnica Exhaustiva (Seed)",
           "fulfilled": true,
           "evidence_path": "01_seed/seed-idirectory-master.md",
-          "evidence_detail": "ADN técnico exhaustivo (Ground Truth) de 262 líneas con contratos, invariantes y diagramas de flujo.",
+          "evidence_detail": "Memoria técnica formal (ThinkingSeed) identificada en '01_seed/seed-idirectory-master.md'.",
           "remediation_hint": "Generar ThinkingSeed Master completo en 01_seed/."
         },
         {
           "criterion_id": "M10-C02",
-          "name": "Documentación Paper-Grade y CLI Help",
+          "name": "CLI Help Documentado",
           "fulfilled": true,
-          "evidence_path": "README.md",
-          "evidence_detail": "Documentación formal de alta ingeniería sin jerga informal (README.md, README_ES.md, engine_readme.md) más ayuda integrada --help.",
-          "remediation_hint": "Documentar opciones de CLI y guías operativas."
+          "evidence_path": "README_ES.md",
+          "evidence_detail": "Instrucciones operativas y ayuda de comandos documentadas en 'README_ES.md'.",
+          "remediation_hint": "Documentar comandos CLI y opciones en README o help."
         },
         {
           "criterion_id": "M10-C03",
-          "name": "Roadmap de Extensión y Adaptabilidad Futura",
+          "name": "Adaptadores Multicanal / Roadmap",
           "fulfilled": true,
           "evidence_path": "01_seed/seed-idirectory-master.md",
-          "evidence_detail": "Registro de deuda técnica y roadmap operacional de evolución formalmente documentado.",
-          "remediation_hint": "Documentar roadmap de adaptadores futuros."
+          "evidence_detail": "Roadmap formal de extensibilidad y capacidades futuras documentado en '01_seed/seed-idirectory-master.md'.",
+          "remediation_hint": "Documentar roadmap y adaptadores futuros en el plan maestro."
+        },
+        {
+          "criterion_id": "M10-C04",
+          "name": "Eficiencia Contextual Espectral FPAI",
+          "fulfilled": true,
+          "evidence_path": ".agentignore",
+          "evidence_detail": "Indicador FPAI estimado (distorsión no medida): PF_spectral=1.000 >= 0.70 (S_spectral=136077, S_linear=136077).",
+          "remediation_hint": "Mantener eficiencia espectral >= 0.70 eliminando tokens muertos o redundantes."
         }
+      ],
+      "phase_completion_pct": 100.0,
+      "weighted_contribution_pct": 5.0,
+      "status": "done"
+    }
+  ],
+  "remediation_plan": [
+    {
+      "priority": "P1",
+      "module_id": "M05",
+      "criterion_id": "M05-C03",
+      "action": "Asegurar algoritmos para resolver dependencias o relaciones.",
+      "impact_score": 6.25,
+      "files_to_touch": [
+        "src/"
+      ]
+    },
+    {
+      "priority": "P1",
+      "module_id": "M05",
+      "criterion_id": "M05-C04",
+      "action": "Implementar generador de código o síntesis de medidas.",
+      "impact_score": 6.25,
+      "files_to_touch": [
+        "src/"
+      ]
+    },
+    {
+      "priority": "P1",
+      "module_id": "M03",
+      "criterion_id": "M03-C02",
+      "action": "Implementar reglas de calidad de datos o código cQS.",
+      "impact_score": 1.67,
+      "files_to_touch": [
+        ".context.yaml",
+        "schemas/"
+      ]
+    },
+    {
+      "priority": "P2",
+      "module_id": "M07",
+      "criterion_id": "M07-C02",
+      "action": "Añadir tests de regresión con archivos golden / snapshots esperados.",
+      "impact_score": 3.33,
+      "files_to_touch": [
+        "tests/"
+      ]
+    },
+    {
+      "priority": "P2",
+      "module_id": "M06",
+      "criterion_id": "M06-C01",
+      "action": "Crear emisores hacia tecnologías destino en src/core/emitter o similar.",
+      "impact_score": 3.0,
+      "files_to_touch": [
+        "src/"
+      ]
+    },
+    {
+      "priority": "P2",
+      "module_id": "M08",
+      "criterion_id": "M08-C01",
+      "action": "Implementar proyecciones adaptadas a diferentes perfiles (lenses/personas).",
+      "impact_score": 2.0,
+      "files_to_touch": [
+        "src/",
+        "dashboards/"
+      ]
+    },
+    {
+      "priority": "P2",
+      "module_id": "M08",
+      "criterion_id": "M08-C02",
+      "action": "Proveer dashboard o cockpit de resumen ejecutivo.",
+      "impact_score": 2.0,
+      "files_to_touch": [
+        "src/",
+        "dashboards/"
+      ]
+    },
+    {
+      "priority": "P2",
+      "module_id": "M08",
+      "criterion_id": "M08-C03",
+      "action": "Exponer comandos CLI de diagnóstico o auditoría.",
+      "impact_score": 2.0,
+      "files_to_touch": [
+        "src/",
+        "dashboards/"
       ]
     }
   ],
-  "remediation_plan": []
+  "stats": {
+    "total_files_scanned": 83,
+    "seeds_detected": 2,
+    "manifests_detected": 1,
+    "context_files_detected": 30,
+    "schemas_detected": 9,
+    "tests_detected": 2,
+    "source_files_detected": 2,
+    "is_git": true,
+    "domain_archetype": "software-engineering",
+    "inspection_mode": "source_code",
+    "context_measurement": {
+      "total": 136077,
+      "dead": 0,
+      "duplicate": 0,
+      "distortion": 0.0,
+      "distortion_state": "not_measured",
+      "method": "exact_content_duplicates; heuristic_tokens; attention_not_measured"
+    }
+  },
+  "fpai": {
+    "p_active": 136077.0,
+    "q_dead": 0.0,
+    "q_dup": 0.0,
+    "d_structural": 0.0,
+    "s_spectral": 136077.0,
+    "s_linear": 136077.0,
+    "divergence_ratio": 0.0,
+    "power_factor_spectral": 1.0,
+    "power_factor_linear": 1.0,
+    "active_ratio": 1.0,
+    "dead_ratio": 0.0,
+    "redundant_ratio": 0.0,
+    "distortion_ratio": 0.0,
+    "calibration_state": "DETERMINISTIC",
+    "gain_coefficient": 1.0
+  },
+  "security": {
+    "shannon_entropy_max": 4.056,
+    "entropy_findings": [],
+    "pii_matches_count": 0,
+    "pii_findings": [],
+    "prompt_injection_surface_count": 0,
+    "prompt_injection_findings": [],
+    "supply_chain_lockfile_pinned": false,
+    "attack_surface_index": 10.0
+  },
+  "resilience": {
+    "afferent_coupling_ca": {
+      "src.core.context_runtime": 1,
+      "tests.test_fwengine": 0,
+      "scripts.generate_benchmark_reports": 0,
+      "tests.test_token_budget": 0,
+      "src.core.fwengine": 0,
+      "skills.v6.idir.scripts.run": 1,
+      "FWengine": 2,
+      "tools.build_runtime": 0
+    },
+    "efferent_coupling_ce": {
+      "FWengine": 0,
+      "scripts.generate_benchmark_reports": 0,
+      "skills.v6.idir.scripts.run": 0,
+      "src.core.context_runtime": 0,
+      "src.core.fwengine": 2,
+      "tests.test_fwengine": 1,
+      "tests.test_token_budget": 1,
+      "tools.build_runtime": 0
+    },
+    "instability_i": {
+      "FWengine": 0.0,
+      "scripts.generate_benchmark_reports": 0.0,
+      "skills.v6.idir.scripts.run": 0.0,
+      "src.core.context_runtime": 0.0,
+      "src.core.fwengine": 1.0,
+      "tests.test_fwengine": 1.0,
+      "tests.test_token_budget": 1.0,
+      "tools.build_runtime": 0.0
+    },
+    "spof_nodes": [],
+    "resilience_patterns_count": {
+      "timeout": 3,
+      "retry": 25,
+      "circuit_breaker": 0,
+      "fallback": 3
+    },
+    "resilience_coverage_ratio": 1.0
+  },
+  "pruning_plan": {
+    "target_path": "D:/0001 HyperScale Thinking/PROYECTOS CLOUD/iContext/iDirectory",
+    "items": [],
+    "total_tokens_recovered": 0,
+    "active_tokens_remaining": 1000,
+    "power_factor_target": 0.85,
+    "generated_at": "2026-10-31T23:02:27.695506+00:00"
+  },
+  "consolidated_score": 73.5,
+  "maturity_band": "Construcción Activa / Madurez Media (50.0% - 74.9%)",
+  "active_bottleneck": "M03: Gobernanza y Cumplimiento (66.7% completado)"
 }

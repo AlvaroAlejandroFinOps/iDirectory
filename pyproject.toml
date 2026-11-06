@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "idirectory"
+version = "6.0.0"
+requires-python = ">=3.10"
+description = "Portable topology governance and bounded context packs"
+
+[project.scripts]
+idir = "fwengine:main"
+
+[tool.setuptools]
+package-dir = {"" = "tools/icontext_runtime"}
+py-modules = ["fwengine", "context_runtime"]

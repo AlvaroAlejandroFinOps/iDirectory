@@ -1,0 +1,5 @@
+role: tooling
+crawl: false
+read_priority: p3
+seed_reference: optional
+purpose: Generated versioned runtime; edit canonical source files.

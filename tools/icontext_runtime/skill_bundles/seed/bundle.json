@@ -1,0 +1,10 @@
+{
+  "version": "6.0.0",
+  "name": "seed",
+  "files": {
+    "SKILL.md": "e9a03d600103bc9dd24b6670f1deae73bf96c28b32882b48d977ecf62fc0ca05",
+    "scripts/run.py": "354efcdae125b7fc630daa0c9c7d1950574b0f797c19039f4427684405614af6",
+    "references/ThinkingSeed Master.md": "f16578335b0be9c308055ccaa24d19481bdac2bc660d3398870e88b66034e212",
+    "references/ThinkingSeed_MasterHybrid.md": "9dcd9a02235c35b14bb6fe5a10767988f3d0709237a698a42ae76556a0557b55"
+  }
+}

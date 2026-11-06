@@ -1,16 +1,16 @@
 {
-  "version": "5.0.0",
+  "version": "6.0.0",
   "project": "iDirectory",
-  "architecture": "Gravity HyperScale Thinking — Federated Adaptive Context Engineering v5.0",
+  "architecture": "Gravity HyperScale Thinking — Federated Adaptive Context Engineering v6.0",
   "federation_protocol": {
-    "version": "5.0.0",
+    "version": "6.0.0",
     "bus_path": ".context/icontext_bus.json",
     "ast_cache_path": ".context/contracts_ast.json",
     "layers": {
-      "l0": "iDirectory v5.0 (Topological & Attentional Control Plane)",
-      "l1": "ThinkingSeed v5.0 (Symbolic Architectural DNA Vector)",
-      "l2": "MetricsThinking v5.0 (Forensic & Spectral FPIA Governor)",
-      "l3": "iReadme v5.0 (Institutional Paper-Grade Synthesizer)"
+      "l0": "iDirectory v6.0 (Topological & Attentional Control Plane)",
+      "l1": "ThinkingSeed v6.0 (Symbolic Architectural DNA Vector)",
+      "l2": "MetricsThinking v6.0 (Forensic & Spectral FPIA Governor)",
+      "l3": "iReadme v6.0 (Institutional Paper-Grade Synthesizer)"
     }
   },
   "profiles": {
@@ -24,15 +24,22 @@
     "tier_1b": {
       "name": "Scoped Multi-File / Scoped Plan (Default for /plan)",
       "entry_command": "python FWengine.py context --compact",
-      "secondary": ["python FWengine.py map --slice <dir>", "python FWengine.py seed --section <id>"],
+      "secondary": [
+        "python FWengine.py map --slice <dir>",
+        "python FWengine.py seed --section <id>"
+      ],
       "seed_policy": "sectional_only",
       "target_token_budget": 800
     },
     "tier_2": {
       "name": "Global Architecture / Forensic Audit / Ecosystem Federation",
       "entry_command": "python FWengine.py context --pack-ecosystem",
-      "triggers": ["/seedMaster", "/metrics", "/readme", "/ultraThinking", "cross_domain_redesign"],
-      "seed_policy": "full_or_ecosystem_bus",
+      "triggers": [
+        "cross_domain_redesign",
+        "explicit_full_seed_request",
+        "full_forensic_audit"
+      ],
+      "seed_policy": "sectional_by_default_full_on_explicit_request",
       "target_token_budget": 16000
     }
   },
@@ -65,5 +72,10 @@
     ".cursorrules",
     ".github/copilot-instructions.md",
     ".agents/skills/idir/SKILL.md"
-  ]
+  ],
+  "runtime": {
+    "version": "6.0.0",
+    "pin": ".context/toolchain.json",
+    "generated": "tools/icontext_runtime/release_manifest.json"
+  }
 }

@@ -1,18 +1,22 @@
 ![Arquitectura iDirectory](iDirectory.png)
 
+**iContext v6.0.0.** Actualización por evidencia incremental, skills portables para Antigravity y Codex, y continuidad por sesión. Guía: [operación y migración v6](docs/specs/icontext-v6.md).
+<!-- ICONTEXT-V6:RELEASE -->
+
+
 # iDirectory: Estándar de Ingeniería de Contexto para Agentes de IA Autónomos por Gravity HyperScale Thinking
 
 **Idioma:** [English](README.md) | [Español](README_ES.md)
 
-[![Estándar](https://img.shields.io/badge/Est%C3%A1ndar-Enterprise%20Paper--Grade%20v5.0-2b2b2b?style=flat-square)](#)
+[![Estándar](https://img.shields.io/badge/Est%C3%A1ndar-Enterprise%20Paper--Grade%20v6.0-2b2b2b?style=flat-square)](#)
 [![Ecosistema](https://img.shields.io/badge/Ecosistema-Multi--IA%20%28Google%20%7C%20Claude%20%7C%20OpenAI%20%7C%20Cursor%29-34495e?style=flat-square)](#1-resumen-ejecutivo)
-[![iContext Federation](https://img.shields.io/badge/iContext-Federated%20v5.0-1a1a1a?style=flat-square)](#)
-[![iDirectory L0](https://img.shields.io/badge/L0-iDirectory%20v5.0-2b2b2b?style=flat-square)](#)
-[![ThinkingSeed L1](https://img.shields.io/badge/L1-ThinkingSeed%20v5.0-34495e?style=flat-square)](#)
-[![MetricsThinking L2](https://img.shields.io/badge/L2-MetricsThinking%20v5.0-4b5563?style=flat-square)](#)
-[![iReadme L3](https://img.shields.io/badge/L3-iReadme%20v5.0-000000?style=flat-square)](#)
+[![iContext Federation](https://img.shields.io/badge/iContext-Federated%20v6.0-1a1a1a?style=flat-square)](#)
+[![iDirectory L0](https://img.shields.io/badge/L0-iDirectory%20v6.0-2b2b2b?style=flat-square)](#)
+[![ThinkingSeed L1](https://img.shields.io/badge/L1-ThinkingSeed%20v6.0-34495e?style=flat-square)](#)
+[![MetricsThinking L2](https://img.shields.io/badge/L2-MetricsThinking%20v6.0-4b5563?style=flat-square)](#)
+[![iReadme L3](https://img.shields.io/badge/L3-iReadme%20v6.0-000000?style=flat-square)](#)
 [![Motor](https://img.shields.io/badge/Motor-FWengine.py-1a1a1a?style=flat-square)](#3-formulación-matemática-y-motores-analíticos)
-[![Verificación](https://img.shields.io/badge/Verificaci%C3%B3n-74%2F74%20Superadas%20(100%25)-000000?style=flat-square)](#6-protocolo-de-ejecución-y-verificación)
+[![Verification](https://img.shields.io/badge/Verification-Recorded%20v6-000000?style=flat-square)](#6-execution--verification-protocol)
 [![Licencia](https://img.shields.io/badge/Licencia-MIT-1a1a1a?style=flat-square)](LICENSE)
 
 ---
@@ -21,15 +25,15 @@
 
 **iDirectory**, creado y concebido por **Gravity HyperScale Thinking**, resuelve la degradación cognitiva de la ventana de contexto, la fragmentación arquitectónica y la entropía de navegación no determinista en arquitecturas modernas de datos en la nube, repositorios corporativos de IA y entornos de ejecución de agentes autónomos. Las arquitecturas empresariales contemporáneas desplegadas sobre Google Cloud Platform, Amazon Web Services, Microsoft Azure y Microsoft Fabric frecuentemente experimentan estructuras de archivos heterogéneas, acumulación descoordinada de datos locales y dispersión ambigua de artefactos. En agentes autónomos de codificación (tales como Google Gemini/Antigravity, Anthropic Claude Code, OpenAI/Codex, Cursor, Windsurf y GitHub Copilot), el escaneo no acotado de directorios consume decenas de millones de tokens en ramas muertas y dependencias compiladas, desencadenando una severa dispersión atencional (*Attention Sink*) y alucinaciones catastróficas.
 
-Para erradicar esta vulnerabilidad operacional, **iDirectory v4.1** establece un framework de Ingeniería de Contexto Adaptativa y Plano de Control Determinista gobernado por `FWengine.py`. Al unificar una matriz heurística en dos fases (por extensión y patrones nominales) con un radar topológico satelital (`.context/tree.json`), un fingerprint criptográfico SHA-256 (`topology_hash`), un Bootloader Adaptativo de Dos Niveles y Tres Perfiles (Tier 1A Atómico, Tier 1B Acotado, Tier 2 Global), empaquetado de contexto en una sola llamada (`context --pack <dir> --tier 1a`, consumiendo $< 220\text{ tokens}$), checkpoints de continuidad atencional (`.context/checkpoint.json`, $< 300\text{ tokens}$), reconciliación automática del ciclo de vida de planes (`reconcile_plans_lifecycle`), cola formal de intenciones en backlog (`artifacts/plans/backlog/queue.json`) y un contrato de cierre de reconciliación idempotente (`reconcile`), la plataforma impone una organización canónica del espacio de trabajo, aísla las capas de almacenamiento local Medallion (Bronze, Silver, Gold) y confiere una orientación espacial instantánea a los agentes autónomos.
+Para erradicar esta vulnerabilidad operacional, **iDirectory v6.0** establece un framework de Ingeniería de Contexto Adaptativa y Plano de Control Determinista gobernado por `FWengine.py`. Al unificar una matriz heurística en dos fases (por extensión y patrones nominales) con un radar topológico satelital (`.context/tree.json`), un fingerprint criptográfico SHA-256 (`topology_hash`), un Bootloader Adaptativo de Dos Niveles y Tres Perfiles (Tier 1A Atómico, Tier 1B Acotado, Tier 2 Global), empaquetado de contexto en una sola llamada (`context --pack <dir> --tier 1a`, consumiendo $< 220\text{ tokens}$), checkpoints de continuidad atencional (`.context/checkpoint.json`, $< 300\text{ tokens}$), reconciliación automática del ciclo de vida de planes (`reconcile_plans_lifecycle`), cola formal de intenciones en backlog (`artifacts/plans/backlog/queue.json`) y un contrato de cierre de reconciliación idempotente (`reconcile`), la plataforma impone una organización canónica del espacio de trabajo, aísla las capas de almacenamiento local Medallion (Bronze, Silver, Gold) y confiere una orientación espacial instantánea a los agentes autónomos.
 
-Las evaluaciones empíricas sobre repositorios de producción demuestran reducciones de tokens de contexto de entre **82.28% y 99.99%**, colapsando la latencia de descubrimiento en frío del agente desde decenas de segundos a una ejecución determinista sub-segundo ($< 85\text{ ms}$) sin requerir exploración recursiva ciega del sistema de archivos, verificado en 74 pruebas automatizadas con una tasa de éxito del 100%.
+Las mediciones reproducibles locales se registran en `.context/benchmark_v6.json`: latencias p50/p95, actualización completa e incremental y archivos releídos. Los paquetes aplican presupuestos de tokens estimados y permiten ampliación explícita. Estas mediciones excluyen inferencia del modelo y no certifican resultados en repositorios ajenos.
 
 ---
 
 ## 2. Arquitectura y Topología del Sistema
 
-La arquitectura de **iDirectory v4.1** se articula en torno a un núcleo de gobernanza sin dependencias externas (`FWengine.py`) que opera sobre una jerarquía determinista completamente en minúsculas (*all-lowercase*) respaldada por contratos formales JSON Schema Draft-07 y un plano de continuidad atencional. A continuación se ilustra el flujo de control, las fronteras entre capas y los circuitos de ruteo de artefactos impuestos por el framework:
+La arquitectura de **iDirectory v6.0** se articula en torno a un núcleo de gobernanza sin dependencias externas (`FWengine.py`) que opera sobre una jerarquía determinista completamente en minúsculas (*all-lowercase*) respaldada por contratos formales JSON Schema Draft-07 y un plano de continuidad atencional. A continuación se ilustra el flujo de control, las fronteras entre capas y los circuitos de ruteo de artefactos impuestos por el framework:
 
 ```text
 +-----------------------------------------------------------------------------------+
@@ -79,16 +83,16 @@ La arquitectura de **iDirectory v4.1** se articula en torno a un núcleo de gobe
 +-----------------------------------------------------------------------------------+
 ```
 
-### Gobernanza Federada & Context Engineering iContext v5.0
+### Gobernanza Federada & Context Engineering iContext v6.0
 
-Este proyecto implementa formalmente el protocolo **iContext Federation Protocol v5.0**, incorporando **4 de los 4 proyectos canónicos** (iDirectory, ThinkingSeed, MetricsThinking y iReadme) de gobernanza agéntica y optimización atencional creados por Gravity HyperScale Thinking:
+Este proyecto implementa formalmente el protocolo **iContext Federation Protocol v6.0**, incorporando **4 de los 4 proyectos canónicos** (iDirectory, ThinkingSeed, MetricsThinking y iReadme) de gobernanza agéntica y optimización atencional creados por Gravity HyperScale Thinking:
 
 | Capa | Componente | Función Principal en este Repositorio | Estado |
 | :--- | :--- | :--- | :--- |
-| `L0` | **iDirectory (L0)** — Plano de Control Topológico & Context Engineering Adaptativo | Gobierna la topología canónica all-lowercase, balizas semánticas (.context.yaml), satélite criptográfico (.context/tree.json), presupuestos de tokens y aislamiento mediante cápsulas para subagentes (<450 tokens). | `ACTIVE (v5.0)` |
-| `L1` | **ThinkingSeed (L1)** — Vector de ADN Arquitectónico Simbólico & Memoria Zero-Code | Preserva la memoria técnica y contratos simbólicos AST sin fuga de código fuente (Zero Source Code), auditado bajo validación estricta de 6 Gates deterministas. | `ACTIVE (v5.0)` |
-| `L2` | **MetricsThinking (L2)** — Auditoría Forense Tecnológica & Gobernanza Espectral FPIA | Calcula madurez por Ground Truth en 10 módulos canónicos, deriva semántica AST, eficiencia espectral FPIA (S_spectral, PF_spectral) y escaneo de seguridad Zero-Trust. | `ACTIVE (v5.0)` |
-| `L3` | **iReadme (L3)** — Sintetizador Institucional de Documentación Dual Paper-Grade | Sincroniza documentación dual inglés/español bajo el estándar Enterprise Paper-Grade, garantizando paridad estructural phi = 1.0, formulación formal en KaTeX y cero fugas de ruta local. | `ACTIVE (v5.0)` |
+| `L0` | **iDirectory (L0)** — Plano de Control Topológico & Context Engineering Adaptativo | Gobierna la topología canónica all-lowercase, balizas semánticas (.context.yaml), satélite criptográfico (.context/tree.json), presupuestos de tokens y aislamiento mediante cápsulas para subagentes (<450 tokens). | `ACTIVE (v6.0)` |
+| `L1` | **ThinkingSeed (L1)** — Vector de ADN Arquitectónico Simbólico & Memoria Zero-Code | Preserva la memoria técnica y contratos simbólicos AST sin fuga de código fuente (Zero Source Code), auditado bajo validación estricta de 6 Gates deterministas. | `ACTIVE (v6.0)` |
+| `L2` | **MetricsThinking (L2)** — Auditoría Forense Tecnológica & Gobernanza Espectral FPIA | Calcula madurez por Ground Truth en 10 módulos canónicos, deriva semántica AST, eficiencia espectral FPIA (S_spectral, PF_spectral) y escaneo de seguridad Zero-Trust. | `ACTIVE (v6.0)` |
+| `L3` | **iReadme (L3)** — Sintetizador Institucional de Documentación Dual Paper-Grade | Sincroniza documentación dual inglés/español bajo el estándar Enterprise Paper-Grade, garantizando paridad estructural phi = 1.0, formulación formal en KaTeX y cero fugas de ruta local. | `ACTIVE (v6.0)` |
 
 La interoperabilidad entre estas herramientas se orquesta de manera no-bloqueante a través del **Bus Cognitivo Federado** (`./.context/icontext_bus.json`), garantizando continuidad atencional, cero deriva satelital y protección estricta contra alucinaciones en agentes autónomos.
 
@@ -134,47 +138,22 @@ Para tareas atómicas Tier 1A, el operador de empaquetado unificado $\pi(G, v_t)
 
 $$\tau(\pi(G, v_t)) < 220\text{ tokens}$$
 
-produciendo un ahorro empírico de contexto del **95.3%** frente a escaneos recursivos ingenuos ($R_{\text{comp}} > 0.95$).
+El ahorro depende de los archivos gobernados y de la tarea; las mediciones locales separan estimaciones y facturación del proveedor.
 
 ---
 
 ## 4. Rendimiento Empírico y Benchmarks
 
-### 4.1. Telemetría de Ejecución del Motor Core
+<!-- ICONTEXT-V6:TELEMETRY:START -->
+| Evidence / Evidencia | Recorded value / Valor registrado |
+| :--- | :--- |
+| Metrics score | 73.5 |
+| Estimated spectral factor (auxiliary) | 1.0 |
+| Query latency p95 (ms) | 11.992800049483776 |
+| Validity | Recorded evidence; verify freshness with icontext audit |
+<!-- ICONTEXT-V6:TELEMETRY:END -->
 
-Benchmarks operacionales evaluados sobre hardware estándar de desarrollo empresarial (x86_64, almacenamiento NVMe PCIe 4.0, runtime de intérprete Python 3.11):
-
-| Dimensión de Métrica | Métrica | Línea Base (Manual / Scripted) | Estándar Objetivo (SLO) | Resultado Empírico de Producción |
-| :--- | :--- | :--- | :--- | :--- |
-| **Sistemas** | Tiempo de Ejecución de Inicialización | ~45.00 s | < 100 ms | **12.4 ms** |
-| **Sistemas** | Latencia de Clasificación por Archivo | ~5.00 s | < 5 ms | **0.18 ms** |
-| **Sistemas** | Huella de Memoria (Ejecución CLI) | N/A | < 25.0 MB | **8.4 MB** |
-| **Sistemas** | Throughput de Reubicación (`--move`) | ~2 ops/s | > 500 ops/s | **1,420 ops/s** |
-| **Sistemas** | Latencia de Generación Satelital | ~1.50 s | < 100 ms | **82.00 ms** |
-| **Sistemas** | Latencia de Escaneo de Budget | ~5.00 s | < 200 ms | **172.42 ms** |
-| **Gobernanza**| Tasa de Éxito de la Suite de Invariantes| N/A | 100% | **74/74 Superadas (100%)** |
-| **Gobernanza**| Cumplimiento de Validación de Schemas | Variable | 100% | **100% (Conforme Draft-07)** |
-| **Gobernanza**| Dependencias Externas | Variable | 0 | **0 (Librería Estándar de Python Pura)**|
-| **Negocio** | Volcado Ciego vs Huella Satelital | Base (20,336 tokens) | < 1,000 tokens | **955 tokens (95.3% de reducción)** |
-| **Negocio** | Tri-Baseline: Huella Paquete Tier 1A | Ciego: 17,710 tokens | < 220 tokens | **63 tokens (99.6% de reducción)** |
-| **Negocio** | Subgrafo Focalizado (`map --slice`) | Base (955 tokens) | < 150 tokens | **83 tokens (91.3% de reducción)** |
-
-### 4.2. Benchmark de Compresión de Tokens Multi-Repositorio
-
-Evaluación empírica conducida sobre 6 repositorios locales heterogéneos utilizando arneses de inferencia Google Gemini 3.7 Flash y Gemini 3.8 Flash:
-
-| Repositorio Evaluado | Total Archivos | Tokens Brutos Repositorio | Tokens Limpios Código | Tokens Huella Satelital | Ratio de Compresión | Tipo de Arquitectura |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| **Gravity - Hyperscale Thinking** | 44,804 | **481,022,531** | 10,899,017 | **24,474** | **99.99%** | Master Graph / Seeds Híbridos |
-| **SemanticFlow** | 12,090 | **95,297,872** | 6,618,150 | **29,039** | **99.97%** | Nativo v3.0 (Tree + 23 Beacons) |
-| **ThinkingSeed** | 909 | **8,428,265** | 3,008,148 | **28,169** | **99.67%** | Nativo v3.0 (Tree + 23 Beacons) |
-| **Gravity - Deep Space** | 37 | **517,820** | 475,775 | **3,630** | **99.30%** | Monolithic Engine DNA |
-| **MetricsThinking** | 95 | **273,693** | 156,408 | **39,871** | **85.43%** | Nativo v3.0 (Tree + 19 Beacons) |
-| **ultraThinking** | 36 | **123,032** | 123,032 | **21,799** | **82.28%** | ADN Metodológico Puro |
-
-*Los reportes periciales completos y datasets JSON estructurados se encuentran documentados en `artifacts/benchmarks/`.*
-
----
+La versión 6 incorpora inventario incremental, invalidación por contenido y consultas sin escritura. Las mediciones de esta entrega se registran en `.context/benchmark_v6.json`; incluyen p50/p95 del motor y del proceso, lecturas de archivos y comparación con inventario completo. Los tokens son estimaciones explícitas. Las métricas de atención del modelo requieren sesiones observadas y no se deducen de FPAI.
 
 ## 5. Estructura del Repositorio y Artefactos
 
@@ -197,7 +176,7 @@ iDirectory/
 │       └── idir.md                  # Envoltorio de comandos de gobernanza para Claude Code
 ├── 01_seed/
 │   ├── .context.yaml                # Baliza del directorio (Prioridad: P0, Relevancia: Crítica)
-│   └── seed-idirectory-master.md    # Memoria técnica primaria y ADN del proyecto (ThinkingSeed Master v3.0)
+│   └── seed-idirectory-master.md    # Memoria técnica primaria y ADN del proyecto (ThinkingSeed Master v6.0)
 ├── 02_foundation/
 │   ├── .context.yaml                # Baliza de foundation
 │   └── engine/
@@ -230,7 +209,7 @@ iDirectory/
 │   └── .context.yaml
 ├── config/                          # Configuración y política de ingeniería de contexto
 │   ├── .context.yaml
-│   └── context_policy.json          # Fuente única de política canónica de Context Engineering (v4.0.0)
+│   └── context_policy.json          # Fuente única de política canónica de Context Engineering (v6.0.0)
 ├── tests/                           # Verification suites and invariant tests
 │   ├── test_fwengine.py             # 66 tests unitarios (CLI, MiniYAML, ruteo, retry I/O NTFS, v4.1 DAG y backlog)
 │   └── test_token_budget.py         # 8 tests de benchmark (compresión de contexto, Tri-Baseline, budgets)
@@ -245,7 +224,7 @@ iDirectory/
 │       ├── .context.yaml
 │       ├── active/                  # Planes de capacidad activos y roadmaps (plan_reingenieria_v4.md)
 │       ├── backlog/                 # Cola estructurada de intenciones diferidas (queue.json, crawl: false)
-│       ├── metricsthinking/         # Formal MetricsThinking SDD maturity audit (100% score)
+│       ├── metricsthinking/         # Formal MetricsThinking SDD maturity audit (evidence-based score)
 │       └── archive/                 # Propuestas archivadas y ramas muertas (crawl: false)
 ├── docs/                            # Repositorio vivo de documentación
 │   ├── .context.yaml
@@ -285,7 +264,7 @@ python --version
 cd iDirectory
 ```
 
-### 6.2. Ejecución de Pipelines y Motor (Interfaz Unificada v4.1)
+### 6.2. Ejecución de Pipelines y Motor (Interfaz Unificada v6.0)
 
 #### 1. Cierre y Reconciliación Unificada e Idempotente
 Comando único determinista que audita nomenclatura de directorios, aprovisiona balizas faltantes, reconcilia planes, valida la cola de backlog y el DAG de dependencias, valida esquemas contra Draft-07 y actualiza el satélite con un `topology_hash` verificado:
@@ -347,7 +326,7 @@ python FWengine.py route "ruta/al/script_sin_clasificar.py" --move
 
 ### 6.3. Suite de Verificación y Pruebas de Invariantes
 
-Ejecutar la suite completa de 74 pruebas unitarias, resiliencia y compresión de tokens utilizando el framework estándar `unittest`:
+Ejecutar la suite completa de pruebas unitarias, resiliencia y compresión de tokens utilizando el framework estándar `unittest`:
 
 ```bash
 python -m unittest discover tests

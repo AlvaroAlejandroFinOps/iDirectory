@@ -1,0 +1,80 @@
+{
+  "checks": [
+    {
+      "audit_full": "valid",
+      "doctor": "passed",
+      "estimated_pack_tokens": {
+        "1a": 144,
+        "1b": 144,
+        "2": 239
+      },
+      "governed_and_state_files_checked": 111,
+      "pending_requests": 0,
+      "project": "iDirectory",
+      "read_only_changed_files": [],
+      "reconcile_check": "passed",
+      "second_sync_changed_files": []
+    },
+    {
+      "audit_full": "valid",
+      "doctor": "passed",
+      "estimated_pack_tokens": {
+        "1a": 142,
+        "1b": 142,
+        "2": 235
+      },
+      "governed_and_state_files_checked": 112,
+      "pending_requests": 0,
+      "project": "ThinkingSeed",
+      "read_only_changed_files": [],
+      "reconcile_check": "passed",
+      "second_sync_changed_files": []
+    },
+    {
+      "audit_full": "valid",
+      "doctor": "passed",
+      "estimated_pack_tokens": {
+        "1a": 147,
+        "1b": 147,
+        "2": 228
+      },
+      "governed_and_state_files_checked": 191,
+      "pending_requests": 0,
+      "project": "MetricsThinking",
+      "read_only_changed_files": [],
+      "reconcile_check": "passed",
+      "second_sync_changed_files": []
+    },
+    {
+      "audit_full": "valid",
+      "doctor": "passed",
+      "estimated_pack_tokens": {
+        "1a": 147,
+        "1b": 147,
+        "2": 244
+      },
+      "governed_and_state_files_checked": 113,
+      "pending_requests": 0,
+      "project": "iReadme",
+      "read_only_changed_files": [],
+      "reconcile_check": "passed",
+      "second_sync_changed_files": []
+    },
+    {
+      "audit_full": "valid",
+      "doctor": "passed",
+      "estimated_pack_tokens": {
+        "1a": 154,
+        "1b": 154,
+        "2": 235
+      },
+      "governed_and_state_files_checked": 88,
+      "pending_requests": 0,
+      "project": "ContextControl",
+      "read_only_changed_files": [],
+      "reconcile_check": "passed",
+      "second_sync_changed_files": []
+    }
+  ],
+  "version": "6.0.0"
+}

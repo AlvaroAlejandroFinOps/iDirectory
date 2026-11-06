@@ -1,0 +1,8 @@
+{
+  "version": "6.0.0",
+  "name": "readme",
+  "files": {
+    "SKILL.md": "e11d40cee46254136d44c21a3828913c3c0633a78fa90d27e0bea685475fe694",
+    "scripts/run.py": "354efcdae125b7fc630daa0c9c7d1950574b0f797c19039f4427684405614af6"
+  }
+}

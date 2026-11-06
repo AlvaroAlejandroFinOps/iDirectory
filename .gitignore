@@ -2,6 +2,14 @@
 __pycache__/
 *.pyc
 .ipynb_checkpoints/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Lock files & concurrency markers
+.context/*.lock
+.context/.*.lock
+*.lock
 
 # Ignorar archivos de datos
 *.csv

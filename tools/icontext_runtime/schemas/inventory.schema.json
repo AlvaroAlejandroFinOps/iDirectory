@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "inventory.schema.json",
+  "type": "object",
+  "required": [
+    "version",
+    "inputs_hash",
+    "policy_hash",
+    "files"
+  ],
+  "properties": {
+    "version": {
+      "const": "6.0.0"
+    },
+    "inputs_hash": {
+      "type": "string"
+    },
+    "policy_hash": {
+      "type": "string"
+    },
+    "files": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "sha256",
+          "size",
+          "stat"
+        ]
+      }
+    }
+  }
+}

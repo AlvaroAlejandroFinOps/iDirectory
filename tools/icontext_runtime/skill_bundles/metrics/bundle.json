@@ -1,0 +1,8 @@
+{
+  "version": "6.0.0",
+  "name": "metrics",
+  "files": {
+    "SKILL.md": "da7800cef6b5487cadf860fa89e4d464b45c5ab7567507ee7b98cd8dbcb844fd",
+    "scripts/run.py": "354efcdae125b7fc630daa0c9c7d1950574b0f797c19039f4427684405614af6"
+  }
+}

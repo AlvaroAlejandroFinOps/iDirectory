@@ -1,0 +1,135 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "../schemas/tree.schema.json",
+  "title": "iDirectory Topological Satellite Schema",
+  "description": "Formal JSON Schema Draft-07 validating .context/tree.json in iDirectory v4.0 (full satellite or focused slice).",
+  "type": "object",
+  "if": { "properties": { "sliced": { "const": true } }, "required": ["sliced"] },
+  "then": { "required": ["project", "sliced", "focus_node", "nodes"] },
+  "else": { "required": ["$schema", "version", "project", "architecture", "updated_at", "timestamp", "topology_hash", "bootloader", "nodes"] },
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "const": "../schemas/tree.schema.json"
+    },
+    "version": {
+      "type": "string"
+    },
+    "project": {
+      "type": "string",
+      "minLength": 1
+    },
+    "architecture": {
+      "type": "string"
+    },
+    "updated_at": {
+      "type": "string"
+    },
+    "timestamp": {
+      "type": "number"
+    },
+    "topology_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "sliced": {
+      "type": "boolean"
+    },
+    "focus_node": {
+      "type": "string",
+      "pattern": "^[^\\\\]+$"
+    },
+    "sliced_at": {
+      "type": "integer"
+    },
+    "truncated": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "budget_exceeded": {
+      "type": "boolean"
+    },
+    "omitted_nodes": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "bootloader": {
+      "type": "object",
+      "required": ["tier_1", "tier_2"],
+      "properties": {
+        "tier_1": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "tier_1a": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "tier_1b": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "tier_2": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "control_plane": {
+      "type": "object",
+      "properties": {
+        "policy_version": { "type": "string" },
+        "adapters": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": true
+    },
+    "nodes": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["role", "prio", "crawl"],
+        "properties": {
+          "role": { "type": "string" },
+          "prio": {
+            "type": "string",
+            "enum": ["p0", "p1", "p2", "p3"]
+          },
+          "crawl": { "type": "boolean" },
+          "seed_ref": {
+            "type": "string",
+            "enum": ["required", "optional"]
+          },
+          "tier1_preload": { "type": "boolean" },
+          "exists": { "type": "boolean" },
+          "has_dynamic_children": { "type": "boolean" },
+          "purpose": { "type": "string" },
+          "instructions": { "type": "string" },
+          "key_files": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "edge": {
+            "type": "string",
+            "enum": ["focus", "parent", "child", "dep", "consumer"]
+          },
+          "pruned": {
+            "type": "boolean"
+          },
+          "node_hash": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

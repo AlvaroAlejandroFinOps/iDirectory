@@ -1,0 +1,11 @@
+version: 1.0
+directory: skills
+role: domain_extension
+purpose: Dominio de extensión skills.
+relevance: high
+crawl: true
+read_priority: p1
+seed_reference: optional
+tier1_preload: false
+token_density: sparse
+instructions: Extensión de dominio activa. Enriquecer con /idir enrich si añade contratos.

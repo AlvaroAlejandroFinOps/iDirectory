@@ -1,0 +1,1028 @@
+{
+  "analyzer_version": "6.0.0:3",
+  "files": {
+    ".agentignore": {
+      "sha256": "0f6bd267128ac9cbffeb79961059f028b189da6c8ec472f107de9de13c7e70ac",
+      "size": 322,
+      "stat": [
+        322,
+        1793473614756678900
+      ]
+    },
+    ".agents/skills/idir/SKILL.md": {
+      "sha256": "16b28743ba815dbdcac9618b413ca80f48d46821c01a8065440bf686e8f0c53e",
+      "size": 492,
+      "stat": [
+        492,
+        1793473210436892800
+      ]
+    },
+    ".claude/commands/idir.md": {
+      "sha256": "0f515ea642dbfed520ec14866c4f9b95e88f941c6c17c359b8cf9103de79ca89",
+      "size": 1115,
+      "stat": [
+        1115,
+        1793046884576532900
+      ]
+    },
+    ".cursorrules": {
+      "sha256": "67e9de65c8bed848f77e05ed0747e77068da835310af3b6926163aec7165fbc8",
+      "size": 845,
+      "stat": [
+        845,
+        1793046841252003900
+      ]
+    },
+    ".github/copilot-instructions.md": {
+      "sha256": "bebdadc360ecdeff1959d66bf092a3302c1626437abe45fc51f9d89d228a690f",
+      "size": 1276,
+      "stat": [
+        1276,
+        1793046863270649800
+      ]
+    },
+    ".github/workflows/ci.yml": {
+      "sha256": "f961a5ef7fba083b72393bb8963634d590a120c9175058e22ac29da714a7ec36",
+      "size": 1242,
+      "stat": [
+        1242,
+        1790354679584925800
+      ]
+    },
+    ".gitignore": {
+      "sha256": "3e21b9cd0c577d393947a3dd22f1037259d831b57d43b26bf843683a8c6b4084",
+      "size": 99,
+      "stat": [
+        99,
+        1788297196178876900
+      ]
+    },
+    "01_seed/.context.yaml": {
+      "sha256": "f5dfa21252c0288b8b6607c6da80f7016c1a2f4828486e1d7a19dc421191a23c",
+      "size": 426,
+      "stat": [
+        426,
+        1793487749624235700
+      ]
+    },
+    "01_seed/seed-idirectory-master.md": {
+      "sha256": "d56212fc3b50cb0b843a1ba70dfe9c632fe72a39af51c2ddb737895c02c2b677",
+      "size": 50559,
+      "stat": [
+        50559,
+        1793485141132178900
+      ]
+    },
+    "02_foundation/.context.yaml": {
+      "sha256": "cfd1c484f512587df5c9ab164b2a25a0830e190d5d7f0a05081509e68c3ee753",
+      "size": 323,
+      "stat": [
+        323,
+        1792857422024973200
+      ]
+    },
+    "02_foundation/engine/.context.yaml": {
+      "sha256": "91d2b15b6ce915671565770cce1d0ea73fb39f540390bdfe9de79cef971ea59d",
+      "size": 404,
+      "stat": [
+        404,
+        1793487749627227800
+      ]
+    },
+    "02_foundation/engine/engine_readme.md": {
+      "sha256": "c1a717e22f5618371d52db5819d048a2666526f390d63c3a09a5d79b4d184424",
+      "size": 4500,
+      "stat": [
+        4500,
+        1792858696597250300
+      ]
+    },
+    "03_research/.context.yaml": {
+      "sha256": "cc8b8dd91bb6a57e1e4527f87dbd8cddf1186d1a1263d3ea070f9b2dde3736cc",
+      "size": 319,
+      "stat": [
+        319,
+        1792857422036935500
+      ]
+    },
+    "03_research/prompts/.context.yaml": {
+      "sha256": "db006f937bff731d5c030613c1f6b0f47f199d8c1b8a2af7fc56cc4cbdd17c65",
+      "size": 350,
+      "stat": [
+        350,
+        1793487749634388600
+      ]
+    },
+    "AGENTS.md": {
+      "sha256": "d3ba26849ad83202cba9df4a8f2399970eac274ee351f3c1777d142fc1c5a378",
+      "size": 1461,
+      "stat": [
+        1461,
+        1793472932782122200
+      ]
+    },
+    "CLAUDE.md": {
+      "sha256": "ee50633af0799b6a94c69d9d17f43b2b3184b8da9bebd782f7bb0cc24223f0ba",
+      "size": 2263,
+      "stat": [
+        2263,
+        1793046834514027400
+      ]
+    },
+    "FWengine.py": {
+      "contracts": {
+        "cli_flags": [
+          "--expand",
+          "--pack",
+          "--tier"
+        ],
+        "imports": [
+          "argparse",
+          "icontext_cli",
+          "pathlib",
+          "sys"
+        ],
+        "signatures": [],
+        "symbols": []
+      },
+      "sha256": "f8c9499aa5b6dc286e846b401f3b414e4ed8ed8b4c309e2db007927e23fc6b1a",
+      "size": 1039,
+      "stat": [
+        1039,
+        1793476791188909200
+      ]
+    },
+    "GEMINI.md": {
+      "sha256": "b6b83d39bb52f4126af159959040cd6392aca8b02070838705a57162441b4943",
+      "size": 224,
+      "stat": [
+        224,
+        1793473131786852400
+      ]
+    },
+    "LICENSE": {
+      "sha256": "98f1efd43a81dafecca1b9e4991fe26d68288f0454989b6ce49af7d7c34ed049",
+      "size": 1084,
+      "stat": [
+        1084,
+        1789696610432564300
+      ]
+    },
+    "README.md": {
+      "semantic_sha256": "23708d46ca354d5039c53f9de0a91aa31e0b8768002eedf7c8f4f86ba521739d",
+      "sha256": "f8f6a5f96258f5e0496a99e82b7dfef0cfc88666461165a1d39aaa4de75a1f87",
+      "size": 26708,
+      "stat": [
+        26708,
+        1793486214205534400
+      ]
+    },
+    "README_ES.md": {
+      "semantic_sha256": "8eb0cb5fb4220174341cf8e7e723fef5ef1f7cc14dc615c51976a024f938425b",
+      "sha256": "8733796e8e24fb8e3973f116a00b142588b97d30186726ca7d415e4bd2045aae",
+      "size": 28088,
+      "stat": [
+        28088,
+        1793486214209524400
+      ]
+    },
+    "artifacts/.context.yaml": {
+      "sha256": "18ca024fb28f6e74896e6d0dcd10aeebad003c0cdb5445e69a4ea04977099e7e",
+      "size": 315,
+      "stat": [
+        315,
+        1792857422048904700
+      ]
+    },
+    "artifacts/benchmark_seed_coverage.md": {
+      "sha256": "daad5916cfa85dbc23d344c2298c3436ff09500ceee57e864ebf1aee6d37a3bd",
+      "size": 4029,
+      "stat": [
+        4029,
+        1793294548730236500
+      ]
+    },
+    "artifacts/benchmarks/.context.yaml": {
+      "sha256": "8f356e8b344444d372f744285c7968695514f94dc09e0e72875bbd370d916cc5",
+      "size": 326,
+      "stat": [
+        326,
+        1792857422100764700
+      ]
+    },
+    "artifacts/benchmarks/README.md": {
+      "sha256": "b64d07e9db1354fe66521313800bfab50a775cf315ba37237ba7cbb2b297270c",
+      "size": 5742,
+      "stat": [
+        5742,
+        1792018581898026300
+      ]
+    },
+    "artifacts/benchmarks/benchmark_matrix.json": {
+      "sha256": "3a95088578a893961fa4bc2edc859ed952eb2973bb3deef34f30411eba1c4d3e",
+      "size": 42959,
+      "stat": [
+        42959,
+        1792018531045730500
+      ]
+    },
+    "artifacts/benchmarks/forensic_repo_01_gravity___hyperscale_thinking.md": {
+      "sha256": "8ddab1796c29b3258bee012fca4bd161b2e8aadeb35312713939397848111335",
+      "size": 5335,
+      "stat": [
+        5335,
+        1792018545982628200
+      ]
+    },
+    "artifacts/benchmarks/forensic_repo_02_gravity___deep_space.md": {
+      "sha256": "314f7f25d2b7db909d753f6199410c29c9eef867d578a6d8b0dd7f4b054eea5a",
+      "size": 4454,
+      "stat": [
+        4454,
+        1792018545982628200
+      ]
+    },
+    "artifacts/benchmarks/forensic_repo_03_ultrathinking.md": {
+      "sha256": "a02ca507ad885e1b236af97f58bf05839e8542eebc8f08424a3d31917acbf905",
+      "size": 4449,
+      "stat": [
+        4449,
+        1792018545983624200
+      ]
+    },
+    "artifacts/benchmarks/forensic_repo_04_thinkingseed.md": {
+      "sha256": "8464f151652af669d7586033a0c0c77fda60bb6f8fc71eb7b79e28a25a891dee",
+      "size": 5429,
+      "stat": [
+        5429,
+        1792018545984623400
+      ]
+    },
+    "artifacts/benchmarks/forensic_repo_05_metricsthinking.md": {
+      "sha256": "61ccf2cec6c2e0281f10cd859d8f7420842e593c62f5f11a194b8eb0cc3d6eb8",
+      "size": 5482,
+      "stat": [
+        5482,
+        1792018545984623400
+      ]
+    },
+    "artifacts/benchmarks/forensic_repo_06_semanticflow.md": {
+      "sha256": "2ec0091c6d94726a9ecd35948e3150a5a6d8cb662efc6ad67f0b4d7335517c3c",
+      "size": 5401,
+      "stat": [
+        5401,
+        1792018545985619600
+      ]
+    },
+    "artifacts/benchmarks/forensic_repo_07_flowagentic.md": {
+      "sha256": "10911dfe3f092d42e8b40d297c03393f3454af46796acd6cbd587d94d915a60f",
+      "size": 5625,
+      "stat": [
+        5625,
+        1792018545986618600
+      ]
+    },
+    "artifacts/plans/.context.yaml": {
+      "sha256": "f0d91db102008c337e6ee2da539d9f5e2d267012f917fbe6058198727327a039",
+      "size": 327,
+      "stat": [
+        327,
+        1792857422113879800
+      ]
+    },
+    "artifacts/plans/active/.context.yaml": {
+      "sha256": "e7f8d4e12facdd212311da5a9cce3fd0e729ace62c429524444fa026295ca982",
+      "size": 380,
+      "stat": [
+        380,
+        1793487749654295400
+      ]
+    },
+    "artifacts/plans/active/plan_reingenieria_v4.md": {
+      "sha256": "15f9377fe47fdf8cbc6d45ed5659b3d8a95541dbafc384c42f1539351cbf77f2",
+      "size": 2181,
+      "stat": [
+        2181,
+        1793046786006883400
+      ]
+    },
+    "artifacts/plans/openia/.context.yaml": {
+      "sha256": "bf4033d19fbcb045f137d59200f3b70236bf627616da7233605c40c07622357f",
+      "size": 508,
+      "stat": [
+        508,
+        1793044043928909900
+      ]
+    },
+    "artifacts/plans/openia/sugerencias_gptsol_5.6high.md": {
+      "sha256": "ff5f96b003e60f09f9e1b0f6aa4832521ab7aa7560974ab7f393b9d18800a312",
+      "size": 22118,
+      "stat": [
+        22118,
+        1793044043944866900
+      ]
+    },
+    "config/.context.yaml": {
+      "sha256": "f333894f1692daa265a80998d463f4418c8f8156cb5af75102134fc47bdf2951",
+      "size": 377,
+      "stat": [
+        377,
+        1793487749674548200
+      ]
+    },
+    "config/context_policy.json": {
+      "sha256": "f2f96f3e6119993146fb332930f770820279c3befd968527d57438f3532981b4",
+      "size": 3072,
+      "stat": [
+        3072,
+        1793477321772487600
+      ]
+    },
+    "data/.context.yaml": {
+      "sha256": "f170de83f63910ad25035a10f51158083b18d56381b9334cb04c96ba8e259615",
+      "size": 305,
+      "stat": [
+        305,
+        1792857422057879000
+      ]
+    },
+    "docs/.context.yaml": {
+      "sha256": "2dc077b646550ed9cc26d35923b8bb538b34d70315852af3829d4c8c5eb58190",
+      "size": 305,
+      "stat": [
+        305,
+        1792857422069850500
+      ]
+    },
+    "docs/architecture/.context.yaml": {
+      "sha256": "6f6a17401b28a19aef98b6bf4d46213217a7d7e387764c8eeae851f8cbad704f",
+      "size": 350,
+      "stat": [
+        350,
+        1793487749666417900
+      ]
+    },
+    "docs/architecture/Directorio de carpetas.md": {
+      "sha256": "50284632fb17c97f6efe3fcd8ef8971e4fce0f1bb3ad7b00940100f2dcbf2ce9",
+      "size": 3717,
+      "stat": [
+        3717,
+        1788925895943346100
+      ]
+    },
+    "docs/architecture/folder_manifest.json": {
+      "sha256": "c664bc6f2deabe087de2555c145c9bf82591a04718fe8fe410e140c1aa240291",
+      "size": 11008,
+      "stat": [
+        11008,
+        1790058231350014300
+      ]
+    },
+    "docs/architecture/folder_manifest.yaml": {
+      "sha256": "79aa0e1f31b57182de00466b3f28780b68017ee3519566252c37087ee902b577",
+      "size": 3519,
+      "stat": [
+        3519,
+        1790058231370211600
+      ]
+    },
+    "docs/notes/.context.yaml": {
+      "sha256": "3425f57f359033363ae217df26d6f3bc7262af469cd8910ea26918df10ad2164",
+      "size": 351,
+      "stat": [
+        351,
+        1793487749671554900
+      ]
+    },
+    "docs/specs/.context.yaml": {
+      "sha256": "f5f48db46374d9967dae8889c01010be31127ad2b982b9da7ff9c3d06e9c7f1c",
+      "size": 333,
+      "stat": [
+        333,
+        1793487749669409400
+      ]
+    },
+    "docs/specs/icontext-v6.md": {
+      "sha256": "a2533b901c6dec1d87fa8dc77ae89efa776dd51499ab487f58e33b404f9554cd",
+      "size": 6740,
+      "stat": [
+        6740,
+        1793477321775480300
+      ]
+    },
+    "iDirectory.png": {
+      "sha256": "beae24f2dfa90a22790a775a7956f1136ba42d7aee5cd5c7b7b3652e3d712d4b",
+      "size": 1852810,
+      "stat": [
+        1852810,
+        1789696233746600300
+      ]
+    },
+    "infrastructure/.context.yaml": {
+      "sha256": "bbde7d0687a00834aceeb18ae5cc5d4bb19b50468444914bf5e3aefb10bef8c1",
+      "size": 315,
+      "stat": [
+        315,
+        1792857422079820800
+      ]
+    },
+    "pyproject.toml": {
+      "sha256": "f508c0ed2b2dce7f9a017d25adafbb083c036d0e6a0dc8a87113493e1bc344a9",
+      "size": 384,
+      "stat": [
+        384,
+        1793473036064245000
+      ]
+    },
+    "schemas/.context.yaml": {
+      "sha256": "0360e24966cfb776e436d1a29d5c8b7eedc6fc50e3fe030a23e8196dfbdf4fc7",
+      "size": 368,
+      "stat": [
+        368,
+        1793487749686685700
+      ]
+    },
+    "schemas/backlog.schema.json": {
+      "sha256": "a5d392ea7768d984781da5f61ede127f53d6469c08617f62ce0124bc73179ea9",
+      "size": 1561,
+      "stat": [
+        1561,
+        1793202765137720900
+      ]
+    },
+    "schemas/beacon.schema.json": {
+      "sha256": "d42d69bebda3b414376fa8c48c06cd8863301e35bf506d643fbfb9608150c686",
+      "size": 1872,
+      "stat": [
+        1872,
+        1793046439790988100
+      ]
+    },
+    "schemas/checkpoint.schema.json": {
+      "sha256": "c81210ffaa333b9176313486ba14b4a012f8888706e9f0536308c158e3c9dd59",
+      "size": 2212,
+      "stat": [
+        2212,
+        1793472517134754800
+      ]
+    },
+    "schemas/contracts_ast.schema.json": {
+      "sha256": "30d2107109780341dd10d8befbba1defe9e61befe0381985c833f43dc514e2f8",
+      "size": 3223,
+      "stat": [
+        3223,
+        1793472517130766000
+      ]
+    },
+    "schemas/icontext_bus.schema.json": {
+      "sha256": "a82c2abd66a6d04272605764bb9c64cfb20da0d5b799a475d408bbf48b8b6a41",
+      "size": 6183,
+      "stat": [
+        6183,
+        1793472517132763800
+      ]
+    },
+    "schemas/inventory.schema.json": {
+      "sha256": "aa5f4d9e42f2ccdd88ab086686f2ae66e0bace9d702c73fa8dba36e8bbd04cdf",
+      "size": 604,
+      "stat": [
+        604,
+        1793472517135757500
+      ]
+    },
+    "schemas/plan_metadata.schema.json": {
+      "sha256": "059aa7e208d67d464c8615bdb4abb29235f45c01c76f209537b5952e1356e505",
+      "size": 892,
+      "stat": [
+        892,
+        1793046444704324500
+      ]
+    },
+    "schemas/toolchain.schema.json": {
+      "sha256": "1906661dc8e0cd43e79477362692ee306d1bc66211792f2b3b56e042558cfdcb",
+      "size": 552,
+      "stat": [
+        552,
+        1793472517136755700
+      ]
+    },
+    "schemas/tree.schema.json": {
+      "sha256": "590f8fb62ed341b87acb75686999cc1df64a9f6105df24cf233772133522fc91",
+      "size": 3564,
+      "stat": [
+        3564,
+        1793202775316109600
+      ]
+    },
+    "scripts/.context.yaml": {
+      "sha256": "80ce3be199164168bc7a07c6990288db2485c2b8b1d749c2094296f3c860abb1",
+      "size": 318,
+      "stat": [
+        318,
+        1793487749689679600
+      ]
+    },
+    "scripts/generate_benchmark_reports.py": {
+      "contracts": {
+        "cli_flags": [],
+        "imports": [
+          "json",
+          "os"
+        ],
+        "signatures": [],
+        "symbols": []
+      },
+      "sha256": "f4e8de013077c60c936580a1f7c449403262539f28dccdc82e9852773942f8f5",
+      "size": 5573,
+      "stat": [
+        5573,
+        1790356520925900400
+      ]
+    },
+    "skills/.context.yaml": {
+      "sha256": "f30ef9a20a9e0b735a60aaabd5ddb57dde7a5de2bcd53671ec39b4765a3877bb",
+      "size": 311,
+      "stat": [
+        311,
+        1793474278520623600
+      ]
+    },
+    "skills/v6/.context.yaml": {
+      "sha256": "cc1f01d9150f8a1544c70c0d2c0d26b6c1ea2bad542bca67f9376df9492de508",
+      "size": 280,
+      "stat": [
+        280,
+        1793474278537982900
+      ]
+    },
+    "skills/v6/idir/.context.yaml": {
+      "sha256": "5912acf30a9f07236bc255c7a9edd6259821c0ac2d0957ad221b790f6c9ed7ba",
+      "size": 293,
+      "stat": [
+        293,
+        1793474278557373400
+      ]
+    },
+    "skills/v6/idir/SKILL.md": {
+      "sha256": "849d8a5335da037ada0c5753492c639f093d9276f3f4bb67674af08fb7cf9c3a",
+      "size": 1256,
+      "stat": [
+        1256,
+        1793476790050931700
+      ]
+    },
+    "skills/v6/idir/bundle.json": {
+      "sha256": "db468f8f687ecee28ceb49cd7cb50f53af54d3134fdddaca96c9ea970d32ba61",
+      "size": 242,
+      "stat": [
+        242,
+        1793476790054918200
+      ]
+    },
+    "skills/v6/idir/scripts/.context.yaml": {
+      "sha256": "89ebd2021e5bfdd8745567619ff488d53201267490f9bd2fdb010c9d325b5baf",
+      "size": 314,
+      "stat": [
+        314,
+        1793474278571501300
+      ]
+    },
+    "skills/v6/idir/scripts/run.py": {
+      "contracts": {
+        "cli_flags": [],
+        "imports": [
+          "icontext_cli",
+          "json",
+          "pathlib",
+          "sys"
+        ],
+        "signatures": [
+          "./skills/v6/idir/scripts/run.py::matches_version(path) -> Any"
+        ],
+        "symbols": [
+          "matches_version"
+        ]
+      },
+      "sha256": "354efcdae125b7fc630daa0c9c7d1950574b0f797c19039f4427684405614af6",
+      "size": 1369,
+      "stat": [
+        1369,
+        1793474238383028000
+      ]
+    },
+    "src/.context.yaml": {
+      "sha256": "12d11ae39e438f2a5210afbb23f6b7ef033a68457f4f0b76ba4acd823b2de8b3",
+      "size": 301,
+      "stat": [
+        301,
+        1792857422088798500
+      ]
+    },
+    "src/cloud_jobs/.context.yaml": {
+      "sha256": "4ad406c4285681ea3f0adba530641023ee7c7cfb874ba50e267304332a51db9f",
+      "size": 437,
+      "stat": [
+        437,
+        1793487749640704900
+      ]
+    },
+    "src/core/.context.yaml": {
+      "sha256": "1fcfcc1e5c260a147e9e3231be5abce1db8777adef0261602bee1cf5d3d57afd",
+      "size": 335,
+      "stat": [
+        335,
+        1793487749646688400
+      ]
+    },
+    "src/core/context_runtime.py": {
+      "contracts": {
+        "cli_flags": [],
+        "imports": [
+          "__future__",
+          "ast",
+          "contextlib",
+          "datetime",
+          "fcntl",
+          "fnmatch",
+          "hashlib",
+          "json",
+          "msvcrt",
+          "os",
+          "pathlib",
+          "re",
+          "stat",
+          "time",
+          "uuid"
+        ],
+        "signatures": [
+          "./src/core/context_runtime.py::read_json(path, default=None) -> Any",
+          "./src/core/context_runtime.py::digest(value) -> Any",
+          "./src/core/context_runtime.py::atomic_write(path, content) -> Any",
+          "./src/core/context_runtime.py::write_json(path, value) -> Any",
+          "./src/core/context_runtime.py::repository_lock(root, name='publish', timeout=10) -> Any",
+          "./src/core/context_runtime.py::publish_layer(root, layer, payload) -> Any",
+          "./src/core/context_runtime.py::ignore_patterns(root) -> Any",
+          "./src/core/context_runtime.py::ignored(relative, patterns) -> Any",
+          "./src/core/context_runtime.py::crawl_allowed(directory) -> Any",
+          "./src/core/context_runtime.py::iter_files(root, patterns=None) -> Any",
+          "./src/core/context_runtime.py::python_contracts(source, relative) -> Any",
+          "./src/core/context_runtime.py::inventory(root, persist=False, full=False) -> Any",
+          "./src/core/context_runtime.py::contracts_index(root, persist=False, full=False) -> Any",
+          "./src/core/context_runtime.py::input_hash(inv, layer) -> Any",
+          "./src/core/context_runtime.py::estimated_tokens(value) -> Any",
+          "./src/core/context_runtime.py::bounded(payload, limit, removable=('contracts_ast', 'edges', 'files', 'active_topology', 'layers')) -> Any",
+          "./src/core/context_runtime.py::query_orientation(root, target='.', tier='1a', expand=False) -> Any",
+          "./src/core/context_runtime.py::validate_seed(path, index=None) -> Any",
+          "./src/core/context_runtime.py::validate_readmes(root) -> Any"
+        ],
+        "symbols": [
+          "read_json",
+          "digest",
+          "atomic_write",
+          "write_json",
+          "repository_lock",
+          "publish_layer",
+          "ignore_patterns",
+          "ignored",
+          "crawl_allowed",
+          "iter_files",
+          "python_contracts",
+          "inventory",
+          "contracts_index",
+          "input_hash",
+          "estimated_tokens",
+          "bounded",
+          "query_orientation",
+          "validate_seed",
+          "validate_readmes"
+        ]
+      },
+      "sha256": "311f894ef793e0d47c3fad8e426a37ba08b1faca505183b6e6334b17d783693c",
+      "size": 20567,
+      "stat": [
+        20567,
+        1793487563901215800
+      ]
+    },
+    "src/core/fwengine.py": {
+      "contracts": {
+        "cli_flags": [
+          "--audit",
+          "--base",
+          "--budget",
+          "--bus",
+          "--capsule",
+          "--check",
+          "--check-freshness",
+          "--clear",
+          "--compact",
+          "--constraint",
+          "--decision",
+          "--evidence-hash",
+          "--expand",
+          "--expires-at",
+          "--fix",
+          "--force-defaults",
+          "--include-pruned",
+          "--move",
+          "--next",
+          "--no-discover",
+          "--objective",
+          "--overwrite",
+          "--pack",
+          "--pack-ecosystem",
+          "--phase",
+          "--plan-id",
+          "--radius",
+          "--resolve",
+          "--section",
+          "--session-id",
+          "--set",
+          "--show",
+          "--slice",
+          "--status",
+          "--step-done",
+          "--sync",
+          "--target",
+          "--task",
+          "--tier",
+          "--toc"
+        ],
+        "imports": [
+          "argparse",
+          "ast",
+          "context_runtime",
+          "datetime",
+          "errno",
+          "fnmatch",
+          "hashlib",
+          "json",
+          "os",
+          "pathlib",
+          "random",
+          "re",
+          "stat",
+          "sys",
+          "threading",
+          "time",
+          "typing",
+          "uuid"
+        ],
+        "signatures": [
+          "./src/core/fwengine.py::MiniYAML(class)",
+          "./src/core/fwengine.py::safe_io_retry(operation: Callable[[], Any], max_attempts: int=4, initial_delay_ms: float=25.0) -> Any",
+          "./src/core/fwengine.py::safe_rename_casing(src: Path, dest: Path) -> Path",
+          "./src/core/fwengine.py::estimate_tokens_v4(text_or_path: Any, fast_stat_only: bool=False) -> int",
+          "./src/core/fwengine.py::resolve_seed_key_files(root_path: Path) -> List[str]",
+          "./src/core/fwengine.py::generate_beacon_content(folder: str, meta: Dict[str, Any], root_path: Optional[Path]=None) -> str",
+          "./src/core/fwengine.py::resolve_beacon(dir_path: Path, root_path: Path) -> Dict[str, Any]",
+          "./src/core/fwengine.py::extract_preserved_comments(beacon_file: Path) -> List[str]",
+          "./src/core/fwengine.py::validate_beacon_data(data: Dict[str, Any]) -> List[str]",
+          "./src/core/fwengine.py::validate_tree_data(data: Dict[str, Any]) -> List[str]",
+          "./src/core/fwengine.py::validate_backlog_data(data: Dict[str, Any]) -> List[str]",
+          "./src/core/fwengine.py::validate_backlog_queue(root_path: Path, check_only: bool=False) -> List[str]",
+          "./src/core/fwengine.py::load_ignore_patterns(root_path: Path) -> List[str]",
+          "./src/core/fwengine.py::is_ignored_path(dir_path: Path, root_path: Path, patterns: Optional[List[str]]=None) -> bool",
+          "./src/core/fwengine.py::discover_unbeaconed_directories(root_path: Path) -> List[Path]",
+          "./src/core/fwengine.py::infer_beacon_meta(dir_path: Path, root_path: Path) -> Dict[str, Any]",
+          "./src/core/fwengine.py::scaffold_beacon_for_dir(dir_path: Path, root_path: Path, overwrite: bool=False) -> Optional[Path]",
+          "./src/core/fwengine.py::ensure_beacon_chain(target_dir: Path, root_path: Path) -> List[Path]",
+          "./src/core/fwengine.py::iter_beacon_files(root_path: Path) -> List[Path]",
+          "./src/core/fwengine.py::sync_beacons(root_path: Path, auto_discover: bool=True, force_defaults: bool=False) -> int",
+          "./src/core/fwengine.py::compute_topology_hash(root_path: Path) -> str",
+          "./src/core/fwengine.py::compute_node_fingerprint(dir_path: Path) -> str",
+          "./src/core/fwengine.py::generate_tree_json(root_path: Path) -> Dict[str, Any]",
+          "./src/core/fwengine.py::check_satellite_freshness(root_path: Path) -> Dict[str, Any]",
+          "./src/core/fwengine.py::format_compact_tree_json(data: Dict[str, Any]) -> str",
+          "./src/core/fwengine.py::sync_tree(root_path: Path) -> Path",
+          "./src/core/fwengine.py::generate_sliced_tree(root_path: Path, target_path: str, radius: int=1, max_children: int=6) -> Dict[str, Any]",
+          "./src/core/fwengine.py::format_sliced_tree(data: Dict[str, Any]) -> str",
+          "./src/core/fwengine.py::build_context_pack(root_path: Path, target_path: str, tier: str='1a', expand: bool=False) -> Dict[str, Any]",
+          "./src/core/fwengine.py::build_context_capsule(root_path: Path, target_path: str, task_description: str='') -> Dict[str, Any]",
+          "./src/core/fwengine.py::get_seed_sections(root_path: Path) -> List[Dict[str, Any]]",
+          "./src/core/fwengine.py::extract_seed_section(root_path: Path, query: str) -> str",
+          "./src/core/fwengine.py::manage_checkpoint(root_path: Path, action='show', plan_id=None, status=None, phase=None, next_action=None, completed_step=None, session_id=None, objective=None, constraints=None, decisions=None, evidence_hash=None, expires_at=None) -> Any",
+          "./src/core/fwengine.py::build_ast_contracts_index(root_path: Path, write_to_disk: bool=True) -> Dict[str, Any]",
+          "./src/core/fwengine.py::sync_icontext_bus(root_path: Path, tree_data=None, ast_index=None, write_to_disk=True) -> Any",
+          "./src/core/fwengine.py::build_ecosystem_pack(root_path: Path, expand: bool=False) -> Dict[str, Any]",
+          "./src/core/fwengine.py::upsert_segmented_block(file_path: Path, tool_key: str, block_content: str) -> bool",
+          "./src/core/fwengine.py::compute_context_budget(root_path: Path, include_pruned_stats: bool=False) -> List[Dict[str, Any]]",
+          "./src/core/fwengine.py::init_project(base_path: str) -> Any",
+          "./src/core/fwengine.py::inspect_python_header(file_path: Path, max_chars: int=4096) -> str",
+          "./src/core/fwengine.py::route_file(file_path: str, base_path: str='.', move: bool=False, overwrite: bool=False) -> Optional[Path]",
+          "./src/core/fwengine.py::reconcile_plans_lifecycle(root_path: Path, check_only: bool=False) -> List[str]",
+          "./src/core/fwengine.py::validate_dependency_dag(root_path: Path, changed_nodes: Optional[List[str]]=None) -> List[str]",
+          "./src/core/fwengine.py::audit_repository(root_path: Path, fix: bool=False) -> bool",
+          "./src/core/fwengine.py::reconcile_repository(root_path: Path, check_only: bool=False) -> bool",
+          "./src/core/fwengine.py::main() -> Any"
+        ],
+        "symbols": [
+          "MiniYAML",
+          "safe_io_retry",
+          "safe_rename_casing",
+          "estimate_tokens_v4",
+          "resolve_seed_key_files",
+          "generate_beacon_content",
+          "resolve_beacon",
+          "extract_preserved_comments",
+          "validate_beacon_data",
+          "validate_tree_data",
+          "validate_backlog_data",
+          "validate_backlog_queue",
+          "load_ignore_patterns",
+          "is_ignored_path",
+          "discover_unbeaconed_directories",
+          "infer_beacon_meta",
+          "scaffold_beacon_for_dir",
+          "ensure_beacon_chain",
+          "iter_beacon_files",
+          "sync_beacons",
+          "compute_topology_hash",
+          "compute_node_fingerprint",
+          "generate_tree_json",
+          "check_satellite_freshness",
+          "format_compact_tree_json",
+          "sync_tree",
+          "generate_sliced_tree",
+          "format_sliced_tree",
+          "build_context_pack",
+          "build_context_capsule",
+          "get_seed_sections",
+          "extract_seed_section",
+          "manage_checkpoint",
+          "build_ast_contracts_index",
+          "sync_icontext_bus",
+          "build_ecosystem_pack",
+          "upsert_segmented_block",
+          "compute_context_budget",
+          "init_project",
+          "inspect_python_header",
+          "route_file",
+          "reconcile_plans_lifecycle",
+          "validate_dependency_dag",
+          "audit_repository",
+          "reconcile_repository",
+          "main"
+        ]
+      },
+      "sha256": "42486dc09826545c7dada364ee4dfaa3a772e628f11f5a2eff8fcc44c51eccd4",
+      "size": 161279,
+      "stat": [
+        161279,
+        1793484930052161800
+      ]
+    },
+    "src/dashboards/.context.yaml": {
+      "sha256": "f1af8cc10c1da0362b606197a9f752e0c1885f919e83f685fbbd46db13a690d8",
+      "size": 351,
+      "stat": [
+        351,
+        1793487749650678600
+      ]
+    },
+    "src/data_generation/.context.yaml": {
+      "sha256": "8354c5ab27f0146ca433a0fad16fa9ac32a505b9db186dbedac4c53540a5f7a5",
+      "size": 365,
+      "stat": [
+        365,
+        1793487749643697900
+      ]
+    },
+    "tests/.context.yaml": {
+      "sha256": "17f237291b102c3af1f3aa08a3e96dae3932252b6c8089309505fdf129572118",
+      "size": 318,
+      "stat": [
+        318,
+        1793487749692823300
+      ]
+    },
+    "tests/test_fwengine.py": {
+      "contracts": {
+        "cli_flags": [],
+        "imports": [
+          "FWengine",
+          "json",
+          "os",
+          "pathlib",
+          "shutil",
+          "sys",
+          "tempfile",
+          "time",
+          "unittest"
+        ],
+        "signatures": [
+          "./tests/test_fwengine.py::TestMiniYAML(class)",
+          "./tests/test_fwengine.py::TestTopologicalManifest(class)",
+          "./tests/test_fwengine.py::TestRoutingMapAndHeuristics(class)",
+          "./tests/test_fwengine.py::TestLifecycleAndIdempotence(class)",
+          "./tests/test_fwengine.py::TestTokenBudgetComputation(class)",
+          "./tests/test_fwengine.py::TestBeaconInheritance(class)",
+          "./tests/test_fwengine.py::TestHybridRouting(class)",
+          "./tests/test_fwengine.py::TestFileSystemHardening(class)",
+          "./tests/test_fwengine.py::TestSatelliteFreshness(class)",
+          "./tests/test_fwengine.py::TestNTFSIOResilience(class)",
+          "./tests/test_fwengine.py::TestAutoScaffoldAndRemediation(class)",
+          "./tests/test_fwengine.py::TestTreeSlicing(class)",
+          "./tests/test_fwengine.py::TestV4AdversarialAndContinuity(class)",
+          "./tests/test_fwengine.py::TestV41EnterpriseAndIncremental(class)",
+          "./tests/test_fwengine.py::TestV5FederationAndEcosystem(class)"
+        ],
+        "symbols": [
+          "TestMiniYAML",
+          "TestTopologicalManifest",
+          "TestRoutingMapAndHeuristics",
+          "TestLifecycleAndIdempotence",
+          "TestTokenBudgetComputation",
+          "TestBeaconInheritance",
+          "TestHybridRouting",
+          "TestFileSystemHardening",
+          "TestSatelliteFreshness",
+          "TestNTFSIOResilience",
+          "TestAutoScaffoldAndRemediation",
+          "TestTreeSlicing",
+          "TestV4AdversarialAndContinuity",
+          "TestV41EnterpriseAndIncremental",
+          "TestV5FederationAndEcosystem"
+        ]
+      },
+      "sha256": "07be53894165991639be21dec5b3c50341634e1b179e87af210f1584a7f2b8ca",
+      "size": 49330,
+      "stat": [
+        49330,
+        1793472845746645200
+      ]
+    },
+    "tests/test_token_budget.py": {
+      "contracts": {
+        "cli_flags": [],
+        "imports": [
+          "FWengine",
+          "json",
+          "os",
+          "pathlib",
+          "shutil",
+          "sys",
+          "tempfile",
+          "time",
+          "unittest"
+        ],
+        "signatures": [
+          "./tests/test_token_budget.py::estimate_tokens(text: str) -> int",
+          "./tests/test_token_budget.py::TestTokenBudgetBenchmark(class)",
+          "./tests/test_token_budget.py::TestTopologicalScalingStress(class)"
+        ],
+        "symbols": [
+          "estimate_tokens",
+          "TestTokenBudgetBenchmark",
+          "TestTopologicalScalingStress"
+        ]
+      },
+      "sha256": "f762cbded51868e9752b5905bc63de5568908d6ba482ad725ebc0edb93c71a86",
+      "size": 8488,
+      "stat": [
+        8488,
+        1793046999137039800
+      ]
+    },
+    "tools/.context.yaml": {
+      "sha256": "270d27ea24148c667bed940a12dbbb3d7ce5139d05a14b392ffc9a6f4b37cb14",
+      "size": 288,
+      "stat": [
+        288,
+        1793487749695814000
+      ]
+    },
+    "tools/build_runtime.py": {
+      "contracts": {
+        "cli_flags": [
+          "--check"
+        ],
+        "imports": [
+          "argparse",
+          "hashlib",
+          "io",
+          "json",
+          "pathlib",
+          "zipfile"
+        ],
+        "signatures": [
+          "./tools/build_runtime.py::put(path, raw, check=False) -> Any",
+          "./tools/build_runtime.py::build(check=False) -> Any"
+        ],
+        "symbols": [
+          "put",
+          "build"
+        ]
+      },
+      "sha256": "3884f7b23541f45710b57ab725dc27579c43c7166460fb29b535aa7f68416958",
+      "size": 6401,
+      "stat": [
+        6401,
+        1793476516247962700
+      ]
+    }
+  },
+  "inputs_hash": "9dbc74eab9d5ac783effcd2b6be9e71a981b1172ecaacc0c83b0ba65fa40e76f",
+  "policy_hash": "ec95ee2ea2ba2dcd77dfa945edf7ff1c8aa8d54547fddeb71c2253c855e2d1b3",
+  "version": "6.0.0"
+}
